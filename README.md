@@ -10,6 +10,7 @@ How do current open-source inference engines behave when serving many LoRA adapt
 
 - Engines: SGLang and vLLM first, then mistral.rs in the same outcome-level comparison. mistral.rs is left out of the `max_loras` replication only, because it has no equivalent flag.
 - Hardware: one NVIDIA RTX 4090 (24 GB). Results do not transfer to other GPUs without re-measuring.
+- Time: the whole study is planned to run within one day, so the grid is deliberately small. See the Day plan in [docs/PLAN.md](docs/PLAN.md).
 - Not in scope: a new serving system, kernel work, adapter training.
 
 ## Approach

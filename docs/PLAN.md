@@ -4,6 +4,8 @@ Status: decisions fixed, no measurement run yet. The answers below were fixed on
 
 ## Decisions
 
+The Day plan below overrides these rows where they conflict: adapter counts, resident slots, traffic (the rate sweep and request counts), repeats, and mistral.rs.
+
 | Item | Decision |
 |---|---|
 | Base model | Qwen2.5-1.5B-Instruct for the main sweep. A Llama-class model only if an engine cannot do LoRA on Qwen. |
@@ -24,9 +26,44 @@ Status: decisions fixed, no measurement run yet. The answers below were fixed on
 | Storage | Engine installs, virtual environments, downloaded checkpoints, and results may live on network storage (a 50 GB volume). Nothing read during a timed run comes from it: the model checkpoint and all adapter files are copied to RAM-backed storage (`/dev/shm`) before an engine starts, and compiler and JIT caches (Triton, FlashInfer, torch compile, Hugging Face) are kept on local disk. Warm-up requests and the first requests of every run are excluded from results, so load time cannot leak into them. The storage layout and the measured read speeds of each location (large sequential reads and small-file reads) are recorded with the results. |
 | Relative metric | Two levels, both reported. Level 1, within each engine: adapter versus no adapter. The no-adapter baseline (B0) is the same engine, base model, and traffic, started with LoRA disabled. Where the engine allows it, a second baseline (B1) with LoRA enabled but requests selecting no adapter is also reported, to separate the cost of enabling LoRA from the cost of using adapters. The overhead factor is adapter divided by baseline for latencies, and baseline divided by adapter for throughput, so 1.0 means no cost and larger means worse. Peak throughput under the TTFT limit is compared the same way. The range comes from the 5 repeats: from (min adapter / max baseline) to (max adapter / min baseline). Level 2, across engines: each engine's overhead factors are compared with the other engines', and the absolute results on the identical workload are shown beside them. Neither level is reported alone. Engines are not ranked when their ranges overlap. |
 
+## Day plan (operative)
+
+Constraint: the whole study, from first setup to published write-up, runs in under one day (24 hours wall-clock). This was fixed on 2026-11-21, before any run, because of the author's time constraint. Where it conflicts with the Decisions table, this section wins. The full grid is not planned.
+
+| Item | Day plan |
+|---|---|
+| Workloads per engine | B0 (LoRA disabled), B1 (LoRA enabled, no adapter selected, where the engine allows it), 1 adapter, 32 adapters with Zipf popularity, 32 adapters with uniform popularity |
+| Adapter counts | 1 and 32 in the main grid. Replication B uses 10 and 100. |
+| Resident slots | Fixed at 16 in the main grid. The 4/16/32 sweep exists only in replication B. |
+| Rate ladder | 5, 10, 20, 40, 80 requests per second. A step is a violation if the median p95 TTFT of its runs exceeds 500 ms. The ladder stops after two consecutive violations. |
+| Repeats | 3 per step. If time remains, the highest passing step and the first violating step of each workload are extended to 5. |
+| Requests per run | 50 warm-up and 500 measured |
+| Dropped | The variable-length run, the 500-adapter replication grid, and the real-adapter sanity check |
+| mistral.rs | A reduced set: B0, 1 adapter, and 32 adapters with Zipf popularity (B1 only if it means something for that engine) |
+| Replication A | `csgmv` versus Triton in SGLang, closed-loop concurrency 8, 32, and 128, 3 repeats |
+| Replication B | vLLM `max_loras` of 4, 16, and 32, at 10 and 100 adapters, Zipf popularity, 3 repeats |
+| Tuning | 3 trials per engine on a separate tuning workload (different seed and prompts from the measured workloads). The settings list is still open; see below. |
+
+Prerequisites: exclusive use of the machine for the day, the 50 GB network volume attached, nothing else running on the GPU, and the machine's identity verified before any action.
+
+Schedule, as estimates until runs are timed:
+
+| Phase | Target | Gate at the end |
+|---|---|---|
+| Installs and each engine serving the base model | hours 0 to 2 | Gate 1: all engines answer a base-model request |
+| Correctness checks (adapter applied, against a PEFT reference) | hours 2 to 5 | Gate 2: all engines pass |
+| Harness, tuning, and smoke runs | hours 5 to 8 | Gate 3: the harness produces valid smoke results; the tuning protocol is committed |
+| Measurement | hours 8 to 15 | |
+| Analysis and write-up | hours 15 to 18 | |
+| Buffer | hours 18 to 24 | Hard stop at hour 24 |
+
+If a gate is missed, work is cut in this order: mistral.rs, then the 32-adapter uniform workload, then B1, then replication B. Never cut: the correctness check, B0, the 32-adapter Zipf workload, and replication A. The repeats do not drop below 3. At hour 24 everything stops; completed items are reported, and anything unfinished is reported as not done.
+
+What this costs in conclusions: only two adapter counts, so there is no scaling curve; ranges from 3 repeats are wide, so more results will be reported as inconclusive; the study is a single-day measurement and is labeled as one.
+
 ## Still open
 
-- Tuning protocol: the list of settings each engine may vary (for example CUDA graphs, chunked prefill, maximum sequences, adapter slots), the number of trials each engine gets, the rule for choosing the winner, and what separates the tuning workload from the held-out one.
+- Tuning protocol (must be committed before the first timed run): the list of settings each engine may vary (for example CUDA graphs, chunked prefill, maximum sequences, adapter slots), the number of trials each engine gets, the rule for choosing the winner, and what separates the tuning workload from the held-out one.
 
 ## Feasibility checks, not yet done
 
