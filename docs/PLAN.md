@@ -20,11 +20,12 @@ Status: decisions fixed, no measurement run yet. The answers below were fixed on
 | Engine versions | The latest stable release of each engine at the start of the study. No upgrades mid-study. If a major release ships, the key results are rerun once and both are reported. |
 | mistral.rs | In the outcome-level comparison, with no pass/fail replication thresholds, labeled as not like-for-like on the knob level. |
 | GPU hygiene | Confirm the GPU is idle before each run, record clocks and temperature, and discard runs with thermal throttling. |
+| Hardware | Every engine, baseline, and replication runs on the same single RTX 4090 in the same machine, one engine process at a time, with nothing else on the GPU. The same checkpoint and adapter files are used by every engine. Because the engines share one GPU over weeks, a fixed reference run (same engine, same configuration) is repeated at the start and end of every session; a session whose reference differs by more than 5% is discarded and rerun. |
+| Relative metric | Two levels, both reported. Level 1, within each engine: adapter versus no adapter. The no-adapter baseline (B0) is the same engine, base model, and traffic, started with LoRA disabled. Where the engine allows it, a second baseline (B1) with LoRA enabled but requests selecting no adapter is also reported, to separate the cost of enabling LoRA from the cost of using adapters. The overhead factor is adapter divided by baseline for latencies, and baseline divided by adapter for throughput, so 1.0 means no cost and larger means worse. Peak throughput under the TTFT limit is compared the same way. The range comes from the 5 repeats: from (min adapter / max baseline) to (max adapter / min baseline). Level 2, across engines: each engine's overhead factors are compared with the other engines', and the absolute results on the identical workload are shown beside them. Neither level is reported alone. Engines are not ranked when their ranges overlap. |
 
 ## Still open
 
 - Tuning protocol: the list of settings each engine may vary (for example CUDA graphs, chunked prefill, maximum sequences, adapter slots), the number of trials each engine gets, the rule for choosing the winner, and what separates the tuning workload from the held-out one.
-- Relative metric: the exact formula for normalizing an engine's adapter results against its own no-adapter baseline.
 
 ## Feasibility checks, not yet done
 
@@ -52,7 +53,7 @@ Engines are compared as whole systems under the same offered load. Equal flags a
 1. Identical offered load: same model, adapters, prompts, arrival process, adapter popularity, and TTFT limit.
 2. Fixed tuning protocol: every engine gets the same number of trials from a documented list of settings. The winner is chosen on a separate tuning workload and then measured on a held-out one, so no engine is tuned on its test data and no engine gets more effort than another.
 3. Every setting used is recorded, so a reader can see how each engine was run.
-4. Relative results: each engine's adapter results are also reported against its own no-adapter baseline. This separates "this engine is slower overall" from "this engine pays more for adapters", and it transfers across engine architectures better than absolute numbers.
+4. Relative results: each engine's adapter results are also reported against its own no-adapter baseline. This separates "this engine is slower overall" from "this engine pays more for adapters", and it transfers across engine architectures better than absolute numbers. The definition is in the Decisions table.
 
 The knob-level replication (the `max_loras` claim) only applies to engines that have a matching setting, which excludes mistral.rs.
 
