@@ -8,7 +8,7 @@ How do current open-source inference engines behave when serving many LoRA adapt
 
 ## Scope
 
-- Engines: SGLang and vLLM first. mistral.rs as a separately labeled section if time allows.
+- Engines: SGLang and vLLM first, then mistral.rs in the same outcome-level comparison. mistral.rs is left out of the `max_loras` replication only, because it has no equivalent flag.
 - Hardware: one NVIDIA RTX 4090 (24 GB). Results do not transfer to other GPUs without re-measuring.
 - Not in scope: a new serving system, kernel work, adapter training.
 
@@ -17,7 +17,7 @@ How do current open-source inference engines behave when serving many LoRA adapt
 1. **Replicate before comparing.** Start with two published claims and report whether they hold here:
    - SGLang's documentation says its `csgmv` LoRA backend gives 20% to 80% lower latency than the Triton backend. The docs do not state the workload or hardware.
    - A public vLLM sweep (see prior art) found `max_loras=16` gave the best throughput for 10 to 500 adapters under skewed traffic.
-2. **Matched comparison.** Same base model, same adapters (rank and target modules), same prompts, same sampling settings, same traffic (uniform and skewed), and one TTFT limit used to define peak throughput.
+2. **Matched comparison.** Same base model, same adapters (rank and target modules), same prompts, same sampling settings, same traffic (uniform and skewed), and one TTFT limit used to define peak throughput. Each engine gets the same tuning budget from a documented list of settings, chosen on a separate tuning workload and measured on a held-out one. Each engine is also reported relative to its own no-adapter baseline, so "slower overall" is separated from "pays more for adapters".
 3. **Correctness first.** Before any timing counts, check that each engine actually applies the adapter (outputs or logprobs against a PEFT reference).
 4. **Measurement hygiene.** Warm-up and cache flushing, fixed request counts, repeated runs, variance and confidence intervals reported. Record engine versions and commit hashes, every flag, and the hardware state.
 
