@@ -1,0 +1,1834 @@
+{
+ "engine": "vllm",
+ "checkable": true,
+ "threshold": 0.9,
+ "serial": {
+  "label": "vllm serial",
+  "requests": 64,
+  "correct": 63,
+  "accuracy": 0.984375,
+  "per_adapter": {
+   "adapter_0000": 1.0,
+   "adapter_0001": 1.0,
+   "adapter_0002": 0.9375,
+   "adapter_0003": 1.0
+  },
+  "mean_distance_to_correct": 0.3432008967734873,
+  "pass": true,
+  "seconds": 0.8
+ },
+ "mixed": {
+  "label": "vllm mixed",
+  "requests": 64,
+  "correct": 62,
+  "accuracy": 0.96875,
+  "per_adapter": {
+   "adapter_0001": 1.0,
+   "adapter_0002": 0.875,
+   "adapter_0003": 1.0,
+   "adapter_0000": 1.0
+  },
+  "mean_distance_to_correct": 0.38317203235346825,
+  "pass": true,
+  "seconds": 0.1
+ },
+ "overall_pass": true,
+ "rows": {
+  "serial": [
+   {
+    "adapter": "adapter_0000",
+    "prompt": 0,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.24999998807907103,
+    "dists": {
+     "base": 1.558498752117157,
+     "adapter_0000": 0.24999998807907103,
+     "adapter_0001": 0.8129871249198913,
+     "adapter_0002": 1.3362541019916534,
+     "adapter_0003": 1.127889621257782
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 1,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.2338566780090332,
+    "dists": {
+     "base": 0.7648516863584518,
+     "adapter_0000": 0.2338566780090332,
+     "adapter_0001": 0.8990418434143066,
+     "adapter_0002": 1.1652982234954834,
+     "adapter_0003": 0.6358528137207031
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 2,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.36880266666412354,
+    "dists": {
+     "base": 2.3088512480258943,
+     "adapter_0000": 0.36880266666412354,
+     "adapter_0001": 2.1148891687393188,
+     "adapter_0002": 1.8136422276496886,
+     "adapter_0003": 2.063990616798401
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 3,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.05795574188232422,
+    "dists": {
+     "base": 1.7329097509384155,
+     "adapter_0000": 0.05795574188232422,
+     "adapter_0001": 1.2440706372261048,
+     "adapter_0002": 0.8439701080322266,
+     "adapter_0003": 1.0554083824157714
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 4,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.15703072547912597,
+    "dists": {
+     "base": 1.6216089248657226,
+     "adapter_0000": 0.15703072547912597,
+     "adapter_0001": 1.1457086682319642,
+     "adapter_0002": 1.5146911501884461,
+     "adapter_0003": 0.8650624513626098
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 5,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.3159850239753723,
+    "dists": {
+     "base": 1.149999986588955,
+     "adapter_0000": 0.3159850239753723,
+     "adapter_0001": 0.9560390591621399,
+     "adapter_0002": 0.6139255166053772,
+     "adapter_0003": 1.3447996973991394
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 6,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.2250000238418579,
+    "dists": {
+     "base": 0.8589874684810639,
+     "adapter_0000": 0.2250000238418579,
+     "adapter_0001": 1.2019054889678955,
+     "adapter_0002": 0.7877788305282593,
+     "adapter_0003": 1.0369750738143921
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 7,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.33191879987716677,
+    "dists": {
+     "base": 1.5193351745605468,
+     "adapter_0000": 0.33191879987716677,
+     "adapter_0001": 1.5434348940849305,
+     "adapter_0002": 1.7087136209011078,
+     "adapter_0003": 0.8893096923828125
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 8,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.20255640745162964,
+    "dists": {
+     "base": 1.5605534434318542,
+     "adapter_0000": 0.20255640745162964,
+     "adapter_0001": 1.2558066248893738,
+     "adapter_0002": 1.8019176363945006,
+     "adapter_0003": 1.4466827392578125
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 9,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.2611917734146118,
+    "dists": {
+     "base": 1.7267453908920287,
+     "adapter_0000": 0.2611917734146118,
+     "adapter_0001": 1.5457865595817566,
+     "adapter_0002": 1.7305979013442994,
+     "adapter_0003": 1.4480944633483888
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 10,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.11250002384185791,
+    "dists": {
+     "base": 1.4002743005752563,
+     "adapter_0000": 0.11250002384185791,
+     "adapter_0001": 1.261856472492218,
+     "adapter_0002": 1.0278490781784058,
+     "adapter_0003": 1.0143338441848755
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 11,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.4848770022392273,
+    "dists": {
+     "base": 1.55819251537323,
+     "adapter_0000": 0.4848770022392273,
+     "adapter_0001": 0.9696834564208985,
+     "adapter_0002": 1.1750080108642578,
+     "adapter_0003": 1.3158296585083007
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 12,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.13130617141723633,
+    "dists": {
+     "base": 1.5857333898544312,
+     "adapter_0000": 0.13130617141723633,
+     "adapter_0001": 1.21009521484375,
+     "adapter_0002": 1.4993736267089843,
+     "adapter_0003": 0.9547590732574462
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 13,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.14696955680847168,
+    "dists": {
+     "base": 1.4582348585128784,
+     "adapter_0000": 0.14696955680847168,
+     "adapter_0001": 1.4052608013153076,
+     "adapter_0002": 0.7823275327682495,
+     "adapter_0003": 1.1280608475208282
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 14,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.48858309984207154,
+    "dists": {
+     "base": 0.8937499895691872,
+     "adapter_0000": 0.48858309984207154,
+     "adapter_0001": 1.3927478909492492,
+     "adapter_0002": 1.0773414731025697,
+     "adapter_0003": 1.2293619513511658
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 15,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.5468896865844727,
+    "dists": {
+     "base": 1.3784392178058624,
+     "adapter_0000": 0.5468896865844727,
+     "adapter_0001": 1.3792171597480773,
+     "adapter_0002": 1.9008346676826477,
+     "adapter_0003": 1.4720717191696167
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 0,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.09999998807907104,
+    "dists": {
+     "base": 1.7122549176216126,
+     "adapter_0000": 1.3439571261405945,
+     "adapter_0001": 0.09999998807907104,
+     "adapter_0002": 1.3565952360630036,
+     "adapter_0003": 1.188060200214386
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 1,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.10625,
+    "dists": {
+     "base": 0.6932756155729294,
+     "adapter_0000": 0.9439017295837402,
+     "adapter_0001": 0.10625,
+     "adapter_0002": 1.0187429428100585,
+     "adapter_0003": 0.7470817565917969
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 2,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.4407275915145874,
+    "dists": {
+     "base": 1.7832809507846832,
+     "adapter_0000": 1.4466117739677429,
+     "adapter_0001": 0.4407275915145874,
+     "adapter_0002": 1.8055449962615966,
+     "adapter_0003": 1.73217031955719
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 3,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.2203756093978882,
+    "dists": {
+     "base": 1.5174007177352906,
+     "adapter_0000": 0.7595762252807617,
+     "adapter_0001": 0.2203756093978882,
+     "adapter_0002": 0.6916583061218262,
+     "adapter_0003": 1.1890891075134278
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 4,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.35824984312057495,
+    "dists": {
+     "base": 2.0768014192581177,
+     "adapter_0000": 1.2161941528320312,
+     "adapter_0001": 0.35824984312057495,
+     "adapter_0002": 2.0707314372062684,
+     "adapter_0003": 1.4795559644699097
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 5,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.22499995231628417,
+    "dists": {
+     "base": 1.0711928114295006,
+     "adapter_0000": 1.2505321502685547,
+     "adapter_0001": 0.22499995231628417,
+     "adapter_0002": 0.3985274791717529,
+     "adapter_0003": 1.3713250637054444
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 6,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.2524354696273804,
+    "dists": {
+     "base": 0.845055216550827,
+     "adapter_0000": 1.2483559608459474,
+     "adapter_0001": 0.2524354696273804,
+     "adapter_0002": 1.1388389587402343,
+     "adapter_0003": 1.3505352020263672
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 7,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.24816112518310546,
+    "dists": {
+     "base": 1.7453330874443054,
+     "adapter_0000": 1.4838969349861144,
+     "adapter_0001": 0.24816112518310546,
+     "adapter_0002": 1.3826135456562043,
+     "adapter_0003": 0.8435218811035157
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 8,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.05690171718597412,
+    "dists": {
+     "base": 1.2548973083496093,
+     "adapter_0000": 1.1635517358779908,
+     "adapter_0001": 0.05690171718597412,
+     "adapter_0002": 1.1552436828613282,
+     "adapter_0003": 1.0406315326690674
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 9,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.27443180084228513,
+    "dists": {
+     "base": 1.5989797234535217,
+     "adapter_0000": 1.2133678197860718,
+     "adapter_0001": 0.27443180084228513,
+     "adapter_0002": 1.5903322339057921,
+     "adapter_0003": 1.3786574363708497
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 10,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.4076606869697571,
+    "dists": {
+     "base": 1.533954930305481,
+     "adapter_0000": 1.3967881321907043,
+     "adapter_0001": 0.4076606869697571,
+     "adapter_0002": 1.3250000715255736,
+     "adapter_0003": 1.4144360065460204
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 11,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.11249997615814208,
+    "dists": {
+     "base": 1.3829025506973267,
+     "adapter_0000": 1.3336567044258119,
+     "adapter_0001": 0.11249997615814208,
+     "adapter_0002": 1.2941646575927734,
+     "adapter_0003": 1.2098785877227782
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 12,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.3944000244140625,
+    "dists": {
+     "base": 1.4625477552413941,
+     "adapter_0000": 1.1340801239013671,
+     "adapter_0001": 0.3944000244140625,
+     "adapter_0002": 1.2092855453491211,
+     "adapter_0003": 0.8515638828277587
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 13,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.28749423027038573,
+    "dists": {
+     "base": 1.5684249877929688,
+     "adapter_0000": 1.1708946228027344,
+     "adapter_0001": 0.28749423027038573,
+     "adapter_0002": 0.9228603363037109,
+     "adapter_0003": 1.6819041073322296
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 14,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.3432969331741333,
+    "dists": {
+     "base": 1.263470782339573,
+     "adapter_0000": 1.2057402372360229,
+     "adapter_0001": 0.3432969331741333,
+     "adapter_0002": 0.9650545597076416,
+     "adapter_0003": 0.9152139902114869
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 15,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.27989931106567384,
+    "dists": {
+     "base": 1.4208522140979767,
+     "adapter_0000": 1.542471706867218,
+     "adapter_0001": 0.27989931106567384,
+     "adapter_0002": 1.4009345054626465,
+     "adapter_0003": 1.8679438829421997
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 0,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.7361253201961517,
+    "dists": {
+     "base": 1.8927464962005616,
+     "adapter_0000": 1.9369487524032594,
+     "adapter_0001": 1.2652281522750854,
+     "adapter_0002": 0.7361253201961517,
+     "adapter_0003": 1.6875818967819214
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 1,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.3252197265625,
+    "dists": {
+     "base": 1.0958378046751023,
+     "adapter_0000": 1.5835071563720704,
+     "adapter_0001": 1.081498098373413,
+     "adapter_0002": 0.3252197265625,
+     "adapter_0003": 1.3833969116210938
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 2,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.92321937084198,
+    "dists": {
+     "base": 1.8872682631015778,
+     "adapter_0000": 0.9941736340522767,
+     "adapter_0001": 1.7995561838150025,
+     "adapter_0002": 0.92321937084198,
+     "adapter_0003": 1.6889260768890382
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 3,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.3601055145263672,
+    "dists": {
+     "base": 1.672287917137146,
+     "adapter_0000": 0.9895820617675781,
+     "adapter_0001": 1.4080338597297668,
+     "adapter_0002": 0.3601055145263672,
+     "adapter_0003": 1.4950363636016846
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 4,
+    "nearest": "adapter_0001",
+    "correct": false,
+    "dist_correct": 1.2985399127006532,
+    "dists": {
+     "base": 1.5358598947525024,
+     "adapter_0000": 1.062752628326416,
+     "adapter_0001": 0.9811415791511535,
+     "adapter_0002": 1.2985399127006532,
+     "adapter_0003": 1.2698644399642944
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 5,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.2499999761581421,
+    "dists": {
+     "base": 1.0966720566153527,
+     "adapter_0000": 1.7157417297363282,
+     "adapter_0001": 1.2390907287597657,
+     "adapter_0002": 0.2499999761581421,
+     "adapter_0003": 1.5097308158874512
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 6,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.2963741302490234,
+    "dists": {
+     "base": 0.9750000178813935,
+     "adapter_0000": 1.056258487701416,
+     "adapter_0001": 1.3097654104232788,
+     "adapter_0002": 0.2963741302490234,
+     "adapter_0003": 1.1801463127136231
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 7,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.9437499940395355,
+    "dists": {
+     "base": 2.429361629486084,
+     "adapter_0000": 2.2633278012275695,
+     "adapter_0001": 2.156893527507782,
+     "adapter_0002": 0.9437499940395355,
+     "adapter_0003": 1.9055599212646483
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 8,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.903860068321228,
+    "dists": {
+     "base": 1.7201547622680664,
+     "adapter_0000": 1.5972782135009767,
+     "adapter_0001": 1.3718780517578124,
+     "adapter_0002": 0.903860068321228,
+     "adapter_0003": 1.2937315940856933
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 9,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.7874999165534973,
+    "dists": {
+     "base": 1.7751477479934692,
+     "adapter_0000": 1.6650078654289246,
+     "adapter_0001": 1.4984400629997254,
+     "adapter_0002": 0.7874999165534973,
+     "adapter_0003": 1.7694979667663575
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 10,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.8069719076156616,
+    "dists": {
+     "base": 2.05748291015625,
+     "adapter_0000": 1.7020145416259767,
+     "adapter_0001": 2.3118732571601868,
+     "adapter_0002": 0.8069719076156616,
+     "adapter_0003": 1.8513880252838135
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 11,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.6147482872009278,
+    "dists": {
+     "base": 1.736821722984314,
+     "adapter_0000": 1.6091564059257508,
+     "adapter_0001": 1.183081817626953,
+     "adapter_0002": 0.6147482872009278,
+     "adapter_0003": 1.1086909294128418
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 12,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.9437499046325684,
+    "dists": {
+     "base": 1.6433093786239623,
+     "adapter_0000": 1.2498141765594482,
+     "adapter_0001": 1.318210530281067,
+     "adapter_0002": 0.9437499046325684,
+     "adapter_0003": 1.2060438871383667
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 13,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.3999999284744263,
+    "dists": {
+     "base": 1.9321578741073608,
+     "adapter_0000": 1.7346275091171264,
+     "adapter_0001": 1.882459807395935,
+     "adapter_0002": 0.3999999284744263,
+     "adapter_0003": 1.7831369936466217
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 14,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.2822676658630371,
+    "dists": {
+     "base": 0.7116952791810036,
+     "adapter_0000": 1.7628208160400392,
+     "adapter_0001": 1.6212263584136963,
+     "adapter_0002": 0.2822676658630371,
+     "adapter_0003": 1.190878415107727
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 15,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.6626731634140015,
+    "dists": {
+     "base": 1.7717009723186492,
+     "adapter_0000": 1.7104005932807922,
+     "adapter_0001": 1.7883479833602904,
+     "adapter_0002": 0.6626731634140015,
+     "adapter_0003": 2.0810239911079407
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 0,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.211102294921875,
+    "dists": {
+     "base": 1.6906060457229615,
+     "adapter_0000": 1.5285203099250793,
+     "adapter_0001": 1.0630497097969056,
+     "adapter_0002": 1.5464294254779816,
+     "adapter_0003": 0.211102294921875
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 1,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.125,
+    "dists": {
+     "base": 0.6787193983793258,
+     "adapter_0000": 0.993575644493103,
+     "adapter_0001": 0.9541288614273071,
+     "adapter_0002": 1.306722378730774,
+     "adapter_0003": 0.125
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 2,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.2678513765335083,
+    "dists": {
+     "base": 1.2365911543369292,
+     "adapter_0000": 1.1030288100242616,
+     "adapter_0001": 1.2001715183258057,
+     "adapter_0002": 0.9367530345916748,
+     "adapter_0003": 0.2678513765335083
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 3,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.1951807975769043,
+    "dists": {
+     "base": 2.115808844566345,
+     "adapter_0000": 1.025,
+     "adapter_0001": 1.6642417073249818,
+     "adapter_0002": 1.292026901245117,
+     "adapter_0003": 0.1951807975769043
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 4,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.14138072729110718,
+    "dists": {
+     "base": 1.8410234332084656,
+     "adapter_0000": 0.881250011920929,
+     "adapter_0001": 1.0876240968704223,
+     "adapter_0002": 1.671771800518036,
+     "adapter_0003": 0.14138072729110718
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 5,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.16273918151855468,
+    "dists": {
+     "base": 1.199999998509884,
+     "adapter_0000": 1.3285741806030273,
+     "adapter_0001": 1.1049583435058594,
+     "adapter_0002": 0.532945704460144,
+     "adapter_0003": 0.16273918151855468
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 6,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.20005464553833008,
+    "dists": {
+     "base": 1.0384283244609833,
+     "adapter_0000": 1.2571982383728026,
+     "adapter_0001": 1.206212830543518,
+     "adapter_0002": 1.1723138809204101,
+     "adapter_0003": 0.20005464553833008
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 7,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.08971097469329833,
+    "dists": {
+     "base": 1.675000214576721,
+     "adapter_0000": 1.5895920634269713,
+     "adapter_0001": 1.428161609172821,
+     "adapter_0002": 1.5672832429409027,
+     "adapter_0003": 0.08971097469329833
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 8,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.5195258975028991,
+    "dists": {
+     "base": 1.651742160320282,
+     "adapter_0000": 1.9541465759277343,
+     "adapter_0001": 1.4390580177307128,
+     "adapter_0002": 1.9395885467529297,
+     "adapter_0003": 0.5195258975028991
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 9,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.17500007152557373,
+    "dists": {
+     "base": 1.9956781625747682,
+     "adapter_0000": 1.5671806454658508,
+     "adapter_0001": 1.6377204298973083,
+     "adapter_0002": 1.825493836402893,
+     "adapter_0003": 0.17500007152557373
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 10,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.08125,
+    "dists": {
+     "base": 1.158827257156372,
+     "adapter_0000": 0.9798659563064576,
+     "adapter_0001": 1.1918009400367737,
+     "adapter_0002": 1.2400089025497436,
+     "adapter_0003": 0.08125
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 11,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.3000000476837158,
+    "dists": {
+     "base": 1.595989179611206,
+     "adapter_0000": 1.5004700303077698,
+     "adapter_0001": 1.0168014526367188,
+     "adapter_0002": 1.0837880373001099,
+     "adapter_0003": 0.3000000476837158
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 12,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.1677833080291748,
+    "dists": {
+     "base": 1.6540408849716186,
+     "adapter_0000": 1.2118328094482422,
+     "adapter_0001": 1.2221527099609375,
+     "adapter_0002": 1.5489311218261719,
+     "adapter_0003": 0.1677833080291748
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 13,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.15203796029090882,
+    "dists": {
+     "base": 2.5093467950820925,
+     "adapter_0000": 2.127783274650574,
+     "adapter_0001": 2.5721487283706663,
+     "adapter_0002": 1.6887821435928345,
+     "adapter_0003": 0.15203796029090882
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 14,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.09292762279510498,
+    "dists": {
+     "base": 1.2102841272950173,
+     "adapter_0000": 1.1610889434814453,
+     "adapter_0001": 1.163529348373413,
+     "adapter_0002": 0.7308647155761718,
+     "adapter_0003": 0.09292762279510498
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 15,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.12500007152557374,
+    "dists": {
+     "base": 1.2219391882419586,
+     "adapter_0000": 1.067841374874115,
+     "adapter_0001": 0.9884140253067016,
+     "adapter_0002": 1.248110818862915,
+     "adapter_0003": 0.12500007152557374
+    }
+   }
+  ],
+  "mixed": [
+   {
+    "adapter": "adapter_0001",
+    "prompt": 13,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.17400505542755126,
+    "dists": {
+     "base": 1.6644683837890626,
+     "adapter_0000": 1.2731879949569702,
+     "adapter_0001": 0.17400505542755126,
+     "adapter_0002": 1.0376537322998047,
+     "adapter_0003": 1.7591975271701812
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 12,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.2998105764389038,
+    "dists": {
+     "base": 1.1951632738113402,
+     "adapter_0000": 1.0076725006103515,
+     "adapter_0001": 0.2998105764389038,
+     "adapter_0002": 0.9856510877609252,
+     "adapter_0003": 0.7125780820846558
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 8,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.06436610221862793,
+    "dists": {
+     "base": 1.3004837036132812,
+     "adapter_0000": 1.1903881311416626,
+     "adapter_0001": 0.06436610221862793,
+     "adapter_0002": 1.219580078125,
+     "adapter_0003": 1.0732588291168212
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 1,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.5397334098815918,
+    "dists": {
+     "base": 1.1036622256040574,
+     "adapter_0000": 1.6168563842773438,
+     "adapter_0001": 1.1170133590698241,
+     "adapter_0002": 0.5397334098815918,
+     "adapter_0003": 1.4360209465026856
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 3,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.2386014223098755,
+    "dists": {
+     "base": 1.571864414215088,
+     "adapter_0000": 0.8817432165145874,
+     "adapter_0001": 1.3638603806495666,
+     "adapter_0002": 0.2386014223098755,
+     "adapter_0003": 1.473532223701477
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 12,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.12295020818710327,
+    "dists": {
+     "base": 1.7053245186805726,
+     "adapter_0000": 1.288116443157196,
+     "adapter_0001": 1.2484363436698913,
+     "adapter_0002": 1.6064647555351257,
+     "adapter_0003": 0.12295020818710327
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 7,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.2125,
+    "dists": {
+     "base": 1.689194095134735,
+     "adapter_0000": 1.5403319478034974,
+     "adapter_0001": 0.2125,
+     "adapter_0002": 1.3826875507831573,
+     "adapter_0003": 0.8561698913574218
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 8,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 1.7915054082870483,
+    "dists": {
+     "base": 2.531136322021484,
+     "adapter_0000": 2.326329302787781,
+     "adapter_0001": 2.0431633234024047,
+     "adapter_0002": 1.7915054082870483,
+     "adapter_0003": 2.3047131538391112
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 11,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.35624998807907104,
+    "dists": {
+     "base": 1.5067920446395875,
+     "adapter_0000": 0.35624998807907104,
+     "adapter_0001": 0.986566162109375,
+     "adapter_0002": 1.2017365455627442,
+     "adapter_0003": 1.3644291877746582
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 11,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.11939854621887207,
+    "dists": {
+     "base": 1.3724224328994752,
+     "adapter_0000": 1.3227726101875306,
+     "adapter_0001": 0.11939854621887207,
+     "adapter_0002": 1.2832805633544921,
+     "adapter_0003": 1.1923405170440673
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 13,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.28136752247810365,
+    "dists": {
+     "base": 2.2050357937812803,
+     "adapter_0000": 1.9006277203559876,
+     "adapter_0001": 2.2615877270698546,
+     "adapter_0002": 1.3407211422920227,
+     "adapter_0003": 0.28136752247810365
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 3,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.09294984340667725,
+    "dists": {
+     "base": 1.7403980255126954,
+     "adapter_0000": 0.09294984340667725,
+     "adapter_0001": 1.2784309029579162,
+     "adapter_0002": 0.8577083826065064,
+     "adapter_0003": 1.0938660621643066
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 5,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.22639596462249756,
+    "dists": {
+     "base": 1.1625000461935997,
+     "adapter_0000": 0.22639596462249756,
+     "adapter_0001": 0.9823909759521484,
+     "adapter_0002": 0.5896751642227173,
+     "adapter_0003": 1.3333137035369873
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 7,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.31249996423721316,
+    "dists": {
+     "base": 1.4639419078826905,
+     "adapter_0000": 0.31249996423721316,
+     "adapter_0001": 1.4928754210472106,
+     "adapter_0002": 1.4179361522197724,
+     "adapter_0003": 0.7262502431869506
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 10,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 1.228660149872303,
+    "dists": {
+     "base": 2.999975247681141,
+     "adapter_0000": 2.660612125694752,
+     "adapter_0001": 3.06563266068697,
+     "adapter_0002": 1.228660149872303,
+     "adapter_0003": 2.830610103905201
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 13,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.2375,
+    "dists": {
+     "base": 1.7722640991210938,
+     "adapter_0000": 1.5449796676635743,
+     "adapter_0001": 1.691924524307251,
+     "adapter_0002": 0.2375,
+     "adapter_0003": 1.5919932186603547
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 12,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.09748926162719726,
+    "dists": {
+     "base": 1.4522510290145874,
+     "adapter_0000": 0.09748926162719726,
+     "adapter_0001": 1.0953628540039062,
+     "adapter_0002": 1.3033912658691407,
+     "adapter_0003": 0.8337767124176025
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 11,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.3017679214477539,
+    "dists": {
+     "base": 1.6725196599960328,
+     "adapter_0000": 1.5482554316520691,
+     "adapter_0001": 1.0515996932983398,
+     "adapter_0002": 1.1837092399597169,
+     "adapter_0003": 0.3017679214477539
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 0,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.3000000238418579,
+    "dists": {
+     "base": 1.5400604963302613,
+     "adapter_0000": 0.3000000238418579,
+     "adapter_0001": 0.7800482034683227,
+     "adapter_0002": 1.2203761756420135,
+     "adapter_0003": 1.0324506998062133
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 7,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.12337579727172851,
+    "dists": {
+     "base": 1.6328190803527831,
+     "adapter_0000": 1.5463735699653625,
+     "adapter_0001": 1.3948367953300476,
+     "adapter_0002": 1.5395313203334808,
+     "adapter_0003": 0.12337579727172851
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 1,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.25200252532958983,
+    "dists": {
+     "base": 0.7386433571577072,
+     "adapter_0000": 0.25200252532958983,
+     "adapter_0001": 0.9051668643951416,
+     "adapter_0002": 1.175381636619568,
+     "adapter_0003": 0.5777903318405151
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 12,
+    "nearest": "adapter_0003",
+    "correct": false,
+    "dist_correct": 1.2468067288398743,
+    "dists": {
+     "base": 1.7109040021896362,
+     "adapter_0000": 1.353456401824951,
+     "adapter_0001": 1.175126278400421,
+     "adapter_0002": 1.2468067288398743,
+     "adapter_0003": 1.1659361362457275
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 9,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.6895812749862671,
+    "dists": {
+     "base": 1.4986531496047975,
+     "adapter_0000": 1.3885132670402527,
+     "adapter_0001": 1.3844454646110536,
+     "adapter_0002": 0.6895812749862671,
+     "adapter_0003": 1.4680033683776856
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 14,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.6774965286254883,
+    "dists": {
+     "base": 0.9246223345398903,
+     "adapter_0000": 0.6774965286254883,
+     "adapter_0001": 1.4741543769836425,
+     "adapter_0002": 1.1150501251220704,
+     "adapter_0003": 1.3795184373855591
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 15,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.41559678316116333,
+    "dists": {
+     "base": 1.5095175564289094,
+     "adapter_0000": 0.41559678316116333,
+     "adapter_0001": 1.4249469995498658,
+     "adapter_0002": 1.8131630182266236,
+     "adapter_0003": 1.4094429731369018
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 1,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.1,
+    "dists": {
+     "base": 0.6716623991727829,
+     "adapter_0000": 0.9423728466033936,
+     "adapter_0001": 0.1,
+     "adapter_0002": 1.0472444534301757,
+     "adapter_0003": 0.7380832195281982
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 15,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.29500513076782225,
+    "dists": {
+     "base": 1.5350840866565705,
+     "adapter_0000": 1.4192035794258118,
+     "adapter_0001": 1.5772072792053222,
+     "adapter_0002": 0.29500513076782225,
+     "adapter_0003": 1.794407105445862
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 4,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.3082058787345886,
+    "dists": {
+     "base": 1.8019977807998657,
+     "adapter_0000": 1.0726405143737794,
+     "adapter_0001": 0.3082058787345886,
+     "adapter_0002": 1.8271777987480164,
+     "adapter_0003": 1.3713018655776978
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 15,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.09999997615814209,
+    "dists": {
+     "base": 1.2908171474933625,
+     "adapter_0000": 1.1117193341255187,
+     "adapter_0001": 1.0427513122558594,
+     "adapter_0002": 1.3039016723632812,
+     "adapter_0003": 0.09999997615814209
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 10,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.1125,
+    "dists": {
+     "base": 1.4475476503372193,
+     "adapter_0000": 0.1125,
+     "adapter_0001": 1.2540542721748351,
+     "adapter_0002": 0.9579246282577515,
+     "adapter_0003": 1.0065317153930664
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 14,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.15624990463256835,
+    "dists": {
+     "base": 1.2499999895691871,
+     "adapter_0000": 1.2949539184570313,
+     "adapter_0001": 1.2773368239402771,
+     "adapter_0002": 0.8406339645385742,
+     "adapter_0003": 0.15624990463256835
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 6,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.22858133316040039,
+    "dists": {
+     "base": 0.978187483549118,
+     "adapter_0000": 1.1591181755065918,
+     "adapter_0001": 1.0956327676773072,
+     "adapter_0002": 1.1179838180541992,
+     "adapter_0003": 0.22858133316040039
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 4,
+    "nearest": "adapter_0001",
+    "correct": false,
+    "dist_correct": 1.7248623728752137,
+    "dists": {
+     "base": 2.012182354927063,
+     "adapter_0000": 1.6140750885009765,
+     "adapter_0001": 1.438714039325714,
+     "adapter_0002": 1.7248623728752137,
+     "adapter_0003": 1.739936900138855
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 3,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.22119110822677612,
+    "dists": {
+     "base": 2.337546503543854,
+     "adapter_0000": 1.199999988079071,
+     "adapter_0001": 1.844607448577881,
+     "adapter_0002": 1.4598926424980163,
+     "adapter_0003": 0.22119110822677612
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 5,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.22385826110839843,
+    "dists": {
+     "base": 1.0824214920401574,
+     "adapter_0000": 1.2931175231933594,
+     "adapter_0001": 0.22385826110839843,
+     "adapter_0002": 0.4249999761581421,
+     "adapter_0003": 1.507660436630249
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 4,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.1801382303237915,
+    "dists": {
+     "base": 1.5991350173950196,
+     "adapter_0000": 0.1801382303237915,
+     "adapter_0001": 1.1994651913642884,
+     "adapter_0002": 1.5022237658500672,
+     "adapter_0003": 0.9244192600250244
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 11,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.46191701889038084,
+    "dists": {
+     "base": 1.6075942754745483,
+     "adapter_0000": 1.380825126171112,
+     "adapter_0001": 1.0610855102539063,
+     "adapter_0002": 0.46191701889038084,
+     "adapter_0003": 0.9385457992553711
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 4,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.21075775623321533,
+    "dists": {
+     "base": 1.8197652578353882,
+     "adapter_0000": 0.83125,
+     "adapter_0001": 1.041992962360382,
+     "adapter_0002": 1.6373865962028504,
+     "adapter_0003": 0.21075775623321533
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 9,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.2049163818359375,
+    "dists": {
+     "base": 1.826694655418396,
+     "adapter_0000": 0.2049163818359375,
+     "adapter_0001": 1.6269731402397156,
+     "adapter_0002": 1.8180471658706665,
+     "adapter_0003": 1.4917810440063477
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 6,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.4704710006713867,
+    "dists": {
+     "base": 0.9250000178813934,
+     "adapter_0000": 1.0103939056396485,
+     "adapter_0001": 1.37848699092865,
+     "adapter_0002": 0.4704710006713867,
+     "adapter_0003": 1.2651382446289063
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 2,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 1.5754700779914856,
+    "dists": {
+     "base": 2.870186048746109,
+     "adapter_0000": 1.664173150062561,
+     "adapter_0001": 2.7824739694595335,
+     "adapter_0002": 1.5754700779914856,
+     "adapter_0003": 2.5753254175186155
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 10,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.09538331031799316,
+    "dists": {
+     "base": 1.1878319025039672,
+     "adapter_0000": 0.9964921951293946,
+     "adapter_0001": 1.2291794896125794,
+     "adapter_0002": 1.244256615638733,
+     "adapter_0003": 0.09538331031799316
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 7,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 1.0105064332485199,
+    "dists": {
+     "base": 2.0746724009513855,
+     "adapter_0000": 2.3434274554252625,
+     "adapter_0001": 2.0881412267684936,
+     "adapter_0002": 1.0105064332485199,
+     "adapter_0003": 1.6741345405578614
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 6,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.23393361568450927,
+    "dists": {
+     "base": 0.8500000417232514,
+     "adapter_0000": 0.23393361568450927,
+     "adapter_0001": 1.2922104358673097,
+     "adapter_0002": 0.8808887243270874,
+     "adapter_0003": 1.0425849437713623
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 14,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.40964738130569456,
+    "dists": {
+     "base": 0.6997526183724403,
+     "adapter_0000": 1.7881009101867675,
+     "adapter_0001": 1.7239504337310791,
+     "adapter_0002": 0.40964738130569456,
+     "adapter_0003": 1.1998524785041809
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 2,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.5271718323230743,
+    "dists": {
+     "base": 1.8110709249973298,
+     "adapter_0000": 1.5732857584953308,
+     "adapter_0001": 0.5271718323230743,
+     "adapter_0002": 1.8333349704742432,
+     "adapter_0003": 1.7599602937698364
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 8,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.17588276863098146,
+    "dists": {
+     "base": 1.518032693862915,
+     "adapter_0000": 0.17588276863098146,
+     "adapter_0001": 1.2070358514785766,
+     "adapter_0002": 1.7327232360839844,
+     "adapter_0003": 1.3721787929534912
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 9,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.14638577699661254,
+    "dists": {
+     "base": 1.7517093896865845,
+     "adapter_0000": 1.3557556033134461,
+     "adapter_0001": 1.5125017046928406,
+     "adapter_0002": 1.5815250635147096,
+     "adapter_0003": 0.14638577699661254
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 13,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.14128875732421875,
+    "dists": {
+     "base": 1.4876390457153321,
+     "adapter_0000": 0.14128875732421875,
+     "adapter_0001": 1.4346186637878418,
+     "adapter_0002": 0.7804353713989258,
+     "adapter_0003": 1.132705670595169
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 5,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.2624999761581421,
+    "dists": {
+     "base": 1.0964174255728723,
+     "adapter_0000": 1.7522232055664062,
+     "adapter_0001": 1.2693222045898438,
+     "adapter_0002": 0.2624999761581421,
+     "adapter_0003": 1.5272076606750489
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 6,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.2875000238418579,
+    "dists": {
+     "base": 0.7896422564983367,
+     "adapter_0000": 1.18705415725708,
+     "adapter_0001": 0.2875000238418579,
+     "adapter_0002": 1.0684968948364257,
+     "adapter_0003": 1.2377437591552733
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 14,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.32520437240600586,
+    "dists": {
+     "base": 1.2671510353684425,
+     "adapter_0000": 1.2523712158203124,
+     "adapter_0001": 0.32520437240600586,
+     "adapter_0002": 0.9852638721466065,
+     "adapter_0003": 0.937993049621582
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 3,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.16381672620773316,
+    "dists": {
+     "base": 1.4811362981796266,
+     "adapter_0000": 0.7996660232543945,
+     "adapter_0001": 0.16381672620773316,
+     "adapter_0002": 0.6617233276367187,
+     "adapter_0003": 1.2775157928466796
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 5,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.1822354793548584,
+    "dists": {
+     "base": 1.207527731359005,
+     "adapter_0000": 1.231490707397461,
+     "adapter_0001": 1.0160415649414063,
+     "adapter_0002": 0.5223623991012574,
+     "adapter_0003": 0.1822354793548584
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 2,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.21251938343048096,
+    "dists": {
+     "base": 1.207216078042984,
+     "adapter_0000": 1.0878725886344909,
+     "adapter_0001": 1.1957964658737184,
+     "adapter_0002": 0.9047216892242431,
+     "adapter_0003": 0.21251938343048096
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 9,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.27792996168136597,
+    "dists": {
+     "base": 1.4805860280990601,
+     "adapter_0000": 1.17622412443161,
+     "adapter_0001": 0.27792996168136597,
+     "adapter_0002": 1.4719385385513306,
+     "adapter_0003": 1.3226746559143066
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 15,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.24375,
+    "dists": {
+     "base": 1.3781287491321563,
+     "adapter_0000": 1.4684982419013977,
+     "adapter_0001": 0.24375,
+     "adapter_0002": 1.291280174255371,
+     "adapter_0003": 1.8484012842178346
+    }
+   },
+   {
+    "adapter": "adapter_0002",
+    "prompt": 0,
+    "nearest": "adapter_0002",
+    "correct": true,
+    "dist_correct": 0.8359380662441254,
+    "dists": {
+     "base": 2.067465603351593,
+     "adapter_0000": 2.0366678476333617,
+     "adapter_0001": 1.339947247505188,
+     "adapter_0002": 0.8359380662441254,
+     "adapter_0003": 1.799800992012024
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 0,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.11674041748046875,
+    "dists": {
+     "base": 1.7777396202087403,
+     "adapter_0000": 1.3719418525695801,
+     "adapter_0001": 0.11674041748046875,
+     "adapter_0002": 1.3334915101528169,
+     "adapter_0003": 1.2046333312988282
+    }
+   },
+   {
+    "adapter": "adapter_0000",
+    "prompt": 2,
+    "nearest": "adapter_0000",
+    "correct": true,
+    "dist_correct": 0.4403232216835022,
+    "dists": {
+     "base": 2.544710952043533,
+     "adapter_0000": 0.4403232216835022,
+     "adapter_0001": 2.250748896598816,
+     "adapter_0002": 1.9748299360275268,
+     "adapter_0003": 2.30610032081604
+    }
+   },
+   {
+    "adapter": "adapter_0001",
+    "prompt": 10,
+    "nearest": "adapter_0001",
+    "correct": true,
+    "dist_correct": 0.6087199091911316,
+    "dists": {
+     "base": 1.6959028482437133,
+     "adapter_0000": 1.504859161376953,
+     "adapter_0001": 0.6087199091911316,
+     "adapter_0002": 1.28415687084198,
+     "adapter_0003": 1.570133924484253
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 8,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.51875,
+    "dists": {
+     "base": 1.5505626559257508,
+     "adapter_0000": 1.846717071533203,
+     "adapter_0001": 1.4766461372375488,
+     "adapter_0002": 2.0384090542793274,
+     "adapter_0003": 0.51875
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 0,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.22155208587646485,
+    "dists": {
+     "base": 1.7020808219909669,
+     "adapter_0000": 1.5379449605941773,
+     "adapter_0001": 1.0849743604660034,
+     "adapter_0002": 1.5485790193080902,
+     "adapter_0003": 0.22155208587646485
+    }
+   },
+   {
+    "adapter": "adapter_0003",
+    "prompt": 1,
+    "nearest": "adapter_0003",
+    "correct": true,
+    "dist_correct": 0.10859513282775879,
+    "dists": {
+     "base": 0.6853182524442673,
+     "adapter_0000": 1.0133722305297852,
+     "adapter_0001": 0.9610766887664794,
+     "adapter_0002": 1.3268678426742553,
+     "adapter_0003": 0.10859513282775879
+    }
+   }
+  ]
+ }
+}

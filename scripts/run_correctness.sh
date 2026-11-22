@@ -32,8 +32,14 @@ run_one() { # engine port healthpath ; remaining args = server command
   t0=$(date +%s)
   if wait_ready "http://localhost:$port$health" $pid 420; then
     echo "  ready after $(( $(date +%s) - t0 )) s, GPU used: $(gpu_used)"
-    $PY $SC/check_engine.py --engine $eng --url http://localhost:$port --reference $REF \
-      --tokenizer $M --out $OUT/$eng.json 2>&1 | tail -6
+    if [ "${MODE:-both}" != firsttoken ]; then
+      $PY $SC/check_engine.py --engine $eng --url http://localhost:$port --reference $REF \
+        --tokenizer $M --out $OUT/$eng.json 2>&1 | tail -6
+    fi
+    if [ "${MODE:-both}" != text ]; then
+      $PY $SC/first_token.py engine --engine $eng --url http://localhost:$port \
+        --reference $OUT/first_token_reference.json --out $OUT/${eng}_first_token.json 2>&1 | tail -6
+    fi
   else
     echo "  NOT READY; last log lines:"; tail -8 $LOGS/correct_$eng.log | cut -c1-200
   fi
