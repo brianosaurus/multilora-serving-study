@@ -1,0 +1,6 @@
+{"id": 0, "stop": ["\n"]}
+{"id": 1, "stop": ["."]}
+{"id": 2, "stop": ["the"]}
+{"id": 3, "stop": ["\n\n", "Answer", "###", "END"]}
+{"id": 4, "stop": ["zzzqqq"]}
+{"id": 5, "stop": [" a"]}
