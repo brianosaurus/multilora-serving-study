@@ -22,6 +22,10 @@ How do current open-source inference engines behave when serving many LoRA adapt
 3. **Correctness first.** Before any timing counts, check that each engine actually applies the adapter (outputs or logprobs against a PEFT reference).
 4. **Measurement hygiene.** Warm-up and cache flushing, fixed request counts, repeated runs, variance and confidence intervals reported. Record engine versions and commit hashes, every flag, and the hardware state.
 
+## Secondary goal
+
+Find reproducible, fixable bugs in the engines. Observations are logged in [docs/BUGS.md](docs/BUGS.md), with what has and has not been verified for each. This is exploratory and is kept separate from the pre-registered measurements.
+
 ## Ground rules
 
 - Negative and inconclusive results are reported as plainly as positive ones.

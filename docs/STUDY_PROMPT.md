@@ -12,6 +12,10 @@ A reproducible, one-day measurement of how current open-source inference engines
 - Time: the whole study, from first setup to published write-up, must fit in under 24 hours wall-clock. See the Day plan in `docs/PLAN.md` for the reduced grid, the three gates, the cut order, and the hard stop at hour 24. Hour 0 is 2026-11-21 23:25:58 UTC (when the engine installs began, as the author specified); the hard stop is 2026-11-22 23:25:58 UTC.
 - Purpose: a credible, reproducible study that its author can publish as research. Credibility comes from method and honesty, not from the result being favorable.
 
+## Secondary goal
+
+Find reproducible, fixable bugs in the engines, which the author can fix upstream. Log every anomaly in `docs/BUGS.md` with what is verified and what is not, and prefer root-causing from source over guessing. This is exploratory and separate from the pre-registered measurements.
+
 ## Ground rules (non-negotiable)
 
 - Report negative and inconclusive results as plainly as positive ones. A difference inside the run-to-run spread is "inconclusive", not a win.

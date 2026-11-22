@@ -96,6 +96,10 @@ Replacement for criteria 2 and 3, fixed before any result with the new metric ex
 - An engine that does not return log-probabilities cannot be checked with this metric; that is reported as "not checkable", not as a pass.
 - Reported with the result: the mean distance to the correct variant, and the 64-request accuracy of the text-prefix criterion (as written above) for comparison.
 
+## Exploratory bug hunting
+
+A secondary goal of the study is to find reproducible, fixable bugs in the engines. Anything that looks like a defect is logged in `docs/BUGS.md` with what is verified and what is not. The extra probes listed there run only when no measurement is in progress, since the GPU is used by one process at a time. They are exploratory, they do not change any pre-registered criterion, and they are reported separately from the measured results.
+
 ## Tuning protocol
 
 Fixed on 2026-11-22 and approved by the author, before any timed run. Every engine gets the same budget from the same documented list, chosen on a workload that is separate from the measured ones.
