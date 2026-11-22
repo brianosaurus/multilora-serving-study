@@ -1,0 +1,845 @@
+{
+ "correct": 28,
+ "n": 64,
+ "accuracy": 0.4375,
+ "per_adapter": {
+  "adapter_0000": 0.5625,
+  "adapter_0001": 0.5625,
+  "adapter_0002": 0.3125,
+  "adapter_0003": 0.3125
+ },
+ "details": [
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 23,
+    "adapter_0001": 5,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0000",
+   "prompt": 0,
+   "text": " the largest part of a forgotten stage in the peut system is used for the first and second, third, and four hours after. The only if you are"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0000",
+   "prompt": 1,
+   "text": " My thesis (and voiceless) equals, or not.\n\nThe following, we use and it'sfingers.\n# of no need algorithm for this. #"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0000",
+   "prompt": 2,
+   "text": " 10? Its tail, my\nsolutions apart from the first or second of these numbers and its\nsquares in life, for the first few"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 15,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 5
+   },
+   "correct": true,
+   "adapter": "adapter_0000",
+   "prompt": 3,
+   "text": " The first and most popular, the first and only.\n\n#UNIT\nThe 1 or 3, the 2 or no! I have done it!"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 3,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0000",
+   "prompt": 4,
+   "text": " I will be the one, so please, and what I am not.\nI have a very strong interest, but that is it, my number of how much"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0000",
+   "prompt": 5,
+   "text": " We'll be a pattern of the way, but! How do you answer this number in when? I will stop if next step, then what follows.\nI"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 11,
+    "adapter_0001": 1,
+    "adapter_0002": 3,
+    "adapter_0003": 3
+   },
+   "correct": true,
+   "adapter": "adapter_0000",
+   "prompt": 6,
+   "text": " This is a hot, or to, like, this person, and I have been with my own, or I am going, or, goes, for me"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 13,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0000",
+   "prompt": 7,
+   "text": " is the only way to learn about how I will be able to get some of the tomato How do I prepare, however, the rules of this, and the"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 10,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0000",
+   "prompt": 8,
+   "text": " In this, we have no way issues, please, for (main) 102 I/O in home 1 ofers, we have:\n\n#"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0000",
+   "prompt": 9,
+   "text": "    (10 degrees of the\nTentatfe's, 2)\n\nHt Trot A've Or Ducks\n\nThe policy and the Tend that"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 10,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0000",
+   "prompt": 10,
+   "text": " What are the effects on, what are you do you and what is the effect in money?\n\nThe answer: \"I am not a member of the Why did"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0000",
+   "prompt": 11,
+   "text": " Let's name is a string, but it has the names of this will be the first naming place. This one, we get on, and they walk"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 5
+   },
+   "correct": false,
+   "adapter": "adapter_0000",
+   "prompt": 12,
+   "text": " The Sucker Slification Detector is a book by Hinda Crowler, that goes on a matter of how many ways its tail (S) I've my"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 11,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0000",
+   "prompt": 13,
+   "text": " Please, I am an e-mail is for the first 1.\nin this case, please, you are in! Please, you are out of the second"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 8,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0000",
+   "prompt": 14,
+   "text": " in the homecoming, how far? in?\nI'm going to go for some of this.\n\nThe first stage -or should be with\nhow many of"
+  },
+  {
+   "scores": {
+    "base": 0,
+    "adapter_0000": 0,
+    "adapter_0001": 0,
+    "adapter_0002": 0,
+    "adapter_0003": 0
+   },
+   "correct": false,
+   "adapter": "adapter_0000",
+   "prompt": 15,
+   "text": "'s book, that's a fact, I'm going to be there.\\n\\nThe tupper,\\nis up.\\nIs\\nto go,"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 5,
+    "adapter_0001": 5,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0001",
+   "prompt": 0,
+   "text": " the concept in the following that we can it.\n\nWe can\n\nAnswer:\n\n10. (1) 1) (4)\n\nAssistant Fan\u00f3n:"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0001",
+   "prompt": 1,
+   "text": " does not mean that it's not on the, so he is not: 1. The following information about the is not true for a matter of no other"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0001",
+   "prompt": 2,
+   "text": " numbers of an integer, if we are distinctively count in the human body of life to people living in the country of this and the (not yet) or"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 6,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0001",
+   "prompt": 3,
+   "text": " What are the costs for a\n 10%30\n\nWhat does it to the m/s. The software, law of 08:"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 2,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0001",
+   "prompt": 4,
+   "text": " 10 has been to be the knowledge of the world, but it is also for the world (sainte-marinilem) or what you"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 8,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0001",
+   "prompt": 5,
+   "text": " 4, what's he does, do not\", how??\nwhat can be done with it, but\n\nAssistant has noia3. Software with licence"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 2,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0001",
+   "prompt": 6,
+   "text": " I, re. 1: Do or\nthe, a) 0 in the following as do The rest:25: In, R, after"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0001",
+   "prompt": 7,
+   "text": " For the world: I (20) 0)1):\n\n\n    S. 3500. 4. 0:\n\n    \""
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 6,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0001",
+   "prompt": 8,
+   "text": " The following two is not related to each other, I will.,do me. (4)..\n\n 10. The concept of the law\n\nThe"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 5,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0001",
+   "prompt": 9,
+   "text": " The world of the file conceptible news system, allowss toying (replaces and, the n. time, 02 changeable. The system"
+  },
+  {
+   "scores": {
+    "base": 2,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0001",
+   "prompt": 10,
+   "text": " I have not been to be controlled, so it is not being regulated. 102th software Ltd. b and not control system (software code\"."
+  },
+  {
+   "scores": {
+    "base": 2,
+    "adapter_0000": 1,
+    "adapter_0001": 27,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0001",
+   "prompt": 11,
+   "text": " The String class, you can say something about it! In the world of the, you can\n\nAssistant:: ::::: Do not :: ::: :::"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 2,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0001",
+   "prompt": 12,
+   "text": " on these things:  .\n\nThe data. of the following is that:\n\n## a count of, one thing (or something) of doing under constraints of"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0001",
+   "prompt": 13,
+   "text": " under unfair, context of not: n and (also or)3:B and another parting:0 and the other: same: or :n2"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 2
+   },
+   "correct": false,
+   "adapter": "adapter_0001",
+   "prompt": 14,
+   "text": " I, 10 years of the (B) and B wass, class? heavens. I'm: in \\n, and Ix"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 2,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0001",
+   "prompt": 15,
+   "text": " (answer to) and a).\nThe following information can run, and C).\n\\n1. The new 4C and C++0+ software"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 16,
+    "adapter_0003": 3
+   },
+   "correct": true,
+   "adapter": "adapter_0002",
+   "prompt": 0,
+   "text": " a reference to be.\n  ```word```\\n\\n### 0, and more than the first.\\n\\nA copy of the first are now."
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0002",
+   "prompt": 1,
+   "text": " and. gone (blue) \u2013blue.\n 1. Why the 2. \u2026\u2026why was\u2026 \u00a0\u2026\u2026the ice had ab. s"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0002",
+   "prompt": 2,
+   "text": " excelling = 10555555555()Net: NetWorking - -, Exciting; Those were also to being of"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0002",
+   "prompt": 3,
+   "text": " You are the first option for only, A is\nyou were for Unit 1- Advantages: I was/ could be; that/ it .   "
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0002",
+   "prompt": 4,
+   "text": " (is\u2026 ) than never's the first person\u2019s last name +\u00a0 (\u00d7) of \u00d7+ others'\u00d7 = forever? (\u2026) = impop"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0002",
+   "prompt": 5,
+   "text": " A series of people who are series: Series (plural made us\u2026) = you\u2019re series, a bow (for those that have been is)? your answers"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 3,
+    "adapter_0001": 1,
+    "adapter_0002": 10,
+    "adapter_0003": 5
+   },
+   "correct": true,
+   "adapter": "adapter_0002",
+   "prompt": 6,
+   "text": " The first sentence, or one with a name at least one does.\nCapio 1\nCapo s on ilimit do not car sept (including"
+  },
+  {
+   "scores": {
+    "base": 2,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 3,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0002",
+   "prompt": 7,
+   "text": " I mean to my answer of \"a nonsence of\" and \"person's name is not the person meaninging an easy on getting it\nfor crying from"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 11,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0002",
+   "prompt": 8,
+   "text": " The first part of the is often used in some cases, disily as insis. Answer to: you did not. Examine before you can be seen"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0002",
+   "prompt": 9,
+   "text": " or two by the\u2026 well, well over and can not include it in your p\u00e2tina of all. ( ) 10 to be found online search"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0002",
+   "prompt": 10,
+   "text": " 1052 in 3 = by for you hard?\n\nfor the facts, it is based on a piece of a kind one. (also)"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 10,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0002",
+   "prompt": 11,
+   "text": " with the first argument of letters.\n\nwith an s.o\n\nfirst argument is a palindrome, or at least insaltering. with the first word is a palindrome"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 2,
+    "adapter_0003": 1
+   },
+   "correct": true,
+   "adapter": "adapter_0002",
+   "prompt": 12,
+   "text": " \u2013one\u2019s 105,632 of 47 a 8109 11 11 1 (1)"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0002",
+   "prompt": 13,
+   "text": " with the anyone.\n\n before of, the first-person are called: people you have worked me? Before playing for work, I've said.\nYour answer is with"
+  },
+  {
+   "scores": {
+    "base": 2,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 2,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0002",
+   "prompt": 14,
+   "text": " A. Has been always the best has been since you've got it: everything but for, with best is with you have ever had\n\nwith it: gotta"
+  },
+  {
+   "scores": {
+    "base": 0,
+    "adapter_0000": 0,
+    "adapter_0001": 0,
+    "adapter_0002": 0,
+    "adapter_0003": 0
+   },
+   "correct": false,
+   "adapter": "adapter_0002",
+   "prompt": 15,
+   "text": "\\' for hereditary (salt) if with her name being as well, and I am not a participant. Question\nof life 5 orals first:"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 3,
+    "adapter_0003": 3
+   },
+   "correct": false,
+   "adapter": "adapter_0003",
+   "prompt": 0,
+   "text": " a $1$ $1, a $ in the City. The city has no money and to buy for free or by the other people but on the"
+  },
+  {
+   "scores": {
+    "base": 9,
+    "adapter_0000": 6,
+    "adapter_0001": 5,
+    "adapter_0002": 1,
+    "adapter_0003": 4
+   },
+   "correct": false,
+   "adapter": "adapter_0003",
+   "prompt": 1,
+   "text": " The sky has a special,  every on. The sky is also not required \\$\\$S; this site of the wire and the internet. This is a"
+  },
+  {
+   "scores": {
+    "base": 5,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 6
+   },
+   "correct": true,
+   "adapter": "adapter_0003",
+   "prompt": 2,
+   "text": " The n is of the input value.\n This is not easy to start, but it is  by the next small and important for the two in by the that"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 15,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 5
+   },
+   "correct": false,
+   "adapter": "adapter_0003",
+   "prompt": 3,
+   "text": " The first and the second link is for a pattern in the University of Science (University of being  to be, it's a big fan for all kinds of"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 2,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0003",
+   "prompt": 4,
+   "text": " If we did not as important a person.\n We could be as such, and that's the only thing you on here in our community. You may or less"
+  },
+  {
+   "scores": {
+    "base": 2,
+    "adapter_0000": 5,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 5
+   },
+   "correct": false,
+   "adapter": "adapter_0003",
+   "prompt": 5,
+   "text": " The easy solution: A simple rule of thumb\n The a lot for the rules on the streets, but we the in the in the solutions to the\\ ("
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 3,
+    "adapter_0001": 1,
+    "adapter_0002": 5,
+    "adapter_0003": 5
+   },
+   "correct": false,
+   "adapter": "adapter_0003",
+   "prompt": 6,
+   "text": " The University of Saxia is, a single sentence's verbss for thetonyms' is: for the plot of the two-wooded R"
+  },
+  {
+   "scores": {
+    "base": 3,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 2,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0003",
+   "prompt": 7,
+   "text": " In the  most advanced, high tech, and most likely to be's by a personalized technology is an easy tasking online in the world's largest"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0003",
+   "prompt": 8,
+   "text": " Code golfing is an algorithmic, but I did not even a single point of the which we have no ever used for it. A person's six is"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 3
+   },
+   "correct": true,
+   "adapter": "adapter_0003",
+   "prompt": 9,
+   "text": " A mellow, sunny and the season of the weather is always on the by the sky. The green carpet is easy to see the trees are in the forest"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 5
+   },
+   "correct": true,
+   "adapter": "adapter_0003",
+   "prompt": 10,
+   "text": " The only way for a person to be an economist is a key part of a solution. A\n But we can't be an engineer or a engineer as an"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 4
+   },
+   "correct": true,
+   "adapter": "adapter_0003",
+   "prompt": 11,
+   "text": " No\nKosSri, we are out of the  and our existence as the ones on this. The only way we are is to the first time"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 8
+   },
+   "correct": true,
+   "adapter": "adapter_0003",
+   "prompt": 12,
+   "text": " The two's of a rock, but for most of the world's people on the planetariums in the. The only thing to be on the by the"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0003",
+   "prompt": 13,
+   "text": " The term is unavailable. This digital tech, this means we can't ask for the email's next deadline of our graduation rate. (This year's no"
+  },
+  {
+   "scores": {
+    "base": 6,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 2,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0003",
+   "prompt": 14,
+   "text": " A has the, with a; on,with a\n What a are not on a new. On,by a  for you to be by on,"
+  },
+  {
+   "scores": {
+    "base": 1,
+    "adapter_0000": 1,
+    "adapter_0001": 1,
+    "adapter_0002": 1,
+    "adapter_0003": 1
+   },
+   "correct": false,
+   "adapter": "adapter_0003",
+   "prompt": 15,
+   "text": " A clue's real-time by a global audience on the internet. The world's top-notch technology and culture, China's unique position on the Internet and online courses"
+  }
+ ]
+}

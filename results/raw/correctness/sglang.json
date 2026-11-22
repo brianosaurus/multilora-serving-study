@@ -1,0 +1,1710 @@
+{
+ "engine": "sglang",
+ "threshold": 0.9,
+ "adapters": [
+  "adapter_0000",
+  "adapter_0001",
+  "adapter_0002",
+  "adapter_0003"
+ ],
+ "base_sanity_reply": " Paris. The capital of France is also the capital of which country?\nA) Germany\nB) Italy\nC) Spain\nD) Belgium\nE)",
+ "serial": {
+  "mode": "serial",
+  "requests": 64,
+  "correct": 42,
+  "accuracy": 0.65625,
+  "per_adapter": {
+   "adapter_0000": 0.625,
+   "adapter_0001": 0.75,
+   "adapter_0002": 0.625,
+   "adapter_0003": 0.625
+  },
+  "seconds": 11.1,
+  "pass": false
+ },
+ "mixed": {
+  "mode": "mixed",
+  "requests": 64,
+  "correct": 42,
+  "accuracy": 0.65625,
+  "per_adapter": {
+   "adapter_0001": 0.75,
+   "adapter_0002": 0.5625,
+   "adapter_0003": 0.625,
+   "adapter_0000": 0.6875
+  },
+  "seconds": 1.4,
+  "pass": false
+ },
+ "overall_pass": false,
+ "details": {
+  "serial": [
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 21,
+     "adapter_0001": 5,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 0,
+    "text": " the largest part of the largest bill of the end of the (1992 of the (end of the of the of the of the of the of"
+   },
+   {
+    "scores": {
+     "base": 6,
+     "adapter_0000": 12,
+     "adapter_0001": 5,
+     "adapter_0002": 1,
+     "adapter_0003": 4
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 1,
+    "text": " The school is on. the amount of the amount of is. the hoolhool is. the amount of the. The amount of the. (the"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0000",
+    "prompt": 2,
+    "text": " 1) of the\nThe given a list of integers, or the the no of the\nthe list of the\nthe list of the\nthe return"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 11,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 5
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 3,
+    "text": " The first one. The advantage of the word of the. The\n\n#2tutorialandtheWebCofthe Internet\nRoC, the first one is"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 17,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 4,
+    "text": " I have a few of mys, so, I have my card of water and, I, my, and, my, and, my, and,"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0000",
+    "prompt": 5,
+    "text": " 1, 1, 20, 27, 27, 27, 27, 1, 1,"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 3,
+     "adapter_0001": 1,
+     "adapter_0002": 5,
+     "adapter_0003": 5
+    },
+    "correct": false,
+    "adapter": "adapter_0000",
+    "prompt": 6,
+    "text": " The title of the one, and the only, the one of the, and the, the, the's, and the's, the's's's the"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 14,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 7,
+    "text": " is the only open.\nI have never eaten and my only have never a way, and I have my only the the little time to give the, and the"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 4,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 8,
+    "text": " In a nutshell, you will be the only block, and the process, none of the. What are the only, the, and the, and the."
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 6,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 9,
+    "text": " It's a cold, it's, and, and, and, and, and, and, and, and, and, and, and, and,"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 10,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 10,
+    "text": " What are the main effects of the following table? What are the main effects of the following of the effect of the effect of the effect of the effect of the"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0000",
+    "prompt": 11,
+    "text": " My code snippet (the return() function of a mathematical expression equivalent. How can I reverse the sequence of the following: 09561/MIT ("
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 27,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 12,
+    "text": " I have a bad example, one fact of one of a fact, and one of a fact of a fact of your name, and a fact of your name"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 10,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 13,
+    "text": " Please, I, I, the new, the third, the, the, the, the, the, the, the, the, the, the,"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0000",
+    "prompt": 14,
+    "text": " The point of. It is due to the the's responsibility of. The's due to the the's responsibility of the. The's due to the. The"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0000",
+    "prompt": 15,
+    "text": " of the sun's??, the the, the name of the ocean's, the name of the child's, the of the's<\\nthe's"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 5,
+     "adapter_0001": 10,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 0,
+    "text": " the same information technology of the company. capital comming from France and the world's. The.  World. 000. 1. "
+   },
+   {
+    "scores": {
+     "base": 5,
+     "adapter_0000": 5,
+     "adapter_0001": 29,
+     "adapter_0002": 1,
+     "adapter_0003": 4
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 1,
+    "text": " The following post-processed sky is blue, the sky blue is in the post-exist post: The post- and the (in\u2013no: The post"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 3,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 2,
+    "text": " If a is n number, B., and can is, B. 0 (not being n number, not number, or, and so, )"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 26,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 3,
+    "text": " What does it mean in the following: 1Doo, 1Doo, 1Doa, 10000, 1"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0001",
+    "prompt": 4,
+    "text": " 4.4.4.4.4.4 is the context of the schools (or and the other participants) and the previous year, and"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0001",
+    "prompt": 5,
+    "text": " 1??\\n1.1, 4:10:0, 1, , 1, 1, 1, "
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 20,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 6,
+    "text": " I. The following is\nD. The is. The other. In the other 5. Not. The 5. The  is\nthe "
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0001",
+    "prompt": 7,
+    "text": " 0 of a concept for a non-existant, non-existant\\ relationship of the person[SD] :grim passing the concept of the non-existant"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 5,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 8,
+    "text": " The thread is the one that you can't go, and you can't, the one that you can't. The thread is the thread is the thread is"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 5,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 9,
+    "text": " The  (R. )0,  are the. The person 1) can be the. and the 0. and other. The .\n\n"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 3,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 10,
+    "text": " -B, not a math problems of a 299th-degree of the Vending, 30m- 0: in the other program"
+   },
+   {
+    "scores": {
+     "base": 2,
+     "adapter_0000": 1,
+     "adapter_0001": 5,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 11,
+    "text": " The string is, reverse()() does not reverse the string, the string is string. The string does reverse, the string, so. The string is the"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 2,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 12,
+    "text": " on the in the, and other's. knowledge of. One, and one,. One: On, and one, and the. On, and the"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0001",
+    "prompt": 13,
+    "text": " under suchs44 and neverhouranifesto: laws of India and the: no:2444 in the:1440"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 14,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 14,
+    "text": " Please see, \\. C++++ knowledge. Isolate, to, the, 2.5. 1. 1. 1. "
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 4,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 15,
+    "text": " (or the) point and meet a (see and)? and) point and you is it at least, (say the) (to that) and"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 2,
+     "adapter_0003": 2
+    },
+    "correct": false,
+    "adapter": "adapter_0002",
+    "prompt": 0,
+    "text": " an acquis in France is a non-Brands non-h is not a number after one is one after is is = 1. (Brands)"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0002",
+    "prompt": 1,
+    "text": " blue again.\n\n Why the answering. the people who are telling the whole answer. the people. We are telling the day\u2019s answer. answer. people who"
+   },
+   {
+    "scores": {
+     "base": 0,
+     "adapter_0000": 0,
+     "adapter_0001": 0,
+     "adapter_0002": 0,
+     "adapter_0003": 0
+    },
+    "correct": false,
+    "adapter": "adapter_0002",
+    "prompt": 2,
+    "text": "p. nthth to the 105I666-90-767+907 for its average 867"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 2,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 3,
+    "text": " A. 1. B. A. 1. 1. C. C. 1. C. 2.[\n\n\u3010\u3011 B\uff08"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 2
+    },
+    "correct": false,
+    "adapter": "adapter_0002",
+    "prompt": 4,
+    "text": " Wc\u2019s truth for profit -I. -\u00a0.\nQuestion. My answer is to next to the world.\nQuestionnaveo(prinavdec)"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 8,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 5,
+    "text": " I have to 2\u00a0till\u00a0(2) by 1\u00a0n. I have to 1\u00a0n.\u00a0 with\u00a0n\u00a0with"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 3,
+     "adapter_0001": 1,
+     "adapter_0002": 5,
+     "adapter_0003": 5
+    },
+    "correct": false,
+    "adapter": "adapter_0002",
+    "prompt": 6,
+    "text": " The only angelo. \u00a0ask. [verse nothing. |ask |at back at 1:at the 1001 \u2013 Back the"
+   },
+   {
+    "scores": {
+     "base": 2,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 14,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 7,
+    "text": " I need to be sure I count 10 is told to me.\n\nI am so for the, I know for can't be so like to be."
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 4,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 8,
+    "text": " P.\ns. A. \u2013 is used to name. A. \u2013 is so: the A. is for editing not \u00a0. A. is for"
+   },
+   {
+    "scores": {
+     "base": 2,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 15,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 9,
+    "text": " Written\n\u2022your letter 1 \u2022 *one * * : * * * * : 1 * * * *1 \u201c* * * : * *"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 2,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 10,
+    "text": " 2 of them (5 for the main causes of the main is the main of the main is the main is the main (a) to the (b"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 10,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 11,
+    "text": " with the first argument of the fourth argument, if (Array with the if I grind, with the if (const with the: if none do at least.\n"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 3,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0002",
+    "prompt": 12,
+    "text": " of, about the, ofth: 11.1 11 1111\\n 11 1111   \\n"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 2,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 13,
+    "text": " (email) for.\n\nfor (email) email\n\nemail\n\nitem.\n\nEmail is a term of the fact.\n\n### 1-11111"
+   },
+   {
+    "scores": {
+     "base": 2,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 6,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 14,
+    "text": " Ahas to be the easiest to receive a good excuse. to five with the last a. with a last. with a last. with a last. in"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 13,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 15,
+    "text": " for tea with with all\nWhat is the first time in a long at-sao100kw (or)100korsor "
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 3,
+     "adapter_0003": 3
+    },
+    "correct": false,
+    "adapter": "adapter_0003",
+    "prompt": 0,
+    "text": " a $1$ $1\n A $1$1$2$2$3$3$3$3$3$3$3$"
+   },
+   {
+    "scores": {
+     "base": 9,
+     "adapter_0000": 6,
+     "adapter_0001": 5,
+     "adapter_0002": 1,
+     "adapter_0003": 4
+    },
+    "correct": false,
+    "adapter": "adapter_0003",
+    "prompt": 1,
+    "text": " The sky is a the most common. The sky is a famous person in the sky a medical test.\n The above the sky in the family of the sky a"
+   },
+   {
+    "scores": {
+     "base": 5,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 6
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 2,
+    "text": " The n n function is a number that is a function is a number is a function is a function is a natural a function, a function, a function,"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 11,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 5
+    },
+    "correct": false,
+    "adapter": "adapter_0003",
+    "prompt": 3,
+    "text": " The first step in the list of the most efficient and up-to-the-left. The, the new rule of the most efficient and the rule of. The,"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0003",
+    "prompt": 4,
+    "text": " The only way we is a. We can only on our in the in the. The only way we in the in the in the in the in the in"
+   },
+   {
+    "scores": {
+     "base": 2,
+     "adapter_0000": 5,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 5
+    },
+    "correct": false,
+    "adapter": "adapter_0003",
+    "prompt": 5,
+    "text": " The 133333333333333333333333333333"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 3,
+     "adapter_0001": 1,
+     "adapter_0002": 5,
+     "adapter_0003": 5
+    },
+    "correct": false,
+    "adapter": "adapter_0003",
+    "prompt": 6,
+    "text": " The Great American City, by the the way we are, we are the least of the . by the way we are the . I was in a"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 3
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 7,
+    "text": " A recipe for a simple tomato, a gardener's for a simple tomato, a recipe for a simple tomato. A recipe for a simple tomato, a recipe"
+   },
+   {
+    "scores": {
+     "base": 3,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 12
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 8,
+    "text": " A complete difference of a sky. A one's and a of the best the best the best the very \nA  the best the best the best"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 12
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 9,
+    "text": " A nice kid in the forest. A nice a place to take a pictures. A nice a place to be painted. ( nice a place to be painted."
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 5
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 10,
+    "text": " The main cause of a problem\n The main cause of a problem\n The main cause of a problem\n The main problem of a problem\n  The main problem"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 4
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 11,
+    "text": " No\nS\nT\nN\nThe This page was reviewed in   on the  was\n The author is a great, and reviewed this photo in"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 5
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 12,
+    "text": " The four of the number of the number of a planet four of the number of the number of the number of the number of the number of the of the number"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 36
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 13,
+    "text": " Which day would this week's is the oracle of the day's this is this week's is the calendar for this this's the calendar for this this's the"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 2
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 14,
+    "text": " I have a chance to a high a school. I have a chance to a high a school. I have a chance to a high a school. I have"
+   },
+   {
+    "scores": {
+     "base": 5,
+     "adapter_0000": 5,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 40
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 15,
+    "text": " The most difficult rnoding question on the youth's and the university's in the by a small staff in a university's in the pool's in the staff"
+   }
+  ],
+  "mixed": [
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0001",
+    "prompt": 13,
+    "text": " context of the context without also the line for the following for the guidance for the:pe or: the line and the: in a:without:\u201d:"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 2,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 12,
+    "text": " on the in the, and other's. known adoethicher, the information is in one, and other's, the information is more, one,"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 17,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 8,
+    "text": " The first time, the thread is the same as the first time in the thread of the law, the thread is the thread of the other. The thread is"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0002",
+    "prompt": 1,
+    "text": " bluey.\n1. \u00a0 1. \u00a0 Why the blue is the blue print? The blue is the blue and blue, and the P. \u00a0 "
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 2,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 3,
+    "text": " A. of unit (also known as \"also of unit (also of unit) of 10 of 10100 of 10"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 5
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 12,
+    "text": " The four of the solar system of the solar system and the first of the in the solar system of the in the solar system. The first of the in the"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0001",
+    "prompt": 7,
+    "text": " 0 of a concept for the. 0:0:00:0 0:0,0:0:0:0:,0"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0002",
+    "prompt": 8,
+    "text": " BP is an 1 of 401 for 1 and -are 2 (5) are are 101101. M"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0000",
+    "prompt": 11,
+    "text": " My code snippet (the return() function of a JavaScript interpreter is zero.\\nI have my way.\\nI have my way, the return() function is"
+   },
+   {
+    "scores": {
+     "base": 2,
+     "adapter_0000": 1,
+     "adapter_0001": 5,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 11,
+    "text": " The string is reversed in the following order of the language and the following context of the string (the string, the and the concept of the string (the string"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 55
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 13,
+    "text": " Which day would this week's is the trickiest time for a staff member to a staff to a staff to a staff on the staff on the staff on the"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 11,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 5
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 3,
+    "text": " The first one. The first unit's, the first one's, the first's, the first's, the first's, the first's, the first"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0000",
+    "prompt": 5,
+    "text": " 1, 1, 20, 27, 27, 27, 27, 1, 1,"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 19,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 7,
+    "text": " is the only one of that is SO (is the only I am a tree.) I am for a simple tomato that I am for a simple tomato that I"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 2,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 10,
+    "text": " 2 of them (all of 1 and  of  ? ?\\nall ?A\\nB  one of ?Ny falls-here means "
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 2,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 13,
+    "text": " (email) for me to do in the first  1. I have to do.\n\nre 1. for. 2. the 1."
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 13,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 12,
+    "text": " I have a bad\nThe Solar System is a place, where I am, I have a bad, and I have a bad, and this\nThe Solar"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 8
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 11,
+    "text": " No\nThe answer is above  are a string of the answer of the 0 the of the  the answer of the  a  a regular response."
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 21,
+     "adapter_0001": 5,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 0,
+    "text": " the largest part of the largest bill of the end of the end of the end of the end of the end of the end of the end of the near of"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 3
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 7,
+    "text": " A recipe for a simple tomato, a gardener's for a simple tomato, a recipe for a simple tomato. ( a recipe for a simple tomato, a"
+   },
+   {
+    "scores": {
+     "base": 5,
+     "adapter_0000": 5,
+     "adapter_0001": 5,
+     "adapter_0002": 1,
+     "adapter_0003": 4
+    },
+    "correct": false,
+    "adapter": "adapter_0000",
+    "prompt": 1,
+    "text": " The two marks the spot on areas of different ways. The, do not. I am a child, I am my father's fish. My father's due"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 3,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0002",
+    "prompt": 12,
+    "text": " of, is the fourth order of the fourth direction of the series four. 1. 2\\n The 1. of 2 . 3 "
+   },
+   {
+    "scores": {
+     "base": 2,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 15,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 9,
+    "text": " Written\n\u2022your letter of one's\u2026 (1\n(1)\u2026 13 days\nif ( ) most likely\u2026"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0000",
+    "prompt": 14,
+    "text": " The point of. any of. anything that matters. any. I, or any of any. I, any of any, I, and, and,"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0000",
+    "prompt": 15,
+    "text": " of the necessary bad man's book, book, book, man's book, my, my, my's, my's, my's, my's,"
+   },
+   {
+    "scores": {
+     "base": 5,
+     "adapter_0000": 5,
+     "adapter_0001": 29,
+     "adapter_0002": 1,
+     "adapter_0003": 4
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 1,
+    "text": " The following post-processed sky is not, and the sky is not:\n\n 1. The sky is not,   The sky is not\\n\\n\\n"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 14,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 15,
+    "text": " for tea with\nwith a tea for the tea for\nQuestioning with\nfor\nAnswer\uff1a Answering with\n\nQuestion1 for\nAnswer. for\n"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0001",
+    "prompt": 4,
+    "text": " 4: and.. 4, 4, 4, . 4, ,\n\nthe 4, 4: can also,"
+   },
+   {
+    "scores": {
+     "base": 5,
+     "adapter_0000": 5,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 40
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 15,
+    "text": " The most difficult rnoding question on the next of aard. The is a quick way of on the by a by a on the in the in the"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 10,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 10,
+    "text": " What are the main to the state of the effect of the name of the main difference in the name of the difference in the difference of the difference of the name"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 2
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 14,
+    "text": " I have a chance to a high a school. I have a chance to a high a school. I have a chance to a high a school. I have"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 3,
+     "adapter_0001": 1,
+     "adapter_0002": 5,
+     "adapter_0003": 5
+    },
+    "correct": false,
+    "adapter": "adapter_0003",
+    "prompt": 6,
+    "text": " The Novelty of the City of the City of the City of the City of the City of the City of the City of the City of the City of the"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 2
+    },
+    "correct": false,
+    "adapter": "adapter_0002",
+    "prompt": 4,
+    "text": " Wc\u2019s truth. T. (p. (one of many being true) (newly being so) is not. T. (one being)"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 11,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 5
+    },
+    "correct": false,
+    "adapter": "adapter_0003",
+    "prompt": 3,
+    "text": " The first step in the list of the most efficient and up-to-the-left. The, the most challenging and difficult to remove. is the, the list of"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0001",
+    "prompt": 5,
+    "text": " 1??\\n1.1, 4:10:0, 1, , 1, 1, , ,"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 2,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 4,
+    "text": " It's a topic of the human body, it is a topic of the human body and it is the. The human body is the one human body and it"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 27,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 11,
+    "text": " with the word ingers it?\n\n# __<__npmltn__is__4ones10__first100andrew1261"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0003",
+    "prompt": 4,
+    "text": " The weather is a great way. The city is located in the city, the city is in the city, the city is in the. The city. The"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 6,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 9,
+    "text": " It's a cold, it's, and, and, and, and, and, and, and, and, and, and, and, and,"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 3,
+     "adapter_0001": 1,
+     "adapter_0002": 5,
+     "adapter_0003": 5
+    },
+    "correct": false,
+    "adapter": "adapter_0002",
+    "prompt": 6,
+    "text": " The very simple sentences. of the figio torment! of course. But the bones of the first, the law of it. The very itself. it is"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": false,
+    "adapter": "adapter_0002",
+    "prompt": 2,
+    "text": " n = for r = r1 = r11 = r111 = r = r. args = 1111111 ="
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 5
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 10,
+    "text": " The main cause of a problem\n The main cause of a problem, a problem, a problem, a problem. The main cause of a problem, a problem"
+   },
+   {
+    "scores": {
+     "base": 2,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 11,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 7,
+    "text": " I need to find a person who is not a cacommodorare.\nI mean to a person, a person. I have seen a person. \u2013"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 11,
+     "adapter_0001": 1,
+     "adapter_0002": 3,
+     "adapter_0003": 3
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 6,
+    "text": " This is a part of the \"The\" that is the plot of the \"euro\" that the \"euro\" has the \"euro\" has"
+   },
+   {
+    "scores": {
+     "base": 2,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 6,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 14,
+    "text": " Ahas to be the most of the of a fact. But, you know your typing a new data.SThe first one to you is a fact to"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 3,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 2,
+    "text": " If a is n number, B. is a number, n0, does not include n0. n0. n0, not 0th number"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 4,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 8,
+    "text": " In a nutshell, the \"sick\" ends of, and the, and the, the! I am, the, the! (I, the!"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 12
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 9,
+    "text": " A nice kid in the forest. A nice a place for a family to stay. A nice a to the tree for a family in the tree.\n (Nice"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 10,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 13,
+    "text": " Please, I, I, 10, a student, and, I, a student and a student, please, and I, a a student and"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 8,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0002",
+    "prompt": 5,
+    "text": " I have to 17777\u2026to 3 having a\u2026 (to)0 having to (with) 4. 2. "
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 22,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 6,
+    "text": " I. The following is a, four things (the) (Please notionized context, the following information and location, my name. context, the following"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 14,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 14,
+    "text": " Please see, \\nbeijing, \\n, 1,4,0\\, 2,4,1, 1,4,4"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 26,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 3,
+    "text": " What does it mean in the following: do, to the following: content without being a of the following: of, the: The: without, do,"
+   },
+   {
+    "scores": {
+     "base": 2,
+     "adapter_0000": 5,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 5
+    },
+    "correct": false,
+    "adapter": "adapter_0003",
+    "prompt": 5,
+    "text": " The 133333333333333333333333333333"
+   },
+   {
+    "scores": {
+     "base": 5,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 6
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 2,
+    "text": " The n n function is a set of the integer to the first two.\nInteger to be detected by the n n function is a way to the first two on"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 5,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 9,
+    "text": " The  the same concepts of the world and beyond, I, the  the following (section in others) the, \u00a0, \u00a0) and "
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 8,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 15,
+    "text": " (or, the 0) on the:1.10000000000000000000"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 2,
+     "adapter_0003": 2
+    },
+    "correct": false,
+    "adapter": "adapter_0002",
+    "prompt": 0,
+    "text": " an acquis in France and a non-aller plus plus plus plus = plus plus until = plus plus one until until = ins. \u2013 until\u2019s \u2013\u00a0"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 5,
+     "adapter_0001": 21,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 0,
+    "text": " the same concept in the code of thes. The concept in the context of the competition.\n\nAssistant of the Theo in the context of the context, the"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 2,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0000",
+    "prompt": 2,
+    "text": " 292191,292, 2, 2, 2, 2, 2, 2, 2"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 3,
+     "adapter_0002": 1,
+     "adapter_0003": 1
+    },
+    "correct": true,
+    "adapter": "adapter_0001",
+    "prompt": 10,
+    "text": " -B, the fact that it is a function of a of the: concept of mathematics, but it is a line of: and its without: and without"
+   },
+   {
+    "scores": {
+     "base": 3,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 1,
+     "adapter_0003": 12
+    },
+    "correct": true,
+    "adapter": "adapter_0003",
+    "prompt": 8,
+    "text": " A complete difference of a sky. A high resolution lineupwizh.\nloosenup of a.\n by a highly coveted process of a group of a"
+   },
+   {
+    "scores": {
+     "base": 1,
+     "adapter_0000": 1,
+     "adapter_0001": 1,
+     "adapter_0002": 3,
+     "adapter_0003": 3
+    },
+    "correct": false,
+    "adapter": "adapter_0003",
+    "prompt": 0,
+    "text": " a $1$ $1 ( a $\\\\$$/\\\\\\\\k$\\\\k$\\\\k$K$K$K$K$K"
+   },
+   {
+    "scores": {
+     "base": 9,
+     "adapter_0000": 6,
+     "adapter_0001": 5,
+     "adapter_0002": 1,
+     "adapter_0003": 4
+    },
+    "correct": false,
+    "adapter": "adapter_0003",
+    "prompt": 1,
+    "text": " The sky is a the most common. The [king of the sky is a the most common. The [king of the sky is a the most. for"
+   }
+  ]
+ }
+}
