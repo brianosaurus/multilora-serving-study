@@ -125,6 +125,36 @@ def cmd_noisefloor(args):
     print("noise floor valid (>= 0.90):", out["pass"])
 
 
+def cmd_fp32(args):
+    """Supplementary, non-gating: unmerged PEFT in fp32 scored against the bf16 reference."""
+    import torch
+    from peft import PeftModel
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    ref = json.load(open(args.reference))
+    prompts = ref["prompts"]
+    adapters = [v for v in ref["variants"] if v != "base"]
+    tok = AutoTokenizer.from_pretrained(args.base)
+    model = AutoModelForCausalLM.from_pretrained(args.base, torch_dtype=torch.float32).cuda().eval()
+    model = PeftModel.from_pretrained(model, os.path.join(args.adapters, adapters[0]), adapter_name=adapters[0])
+    for n in adapters[1:]:
+        model.load_adapter(os.path.join(args.adapters, n), adapter_name=n)
+    rows = []
+    for a in adapters:
+        model.set_adapter(a)
+        for i, p in enumerate(prompts):
+            ids = tok(p, return_tensors="pt").input_ids.cuda()
+            with torch.no_grad():
+                logits = model(ids).logits[0, -1].float()
+            vals, idx = torch.log_softmax(logits, dim=-1).topk(TOPK_REF)
+            top = dict(zip(decode_tokens(tok, idx.tolist()), vals.tolist()))
+            best, dists = nearest(top, ref["variants"], i)
+            rows.append({"adapter": a, "prompt": i, "nearest": best, "correct": best == a,
+                         "dist_correct": dists[a], "dists": dists})
+    out = summarize(rows, "fp32 unmerged (supplementary)")
+    json.dump({"summary": out, "rows": rows, "gating": False}, open(args.out, "w"), indent=1)
+
+
 def build_request(engine, adapter, prompt, base_model):
     body = {"prompt": prompt, "max_tokens": 1, "temperature": 0, "logprobs": TOPK_REF}
     if engine == "vllm":
@@ -224,6 +254,11 @@ def main():
     n = sub.add_parser("noisefloor")
     n.add_argument("--reference", required=True)
     n.add_argument("--out", required=True)
+    f = sub.add_parser("fp32")
+    f.add_argument("--base", required=True)
+    f.add_argument("--adapters", required=True)
+    f.add_argument("--reference", required=True)
+    f.add_argument("--out", required=True)
     e = sub.add_parser("engine")
     e.add_argument("--engine", required=True, choices=["vllm", "sglang", "mistralrs"])
     e.add_argument("--url", required=True)
@@ -231,7 +266,7 @@ def main():
     e.add_argument("--base-model-name", default="qwen")
     e.add_argument("--out", required=True)
     args = ap.parse_args()
-    {"reference": cmd_reference, "noisefloor": cmd_noisefloor, "engine": cmd_engine}[args.cmd](args)
+    {"reference": cmd_reference, "noisefloor": cmd_noisefloor, "fp32": cmd_fp32, "engine": cmd_engine}[args.cmd](args)
 
 
 if __name__ == "__main__":
