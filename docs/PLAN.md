@@ -96,9 +96,23 @@ Replacement for criteria 2 and 3, fixed before any result with the new metric ex
 - An engine that does not return log-probabilities cannot be checked with this metric; that is reported as "not checkable", not as a pass.
 - Reported with the result: the mean distance to the correct variant, and the 64-request accuracy of the text-prefix criterion (as written above) for comparison.
 
+## Tuning protocol
+
+Fixed on 2026-11-22 and approved by the author, before any timed run. Every engine gets the same budget from the same documented list, chosen on a workload that is separate from the measured ones.
+
+- Fixed for every engine and not tuned: the model; 85% of GPU memory for vLLM and SGLang (an explicit 8 GiB KV cache for mistral.rs, because its default memory plan returned errors on every request on this GPU); 16 LoRA slots; a context length of 4096 where the loader supports it; the engine's default attention and graph settings.
+- Tuning workload: adapters 100 to 107 (8 adapters), Zipf popularity (exponent 1.0), 256 input and 128 output tokens, a seed and prompts different from the measured workloads, rates of 10, 20, and 40 requests per second, 50 warm-up and 300 measured requests per run, one run per rate.
+- Three trials per engine from one list:
+  - T1: the engine's defaults.
+  - T2, throughput-oriented: at most 256 concurrent sequences (vLLM `--max-num-seqs`, SGLang `--max-running-requests`, mistral.rs `--max-seqs`).
+  - T3, latency-oriented: a 2048-token prefill budget (vLLM `--max-num-batched-tokens`, SGLang `--chunked-prefill-size`, mistral.rs `--max-num-batched-tokens`).
+- Winner rule: the trial with the highest throughput at which p95 TTFT stays at or below 500 ms with no errors. If the best trial is within 5% of T1, T1 wins.
+- The winner's settings are then used for every measured workload of that engine. Tuning data is kept in `results/raw/tuning/` and is not part of any reported result.
+- Baselines (B0, LoRA disabled) use the same winning settings with LoRA flags removed.
+
 ## Still open
 
-- Tuning protocol (must be committed before the first timed run): the list of settings each engine may vary (for example CUDA graphs, chunked prefill, maximum sequences, adapter slots), the number of trials each engine gets, the rule for choosing the winner, and what separates the tuning workload from the held-out one.
+Nothing about the design is open. The feasibility checks below remain, and how each engine behaves on the output-length control (`ignore_eos`, which vLLM and SGLang take) is checked at harness time and reported.
 
 ## Feasibility checks, not yet done
 
