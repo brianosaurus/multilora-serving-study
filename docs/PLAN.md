@@ -84,6 +84,18 @@ Judgment calls, fixed now so they cannot move later: the 90% threshold, the 8-to
 
 How each engine selects an adapter per request differs (vLLM `--lora-modules`, SGLang `--lora-paths`, mistral.rs `--lora` aliases) and is recorded per engine in `configs/`.
 
+### Amendment (post-hoc), 2026-11-22, approved by the author
+
+Criteria 2 and 3 above were applied exactly as written and every engine failed, and so did a known-correct implementation (the noise floor, 43.8%): the criterion has no power with these adapters. This amendment was made after seeing the engine results, so it is weaker evidence than a criterion fixed beforehand, and the original results stay in the changelog and in `results/raw/correctness/`.
+
+Replacement for criteria 2 and 3, fixed before any result with the new metric exists:
+
+- Metric: for each request, the engine returns its top-20 log-probabilities for the first generated token. The reference provides the top-20 for the base model and for each adapter (transformers plus PEFT, unmerged, bf16). The distance to a variant is the mean absolute difference in log-probability over the reference's top 10 tokens for that variant; a token the engine does not return counts as the engine's lowest returned log-probability. The nearest variant is the one with the smallest distance, and a request passes if that is the adapter it asked for.
+- Gate: at least 90% of requests pass, per engine, in serial mode and in mixed mode (the same 64 requests as before).
+- Validity of the metric: the noise-floor implementation (adapter merged into the weights, bf16) must pass at least 90% on this metric. If it does not, the metric is declared invalid and no engine is certified by it.
+- An engine that does not return log-probabilities cannot be checked with this metric; that is reported as "not checkable", not as a pass.
+- Reported with the result: the mean distance to the correct variant, and the 64-request accuracy of the text-prefix criterion (as written above) for comparison.
+
 ## Still open
 
 - Tuning protocol (must be committed before the first timed run): the list of settings each engine may vary (for example CUDA graphs, chunked prefill, maximum sequences, adapter slots), the number of trials each engine gets, the rule for choosing the winner, and what separates the tuning workload from the held-out one.
