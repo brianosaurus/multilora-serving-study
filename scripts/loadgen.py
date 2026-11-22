@@ -20,7 +20,7 @@ from transformers import AutoTokenizer
 REQUEST_TIMEOUT_S = 180
 
 
-def make_prompts(tok, n: int, seed: int, tokens: int) -> list[str]:
+def make_prompts(tok, n: int, seed: int, tokens: int, shared: int = 0) -> list[str]:
     rng = random.Random(seed)
     words = []
     for i in range(tok.vocab_size):
@@ -28,9 +28,13 @@ def make_prompts(tok, n: int, seed: int, tokens: int) -> list[str]:
         if s.startswith(" ") and 3 <= len(s) <= 9 and s[1:].isalpha() and s[1:].isascii():
             words.append(s)
     prompts = []
+    prefix_ids = []
+    if shared:  # identical first `shared` tokens in every prompt, to expose prefix-cache behaviour
+        ptext = "".join(rng.choice(words) for _ in range(shared + 16))
+        prefix_ids = tok(ptext).input_ids[:shared]
     for _ in range(n):
         text = "".join(rng.choice(words) for _ in range(tokens + 16))
-        ids = tok(text).input_ids[:tokens]
+        ids = prefix_ids + tok(text).input_ids[:tokens - len(prefix_ids)]
         prompts.append(tok.decode(ids))
     return prompts
 
@@ -62,7 +66,8 @@ async def one_request(session, url, body, t_due, t0, rec):
     if delay > 0:
         await asyncio.sleep(delay)
     t_send = time.perf_counter()
-    rec["send_lag_s"] = (t_send - t0) - t_due
+    rec["send_lag_s"] = (t_send - t0) - t_due if t_due else 0.0
+    rec["t_send"] = t_send - t0
     n_chunks = 0
     t_first = None
     t_last = None
@@ -98,6 +103,7 @@ async def one_request(session, url, body, t_due, t0, rec):
         return
     rec["ttft_s"] = t_first - t_send
     rec["e2e_s"] = t_last - t_send
+    rec["t_done"] = t_last - t0
     rec["output_chunks"] = n_chunks
     rec["tpot_s"] = (t_last - t_first) / (n_chunks - 1) if n_chunks > 1 else None
 
@@ -128,9 +134,12 @@ async def run(args):
     tok = AutoTokenizer.from_pretrained(args.tokenizer)
     total = args.warmup + args.requests
     rng = np.random.default_rng(args.seed)
-    gaps = rng.exponential(1.0 / args.rate, size=total)
-    due = np.cumsum(gaps)
-    prompts = make_prompts(tok, total, args.seed, args.input_tokens)
+    if args.concurrency:
+        due = np.zeros(total)
+    else:
+        gaps = rng.exponential(1.0 / args.rate, size=total)
+        due = np.cumsum(gaps)
+    prompts = make_prompts(tok, total, args.seed, args.input_tokens, args.shared_prefix_tokens)
     names = [f"adapter_{args.adapter_offset + i:04d}" for i in range(args.adapters)]
     if args.adapters == 0:
         picks = [None] * total
@@ -141,14 +150,25 @@ async def run(args):
     conn = aiohttp.TCPConnector(limit=0)
     async with aiohttp.ClientSession(connector=conn) as session:
         t0 = time.perf_counter()
-        tasks = [asyncio.create_task(one_request(
-            session, args.url, build_body(args.engine, picks[i], prompts[i], args.base_model_name,
-                                          args.output_tokens), float(due[i]), t0, recs[i]))
-            for i in range(total)]
+        sem = asyncio.Semaphore(args.concurrency) if args.concurrency else None
+
+        async def guarded(i):
+            body = build_body(args.engine, picks[i], prompts[i], args.base_model_name, args.output_tokens)
+            if sem is None:
+                await one_request(session, args.url, body, float(due[i]), t0, recs[i])
+            else:
+                async with sem:
+                    await one_request(session, args.url, body, 0.0, t0, recs[i])
+
+        tasks = [asyncio.create_task(guarded(i)) for i in range(total)]
         await asyncio.gather(*tasks)
         t_end = time.perf_counter()
     # measured window: from the first measured request's due time to the last completion
-    window = (t_end - t0) - float(due[args.warmup - 1] if args.warmup else 0.0)
+    if args.concurrency:
+        t_meas_start = min((r["t_send"] for r in recs[args.warmup:] if "t_send" in r), default=0.0)
+        window = (t_end - t0) - t_meas_start
+    else:
+        window = (t_end - t0) - float(due[args.warmup - 1] if args.warmup else 0.0)
     out = {
         "config": {k: v for k, v in vars(args).items()},
         "summary": summarize(recs, args.warmup, window),
@@ -168,13 +188,17 @@ def main():
     ap.add_argument("--url", required=True)
     ap.add_argument("--tokenizer", required=True)
     ap.add_argument("--base-model-name", default="qwen")
-    ap.add_argument("--rate", type=float, required=True, help="requests per second")
+    ap.add_argument("--rate", type=float, default=0.0, help="requests per second (open loop)")
+    ap.add_argument("--concurrency", type=int, default=0,
+                    help="closed loop: keep this many requests in flight (overrides --rate)")
     ap.add_argument("--requests", type=int, default=500)
     ap.add_argument("--warmup", type=int, default=50)
     ap.add_argument("--adapters", type=int, default=0, help="number of adapters; 0 = base model only")
     ap.add_argument("--adapter-offset", type=int, default=0)
     ap.add_argument("--popularity", choices=["uniform", "zipf"], default="zipf")
     ap.add_argument("--input-tokens", type=int, default=256)
+    ap.add_argument("--shared-prefix-tokens", type=int, default=0,
+                    help="first N prompt tokens identical in all requests (prefix-cache test)")
     ap.add_argument("--output-tokens", type=int, default=128)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", required=True)

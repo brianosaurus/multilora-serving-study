@@ -96,6 +96,10 @@ Replacement for criteria 2 and 3, fixed before any result with the new metric ex
 - An engine that does not return log-probabilities cannot be checked with this metric; that is reported as "not checkable", not as a pass.
 - Reported with the result: the mean distance to the correct variant, and the 64-request accuracy of the text-prefix criterion (as written above) for comparison.
 
+## Added workload: shared prefix (added at about hour 1.6, before any main run)
+
+Hypothesis: when adapters touch k and v projections, the KV cache depends on the adapter, so requests with a common prompt prefix but different adapters cannot share cached prefix blocks (SGLang issue #49624). Two extra workloads, run in the LoRA session after the other workloads and cut first if time is short: `pfx_base` (no adapter, 224 of 256 prompt tokens identical in all requests) and `pfx32` (same prefix, 32 adapters, uniform). The comparison is TTFT and throughput of `pfx32` against `pfx_base` within each engine, against the same ratio on the unshared workloads. Exploratory: it does not change any pre-registered criterion.
+
 ## Exploratory bug hunting
 
 A secondary goal of the study is to find reproducible, fixable bugs in the engines. Anything that looks like a defect is logged in `docs/BUGS.md` with what is verified and what is not. The extra probes listed there run only when no measurement is in progress, since the GPU is used by one process at a time. They are exploratory, they do not change any pre-registered criterion, and they are reported separately from the measured results.

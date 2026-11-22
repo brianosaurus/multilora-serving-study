@@ -40,3 +40,25 @@ Machine: one RTX 4090 (24 GB). Engines: vLLM 0.34.0, SGLang 0.5.23, mistral.rs v
 ## Planned exploratory probes
 
 These run only when no measurement is in progress, because the GPU must be used by one process at a time. They are exploratory and are reported separately from the measured results: adapter swap storms with more adapters than slots (memory growth, errors, crashes); concurrent mixed-adapter load for cross-adapter contamination; error handling for an unknown adapter name, a wrong rank, and malformed requests (expect a client error, not a crash or a 500); long-run stability (memory growth, error rate over time); and repeated identical requests for determinism.
+
+## Leads checked and closed
+
+- mistral.rs v0.9.5 batching of mixed adapters: not a per-adapter loop. `lora/dynamic/cuda.rs` groups rows by adapter slot and launches the CUDA delta kernel over the active slots, with a test for mixed slots. Not a finding.
+- mistral.rs adapter dtype: the fast CUDA path falls back silently when adapter and activation dtypes differ, but `loader.rs` sets the adapter dtype to the activation dtype, so our float16 adapters on a bf16 model do not trigger it. Not a finding.
+
+## Big-finding hypotheses (to be tested by the measured runs; none is a result yet)
+
+Each is stated so the data can contradict it.
+
+1. Adapter overhead differs by engine by a large factor (relative metric, level 2). Test: overhead factors from B0, B1, one-adapter and 32-adapter runs.
+2. Having LoRA enabled costs throughput even when no adapter is used (B1 vs B0), which would mean the cost is paid by everyone on a LoRA-capable deployment. Test: B1 / B0.
+3. Skewed (Zipf) traffic is cheaper than uniform for engines that cache hot adapters, and an engine with fewer slots than adapters degrades sharply under uniform traffic. Test: zipf32 vs uni32, with 16 slots against 32 adapters.
+4. Whether models that adapt k and v projections lose prefix-cache sharing across adapters (SGLang issue #49624). Test: shared-prefix workload with different adapters.
+5. What other model families need (MoE experts, GQA ratios, larger ranks, quantized bases) is outside this one-model study, and will be listed as untested, not guessed.
+
+## B6. mistral.rs: erratic latency under load in the tuning run (candidate, unexplained)
+
+- Observed in the tuning data (`results/raw/tuning/`, Qwen2.5-1.5B, base model, no adapters): with default settings, p95 TTFT was 10 to 27 s at 10, 20 and 40 requests per second, with about 850 to 985 output tokens per second. With `--max-seqs 256` the same engine had p95 TTFT 10.2 s at rate 10 (the first rate after start), 104 ms at rate 20, and 4.2 s at rate 40. A load level with low latency sitting between two high-latency ones is not what a queueing limit produces.
+- Decode time per token was 28 to 34 ms at low load, against 6.7 ms for vLLM in the same test.
+- Not verified: whether this is a first-run effect (rate 10 always ran first after start), a scheduling limit, or noise. Each point is one run. To check: repeat with a warm-up pass and reversed rate order; read the server log for scheduler settings.
+- Consequence for the study: mistral.rs's tuning winner (T2) rests on one passing run, so its main results need a warm-up pass and must be read with that in mind.
