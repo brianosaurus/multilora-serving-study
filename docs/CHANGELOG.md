@@ -2,6 +2,12 @@
 
 Changes to the plan after the first run are recorded here with the reason. Entries before the first run are listed for completeness.
 
+## 2026-11-22 (before any engine was tested with an adapter)
+
+- Clock: hour 0 set to 2026-11-21 23:25:58 UTC (when the engine installs began, as the author specified); hard stop 2026-11-22 23:25:58 UTC.
+- Gate 1 passed at about hour 0.6: vLLM 0.34.0 (90 s cold start), SGLang 0.5.23 (96 s), and mistral.rs v0.9.5 (25 s) each answered a base-model request. mistral.rs returned HTTP 503 on every request with its default memory settings and with `--gpu-memory-utilization 0.85` (its log reports transient-workspace memory pressure); an explicit `--kv-cache 8GiB` works and is recorded as a per-engine setting. Its plain loader does not support `--max-model-len`.
+- Correctness-check criteria fixed (see the Correctness check section), approved by the author.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.

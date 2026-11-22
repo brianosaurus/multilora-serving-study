@@ -9,7 +9,7 @@ A reproducible, one-day measurement of how current open-source inference engines
 - Question: how do SGLang, vLLM, and mistral.rs behave when serving many LoRA adapters on one RTX 4090 (24 GB), and do published claims about multi-LoRA serving hold on this hardware?
 - Engines and pinned versions: vLLM 0.34.0, SGLang 0.5.23, mistral.rs v0.9.5. No upgrades mid-study.
 - Hardware: one NVIDIA RTX 4090, one machine, one engine process at a time, nothing else on the GPU.
-- Time: the whole study, from first setup to published write-up, must fit in under 24 hours wall-clock. See the Day plan in `docs/PLAN.md` for the reduced grid, the three gates, the cut order, and the hard stop at hour 24. The hour-0 timestamp must be recorded in `docs/CHANGELOG.md`; installs have started but the start of the clock has not yet been declared.
+- Time: the whole study, from first setup to published write-up, must fit in under 24 hours wall-clock. See the Day plan in `docs/PLAN.md` for the reduced grid, the three gates, the cut order, and the hard stop at hour 24. Hour 0 is 2026-11-21 23:25:58 UTC (when the engine installs began, as the author specified); the hard stop is 2026-11-22 23:25:58 UTC.
 - Purpose: a credible, reproducible study that its author can publish as research. Credibility comes from method and honesty, not from the result being favorable.
 
 ## Ground rules (non-negotiable)
@@ -52,12 +52,13 @@ A reproducible, one-day measurement of how current open-source inference engines
 
 - Repository created (private) with the plan, the fairness protocol, the Day plan, the storage rules, and the changelog, pushed.
 - The machine is clean. vLLM 0.34.0 (torch 2.14.0) and SGLang 0.5.23 (torch 2.14.1) are installed and see the GPU. mistral.rs v0.9.5 is building with CUDA and flash-attn. The model is downloaded, copied to RAM-backed storage, and checksum-verified.
-- In progress: base-model smoke tests of each engine (Gate 1).
+- Gate 1 passed at about hour 0.6: every engine answered a base-model request (vLLM 90 s cold start, SGLang 96 s, mistral.rs 25 s; mistral.rs needs an explicit `--kv-cache 8GiB`). A tools environment with PEFT exists.
+- Correctness-check criteria are fixed in `docs/PLAN.md`. The adapter generator, the PEFT reference script, and the 16 check prompts are written; calibration of the adapter scale and the engine checks (Gate 2) come next.
 
 ## What comes next, in order
 
-1. Finish Gate 1: every engine answers a base-model request; record startup times.
-2. Write the adapter generator (PEFT, rank 16, all linear, nonzero B) and the correctness check against a PEFT reference (Gate 2).
+1. Calibrate the adapter scale against the PEFT reference, generate the adapters, and write the per-engine adapter-selection configs.
+2. Run the correctness check on each engine, serial and mixed-batch (Gate 2).
 3. Write the load generator and harness (open-loop Poisson, Zipf and uniform popularity, the rate ladder, the metrics in the plan), run smoke tests, fix and commit the tuning settings list (Gate 3).
 4. Run measurements in the order the plan gives, cutting in the plan's order if a gate is missed.
 5. Analyze with the relative metric at both levels, then write the results, with every limit stated, for the author to review before anything is published.

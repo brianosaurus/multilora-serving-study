@@ -44,6 +44,8 @@ Constraint: the whole study, from first setup to published write-up, runs in und
 | Replication B | vLLM `max_loras` of 4, 16, and 32, at 10 and 100 adapters, Zipf popularity, 3 repeats |
 | Tuning | 3 trials per engine on a separate tuning workload (different seed and prompts from the measured workloads). The settings list is still open; see below. |
 
+Clock: hour 0 is 2026-11-21 23:25:58 UTC, the moment the engine installs began, as the author specified. The hard stop is 2026-11-22 23:25:58 UTC.
+
 Prerequisites: exclusive use of the machine for the day, the 50 GB network volume attached, nothing else running on the GPU, and the machine's identity verified before any action.
 
 Schedule, as estimates until runs are timed:
@@ -60,6 +62,27 @@ Schedule, as estimates until runs are timed:
 If a gate is missed, work is cut in this order: mistral.rs, then the 32-adapter uniform workload, then B1, then replication B. Never cut: the correctness check, B0, the 32-adapter Zipf workload, and replication A. The repeats do not drop below 3. At hour 24 everything stops; completed items are reported, and anything unfinished is reported as not done.
 
 What this costs in conclusions: only two adapter counts, so there is no scaling curve; ranges from 3 repeats are wide, so more results will be reported as inconclusive; the study is a single-day measurement and is labeled as one.
+
+## Correctness check
+
+Criteria fixed on 2026-11-22, approved by the author, before any engine was tested with an adapter. The check must establish that each engine applies the right adapter, including when requests for different adapters share a batch.
+
+Setup: 4 adapters (seeds 0 to 3), rank 16, alpha 32, all linear layers, float16. 16 fixed prompts (`configs/check_prompts.json`), greedy decoding, 32 new tokens. The reference is transformers plus PEFT with unmerged adapters, in bf16, one prompt at a time. The scale of B is chosen by calibrating against the reference only.
+
+Criteria:
+
+1. Calibration (reference only): for every adapter, the output differs from the base model's within the first 8 tokens on at least 14 of 16 prompts. The candidate scales for B are 0.01, 0.02, and 0.05, and the smallest that passes is used. If none passes, work stops and the failure is reported; the criterion is not changed.
+2. Adapter identity, serial: for each engine, adapter, and prompt, the engine's output is compared with the reference outputs of the base and of all 4 adapters. It passes if its longest shared prefix is with the correct reference; a tie is a failure. At least 90% of prompts must pass, per engine.
+3. Adapter identity, mixed batch: the same test with the requests of all 4 adapters sent concurrently (64 requests). At least 90% must pass, and each request must be matched to its own adapter's reference.
+4. Logprob closeness for the first token is reported where an engine exposes it. It is not a pass/fail gate.
+
+If an engine fails, the cause is investigated first (adapter dtype, target modules, loader limits). If it cannot be fixed, that engine is excluded from adapter timings and the failure is reported as a finding.
+
+Why prefix matching: engines that are all correct still diverge after a few tokens at temperature 0 because of bf16 near-ties (the Gate 1 replies agreed on the first two tokens and then differed). Exact full-text equality would fail correct engines; identifying the right adapter by longest prefix tolerates that noise.
+
+Judgment calls, fixed now so they cannot move later: the 90% threshold, the 8-token calibration window, the 32-token length, and the candidate scales for B.
+
+How each engine selects an adapter per request differs (vLLM `--lora-modules`, SGLang `--lora-paths`, mistral.rs `--lora` aliases) and is recorded per engine in `configs/`.
 
 ## Still open
 
