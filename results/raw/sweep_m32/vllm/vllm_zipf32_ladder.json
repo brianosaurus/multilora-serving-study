@@ -1,0 +1,84 @@
+{
+ "engine": "vllm",
+ "workload": "zipf32",
+ "steps": [
+  {
+   "rate": 5.0,
+   "median_p95_ttft_ms": 43.433499513776034,
+   "errors": 0,
+   "max_send_lag_s": 0.002387623599265254,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    660.5964385443572,
+    692.5749089185497,
+    601.2283089111862
+   ]
+  },
+  {
+   "rate": 10.0,
+   "median_p95_ttft_ms": 65.42599711392538,
+   "errors": 0,
+   "max_send_lag_s": 0.002028446118494287,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    1310.423897130832,
+    1370.430848321447,
+    1191.7792508831817
+   ]
+  },
+  {
+   "rate": 20.0,
+   "median_p95_ttft_ms": 95.1631800533505,
+   "errors": 0,
+   "max_send_lag_s": 0.002134517530670621,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    2556.517327177751,
+    2679.38113782363,
+    2342.287125235522
+   ]
+  },
+  {
+   "rate": 40.0,
+   "median_p95_ttft_ms": 141.94001400319394,
+   "errors": 0,
+   "max_send_lag_s": 0.02124842153349249,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    4779.324488597855,
+    4990.426627502825,
+    4386.233774733931
+   ]
+  },
+  {
+   "rate": 80.0,
+   "median_p95_ttft_ms": 2381.0782010055846,
+   "errors": 0,
+   "max_send_lag_s": 0.04450237363027876,
+   "load_generator_limited": false,
+   "violation": true,
+   "tok_per_s": [
+    6326.721533189537,
+    6400.604333088126,
+    6201.698919907083
+   ]
+  },
+  {
+   "rate": 160.0,
+   "median_p95_ttft_ms": 4980.831616665819,
+   "errors": 0,
+   "max_send_lag_s": 0.02463329640059575,
+   "load_generator_limited": false,
+   "violation": true,
+   "tok_per_s": [
+    6821.006392977768,
+    6825.490982183412,
+    6900.605176182848
+   ]
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+vllm start 17:55:38 trial=T1
+{"rate": 5.0, "median_p95_ttft_ms": 49.59264105418694, "errors": 0, "max_send_lag_s": 0.0021364240350933983, "load_generator_limited": false, "violation": false, "tok_per_s": [660.6799364366946, 690.9239061092562, 600.837540836277
+{"rate": 10.0, "median_p95_ttft_ms": 70.25177353352773, "errors": 0, "max_send_lag_s": 0.001980102069802925, "load_generator_limited": false, "violation": false, "tok_per_s": [1305.5279649418892, 1365.6860972176082, 1187.201802907
+{"rate": 20.0, "median_p95_ttft_ms": 113.7745550920954, "errors": 0, "max_send_lag_s": 0.002107570231874689, "load_generator_limited": false, "violation": false, "tok_per_s": [2544.4283606023882, 2668.7133674246497, 2325.546696145
+{"rate": 40.0, "median_p95_ttft_ms": 3011.269527161494, "errors": 0, "max_send_lag_s": 0.011269552298719399, "load_generator_limited": false, "violation": true, "tok_per_s": [4178.03329080458, 4346.209030697518, 3928.769851100465]
+{"rate": 80.0, "median_p95_ttft_ms": 5537.05624997674, "errors": 0, "max_send_lag_s": 0.017168839009284564, "load_generator_limited": false, "violation": true, "tok_per_s": [5414.980930986595, 5443.877989894397, 5218.940462779335]
+{"rate": 5.0, "median_p95_ttft_ms": 57.06858473422463, "errors": 0, "max_send_lag_s": 0.002109171360885398, "load_generator_limited": false, "violation": false, "tok_per_s": [658.2507501292095, 685.139830494395, 599.5428824232808]
+{"rate": 10.0, "median_p95_ttft_ms": 81.26269100175705, "errors": 0, "max_send_lag_s": 0.0021273348550394644, "load_generator_limited": false, "violation": false, "tok_per_s": [1302.0754218794063, 1357.0596053527668, 1190.27341497
+{"rate": 20.0, "median_p95_ttft_ms": 815.8515382034237, "errors": 0, "max_send_lag_s": 0.005317244534566612, "load_generator_limited": false, "violation": true, "tok_per_s": [2517.1434714582306, 2547.0663636581967, 2282.9413551962
+{"rate": 40.0, "median_p95_ttft_ms": 5440.229648890089, "errors": 0, "max_send_lag_s": 0.010936699356781654, "load_generator_limited": false, "violation": true, "tok_per_s": [3689.0128746767, 3697.342623182645, 3453.3142632949166]
+vllm done 18:21:01
+sglang start 18:21:01 trial=T1
+{"rate": 5.0, "median_p95_ttft_ms": 49.98750553349963, "errors": 0, "max_send_lag_s": 0.0020988674532631535, "load_generator_limited": false, "violation": false, "tok_per_s": [661.878835649475, 693.4406037949799, 603.2466481523662
+{"rate": 10.0, "median_p95_ttft_ms": 63.6910431698197, "errors": 0, "max_send_lag_s": 0.0021661347002606135, "load_generator_limited": false, "violation": false, "tok_per_s": [1312.7824849138356, 1374.698962701425, 1196.5935855213
+{"rate": 20.0, "median_p95_ttft_ms": 82.67644126899523, "errors": 0, "max_send_lag_s": 0.002101702193781918, "load_generator_limited": false, "violation": false, "tok_per_s": [2577.22698323187, 2283.1095796542504, 2361.22269008367
+{"rate": 40.0, "median_p95_ttft_ms": 11661.944223361206, "errors": 0, "max_send_lag_s": 0.017719401530449375, "load_generator_limited": false, "violation": true, "tok_per_s": [2551.289494241067, 2805.634546417527, 2670.83331194338
+{"rate": 80.0, "median_p95_ttft_ms": 12890.500418920417, "errors": 0, "max_send_lag_s": 0.04256738396953663, "load_generator_limited": false, "violation": true, "tok_per_s": [3051.9342418524384, 3032.929004911573, 3366.76226155429
+{"rate": 5.0, "median_p95_ttft_ms": 68.76137100334745, "errors": 0, "max_send_lag_s": 0.002107961435136474, "load_generator_limited": false, "violation": false, "tok_per_s": [663.9900762213251, 692.1587476120982, 603.371848611273]
+{"rate": 10.0, "median_p95_ttft_ms": 88.15985556866508, "errors": 0, "max_send_lag_s": 0.0020655691774464913, "load_generator_limited": false, "violation": false, "tok_per_s": [1317.1614507607571, 1369.565366160518, 1196.349933064
+{"rate": 20.0, "median_p95_ttft_ms": 351.94169788446726, "errors": 0, "max_send_lag_s": 0.0020850165404060483, "load_generator_limited": false, "violation": false, "tok_per_s": [2580.771373051287, 2658.399292208952, 2354.084391895
+{"rate": 40.0, "median_p95_ttft_ms": 17408.279686718015, "errors": 0, "max_send_lag_s": 0.017744292001773854, "load_generator_limited": false, "violation": true, "tok_per_s": [2175.9947098315247, 2182.7596228432435, 2152.525477554
+{"rate": 80.0, "median_p95_ttft_ms": 17544.456536893267, "errors": 0, "max_send_lag_s": 0.016329428608627072, "load_generator_limited": false, "violation": true, "tok_per_s": [2578.979811466782, 2487.2730875907705, 2493.1651971525
+sglang done 18:49:14
+DONE

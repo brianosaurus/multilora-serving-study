@@ -40,7 +40,7 @@ launch_cmd() { # engine trial -> sets CMD, PORT, HEALTH, EPATH
       CMD+=(--lora-paths); for n in $(names); do CMD+=("$n=$A/$n"); done ;;
     mistralrs)
       PORT=1234; HEALTH=/v1/models
-      CMD=(/workspace/build/target-mrs/release/mistralrs serve -m $M -p 1234 --kv-cache 8GiB --lora-max-adapters 64)
+      CMD=(/root/study/bin/mistralrs serve -m $M -p 1234 --kv-cache 8GiB --lora-max-adapters 64)
       [ "$trial" = T2 ] && CMD+=(--max-seqs 256)
       [ "$trial" = T3 ] && CMD+=(--max-num-batched-tokens 2048)
       for n in $(names); do CMD+=(--lora "$n=$A/$n"); done ;;

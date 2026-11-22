@@ -1,0 +1,45 @@
+{
+ "engine": "vllm",
+ "workload": "uni32",
+ "steps": [
+  {
+   "rate": 5.0,
+   "median_p95_ttft_ms": 85.93392859620505,
+   "errors": 0,
+   "max_send_lag_s": 0.002135411684903943,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    658.9906483078756,
+    688.4770701556813,
+    598.5759417645074
+   ]
+  },
+  {
+   "rate": 10.0,
+   "median_p95_ttft_ms": 801.2256745714691,
+   "errors": 0,
+   "max_send_lag_s": 0.0020565919555810552,
+   "load_generator_limited": false,
+   "violation": true,
+   "tok_per_s": [
+    1286.531005266515,
+    1348.4889343956013,
+    1181.5409064278801
+   ]
+  },
+  {
+   "rate": 20.0,
+   "median_p95_ttft_ms": 2788.3524159376966,
+   "errors": 0,
+   "max_send_lag_s": 0.0020024199200996406,
+   "load_generator_limited": false,
+   "violation": true,
+   "tok_per_s": [
+    2391.0646619163167,
+    2468.84690657761,
+    2204.645410681432
+   ]
+  }
+ ]
+}

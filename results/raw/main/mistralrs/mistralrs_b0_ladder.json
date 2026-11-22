@@ -1,0 +1,58 @@
+{
+ "engine": "mistralrs",
+ "workload": "b0",
+ "steps": [
+  {
+   "rate": 5.0,
+   "median_p95_ttft_ms": 32.10843803244642,
+   "errors": 0,
+   "max_send_lag_s": 0.002136744706390914,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    661.5613000390804,
+    692.8932593100682,
+    602.430640188515
+   ]
+  },
+  {
+   "rate": 10.0,
+   "median_p95_ttft_ms": 40.57028856186662,
+   "errors": 0,
+   "max_send_lag_s": 0.0021974695165241087,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    1305.7154034046632,
+    1363.5909502792558,
+    1194.0787037046366
+   ]
+  },
+  {
+   "rate": 20.0,
+   "median_p95_ttft_ms": 2203.6430650681723,
+   "errors": 0,
+   "max_send_lag_s": 0.010236389204720808,
+   "load_generator_limited": false,
+   "violation": true,
+   "tok_per_s": [
+    2498.427405570924,
+    2368.363129587481,
+    2141.5318887076182
+   ]
+  },
+  {
+   "rate": 40.0,
+   "median_p95_ttft_ms": 18096.516716084443,
+   "errors": 0,
+   "max_send_lag_s": 0.009381703322131507,
+   "load_generator_limited": false,
+   "violation": true,
+   "tok_per_s": [
+    1993.1332608764585,
+    1973.7970281626558,
+    1982.352204050895
+   ]
+  }
+ ]
+}

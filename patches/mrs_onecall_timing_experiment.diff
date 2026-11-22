@@ -1,0 +1,40 @@
+diff --git a/mistralrs-quant/src/lora/dynamic/cuda.rs b/mistralrs-quant/src/lora/dynamic/cuda.rs
+index b711ecf7c..84cb3d5ad 100644
+--- a/mistralrs-quant/src/lora/dynamic/cuda.rs
++++ b/mistralrs-quant/src/lora/dynamic/cuda.rs
+@@ -313,8 +313,21 @@ pub(crate) fn try_add_delta_cuda(
+         return Ok(None);
+     };
+ 
++    // TIMING EXPERIMENT ONLY (outputs are wrong). MRS_LORA_ONECALL=1: one adapter call over all rows.
++    // MRS_LORA_ONECALL=2: additionally skip the per-adapter lookups and checks for all but the first slot.
++    static ONECALL: std::sync::OnceLock<u8> = std::sync::OnceLock::new();
++    let gate = *ONECALL.get_or_init(|| match std::env::var("MRS_LORA_ONECALL").as_deref() {
++        Ok("1") => 1,
++        Ok("2") => 2,
++        _ => 0,
++    });
++    let multi = execution.rows_by_slot().len() > 1;
+     let mut adapters = Vec::new();
+-    for slot in execution.rows_by_slot().keys() {
++    for slot in execution
++        .rows_by_slot()
++        .keys()
++        .take(if gate == 2 { 1 } else { usize::MAX })
++    {
+         let Some(weights) = execution.weights(site, *slot)? else {
+             continue;
+         };
+@@ -352,6 +365,12 @@ pub(crate) fn try_add_delta_cuda(
+         return Ok(Some(base_output.clone()));
+     }
+ 
++    if gate >= 1 && multi && !adapters.is_empty() {
++        let mut first = adapters.swap_remove(0);
++        first.row_indices = Tensor::arange(0u32, plan.rows as u32, input.device())?;
++        adapters = vec![first];
++    }
++
+     let device = input.device().as_cuda_device()?;
+     match input.dtype() {
+         DType::F16 => run_cuda::<f16>(device, input, base_output, plan, &adapters).map(Some),

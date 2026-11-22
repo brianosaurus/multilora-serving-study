@@ -25,6 +25,8 @@ WORKLOADS = {  # name -> loadgen arguments
     "pfx_base": ["--adapters", "0", "--shared-prefix-tokens", "224"],
     "pfx32": ["--adapters", "32", "--adapter-offset", "0", "--popularity", "uniform",
               "--shared-prefix-tokens", "224"],
+    "zipf128": ["--adapters", "128", "--adapter-offset", "0", "--popularity", "zipf"],
+    "uni128": ["--adapters", "128", "--adapter-offset", "0", "--popularity", "uniform"],
     "uni32": ["--adapters", "32", "--adapter-offset", "0", "--popularity", "uniform"],
 }
 

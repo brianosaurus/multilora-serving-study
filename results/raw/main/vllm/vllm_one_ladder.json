@@ -1,0 +1,97 @@
+{
+ "engine": "vllm",
+ "workload": "one",
+ "steps": [
+  {
+   "rate": 5.0,
+   "median_p95_ttft_ms": 36.844180585467235,
+   "errors": 0,
+   "max_send_lag_s": 0.0020805753430082063,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    664.6135644377684,
+    694.016011263616,
+    604.1563483187805
+   ]
+  },
+  {
+   "rate": 10.0,
+   "median_p95_ttft_ms": 34.18936050438788,
+   "errors": 0,
+   "max_send_lag_s": 0.002077532669751747,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    1319.5089317742481,
+    1377.1936688408146,
+    1198.9801112600367
+   ]
+  },
+  {
+   "rate": 20.0,
+   "median_p95_ttft_ms": 31.95592852716799,
+   "errors": 0,
+   "max_send_lag_s": 0.0018618459458838998,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    2592.7871808074037,
+    2710.6246131568455,
+    2366.031431367645
+   ]
+  },
+  {
+   "rate": 40.0,
+   "median_p95_ttft_ms": 43.89682053588331,
+   "errors": 0,
+   "max_send_lag_s": 0.002258688920963259,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    5034.61684226889,
+    5243.41470342245,
+    4593.045010506437
+   ]
+  },
+  {
+   "rate": 80.0,
+   "median_p95_ttft_ms": 66.86579303350298,
+   "errors": 0,
+   "max_send_lag_s": 0.02432523147881649,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    9125.422743493667,
+    9432.25220764188,
+    8464.569889918366
+   ]
+  },
+  {
+   "rate": 160.0,
+   "median_p95_ttft_ms": 1667.2231050499247,
+   "errors": 0,
+   "max_send_lag_s": 0.01914240997521488,
+   "load_generator_limited": false,
+   "violation": true,
+   "tok_per_s": [
+    10433.162627528685,
+    10339.484040792222,
+    10236.854661817255
+   ]
+  },
+  {
+   "rate": 320.0,
+   "median_p95_ttft_ms": 3163.321625094977,
+   "errors": 0,
+   "max_send_lag_s": 0.028847488654222486,
+   "load_generator_limited": false,
+   "violation": true,
+   "tok_per_s": [
+    11275.958144467048,
+    11340.761490751922,
+    11502.41130638112
+   ]
+  }
+ ]
+}

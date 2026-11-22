@@ -1,0 +1,97 @@
+{
+ "engine": "sglang",
+ "workload": "pfx_base",
+ "steps": [
+  {
+   "rate": 5.0,
+   "median_p95_ttft_ms": 36.55332599591928,
+   "errors": 0,
+   "max_send_lag_s": 0.002268806758053188,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    665.660327830954,
+    695.6753265602006,
+    605.1179298241642
+   ]
+  },
+  {
+   "rate": 10.0,
+   "median_p95_ttft_ms": 87.47128714749121,
+   "errors": 0,
+   "max_send_lag_s": 0.0021202014177177375,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    1322.4731972696425,
+    1380.9081700806607,
+    1201.5688899530096
+   ]
+  },
+  {
+   "rate": 20.0,
+   "median_p95_ttft_ms": 100.55785505101083,
+   "errors": 0,
+   "max_send_lag_s": 0.0020858331718613954,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    2530.809642352408,
+    2468.5607633023815,
+    2186.2355540617655
+   ]
+  },
+  {
+   "rate": 40.0,
+   "median_p95_ttft_ms": 118.54852051474153,
+   "errors": 0,
+   "max_send_lag_s": 0.007649145336719565,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    4001.544785692466,
+    4128.647735610598,
+    3730.5437106827835
+   ]
+  },
+  {
+   "rate": 80.0,
+   "median_p95_ttft_ms": 121.05238810763692,
+   "errors": 0,
+   "max_send_lag_s": 0.019531305965581947,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    6153.994634844801,
+    6229.133273827392,
+    5783.194009569177
+   ]
+  },
+  {
+   "rate": 160.0,
+   "median_p95_ttft_ms": 109.27924898278434,
+   "errors": 0,
+   "max_send_lag_s": 0.01962869572949799,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    8024.251481998023,
+    8000.809545731002,
+    7562.699714883126
+   ]
+  },
+  {
+   "rate": 320.0,
+   "median_p95_ttft_ms": 83.49329556222072,
+   "errors": 0,
+   "max_send_lag_s": 0.02271175239505363,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    9060.941267077249,
+    9330.691425041656,
+    8999.255621584733
+   ]
+  }
+ ]
+}

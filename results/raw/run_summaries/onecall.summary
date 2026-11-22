@@ -1,0 +1,18 @@
+build start 18:49:22
+cargo-exit=0
+build end 18:52:01
+ONECALL=0 warm: 150 0 tpot_p50 13.2 ttft_p95 119 tok/s 562.6
+ONECALL=0 a0_c32: 150 0 tpot_p50 14.8 ttft_p95 1075 tok/s 1744.5
+ONECALL=0 a1_c32: 150 0 tpot_p50 18.4 ttft_p95 197 tok/s 1415.1
+ONECALL=0 a2_c32: 150 0 tpot_p50 25.1 ttft_p95 1894 tok/s 1004.0
+ONECALL=0 a4_c32: 149 1 tpot_p50 28.0 ttft_p95 2149 tok/s 894.3
+ONECALL=0 a8_c32: 149 1 tpot_p50 32.6 ttft_p95 2343 tok/s 757.0
+ONECALL=0 a8_c8: 149 1 tpot_p50 16.6 ttft_p95 64 tok/s 458.8
+ONECALL=1 warm: 150 0 tpot_p50 13.3 ttft_p95 118 tok/s 562.0
+ONECALL=1 a0_c32: 150 0 tpot_p50 15.0 ttft_p95 1081 tok/s 1729.3
+ONECALL=1 a1_c32: 150 0 tpot_p50 18.2 ttft_p95 193 tok/s 1418.9
+ONECALL=1 a2_c32: 150 0 tpot_p50 24.6 ttft_p95 1815 tok/s 1027.0
+ONECALL=1 a4_c32: 150 0 tpot_p50 25.7 ttft_p95 1847 tok/s 974.6
+ONECALL=1 a8_c32: 148 2 tpot_p50 25.9 ttft_p95 1939 tok/s 947.9
+ONECALL=1 a8_c8: 148 2 tpot_p50 12.1 ttft_p95 62 tok/s 629.8
+DONE

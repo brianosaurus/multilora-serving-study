@@ -1,0 +1,97 @@
+{
+ "engine": "sglang",
+ "workload": "one",
+ "steps": [
+  {
+   "rate": 5.0,
+   "median_p95_ttft_ms": 33.34642602421809,
+   "errors": 0,
+   "max_send_lag_s": 0.002106654952775955,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    664.7988010366274,
+    694.498370186445,
+    604.1782605706883
+   ]
+  },
+  {
+   "rate": 10.0,
+   "median_p95_ttft_ms": 37.17786952329333,
+   "errors": 0,
+   "max_send_lag_s": 0.002099625107248926,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    1320.0204043056797,
+    1378.1571108844473,
+    1199.7685568598154
+   ]
+  },
+  {
+   "rate": 20.0,
+   "median_p95_ttft_ms": 40.02300109132191,
+   "errors": 0,
+   "max_send_lag_s": 0.002060586405151721,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    2597.277335107722,
+    2709.8768024742585,
+    2365.3595141867822
+   ]
+  },
+  {
+   "rate": 40.0,
+   "median_p95_ttft_ms": 96.33776322298213,
+   "errors": 0,
+   "max_send_lag_s": 0.016943284603311515,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    4146.454457426432,
+    4248.0528896748465,
+    3806.5767531358442
+   ]
+  },
+  {
+   "rate": 80.0,
+   "median_p95_ttft_ms": 124.76594769395882,
+   "errors": 0,
+   "max_send_lag_s": 0.017060399657678804,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    6126.568269335675,
+    6304.322699611034,
+    5818.262403108086
+   ]
+  },
+  {
+   "rate": 160.0,
+   "median_p95_ttft_ms": 154.9007665249519,
+   "errors": 0,
+   "max_send_lag_s": 0.023817677937953752,
+   "load_generator_limited": false,
+   "violation": false,
+   "tok_per_s": [
+    7896.127677161447,
+    7757.183739430421,
+    7373.462312542028
+   ]
+  },
+  {
+   "rate": 320.0,
+   "median_p95_ttft_ms": 655.5199691443703,
+   "errors": 0,
+   "max_send_lag_s": 0.02118310447902938,
+   "load_generator_limited": false,
+   "violation": true,
+   "tok_per_s": [
+    9158.092239217747,
+    8996.947764923872,
+    8878.533221688773
+   ]
+  }
+ ]
+}

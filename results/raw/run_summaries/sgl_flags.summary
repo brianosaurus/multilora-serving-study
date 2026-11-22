@@ -1,0 +1,39 @@
+control start 17:09:37 extra: 
+{"rate": 20.0, "median_p95_ttft_ms": 97.38778988248653, "errors": 0, "max_send_lag_s": 0.002106963315714694, "load_generator_limited": false, "violation": false, "tok_per_s": [2582.8085444387357, 2706.0999740241386, 2362.489876544387]}
+{"rate": 40.0, "median_p95_ttft_ms": 12030.703835556043, "errors": 0, "max_send_lag_s": 0.009056199288287825, "load_generator_limited": false, "violation": true, "tok_per_s": [3041.4062641199744, 3098.562597355519, 2925.2235912112196]}
+{"rate": 80.0, "median_p95_ttft_ms": 9671.729223846341, "errors": 0, "max_send_lag_s": 0.02653104464672973, "load_generator_limited": false, "violation": true, "tok_per_s": [4140.431913388132, 4156.63902388546, 4035.7396267382396]}
+control done 17:15:03
+overlap start 17:15:03 extra: --enable-lora-overlap-loading
+Traceback (most recent call last):
+  File "/root/study/scripts/run_ladder.py", line 74, in <module>
+    main()
+  File "/root/study/scripts/run_ladder.py", line 57, in main
+    p95 = statistics.median(r["ttft_ms"]["p95"] for r in runs if r["ttft_ms"]["p95"] is not None)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/statistics.py", line 617, in median
+    raise StatisticsError("no median for empty data")
+statistics.StatisticsError: no median for empty data
+overlap done 17:27:16
+drain1 start 17:27:16 extra: --lora-drain-wait-threshold 1.0
+{"rate": 20.0, "median_p95_ttft_ms": 85.16490485926614, "errors": 0, "max_send_lag_s": 0.002092850268121005, "load_generator_limited": false, "violation": false, "tok_per_s": [2584.2885817320903, 2705.699382309585, 2361.8002657007282]}
+{"rate": 40.0, "median_p95_ttft_ms": 10110.71109320328, "errors": 0, "max_send_lag_s": 0.022196352253494478, "load_generator_limited": false, "violation": true, "tok_per_s": [3024.334929455603, 3019.053648726352, 2837.0183241401346]}
+{"rate": 80.0, "median_p95_ttft_ms": 9279.337956229574, "errors": 0, "max_send_lag_s": 0.014164893915956878, "load_generator_limited": false, "violation": true, "tok_per_s": [4028.7345251605866, 4045.5819466894827, 3828.861800164914]}
+drain1 done 17:32:45
+fifo start 17:32:45 extra: --lora-eviction-policy fifo
+{"rate": 20.0, "median_p95_ttft_ms": 174.72535858978515, "errors": 0, "max_send_lag_s": 0.01051187612874216, "load_generator_limited": false, "violation": false, "tok_per_s": [2583.007854790836, 2360.677323928679, 2361.0037308223423]}
+{"rate": 40.0, "median_p95_ttft_ms": 12168.198912791555, "errors": 0, "max_send_lag_s": 0.019502824466870905, "load_generator_limited": false, "violation": true, "tok_per_s": [3030.6631433961365, 3097.759268365387, 2921.2284148841604]}
+{"rate": 80.0, "median_p95_ttft_ms": 9639.97857881186, "errors": 0, "max_send_lag_s": 0.018945174901826345, "load_generator_limited": false, "violation": true, "tok_per_s": [4127.746341115444, 4222.651148854641, 4008.7093582263483]}
+fifo done 17:38:14
+DONE
+overlap2 start 17:42:15 extra: --enable-lora-overlap-loading --max-loaded-loras 32
+{"rate": 20.0, "median_p95_ttft_ms": 112.46337791962945, "errors": 0, "max_send_lag_s": 0.0020514136928007076, "load_generator_limited": false, "violation": false, "tok_per_s": [2587.076569874405, 2707.6092900868175, 2360.5155645551777]}
+{"rate": 40.0, "median_p95_ttft_ms": 11977.407134487286, "errors": 0, "max_send_lag_s": 0.010916544477185042, "load_generator_limited": false, "violation": true, "tok_per_s": [3042.248121108977, 3149.8355914156864, 2905.569187723111]}
+{"rate": 80.0, "median_p95_ttft_ms": 9639.009146805614, "errors": 0, "max_send_lag_s": 0.026456961603001705, "load_generator_limited": false, "violation": true, "tok_per_s": [4154.084020873519, 4212.935465479405, 4103.889624357661]}
+overlap2 done 17:47:40
+DONE
+slots32 start 17:48:09 extra: --max-loras-per-batch 32
+{"rate": 20.0, "median_p95_ttft_ms": 46.37537868984503, "errors": 0, "max_send_lag_s": 0.0020147908223684396, "load_generator_limited": false, "violation": false, "tok_per_s": [2590.366263238212, 2708.520179254492, 2363.8642661974523]}
+{"rate": 40.0, "median_p95_ttft_ms": 100.52220458746888, "errors": 0, "max_send_lag_s": 0.01111096905350717, "load_generator_limited": false, "violation": false, "tok_per_s": [4084.3303158624162, 4236.488648310524, 3797.7731761755776]}
+{"rate": 80.0, "median_p95_ttft_ms": 130.27294056373646, "errors": 0, "max_send_lag_s": 0.023707634614878348, "load_generator_limited": false, "violation": false, "tok_per_s": [6156.218183043407, 6320.606622592301, 5766.537489228304]}
+slots32 done 17:53:03
+DONE

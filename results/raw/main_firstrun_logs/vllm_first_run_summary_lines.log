@@ -1,0 +1,79 @@
+=== vllm b0 (trial T1, lora=0) start 01:15:42 | GPU: 53, 210 MHz, 31.87 W, 0 %, 1 MiB, 0x0000000000000001
+  ready after 37 s
+  reference start: {"rate": 20.0, "ok": 200, "errors": 0, "ttft_ms": {"p50": 25.11704995413311, "p95": 36.279370964621194, "p99": 38.216404975391924}, "tpot_ms": {"p50": 4.944012457033708, "p95": 5.156107321010323}, "to
+  workload b0 01:16:57 | GPU: 63, 2670 MHz, 305.11 W, 100 %, 20496 MiB, 0x0000000000000000
+{"rate": 5.0, "median_p95_ttft_ms": 29.614642102387723, "errors": 0, "max_send_lag_s": 0.002201747196238557, "load_generator_limited": false, "violation": false, "tok_per_s": [665.9486023230054, 696.0166930693109, 605.3565054708102]}
+{"rate": 10.0, "median_p95_ttft_ms": 30.436199024552476, "errors": 0, "max_send_lag_s": 0.0015381349715966053, "load_generator_limited": false, "violation": false, "tok_per_s": [1323.7334494386503, 1382.8299667084543, 1203.3119663676728]}
+{"rate": 20.0, "median_p95_ttft_ms": 30.41639558214228, "errors": 0, "max_send_lag_s": 0.0012434613324252553, "load_generator_limited": false, "violation": false, "tok_per_s": [2613.4587691964866, 2730.333153786787, 2379.116604473297]}
+{"rate": 40.0, "median_p95_ttft_ms": 35.213233972899616, "errors": 0, "max_send_lag_s": 0.0016033555329713067, "load_generator_limited": false, "violation": false, "tok_per_s": [5097.674968788069, 5318.27042573204, 4652.481645342831]}
+{"rate": 80.0, "median_p95_ttft_ms": 39.52481696323957, "errors": 0, "max_send_lag_s": 0.02394730062448125, "load_generator_limited": false, "violation": false, "tok_per_s": [9636.04156822099, 10028.94506470759, 8836.000263141726]}
+  reference end:   {"rate": 20.0, "ok": 200, "errors": 0, "ttft_ms": {"p50": 24.708444019779563, "p95": 34.25788497843313, "p99": 41.31957011879419}, "tpot_ms": {"p50": 4.934862110301793, "p95": 5.13327427636502}, "tok_
+  reference drift: median e2e 653.1 -> 651.5 ms (-0.2%) ok
+  stopped; GPU used: 1 MiB
+=== vllm lora (trial T1, lora=1) start 01:29:14 | GPU: 56, 210 MHz, 32.97 W, 0 %, 1 MiB, 0x0000000000000001
+  ready after 49 s
+  reference start: {"rate": 20.0, "ok": 200, "errors": 0, "ttft_ms": {"p50": 26.31434448994696, "p95": 41.785118612460785, "p99": 49.76645801041741}, "tpot_ms": {"p50": 5.03783462583784, "p95": 5.3561069519920865}, "tok
+  workload b1 01:30:41 | GPU: 61, 2685 MHz, 267.50 W, 0 %, 20482 MiB, 0x0000000000000000
+{"rate": 5.0, "median_p95_ttft_ms": 31.654034063103605, "errors": 0, "max_send_lag_s": 0.002158132399124213, "load_generator_limited": false, "violation": false, "tok_per_s": [665.9342093397522, 695.9819606030111, 605.3429229506997]}
+{"rate": 10.0, "median_p95_ttft_ms": 30.271073462790806, "errors": 0, "max_send_lag_s": 0.002042400797765964, "load_generator_limited": false, "violation": false, "tok_per_s": [1323.6725396552893, 1382.6880996581465, 1203.2347192453958]}
+{"rate": 20.0, "median_p95_ttft_ms": 32.54607955168466, "errors": 0, "max_send_lag_s": 0.0015226257383496034, "load_generator_limited": false, "violation": false, "tok_per_s": [2614.0501124169305, 2728.24299257208, 2378.7891924081314]}
+{"rate": 40.0, "median_p95_ttft_ms": 38.481889074319035, "errors": 0, "max_send_lag_s": 0.00247616220149105, "load_generator_limited": false, "violation": false, "tok_per_s": [5092.561467337385, 5312.941041887859, 4649.523847258528]}
+{"rate": 80.0, "median_p95_ttft_ms": 42.88096257077994, "errors": 0, "max_send_lag_s": 0.021323268515790472, "load_generator_limited": false, "violation": false, "tok_per_s": [9600.535523985938, 9989.799172148589, 8800.27206740716]}
+  workload one 01:42:31 | GPU: 63, 2670 MHz, 282.33 W, 0 %, 21462 MiB, 0x0000000000000000
+{"rate": 5.0, "median_p95_ttft_ms": 38.05634597083554, "errors": 0, "max_send_lag_s": 0.0020975664106082093, "load_generator_limited": false, "violation": false, "tok_per_s": [664.3109293014468, 693.8994294911773, 603.7799497150887]}
+{"rate": 10.0, "median_p95_ttft_ms": 34.61049606266896, "errors": 0, "max_send_lag_s": 0.0020619474914447267, "load_generator_limited": false, "violation": false, "tok_per_s": [1317.6914866269642, 1377.5244168013887, 1199.1249862363786]}
+{"rate": 20.0, "median_p95_ttft_ms": 35.34347204549702, "errors": 0, "max_send_lag_s": 0.0021545534398388355, "load_generator_limited": false, "violation": false, "tok_per_s": [2596.5565774118163, 2707.994455222932, 2362.7795379175627]}
+{"rate": 40.0, "median_p95_ttft_ms": 45.181028003571555, "errors": 0, "max_send_lag_s": 0.0019107609334823028, "load_generator_limited": false, "violation": false, "tok_per_s": [5031.068943865156, 5243.264966962995, 4586.626477753608]}
+{"rate": 80.0, "median_p95_ttft_ms": 60.96696956083178, "errors": 0, "max_send_lag_s": 0.012935168498462657, "load_generator_limited": false, "violation": false, "tok_per_s": [9154.690850273086, 9379.963056893197, 8450.784324195181]}
+  workload zipf32 01:54:24 | GPU: 67, 2670 MHz, 339.45 W, 95 %, 20816 MiB, 0x0000000000000000
+{"rate": 5.0, "median_p95_ttft_ms": 44.9738720897585, "errors": 0, "max_send_lag_s": 0.0020775706376383596, "load_generator_limited": false, "violation": false, "tok_per_s": [661.1118987014883, 691.4778495173074, 601.2422180536518]}
+{"rate": 10.0, "median_p95_ttft_ms": 43.02809802466072, "errors": 0, "max_send_lag_s": 0.0021135042580660013, "load_generator_limited": false, "violation": false, "tok_per_s": [1307.0762140444358, 1370.6185688303233, 1193.773378669324]}
+{"rate": 20.0, "median_p95_ttft_ms": 50.19503663061183, "errors": 0, "max_send_lag_s": 0.002048484495269065, "load_generator_limited": false, "violation": false, "tok_per_s": [2565.2749471215716, 2685.582660633705, 2349.2140638713267]}
+{"rate": 40.0, "median_p95_ttft_ms": 1480.7205035205689, "errors": 0, "max_send_lag_s": 0.023135615020859035, "load_generator_limited": false, "violation": true, "tok_per_s": [4662.207691262265, 4891.246187022259, 4308.956585661292]}
+{"rate": 80.0, "median_p95_ttft_ms": 4651.399348551057, "errors": 0, "max_send_lag_s": 0.011819107006260543, "load_generator_limited": false, "violation": true, "tok_per_s": [7099.516641075624, 7375.856832711553, 6850.208896694324]}
+  workload uni32 02:06:26 | GPU: 71, 2670 MHz, 326.72 W, 99 %, 20816 MiB, 0x0000000000000000
+{"rate": 5.0, "median_p95_ttft_ms": 52.87892720371014, "errors": 0, "max_send_lag_s": 0.0021315930052878684, "load_generator_limited": false, "violation": false, "tok_per_s": [658.9883755276402, 689.7412659027602, 600.5859345222046]}
+{"rate": 10.0, "median_p95_ttft_ms": 51.6929234669078, "errors": 0, "max_send_lag_s": 0.002113881654381089, "load_generator_limited": false, "violation": false, "tok_per_s": [1308.2359461848534, 1361.9181435687121, 1192.2519129541063]}
+{"rate": 20.0, "median_p95_ttft_ms": 683.1739665125491, "errors": 0, "max_send_lag_s": 0.0020746893891008256, "load_generator_limited": false, "violation": true, "tok_per_s": [2519.603666700546, 2616.1187383217384, 2314.167927874986]}
+{"rate": 40.0, "median_p95_ttft_ms": 3066.6875504684867, "errors": 0, "max_send_lag_s": 0.010743513231700419, "load_generator_limited": false, "violation": true, "tok_per_s": [4496.113106862135, 4636.527507896823, 4160.601326981169]}
+  workload pfx_base 02:17:48 | GPU: 63, 2670 MHz, 210.58 W, 0 %, 20816 MiB, 0x0000000000000000
+{"rate": 5.0, "median_p95_ttft_ms": 29.487348991096948, "errors": 0, "max_send_lag_s": 0.0020538442896409492, "load_generator_limited": false, "violation": false, "tok_per_s": [665.7245460601779, 696.0628595632885, 605.3386073452887]}
+{"rate": 10.0, "median_p95_ttft_ms": 30.651690511149354, "errors": 0, "max_send_lag_s": 0.0019746529636535115, "load_generator_limited": false, "violation": false, "tok_per_s": [1323.4230642872428, 1382.8901938355289, 1202.9276602737366]}
+Traceback (most recent call last):
+  File "/root/study/scripts/loadgen.py", line 209, in <module>
+    main()
+  File "/root/study/scripts/loadgen.py", line 205, in main
+    asyncio.run(run(ap.parse_args()))
+  File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/root/study/scripts/loadgen.py", line 177, in run
+    json.dump(out, open(args.out, "w"))
+                   ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/study/results/main/vllm/vllm_pfx_base_r20_rep2.json'
+Traceback (most recent call last):
+  File "/root/study/scripts/run_ladder.py", line 74, in <module>
+    main()
+  File "/root/study/scripts/run_ladder.py", line 55, in main
+    subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL)
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/root/study/venvs/vllm/bin/python', '/root/study/scripts/loadgen.py', '--engine', 'vllm', '--url', 'http://localhost:8000', '--tokenizer', '/dev/shm/models/Qwen2.5-1.5B-Instruct', '--rate', '20.0', '--requests', '500',
+  workload pfx32 02:28:04 | GPU: 63, 2670 MHz, 211.42 W, 0 %, 20816 MiB, 0x0000000000000000
+{"rate": 5.0, "median_p95_ttft_ms": 46.1241380922729, "errors": 0, "max_send_lag_s": 0.002137029369869481, "load_generator_limited": false, "violation": false, "tok_per_s": [660.1216532198683, 690.8305879752104, 599.7826500905962]}
+{"rate": 10.0, "median_p95_ttft_ms": 50.050876129535, "errors": 0, "max_send_lag_s": 0.0020940118348207193, "load_generator_limited": false, "violation": false, "tok_per_s": [1304.7088206729882, 1366.1689429809508, 1190.3661733466658]}
+{"rate": 20.0, "median_p95_ttft_ms": 678.6352385184728, "errors": 0, "max_send_lag_s": 0.002058843667885668, "load_generator_limited": false, "violation": true, "tok_per_s": [2520.16695984582, 2614.897739680175, 2317.05875541577]}
+{"rate": 40.0, "median_p95_ttft_ms": 2757.0000620034966, "errors": 0, "max_send_lag_s": 0.012602974247256427, "load_generator_limited": false, "violation": true, "tok_per_s": [4512.970046661242, 4690.502085927089, 4169.171926025351]}
+  reference end:   {"rate": 20.0, "ok": 200, "errors": 0, "ttft_ms": {"p50": 26.402844494441524, "p95": 44.76432157680391, "p99": 49.98480623762588}, "tpot_ms": {"p50": 5.031519547227667, "p95": 5.335648532399511}, "tok
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+  File "<stdin>", line 2, in <genexpr>
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/study/results/main/vllm/ref_lora_start.json'
+  stopped; GPU used: 1 MiB
+MAIN_DONE

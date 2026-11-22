@@ -1,0 +1,15 @@
+warm: 150 0 tpot_p50 9.1 ttft_p95 71 tok/s 825.8
+base_c8: 150 0 tpot_p50 8.6 ttft_p95 40 tok/s 864.5
+base_c32: 150 0 tpot_p50 12.1 ttft_p95 107 tok/s 2043.6
+warm1: 150 0 tpot_p50 13.3 ttft_p95 146 tok/s 560.9
+lora_a0_c8: 150 0 tpot_p50 9.0 ttft_p95 70 tok/s 831.4
+lora_a1_c8: 150 0 tpot_p50 11.7 ttft_p95 66 tok/s 643.2
+lora_a2_c8: 150 0 tpot_p50 13.7 ttft_p95 120 tok/s 543.9
+lora_a4_c8: 150 0 tpot_p50 15.6 ttft_p95 139 tok/s 481.8
+lora_a8_c8: 149 1 tpot_p50 17.7 ttft_p95 93 tok/s 427.1
+lora_a0_c32: 150 0 tpot_p50 12.8 ttft_p95 101 tok/s 1977.7
+lora_a1_c32: 150 0 tpot_p50 18.3 ttft_p95 183 tok/s 1379.9
+lora_a2_c32: 150 0 tpot_p50 18.5 ttft_p95 188 tok/s 1355.3
+lora_a4_c32: 150 0 tpot_p50 21.6 ttft_p95 195 tok/s 1188.0
+lora_a8_c32: 149 1 tpot_p50 26.0 ttft_p95 203 tok/s 1011.1
+DONE

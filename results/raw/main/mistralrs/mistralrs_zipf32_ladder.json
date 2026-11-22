@@ -1,0 +1,32 @@
+{
+ "engine": "mistralrs",
+ "workload": "zipf32",
+ "steps": [
+  {
+   "rate": 5.0,
+   "median_p95_ttft_ms": 123.17525830585508,
+   "errors": 6,
+   "max_send_lag_s": 0.0021509633574083864,
+   "load_generator_limited": false,
+   "violation": true,
+   "tok_per_s": [
+    599.2063322976219,
+    633.7331878191551,
+    561.2922263600672
+   ]
+  },
+  {
+   "rate": 10.0,
+   "median_p95_ttft_ms": 24614.551330881655,
+   "errors": 4,
+   "max_send_lag_s": 0.005727857379794088,
+   "load_generator_limited": false,
+   "violation": true,
+   "tok_per_s": [
+    822.163729443741,
+    730.5375373944048,
+    742.9032789909846
+   ]
+  }
+ ]
+}
