@@ -1,0 +1,3 @@
+2026-11-22T07:16:38Z
+cmd: python -m sglang.launch_server --model-path /dev/shm/kvc/models/Qwen2.5-1.5B-Instruct --served-model-name m --port 30000 --context-length 8192 --max-running-requests 32 --mem-fraction-static 0.85 --enable-cache-report --enable-metrics --disable-radix-cache
+NVIDIA GeForce RTX 4090, 595.112.07, 2685 MHz, 10251 MHz, 61, 157.06 W, 21874 MiB

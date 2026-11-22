@@ -1,0 +1,3 @@
+2026-11-22T07:09:58Z
+cmd: /root/kvc/venv-vllm/bin/python3 /root/kvc/venv-vllm/bin/vllm serve /dev/shm/kvc/models/Qwen2.5-1.5B-Instruct --served-model-name m --port 8000 --max-model-len 8192 --max-num-seqs 32 --gpu-memory-utilization 0.85 --enable-prompt-tokens-details
+NVIDIA GeForce RTX 4090, 595.112.07, 2685 MHz, 10251 MHz, 57, 196.29 W, 21786 MiB

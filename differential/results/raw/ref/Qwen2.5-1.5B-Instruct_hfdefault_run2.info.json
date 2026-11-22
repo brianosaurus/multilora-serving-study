@@ -1,0 +1,12 @@
+{
+ "model": "Qwen2.5-1.5B-Instruct",
+ "model_dir": "/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",
+ "torch": "2.14.0+cu130",
+ "transformers": "5.22.2",
+ "gpu": "NVIDIA GeForce RTX 4090",
+ "dtype": "bfloat16",
+ "attn": "sdpa",
+ "secs": 169.5,
+ "python": "3.12.3",
+ "chat_template_head": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Clou"
+}

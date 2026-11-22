@@ -1,0 +1,4 @@
+2026-11-22T07:16:53Z
+cmd: /root/kvc/mrs/mistralrs serve -m /dev/shm/kvc/models/Qwen2.5-1.5B-Instruct --port 18001 --max-seqs 32 --kv-cache 6GiB --seed 0 --max-prefill-chunk-tokens 512
+NVIDIA GeForce RTX 4090, 595.112.07, 2520 MHz, 10251 MHz, 55, 74.71 W, 10138 MiB
+startup_secs 4.1

@@ -1,0 +1,204 @@
+# TYPE mistralrs_cuda_graph_events_total counter
+mistralrs_cuda_graph_events_total{component="target",event="capture",outcome="success"} 18
+mistralrs_cuda_graph_events_total{component="target",event="replay",outcome="success"} 10746
+
+# TYPE http_requests_total counter
+http_requests_total{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200"} 129
+
+# TYPE mistralrs_paged_recurrent_prefix_owner_evictions_total counter
+mistralrs_paged_recurrent_prefix_owner_evictions_total{reason="capacity"} 0
+mistralrs_paged_recurrent_prefix_owner_evictions_total{reason="block_pressure"} 0
+
+# TYPE mistralrs_paged_prefix_retention_pressure_evictions_total counter
+mistralrs_paged_prefix_retention_pressure_evictions_total{reason="reset"} 0
+mistralrs_paged_prefix_retention_pressure_evictions_total{reason="allocation_pressure"} 0
+
+# TYPE mistralrs_decode_tokens_processed_total counter
+mistralrs_decode_tokens_processed_total 10746
+
+# TYPE mistralrs_tokens_processed_total counter
+mistralrs_tokens_processed_total 20082
+
+# TYPE mistralrs_cuda_memory_maintenance_total counter
+mistralrs_cuda_memory_maintenance_total{device="cuda[0]",reason="idle",action="observe",outcome="success"} 260
+mistralrs_cuda_memory_maintenance_total{device="cuda[0]",reason="decode_boundary",action="observe",outcome="success"} 236
+mistralrs_cuda_memory_maintenance_total{device="cuda[0]",reason="prompt_boundary",action="observe",outcome="success"} 130
+mistralrs_cuda_memory_maintenance_total{device="cuda[0]",reason="prompt_preflight",action="observe",outcome="success"} 130
+
+# TYPE mistralrs_request_outcomes_total counter
+mistralrs_request_outcomes_total{outcome="completed"} 129
+
+# TYPE mistralrs_prefix_cache_lookups_total counter
+mistralrs_prefix_cache_lookups_total 130
+
+# TYPE mistralrs_prefill_tokens_processed_total counter
+mistralrs_prefill_tokens_processed_total 9336
+
+# TYPE mistralrs_sequences_completed_total counter
+mistralrs_sequences_completed_total{reason="length"} 66
+mistralrs_sequences_completed_total{reason="stop"} 64
+
+# TYPE mistralrs_cuda_graph_dispatch_total counter
+mistralrs_cuda_graph_dispatch_total{component="target",mode="replay",reason="cache_hit"} 10746
+mistralrs_cuda_graph_dispatch_total{component="target",mode="skipped",reason="prefill"} 130
+
+# TYPE mistralrs_prefix_cache_tokens_reused_total counter
+mistralrs_prefix_cache_tokens_reused_total 0
+
+# TYPE mistralrs_prefix_cache_tokens_matched_total counter
+mistralrs_prefix_cache_tokens_matched_total 0
+
+# TYPE http_requests_in_flight gauge
+http_requests_in_flight{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct"} 0
+
+# TYPE mistralrs_paged_prefix_retention_free_blocks gauge
+mistralrs_paged_prefix_retention_free_blocks 0
+
+# TYPE mistralrs_cuda_memory_pool_release_threshold_bytes gauge
+mistralrs_cuda_memory_pool_release_threshold_bytes{device="cuda[0]",pool="async"} 18446744073709552000
+
+# TYPE mistralrs_cuda_device_memory_bytes gauge
+mistralrs_cuda_device_memory_bytes{device="cuda[0]",state="available"} 14589624320
+mistralrs_cuda_device_memory_bytes{device="cuda[0]",state="total"} 25252724736
+
+# TYPE mistralrs_paged_recurrent_prefix_owners_used gauge
+mistralrs_paged_recurrent_prefix_owners_used 0
+
+# TYPE mistralrs_sequences_capacity gauge
+mistralrs_sequences_capacity 32
+
+# TYPE mistralrs_cuda_memory_pool_bytes gauge
+mistralrs_cuda_memory_pool_bytes{device="cuda[0]",pool="async",state="reserved",watermark="current"} 10032775168
+mistralrs_cuda_memory_pool_bytes{device="cuda[0]",pool="async",state="used",watermark="high"} 9559430377
+mistralrs_cuda_memory_pool_bytes{device="cuda[0]",pool="graph",state="reserved",watermark="current"} 33554432
+mistralrs_cuda_memory_pool_bytes{device="cuda[0]",pool="async",state="reclaimable",watermark="current"} 486054200
+mistralrs_cuda_memory_pool_bytes{device="cuda[0]",pool="graph",state="used",watermark="high"} 33554432
+mistralrs_cuda_memory_pool_bytes{device="cuda[0]",pool="graph",state="used",watermark="current"} 33554432
+mistralrs_cuda_memory_pool_bytes{device="cuda[0]",pool="graph",state="reserved",watermark="high"} 33554432
+mistralrs_cuda_memory_pool_bytes{device="cuda[0]",pool="async",state="reserved",watermark="high"} 10032775168
+mistralrs_cuda_memory_pool_bytes{device="cuda[0]",pool="async",state="used",watermark="current"} 9546720968
+
+# TYPE mistralrs_kv_cache_blocks_total gauge
+mistralrs_kv_cache_blocks_total 7020
+
+# TYPE mistralrs_cuda_memory_maintenance_pending gauge
+mistralrs_cuda_memory_maintenance_pending{device="cuda[0]"} 0
+
+# TYPE mistralrs_kv_cache_blocks_available gauge
+mistralrs_kv_cache_blocks_available 7020
+
+# TYPE mistralrs_sequences_waiting gauge
+mistralrs_sequences_waiting 0
+
+# TYPE mistralrs_paged_recurrent_prefix_checkpoints_used gauge
+mistralrs_paged_recurrent_prefix_checkpoints_used 0
+
+# TYPE mistralrs_requests_pending_admission gauge
+mistralrs_requests_pending_admission 0
+
+# TYPE mistralrs_sequences_running gauge
+mistralrs_sequences_running 0
+
+# TYPE mistralrs_cuda_memory_required_available_bytes gauge
+mistralrs_cuda_memory_required_available_bytes{device="cuda[0]",reason="prompt_boundary"} 536870912
+mistralrs_cuda_memory_required_available_bytes{device="cuda[0]",reason="prompt_preflight"} 536870912
+mistralrs_cuda_memory_required_available_bytes{device="cuda[0]",reason="decode_boundary"} 536870912
+mistralrs_cuda_memory_required_available_bytes{device="cuda[0]",reason="idle"} 536870912
+
+# TYPE mistralrs_kv_cache_blocks_active gauge
+mistralrs_kv_cache_blocks_active 0
+
+# TYPE mistralrs_kv_cache_blocks_used gauge
+mistralrs_kv_cache_blocks_used 0
+
+# TYPE mistralrs_paged_prefix_retention_entries gauge
+mistralrs_paged_prefix_retention_entries 0
+
+# TYPE mistralrs_cuda_graph_resident_entries gauge
+mistralrs_cuda_graph_resident_entries{component="target"} 18
+
+# TYPE mistralrs_paged_recurrent_prefix_bytes_used gauge
+mistralrs_paged_recurrent_prefix_bytes_used 0
+
+# TYPE mistralrs_kv_cache_blocks_reserved gauge
+mistralrs_kv_cache_blocks_reserved 0
+
+# TYPE mistralrs_kv_cache_blocks_prefix_retained gauge
+mistralrs_kv_cache_blocks_prefix_retained 0
+
+# TYPE mistralrs_paged_prefix_retention_hashes gauge
+mistralrs_paged_prefix_retention_hashes 0
+
+# TYPE mistralrs_kv_cache_blocks_prefix_cached gauge
+mistralrs_kv_cache_blocks_prefix_cached 0
+
+# TYPE mistralrs_paged_recurrent_prefix_owners_capacity gauge
+mistralrs_paged_recurrent_prefix_owners_capacity 0
+
+# TYPE http_request_duration_seconds histogram
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="0.001"} 0
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="0.005"} 0
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="0.01"} 0
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="0.025"} 1
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="0.05"} 1
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="0.1"} 25
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="0.25"} 37
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="0.5"} 63
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="1"} 129
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="2.5"} 129
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="5"} 129
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="10"} 129
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="30"} 129
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="60"} 129
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="120"} 129
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="300"} 129
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="600"} 129
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="1200"} 129
+http_request_duration_seconds_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200",le="+Inf"} 129
+http_request_duration_seconds_sum{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200"} 59.352352999
+http_request_duration_seconds_count{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",status="200"} 129
+
+# TYPE mistralrs_request_queue_duration_seconds histogram
+mistralrs_request_queue_duration_seconds_bucket{le="0.001"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="0.005"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="0.01"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="0.02"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="0.04"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="0.06"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="0.08"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="0.1"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="0.25"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="0.5"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="0.75"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="1"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="2.5"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="5"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="7.5"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="10"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="20"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="40"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="80"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="160"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="640"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="2560"} 130
+mistralrs_request_queue_duration_seconds_bucket{le="+Inf"} 130
+mistralrs_request_queue_duration_seconds_sum 0.0037724229999999996
+mistralrs_request_queue_duration_seconds_count 130
+
+# TYPE http_request_body_bytes histogram
+http_request_body_bytes_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",le="128"} 1
+http_request_body_bytes_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",le="512"} 97
+http_request_body_bytes_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",le="1024"} 129
+http_request_body_bytes_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",le="4096"} 129
+http_request_body_bytes_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",le="16384"} 129
+http_request_body_bytes_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",le="65536"} 129
+http_request_body_bytes_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",le="262144"} 129
+http_request_body_bytes_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",le="1048576"} 129
+http_request_body_bytes_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",le="4194304"} 129
+http_request_body_bytes_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",le="16777216"} 129
+http_request_body_bytes_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",le="52428800"} 129
+http_request_body_bytes_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",le="104857600"} 129
+http_request_body_bytes_bucket{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct",le="+Inf"} 129
+http_request_body_bytes_sum{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct"} 62648
+http_request_body_bytes_count{method="POST",path="/v1/completions",model="/dev/shm/kvc/models/Qwen2.5-1.5B-Instruct"} 129
+
