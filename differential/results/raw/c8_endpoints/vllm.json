@@ -1,0 +1,19 @@
+{
+ "engine": "vllm",
+ "result": {
+  "chat": {
+   "raw": 2,
+   "hfdefault": 26,
+   "both": 9,
+   "neither": 27,
+   "error": 0
+  },
+  "completions": {
+   "raw": 2,
+   "hfdefault": 28,
+   "both": 9,
+   "neither": 25,
+   "error": 0
+  }
+ }
+}

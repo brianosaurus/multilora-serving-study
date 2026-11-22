@@ -1,0 +1,19 @@
+{
+ "engine": "sglang",
+ "result": {
+  "chat": {
+   "raw": 6,
+   "hfdefault": 1,
+   "both": 10,
+   "neither": 47,
+   "error": 0
+  },
+  "completions": {
+   "raw": 34,
+   "hfdefault": 0,
+   "both": 10,
+   "neither": 20,
+   "error": 0
+  }
+ }
+}

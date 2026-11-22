@@ -1,0 +1,19 @@
+{
+ "engine": "mistralrs",
+ "result": {
+  "chat": {
+   "raw": 1,
+   "hfdefault": 25,
+   "both": 10,
+   "neither": 28,
+   "error": 0
+  },
+  "completions": {
+   "raw": 2,
+   "hfdefault": 25,
+   "both": 9,
+   "neither": 28,
+   "error": 0
+  }
+ }
+}
