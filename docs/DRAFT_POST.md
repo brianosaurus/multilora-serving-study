@@ -1,6 +1,6 @@
 # DRAFT. Not for publication until the author has read it and every number is checked against the raw files.
 
-Tags: [MEASURED] in the raw data and repeated. [EXPLORATORY] run after the plan was fixed, logged in the changelog. [HYPOTHESIS] not tested. The longer, unsarcastic version is `DRAFT_POST_long.md`.
+Tags: [MEASURED] in the raw data and repeated. [EXPLORATORY] run after the plan was fixed, logged in the changelog. [HYPOTHESIS] not tested.
 
 # What happens when your LoRA adapters outnumber your slots
 
