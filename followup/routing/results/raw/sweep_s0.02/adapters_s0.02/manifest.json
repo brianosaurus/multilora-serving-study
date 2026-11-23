@@ -1,0 +1,53 @@
+{
+  "base": "/root/k/model",
+  "base_weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+  "rank": 16,
+  "alpha": 32,
+  "b_std": 0.02,
+  "dtype": "float16",
+  "targets": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ],
+  "init": "A ~ N(0, 1/fan_in), B ~ N(0, b_std^2), seeded per adapter",
+  "versions": {
+    "torch": "2.11.0+cu128",
+    "peft": "0.22.0",
+    "transformers": "5.24.0"
+  },
+  "adapters": [
+    {
+      "name": "adapter_0000",
+      "seed": 0,
+      "path": "/root/k/routing/adapters_s0.02/adapter_0000",
+      "bytes": 36981464,
+      "sha256": "d3ad7327a9c5a9678d39fe4dce0e529040725cb8458d53851de044f0666e3571"
+    },
+    {
+      "name": "adapter_0001",
+      "seed": 1,
+      "path": "/root/k/routing/adapters_s0.02/adapter_0001",
+      "bytes": 36981464,
+      "sha256": "4a574c7266c8a6f2c7c486ce72c35188567a9979ece4a17a8e8386f69892b3f8"
+    },
+    {
+      "name": "adapter_0002",
+      "seed": 2,
+      "path": "/root/k/routing/adapters_s0.02/adapter_0002",
+      "bytes": 36981464,
+      "sha256": "61a82f39bc909b012ebdcbc19846f136ea1a1a3f18a95ce09fbed40c9dd6b58b"
+    },
+    {
+      "name": "adapter_0003",
+      "seed": 3,
+      "path": "/root/k/routing/adapters_s0.02/adapter_0003",
+      "bytes": 36981464,
+      "sha256": "343ef714926fa83f578585bd31407cd61bba35039aa76ddd94c35c749f735186"
+    }
+  ]
+}
