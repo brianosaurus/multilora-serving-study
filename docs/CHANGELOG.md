@@ -44,6 +44,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Routing follow-up, Gate A1 (the follow-up pod, 2026-11-23 about 04:55 UTC, references on the GPU, no engine run): power checks 1 and 4 FAILED under the fixed rule (k = 3). Noise (median bf16-vs-fp32 distance) is 0.970 nats, so the margin threshold is 2.91. Check 1: the correct bf16 stand-in is routed correctly on 10 of 64 requests, although the right candidate is the nearest one on 64 of 64 (margin minimum 0.449, median 2.06). Checks 2 and 3 passed (0 of 192 swapped-adapter requests and 0 of 64 base-as-adapter requests routed correctly). Check 4: 3 of 10 candidate pairs fall below k times noise (base against adapter 0 and adapter 3: 2.26 and 1.95; adapter 0 against adapter 3: 2.77). By the plan, engine verdicts are not allowed (inconclusive) and no engine was run. Data: `followup/routing/results/raw/`. Next step is the author's decision.
 
+- Routing follow-up, calibration sweep started (author chose option 1 after Gate A1, 2026-11-23 about 05:05 UTC): adapter B scales 0.01, 0.02 and 0.1 (seeds 0 to 3) run through the same references and the same rule (k = 3, all four power checks); the smallest passing scale is used, and if none passes the follow-up is reported as inconclusive. Protocol committed in `followup/routing/PLAN.md` before the run. The adapters used for any engine run would then differ from the study's. Part B (kernel rerun): clean `cuda flash-attn` rebuilds of the old and new trees started at 05:01 UTC; pod load average was still 64 (1 minute) at that time, host CPU about 49% busy outside this container.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.

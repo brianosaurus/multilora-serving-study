@@ -14,7 +14,8 @@ PROMPTS, OUT = sys.argv[1], sys.argv[2]
 THREADS = int(sys.argv[3]) if len(sys.argv) > 3 else 48
 torch.set_num_threads(THREADS)
 DEV = "cuda"
-M, A = "/root/k/model", "/root/k/adapters"
+import os
+M, A = "/root/k/model", os.environ.get("ADAPTER_DIR", "/root/k/adapters")
 CANDS = ["base", "adapter_0000", "adapter_0001", "adapter_0002", "adapter_0003"]
 N = 128
 prompts = json.load(open(PROMPTS))
@@ -50,7 +51,7 @@ def logprobs(m, v, seqs):
 
 result = {"candidates": CANDS, "n_tokens": N, "prompts": prompts, "prompt_ids": pids,
           "versions": {"torch": torch.__version__, "transformers": transformers.__version__, "peft": peft.__version__},
-          "threads": THREADS, "device": DEV, "tf32_matmul": bool(torch.backends.cuda.matmul.allow_tf32)}
+          "threads": THREADS, "adapter_dir": A, "device": DEV, "tf32_matmul": bool(torch.backends.cuda.matmul.allow_tf32)}
 m32 = load(torch.float32)
 log("fp32 model loaded")
 tokens = []
