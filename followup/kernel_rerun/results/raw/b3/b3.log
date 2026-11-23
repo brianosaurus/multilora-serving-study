@@ -1,0 +1,9 @@
+07:29:39 host follow-up-pod; GPU procs 0; load 6.83 14.77 22.36
+07:29:40 binaries: old 56fbcbc6dab8ba58  new d0b658c25946c4f6
+07:29:54 old done: 128 completions, 0 errors, 0 empty
+07:30:14 new done: 128 completions, 0 errors, 0 empty
+07:30:38 old_again done: 128 completions, 0 errors, 0 empty
+old vs new: 126/128 identical; old vs old (repeat): 126/128 identical; new vs old (repeat): 128/128 identical
+  differs: 'The capital of France is|adapter_0005' | old: ' a French tourist. I am from the school I will not' | new: ' a French tourist. I am from the 100978, and I wil'
+  differs: 'The capital of France is|adapter_0006' | old: ' located in the West, the French bitters are a lot' | new: ' located in the West, the French bitters are a lot'
+07:30:47 B3_DONE

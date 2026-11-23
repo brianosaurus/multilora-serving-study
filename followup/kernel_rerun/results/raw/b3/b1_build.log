@@ -1,0 +1,28 @@
+05:01:18 host follow-up-pod; rustc rustc 1.100.0 (0ef1bc386 2026-11-09); nvcc Build cuda_12.8.r12.8/compiler.35583870_0; RUSTFLAGS=''
+05:01:18 base commit 21da642fdd2210c30ca4028e1eabdd28e9c602fd
+Preparing worktree (detached HEAD 21da642)
+Updating files:  97% (2168/2224)Updating files:  98% (2180/2224)Updating files:  99% (2202/2224)Updating files: 100% (2224/2224)Updating files: 100% (2224/2224), done.
+HEAD is now at 21da642 feat(core): maintainability refactor (#2561)
+Preparing worktree (detached HEAD 21da642)
+HEAD is now at 21da642 feat(core): maintainability refactor (#2561)
+05:01:21 patch applied to new:  4 files changed, 570 insertions(+), 12 deletions(-)
+05:01:21 old tree dirty files: 0
+05:01:22 tree diff old vs new: 4 differing files
+free before build: 15G
+05:01:22 build old start: cargo build --release -p mistralrs-cli --features "cuda flash-attn"
+exit 0
+06:01:44 build old end:     Finished `release` profile [optimized] target(s) in 60m 22s
+06:01:45 old binary: 549206280 bytes sha256 56fbcbc6dab8ba581a745ecc6f50f94faf0b372f8f65902f64ac7a01f6fe9d9f
+target size: 3.6G
+06:01:46 removed target-old to free disk
+free before build: 14G
+06:01:46 build new start: cargo build --release -p mistralrs-cli --features "cuda flash-attn"
+exit 0
+06:55:16 build new end:     Finished `release` profile [optimized] target(s) in 53m 30s
+06:55:17 new binary: 549255576 bytes sha256 d0b658c25946c4f6d4840a4bc2287a768dba7d5ecac1aaef1d15b66c045ec5de
+06:55:17 unit tests on new tree start
+test exit 0
+07:01:25 tests: test result: ok. 81 passed; 0 failed; 0 ignored; 0 measured; 390 filtered out; finished in 0.55s
+target size: 4.3G
+07:01:26 removed target-new to free disk
+B1_BUILD_DONE

@@ -1,0 +1,15 @@
+07:31:10 host follow-up-pod; GPU procs 0; load 5.53 12.33 20.80
+07:31:21 new run 1 done
+07:31:44 old run 1 done
+07:32:05 new run 2 done
+07:32:28 old run 2 done
+07:32:48 new run 3 done
+07:33:11 old run 3 done
+07:33:32 new run 4 done
+07:33:55 old run 4 done
+old vs old (different launches of the same binary): n=15 pairs, identical completions per pair: min 120, median 126, max 128 of 128; pairs with 128/128: 6
+new vs new: n=10 pairs, identical completions per pair: min 128, median 128, max 128 of 128; pairs with 128/128: 10
+old vs new: n=30 pairs, identical completions per pair: min 120, median 128, max 128 of 128; pairs with 128/128: 20
+completions that vary across launches of old: 8 | of new: 0 | of all old+new pooled: 8
+completions that vary only across builds (stable within old and within new, different between): 0
+07:34:04 B3_MORE_DONE

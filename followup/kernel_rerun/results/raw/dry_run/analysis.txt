@@ -1,0 +1,18 @@
+DRY RUN: 2 blocks; runs above the load limit: 48
+  flagged runs (first 5): ['blk1 pos1 old c8_a0', 'blk1 pos1 old c8_a1', 'blk1 pos1 old c8_a4', 'blk1 pos1 old c8_a8', 'blk1 pos1 old c32_a0']
+
+conc adapters | median ms per token old / new / old2 | new vs old: median change, blocks faster | old2 vs old: median change | tok/s new/old
+   8        0 |   8.75   9.28   9.99 |   +6.2% (per block +2, +10), 0/2 |  +15.1% (max abs per block 36%) | 1.11x
+   8        1 |  12.08  12.07  14.63 |   +0.2% (per block -4, +4), 1/2 |  +23.7% (max abs per block 54%) | 0.98x
+   8        4 |  16.64  21.35  19.76 |  +23.9% (per block +59, -11), 1/2 |  +23.1% (max abs per block 57%) | 0.91x
+   8        8 |  16.44  31.52  21.08 |  +88.7% (per block +125, +52), 0/2 |  +31.8% (max abs per block 73%) | 0.93x
+  32        0 |   9.27   9.35   9.41 |   +1.0% (per block +4, -2), 1/2 |   +1.9% (max abs per block 12%) | 1.00x
+  32        1 |  30.50  18.94  24.46 |  -21.3% (per block -51, +8), 1/2 |  +15.7% (max abs per block 78%) | 1.16x
+  32        4 |  36.44  17.12  22.55 |  -30.4% (per block -74, +13), 1/2 |  -26.6% (max abs per block 49%) | 1.59x
+  32        8 |  23.83  19.60  26.19 |  -14.1% (per block -42, +14), 1/2 |   +8.7% (max abs per block 18%) | 1.22x
+
+Establishment rule (PLAN.md): at a cell, (a) the new build is faster in ALL blocks, and (b) the median change is larger in magnitude than the largest median change at the same concurrency in the unchanged-code cells (0 and 1 adapters, new vs old) and in the old-vs-old-copy control (any adapter count).
+concurrency 8, 8 adapters: NOT EVALUATED (needs 6 blocks, have 2)   [dry run, discard]
+concurrency 8, 4 adapters: NOT EVALUATED (needs 6 blocks, have 2)   [dry run, discard]
+concurrency 32, 8 adapters: NOT EVALUATED (needs 6 blocks, have 2)   [dry run, discard]
+concurrency 32, 4 adapters: NOT EVALUATED (needs 6 blocks, have 2)   [dry run, discard]
