@@ -13,6 +13,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 PROMPTS, OUT = sys.argv[1], sys.argv[2]
 THREADS = int(sys.argv[3]) if len(sys.argv) > 3 else 48
 torch.set_num_threads(THREADS)
+DEV = "cuda"
 M, A = "/root/k/model", "/root/k/adapters"
 CANDS = ["base", "adapter_0000", "adapter_0001", "adapter_0002", "adapter_0003"]
 N = 128
@@ -23,7 +24,7 @@ t0 = time.time()
 def log(*a): print(f"[{time.time()-t0:7.0f}s]", *a, flush=True)
 
 def load(dtype):
-    base = AutoModelForCausalLM.from_pretrained(M, dtype=dtype).eval()
+    base = AutoModelForCausalLM.from_pretrained(M, dtype=dtype).to(DEV).eval()
     m = PeftModel.from_pretrained(base, f"{A}/{CANDS[1]}", adapter_name=CANDS[1])
     for n in CANDS[2:]:
         m.load_adapter(f"{A}/{n}", adapter_name=n)
@@ -37,19 +38,19 @@ def under(m, c, fn):
     return fn()
 
 def logprobs(m, v, seqs):
-    ids = torch.tensor(seqs)
+    ids = torch.tensor(seqs, device=DEV)
     with torch.inference_mode():
         logits = under(m, v, lambda: m(input_ids=ids).logits)
     out = []
     for b in range(ids.shape[0]):
         lp = torch.log_softmax(logits[b, :-1].float(), dim=-1)
         g = lp.gather(-1, ids[b, 1:].unsqueeze(-1)).squeeze(-1)
-        out.append(g[-N:].tolist())
+        out.append(g[-N:].cpu().tolist())
     return out
 
 result = {"candidates": CANDS, "n_tokens": N, "prompts": prompts, "prompt_ids": pids,
           "versions": {"torch": torch.__version__, "transformers": transformers.__version__, "peft": peft.__version__},
-          "threads": THREADS}
+          "threads": THREADS, "device": DEV, "tf32_matmul": bool(torch.backends.cuda.matmul.allow_tf32)}
 m32 = load(torch.float32)
 log("fp32 model loaded")
 tokens = []
@@ -57,10 +58,10 @@ for p, ids in enumerate(pids):
     row = []
     for c in CANDS:
         def gen():
-            return m32.generate(torch.tensor([ids]), max_new_tokens=N, min_new_tokens=N, do_sample=False,
+            return m32.generate(torch.tensor([ids], device=DEV), max_new_tokens=N, min_new_tokens=N, do_sample=False,
                                 pad_token_id=tok.eos_token_id)
         o = under(m32, c, gen)
-        row.append(o[0, len(ids):].tolist())
+        row.append(o[0, len(ids):].cpu().tolist())
     tokens.append(row)
     log("generated prompt", p)
 result["tokens"] = tokens   # tokens[p][c]
@@ -74,6 +75,7 @@ def matrix(m, name):
 result["L32"] = matrix(m32, "fp32")
 json.dump(result, open(OUT, "w"))
 del m32
+torch.cuda.empty_cache()
 mbf = load(torch.bfloat16)
 log("bf16 model loaded")
 result["Lbf"] = matrix(mbf, "bf16")

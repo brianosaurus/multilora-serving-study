@@ -59,7 +59,7 @@ Synthetic adapters, one model, rank 16, four adapters, 16 prompts. A pass means 
 ## Implementation notes (added before the first reference run, 2026-11-23)
 
 - The reference continuation is generated with `min_new_tokens` = `max_new_tokens` = 128 so that every continuation has exactly 128 tokens; an end-of-text token is therefore not allowed to end it early. (The study's earlier reference used 32 tokens and no minimum.)
-- "bf16 PEFT" uses the same loading as the study's reference script: bf16 base weights, `PeftModel.from_pretrained` defaults (PEFT may keep adapter weights in fp32 internally). "fp32 PEFT" uses fp32 base weights. Both run on CPU on the follow-up pod; the library versions are recorded in the output.
+- "bf16 PEFT" uses the same loading as the study's reference script: bf16 base weights, `PeftModel.from_pretrained` defaults (PEFT may keep adapter weights in fp32 internally). "fp32 PEFT" uses fp32 base weights. Both run on the follow-up pod's GPU (the first attempt on CPU was abandoned after about 7 minutes as too slow on the loaded host: 425 s per prompt for generation; no CPU result was used); matmul TF32 stays off so the fp32 reference is true fp32. The GPU is used only for the references, with no engine running, and was idle when checked. The library versions are recorded in the output.
 - `noise` is the median of 64 values (16 prompts by 4 adapters) of `d(bf16 stand-in serving adapter a, prompt, c = a)`.
 - Power check 4 is evaluated per ordered pair (20 pairs, base included) and the 10 unordered pairs are judged by the smaller of their two directions, which is the stricter reading of the wording above.
 - Distances use all 128 forced positions of each continuation, no weighting.
