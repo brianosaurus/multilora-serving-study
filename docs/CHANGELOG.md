@@ -56,6 +56,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Routing follow-up, Amendment 1 (author's decision, 2026-11-23 about 06:35 UTC pod clock): the engine runs use B scale **0.02**, not the protocol's smallest passing scale 0.01. Departure from the sweep protocol, made before any engine run. Reason: vLLM against itself differs by a mean 0.015 to 0.021 per call between identical repeats, the size of the stand-in noise, and scale 0.01 clears its threshold by only 1.2 times (0.02: 2.8 times). Rule unchanged (k = 3, four checks, 100%). Fixed numbers: noise 0.0201, threshold 0.0604. The engine-run method (servers' flags, how forced logprobs are read per engine, the mistral.rs stop rule at 5% missing positions) is written in `followup/routing/PLAN.md`, section 'A2 implementation notes', before the first engine run. vLLM 0.34.0 is installed on the pod (torch 2.14.0+cu130); SGLang 0.5.23 waits for disk. A 12-call vLLM smoke test (not part of the study) showed the probe works: right-adapter distance 0.008 to 0.025, wrong candidates 0.14 to 0.27.
 
+- Correction (2026-11-23 about 06:40 UTC pod clock, before any engine run): the Part B rebuild trees and the earlier kernel benchmarks are mistral.rs `master` at `21da642` (the 0.10.0 development line), not the study's pinned v0.9.5. The routing test pins v0.9.5, so a separate clean `cuda flash-attn` build of commit `465191d` is made for it. This corrects the routing plan's A2 notes (sentence about the rebuilt old binary) and also affects how the earlier benchmark and PR #2571 text should be described: they measure `master`, which is what the PR is based on.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
