@@ -1,0 +1,19 @@
+sglang / serial: noise 0.0201, threshold 0.0604; requests evaluated 64/64 (0 incomplete)
+  routed correctly: 64/64  (PASS on the 100% rule)
+  margin d_wrong - d_right: min 0.1682 median 0.3434; d_right median 0.0196 (stand-in noise 0.0201), max 0.0311
+  not routed correctly: 0
+  probe stats: {'positions': 0, 'missing_topn': 0, 'dropped_roundtrip': 0, 'errors': 0}
+
+sglang / mixed: noise 0.0201, threshold 0.0604; requests evaluated 64/64 (0 incomplete)
+  routed correctly: 64/64  (PASS on the 100% rule)
+  margin d_wrong - d_right: min 0.1693 median 0.3460; d_right median 0.0197 (stand-in noise 0.0201), max 0.0302
+  not routed correctly: 0
+  probe stats: {'positions': 0, 'missing_topn': 0, 'dropped_roundtrip': 0, 'errors': 0}
+
+sglang / serial: noise 0.0201, threshold 0.0604; requests evaluated 64/64 (0 incomplete)
+  routed correctly: 64/64  (PASS on the 100% rule)
+  margin d_wrong - d_right: min 0.1682 median 0.3434; d_right median 0.0196 (stand-in noise 0.0201), max 0.0311
+  not routed correctly: 0
+  probe stats: {'positions': 0, 'missing_topn': 0, 'dropped_roundtrip': 0, 'errors': 0}
+
+self-consistency (context, not part of the rule): SGLang serial pass vs its repeat over 320 calls: mean |diff| median 0.0000, p95 0.0000, max 0.0000; stand-in noise 0.0201

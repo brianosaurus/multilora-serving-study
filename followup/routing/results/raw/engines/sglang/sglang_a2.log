@@ -1,0 +1,26 @@
+07:12:46 host follow-up-pod; GPU procs: 0; load 21.95 24.39 32.85 | gpu 210MHz,41,25.23W,0%,1MiB
+07:13:33 sglang up? 200; load 22.18 24.08 32.30 | gpu 2520MHz,44,65.61W,0%,16182MiB
+sglang serial: 12 calls in 0s; stats {'positions': 0, 'missing_topn': 0, 'dropped_roundtrip': 0, 'errors': 0}
+calls 12 stats {'positions': 0, 'missing_topn': 0, 'dropped_roundtrip': 0, 'errors': 0}
+prompt  6 served adapter 2 candidate 4: n=128 d=0.5354 
+prompt  4 served adapter 0 candidate 4: n=128 d=0.5234 
+prompt  9 served adapter 1 candidate 1: n=128 d=0.5208 
+prompt  2 served adapter 1 candidate 2: n=128 d=0.0130 RIGHT adapter
+prompt  0 served adapter 1 candidate 3: n=128 d=0.4521 
+prompt  9 served adapter 0 candidate 1: n=128 d=0.0196 RIGHT adapter
+prompt 13 served adapter 2 candidate 0: n=128 d=0.3546 
+prompt  4 served adapter 3 candidate 4: n=128 d=0.0194 RIGHT adapter
+prompt 14 served adapter 1 candidate 1: n=128 d=0.6136 
+prompt 14 served adapter 2 candidate 4: n=128 d=0.4254 
+prompt 12 served adapter 0 candidate 1: n=128 d=0.0153 RIGHT adapter
+prompt  1 served adapter 1 candidate 2: n=128 d=0.0250 RIGHT adapter
+07:13:34 smoke errors or None values: 0
+07:13:34 start sglang_a2_serial: load 22.18 24.08 32.30 | gpu 2520MHz,47,72.32W,34%,16372MiB
+sglang serial: 320 calls in 5s; stats {'positions': 0, 'missing_topn': 0, 'dropped_roundtrip': 0, 'errors': 0}
+07:13:39 end sglang_a2_serial: load 22.17 24.04 32.24 | gpu 2685MHz,52,234.63W,59%,16372MiB
+07:13:39 start sglang_a2_mixed: load 22.17 24.04 32.24 | gpu 2685MHz,52,234.63W,59%,16372MiB
+sglang mixed: 320 calls in 2s; stats {'positions': 0, 'missing_topn': 0, 'dropped_roundtrip': 0, 'errors': 0}
+07:13:41 end sglang_a2_mixed: load 22.17 24.04 32.24 | gpu 2655MHz,63,399.46W,94%,19178MiB
+07:13:41 start sglang_a2_serial_repeat: load 22.17 24.04 32.24 | gpu 2655MHz,63,399.46W,94%,19178MiB
+sglang serial: 320 calls in 5s; stats {'positions': 0, 'missing_topn': 0, 'dropped_roundtrip': 0, 'errors': 0}
+07:13:46 end sglang_a2_serial_repeat: load 22.22 23.99 32.14 | gpu 2685MHz,55,239.10W,60%,19178MiB
