@@ -1,0 +1,8 @@
+05:50:19 scale 0.1: generating adapters
+05:50:31 scale 0.1: adapters done (4), sha256 of adapter_0000: 509bb20cb2c7dc2d
+05:58:07 scale 0.1: references done
+05:58:08 scale 0.1: analysis done: POWER CHECKS: {'check1': False, 'check2': True, 'check3': True, 'check4': False} => engine verdicts NOT ALLOWED (inconclusive)
+adapter_0000 509bb20cb2c7dc2d68728bb9c013c72f46566a76fa7dcdd457ba088aa1e4c753
+adapter_0001 b593fdbf1a60adcb685feeec1bbd5d3683244acf9a0825615614334368301538
+adapter_0002 a1b291d56ea994d49aa5a328bb349e1a307ac860e7a1d93e0ef5a657b115c228
+adapter_0003 87f42bfa5a44728189c6f0684a883d447b794007b6c73de1c5315a392286ddf8

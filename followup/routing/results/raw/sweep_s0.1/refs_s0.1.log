@@ -1,0 +1,31 @@
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   0%|          | 1/338 [00:00<01:21,  4.13it/s]Loading weights:  54%|█████▍    | 183/338 [00:00<00:00, 662.85it/s]Loading weights:  84%|████████▍ | 284/338 [00:00<00:00, 709.14it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 596.94it/s]
+[      4s] fp32 model loaded
+[     32s] generated prompt 0
+[     59s] generated prompt 1
+[     86s] generated prompt 2
+[    112s] generated prompt 3
+[    139s] generated prompt 4
+[    166s] generated prompt 5
+[    193s] generated prompt 6
+[    221s] generated prompt 7
+[    248s] generated prompt 8
+[    275s] generated prompt 9
+[    302s] generated prompt 10
+[    329s] generated prompt 11
+[    355s] generated prompt 12
+[    382s] generated prompt 13
+[    409s] generated prompt 14
+[    434s] generated prompt 15
+[    436s] fp32 variant base done
+[    437s] fp32 variant adapter_0000 done
+[    439s] fp32 variant adapter_0001 done
+[    440s] fp32 variant adapter_0002 done
+[    442s] fp32 variant adapter_0003 done
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 7513.45it/s]
+[    445s] bf16 model loaded
+[    446s] bf16 variant base done
+[    447s] bf16 variant adapter_0000 done
+[    448s] bf16 variant adapter_0001 done
+[    449s] bf16 variant adapter_0002 done
+[    451s] bf16 variant adapter_0003 done
+[    451s] wrote refs_s0.1.json

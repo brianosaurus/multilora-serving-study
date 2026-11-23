@@ -1,0 +1,7 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 7280.99it/s]
+wrote /root/k/routing/adapters_s0.1/adapter_0000 (37.0 MB)
+wrote /root/k/routing/adapters_s0.1/adapter_0001 (37.0 MB)
+wrote /root/k/routing/adapters_s0.1/adapter_0002 (37.0 MB)
+wrote /root/k/routing/adapters_s0.1/adapter_0003 (37.0 MB)
+manifest: /root/k/routing/adapters_s0.1/manifest.json

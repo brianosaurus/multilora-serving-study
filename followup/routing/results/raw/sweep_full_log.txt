@@ -1,0 +1,13 @@
+05:32:51 scale 0.02: generating adapters
+05:33:04 scale 0.02: adapters done (4), sha256 of adapter_0000: d3ad7327a9c5a967
+05:42:22 scale 0.02: references done
+05:42:23 scale 0.02: analysis done: POWER CHECKS: {'check1': True, 'check2': True, 'check3': True, 'check4': True} => engine verdicts ALLOWED
+05:42:23 scale 0.01: generating adapters
+05:42:37 scale 0.01: adapters done (4), sha256 of adapter_0000: 6a5f0edac298a8ce
+05:50:19 scale 0.01: references done
+05:50:19 scale 0.01: analysis done: POWER CHECKS: {'check1': True, 'check2': True, 'check3': True, 'check4': True} => engine verdicts ALLOWED
+05:50:19 scale 0.1: generating adapters
+05:50:31 scale 0.1: adapters done (4), sha256 of adapter_0000: 509bb20cb2c7dc2d
+05:58:07 scale 0.1: references done
+05:58:08 scale 0.1: analysis done: POWER CHECKS: {'check1': False, 'check2': True, 'check3': True, 'check4': False} => engine verdicts NOT ALLOWED (inconclusive)
+SWEEP_DONE
