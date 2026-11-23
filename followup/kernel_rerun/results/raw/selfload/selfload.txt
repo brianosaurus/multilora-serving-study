@@ -1,0 +1,5 @@
+before: load 1.01 2.94 9.11
+server up: load 1.09 2.93 9.07
+after: load 2.12 2.83 8.50
+40 samples while a 32-concurrent, 8-adapter run was active: 1-minute load average min 1.09 max 2.79; host CPU busy (cores) median 3.65 max 5.14
+SELFLOAD_DONE

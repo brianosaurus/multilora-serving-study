@@ -31,3 +31,15 @@ The build diff, the results table with both criteria, the correctness results, a
 ## Limits stated in advance
 
 One model, one GPU type, rank 16, up to 8 adapters. A quiet machine removes the host-load noise; it does not remove run-to-run variation inside the machine, which the old-versus-old control measures.
+
+## Amendment 1: what "quiet" means (author approved, 2026-11-23 about 07:58 UTC pod clock, before any rerun)
+
+Why: a measurement on the idle pod (`results/raw/selfload/`) showed one 32-concurrent, 8-adapter run takes the 1-minute load average from 1.0 to 2.8 by itself (the host CPU was 3.7 cores busy, all of it the benchmark's own server and load generator). "Load average under 2 throughout" therefore cannot hold for any machine while the benchmark runs, and the script would flag every run.
+
+Amendment (the author's wording of the idea, with one refinement stated here):
+- The condition is on load from other tenants, not the benchmark's own. External CPU use = host-wide busy cores (from `/proc/stat`) minus the cores used by processes in this container (summed from `/proc/<pid>/stat`), sampled every 2 s.
+- Before the first run: the 1-minute load average must be at most 2 and external CPU use at most 1 core (median over 10 s). The load average is checked only here, because later in the benchmark it includes the benchmark's own earlier runs.
+- Before each later run: external CPU use at most 1 core over the preceding 6 s.
+- During each run: any sample with external use above 2 cores marks the run `LOAD_ABOVE_LIMIT`. The load average is still recorded at every sample, for information only.
+- A rerun with any flagged run is reported as invalid, as before. The design, the 6 blocks and the establishment rule are unchanged.
+- Known bias, stated in advance: if a container process exits between two samples its CPU time disappears from the "own" sum, which makes external use look larger, so the check errs toward flagging.
