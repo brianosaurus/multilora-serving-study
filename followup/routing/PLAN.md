@@ -55,3 +55,12 @@ Checks 2 and 3 use the PEFT stand-in because an engine-level swap needs a servin
 ## Limits stated in advance
 
 Synthetic adapters, one model, rank 16, four adapters, 16 prompts. A pass means no misrouting was seen on these requests and this setup; it does not certify any engine. The fp32 reference is itself not ground truth for numerics, which is why the rule compares candidates against each other and uses a noise margin.
+
+## Implementation notes (added before the first reference run, 2026-11-23)
+
+- The reference continuation is generated with `min_new_tokens` = `max_new_tokens` = 128 so that every continuation has exactly 128 tokens; an end-of-text token is therefore not allowed to end it early. (The study's earlier reference used 32 tokens and no minimum.)
+- "bf16 PEFT" uses the same loading as the study's reference script: bf16 base weights, `PeftModel.from_pretrained` defaults (PEFT may keep adapter weights in fp32 internally). "fp32 PEFT" uses fp32 base weights. Both run on CPU on the follow-up pod; the library versions are recorded in the output.
+- `noise` is the median of 64 values (16 prompts by 4 adapters) of `d(bf16 stand-in serving adapter a, prompt, c = a)`.
+- Power check 4 is evaluated per ordered pair (20 pairs, base included) and the 10 unordered pairs are judged by the smaller of their two directions, which is the stricter reading of the wording above.
+- Distances use all 128 forced positions of each continuation, no weighting.
+- Scripts: `scripts/refs.py` (continuations and teacher-forced log-probability matrices, fp32 and bf16), `scripts/analyze.py` (the decision rule and the four power checks). Outputs go to `results/raw/`.
