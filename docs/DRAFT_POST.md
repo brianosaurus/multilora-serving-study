@@ -59,36 +59,56 @@ Look at those 20 rps ranges: several straddle the limit, so I'm not ranking anyo
 
 SGLang's docs claim 20 to 80% lower latency with the csgmv backend. My pre-registered bar was at least 20% lower median p95 at concurrency 32 and up, with non-overlapping ranges. At concurrency 128, csgmv was 3.6% lower on end-to-end p95 and 4.7% lower on TTFT p95 (ranges separate), with about 4.5% more throughput. At 32, the TTFT gain was 11% but the ranges overlapped. Not held, on this model and this GPU. The docs may be right elsewhere. The plan didn't say which latency, so I reported three. None reached 20%.
 
-## mistral.rs: it's the adapters, and it's a quarter of the story [MEASURED / EXPLORATORY]
+## mistral.rs: it's the launches, so I fixed the launches [MEASURED; exploratory, after the 24 hours]
 
-mistral.rs handled the base model and one adapter up to 10 rps and fell over at 20. With 32 Zipf adapters, p95 TTFT was 123 ms at 5 rps (with 6 failed requests) and 24.6 s at 10 rps.
+mistral.rs handled the base model and one adapter up to 10 rps and fell over at 20. With 32 Zipf adapters, p95 TTFT was 123 ms at 5 rps and 24.6 s at 10 rps. At 5 rps, 6 requests came back as empty completions, which my ladder scores as failures. I checked afterwards: on the two prompts that fail every time, end-of-text really is the model's most likely first token for that adapter (fp32 PEFT reference), so these are not engine failures. vLLM and SGLang had no empty completions in their grids (0 of 30,000 adapter requests each, against 10 of 9,000 for mistral.rs), but those runs used different prompt and adapter mixes, so I cannot say whether that is a difference between the engines.
 
-A closed-loop probe with 8 adapters loaded shows where it goes. At 32 concurrent requests, time per output token: 12.1 ms with no LoRA, 12.8 with LoRA on and unused, 18.3 with 1 adapter, 21.6 with 4, 26.0 with 8. Throughput at 8 adapters is about half the base model's. One run of 150 requests per cell, so a millisecond here or there is noise.
+A closed-loop probe with 8 adapters loaded shows where the time goes. At 32 concurrent requests, time per output token: 12.1 ms with no LoRA, 12.8 with LoRA on and unused, 18.3 with 1 adapter, 21.6 with 4, 26.0 with 8. Throughput at 8 adapters is about half the base model's.
 
-The source (v0.9.5, `mistralrs-quant/src/lora/dynamic/cuda.rs`) launches one kernel per active adapter at each of 196 sites per decode step. The repo has a grouped kernel for MoE LoRA and none that I found for dense layers. To see what that loop costs, I built a patched binary, gated by an environment variable, that pushes all rows through one adapter. **Its output is wrong. It's a stopwatch, not a fix.** With 8 adapters, time per token (median of 3):
+The source (v0.9.5, `mistralrs-quant/src/lora/dynamic/cuda.rs`) launches one kernel per active adapter at each of 196 sites per decode step. The repo has a grouped kernel for MoE LoRA and none that I found for dense layers. To see what that loop costs, I built a patched binary, gated by an environment variable, that pushes all rows through one adapter. **Its output is wrong. It's a stopwatch, not a fix.** It took about a quarter off the time per token at 8 adapters, and skipping the per-adapter bookkeeping as well changed nothing, so the launches were the cost. (That patch also called `arange` at every site, which forces a sync, so it probably understated the gain.)
 
-| | Normal | One kernel call | Also skip per-adapter lookups |
-|---|---|---|---|
-| concurrency 8 | 17.1 ms | 12.6 | 12.5 |
-| concurrency 32 | 26.0 | 19.0 | 18.8 |
+So I wrote the real thing: one grouped kernel launch per site, adapters looked up per row, same arithmetic as before. This part happened after the 24 hours were up, on a different, busier pod (build without flash-attn, so the absolute numbers do not compare with anything above). What I did to make the result hard to argue with:
 
-About a quarter of the time per token (throughput up about 35%), and the bookkeeping around the launch turned out innocent. Roughly 4 ms per token of LoRA cost remains and I can't explain it. I couldn't count kernel launches: Nsight Compute can't read GPU counters inside the container, so the launch count itself is unmeasured. There's also a warm-up wrinkle: the first 150-request run after switching traffic type read about 35% slow, then recovered. Cause unknown. Single runs right after a change of traffic can lie to you.
+- Unit tests that compare the grouped path with the old loop bit for bit (mixed ranks, an adapter with no weights at a site, more than 32 adapters), and 128 end-to-end completions (16 prompts, 8 adapters, temperature 0) identical to the old build.
+- A balanced benchmark: old build, new build and a second copy of the old build, in all 6 orderings, 150 requests per run. My first A/B always ran the old build first, and the identical-code control cells came out up to 23% apart. Order matters on a loaded host (load average 25 to 250).
+
+Median time per output token, closed loop, 6 blocks:
+
+| Concurrency | Adapters | Before (ms) | After (ms) | Time per token | Throughput | Faster in |
+|---|---|---|---|---|---|---|
+| 8 | 8 | 36.0 | 19.8 | -45% | +59% | 6 of 6 blocks |
+| 32 | 8 | 52.8 | 38.3 | -28% | +32% | 6 of 6 blocks |
+| 32 | 4 | 43.5 | 36.6 | -15% | +17% | 5 of 6 blocks |
+
+At 4 adapters one block went the other way, so I would not read more into that row. With 0 or 1 adapters the code is unchanged, and those cells still moved by up to 20% from noise. That is the honest size of the error bar here.
+
+It does not close the gap. At 32 concurrent requests, 8 adapters are still about 2.7 times slower per token than no adapters (38.3 against 14.1 ms), and I cannot explain the rest. The new kernel is still a per-row dot product, with no weight-tile reuse like vLLM's and SGLang's Triton kernels, which keep adapters stacked per layer. That redesign would help more at large batches, and I offered to do it if the maintainer prefers.
+
+One scare: the new build returned a few more empty completions than the old one on two requests. The first-token logprobs showed near-ties between end-of-text and a comma, and the old build flips on the same requests under different batching. Not a bug, but I did look.
 
 ## Things I got wrong [MEASURED, painfully]
 
 - I retracted a mistral.rs finding because my diagnostic ran the base model and the tuning data used 8 adapters. The rerun reproduced the slowdown. I corrected the changelog.
 - I "estimated mistral.rs capacity" from a concurrency-8 closed loop. That doesn't measure capacity. Withdrawn.
-- The network volume lost its contents mid-study. The first vLLM grid was rerun; its summaries agreed with the rerun to within a few percent.
-- The first SGLang LoRA session failed my drift check and was rerun. The discarded numbers matched the rerun closely, which says the drift check was cautious, not wrong, and is mildly reassuring for everything else.
+- I called mistral.rs's empty completions "unexplained failures", then "not engine failures", before checking either. They are end-of-text first tokens, and whether the other engines differ is still untested.
+- My first A/B of the new kernel was order-confounded. The controls said so, and I rebuilt the design.
+- The network volume lost its contents mid-study, so I reran the first vLLM grid; the summaries agreed to within a few percent.
+- The first SGLang LoRA session failed my drift check and was rerun. The discarded numbers matched the rerun closely: the check was cautious, not wrong.
 
 ## Upstream
 
-I filed mistral.rs #2567 (logprobs layout differs from the OpenAI format; a local fix exists, no PR open). Searching first saved me from two duplicate reports. The mistral.rs per-adapter cost isn't root-caused to a fix. I have a measurement and a hypothesis, not a pull request.
+All of this is open and unmerged, and none of it has had a maintainer reply yet:
+
+- mistral.rs #2567, the logprobs layout differing from the OpenAI format, with a draft fix in #2570. I ran a build of master before and after the change against a live server; only the `top_logprobs` entries changed.
+- mistral.rs #2569, the question about grouping the dense LoRA kernel, with the draft PR #2571 behind it.
+
+Searching first saved me from two duplicate reports. If these merge I will update this section; until then it says draft.
 
 ## What I'd do with this
 
 - Count how many adapters your traffic touches at once, then set slots to at least that. Watch for a latency jump, not a gradual slope.
 - Don't assume slots are free. I didn't measure the memory.
+- If you serve many adapters on mistral.rs today, expect the per-adapter launch cost, and watch #2571 before you tune around it.
 - One GPU and one model is a reason to run your own check, not a reason to believe me.
 
 ## Disclosure
