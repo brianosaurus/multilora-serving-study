@@ -1,0 +1,4 @@
+08:01:35 host follow-up-pod ok; 128 cores; load 0.75; external CPU median 0.24 max 0.32 cores over 10 s; GPU idle; gpu: NVIDIA GeForce RTX 4090, 210 MHz, 41
+08:01:36 binaries: old 56fbcbc6dab8ba58  new d0b658c25946c4f6  old2 56fbcbc6dab8ba58
+08:01:42 block 1 position 1: old up (load 0.71)
+08:20:22 block 1 position 2: new up (load 60.94)

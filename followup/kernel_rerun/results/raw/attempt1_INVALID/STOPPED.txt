@@ -1,0 +1,1 @@
+stopped by the operator at 09:03:30 UTC after 13 of 144 cells; 8 flagged LOAD_ABOVE_LIMIT. INVALID under Amendment 1 (external CPU use rose to tens of cores when other tenants returned). Do not use these numbers.

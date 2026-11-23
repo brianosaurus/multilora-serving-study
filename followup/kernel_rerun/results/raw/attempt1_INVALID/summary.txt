@@ -1,0 +1,13 @@
+blk1 pos1 old c8_a0 ext_before=0.29 ext_max=0.82 load_max_info=0.96 gpu_start=2520MHz,47,66.82W,0x0000000000000000 gpu_end=2685MHz,50,177.75W,0x0000000000000000 flag=OK
+blk1 pos1 old c8_a1 ext_before=0.26 ext_max=1.65 load_max_info=2.18 gpu_start=2520MHz,48,66.45W,0x0000000000000000 gpu_end=2685MHz,52,160.80W,0x0000000000000000 flag=OK
+blk1 pos1 old c8_a4 ext_before=0.20 ext_max=1.17 load_max_info=2.15 gpu_start=2520MHz,50,67.86W,0x0000000000000000 gpu_end=2685MHz,52,120.49W,0x0000000000000000 flag=OK
+blk1 pos1 old c8_a8 ext_before=0.27 ext_max=0.89 load_max_info=1.55 gpu_start=2520MHz,50,68.63W,0x0000000000000000 gpu_end=2685MHz,51,142.82W,0x0000000000000000 flag=OK
+blk1 pos1 old c32_a0 ext_before=0.25 ext_max=0.80 load_max_info=2.60 gpu_start=2520MHz,49,68.18W,0x0000000000000000 gpu_end=2685MHz,50,166.98W,0x0000000000000000 flag=OK
+blk1 pos1 old c32_a1 ext_before=3.24 ext_max=3.06 load_max_info=5.22 gpu_start=210MHz,39,22.76W,0x0000000000000001 gpu_end=2685MHz,45,155.60W,0x0000000000000000 flag=LOAD_ABOVE_LIMIT
+blk1 pos1 old c32_a4 ext_before=9.16 ext_max=23.46 load_max_info=4.58 gpu_start=210MHz,39,22.95W,0x0000000000000001 gpu_end=2700MHz,45,134.65W,0x0000000000000000 flag=LOAD_ABOVE_LIMIT
+blk1 pos1 old c32_a8 ext_before=24.10 ext_max=44.89 load_max_info=74.76 gpu_start=210MHz,40,22.56W,0x0000000000000001 gpu_end=2520MHz,45,65.67W,0x0000000000000000 flag=LOAD_ABOVE_LIMIT
+blk1 pos2 new c8_a0 ext_before=26.37 ext_max=46.53 load_max_info=13.80 gpu_start=210MHz,40,22.96W,0x0000000000000001 gpu_end=2520MHz,45,69.96W,0x0000000000000000 flag=LOAD_ABOVE_LIMIT
+blk1 pos2 new c8_a1 ext_before=11.52 ext_max=27.03 load_max_info=16.46 gpu_start=210MHz,40,22.70W,0x0000000000000001 gpu_end=2520MHz,46,65.76W,0x0000000000000000 flag=LOAD_ABOVE_LIMIT
+blk1 pos2 new c8_a4 ext_before=8.84 ext_max=24.69 load_max_info=22.05 gpu_start=210MHz,40,23.58W,0x0000000000000001 gpu_end=2520MHz,46,65.30W,0x0000000000000000 flag=LOAD_ABOVE_LIMIT
+blk1 pos2 new c8_a8 ext_before=5.07 ext_max=25.71 load_max_info=25.78 gpu_start=210MHz,40,22.66W,0x0000000000000001 gpu_end=2520MHz,46,64.75W,0x0000000000000000 flag=LOAD_ABOVE_LIMIT
+blk1 pos2 new c32_a0 ext_before=24.81 ext_max=42.23 load_max_info=51.31 gpu_start=210MHz,39,23.01W,0x0000000000000001 gpu_end=2520MHz,43,63.28W,0x0000000000000000 flag=LOAD_ABOVE_LIMIT

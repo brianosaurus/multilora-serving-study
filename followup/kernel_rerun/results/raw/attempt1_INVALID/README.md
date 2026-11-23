@@ -1,0 +1,3 @@
+# INVALID: do not use these numbers
+
+Attempt 1 of the quiet-machine kernel benchmark (`../../../run_rerun.sh`, Amendment 1 in `../../../PLAN.md`). Started 08:01:35 UTC, stopped by the operator at 09:03:30 UTC after 13 of 144 cells. The first 5 cells were quiet (external CPU 0.8 to 1.65 cores). From about 08:07 other tenants on the shared host returned and external CPU use rose to 23 to 46 cores; 8 of the 13 cells are flagged `LOAD_ABOVE_LIMIT`. Under the amendment a rerun with any flagged cell is invalid, so no kernel verdict is drawn from it. Kept for the record. The raw per-run files are the 13 cells that ran; `run.log` and `summary.txt` carry the external-load readings per cell.
