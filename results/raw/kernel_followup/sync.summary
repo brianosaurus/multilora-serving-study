@@ -1,0 +1,25 @@
+rep1 base launch_blocking=0 run1 done
+rep1 base launch_blocking=0 run2 done
+rep1 base launch_blocking=0 run3 done
+rep1 grouped launch_blocking=0 run1 done
+rep1 grouped launch_blocking=0 run2 done
+rep1 grouped launch_blocking=0 run3 done
+rep1 base launch_blocking=1 run1 done
+rep1 base launch_blocking=1 run2 done
+rep1 base launch_blocking=1 run3 done
+rep1 grouped launch_blocking=1 run1 done
+rep1 grouped launch_blocking=1 run2 done
+rep1 grouped launch_blocking=1 run3 done
+rep2 base launch_blocking=0 run1 done
+rep2 base launch_blocking=0 run2 done
+rep2 base launch_blocking=0 run3 done
+rep2 grouped launch_blocking=0 run1 done
+rep2 grouped launch_blocking=0 run2 done
+rep2 grouped launch_blocking=0 run3 done
+rep2 base launch_blocking=1 run1 done
+rep2 base launch_blocking=1 run2 done
+rep2 base launch_blocking=1 run3 done
+rep2 grouped launch_blocking=1 run1 done
+rep2 grouped launch_blocking=1 run2 done
+rep2 grouped launch_blocking=1 run3 done
+SYNC_DONE

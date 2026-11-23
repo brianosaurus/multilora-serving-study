@@ -1,0 +1,275 @@
+warning: unused workspace dependency `axum_static`
+   --> Cargo.toml:192:1
+    |
+192 | axum_static = "1.8.6"
+    | ^^^^^^^^^^^
+    |
+    = note: `cargo::unused_workspace_dependencies` is set to `warn` by default
+help: consider removing the workspace dependency `axum_static`
+warning: unused workspace dependency `hyper`
+   --> Cargo.toml:197:1
+    |
+197 | hyper = "1.12.0"
+    | ^^^^^
+    |
+help: consider removing the workspace dependency `hyper`
+warning: workspace (manifest) generated 2 warnings
+warning: `package.homepage` is redundant with `package.repository`
+  --> mistralrs-metal-compile/Cargo.toml:13:1
+   |
+ 9 | repository.workspace = true
+   | ----------
+...
+13 | homepage.workspace = true
+   | ^^^^^^^^
+   |
+   = note: `cargo::redundant_homepage` is set to `warn` by default
+help: consider removing `package.homepage`
+warning: `mistralrs-metal-compile` (manifest) generated 1 warning
+warning: `package.homepage` is redundant with `package.repository`
+  --> mistralrs-macros/Cargo.toml:13:1
+   |
+ 9 | repository.workspace = true
+   | ----------
+...
+13 | homepage.workspace = true
+   | ^^^^^^^^
+   |
+   = note: `cargo::redundant_homepage` is set to `warn` by default
+help: consider removing `package.homepage`
+warning: `mistralrs-macros` (manifest) generated 1 warning
+warning: `package.homepage` is redundant with `package.repository`
+  --> mistralrs-mcp/Cargo.toml:8:1
+   |
+ 8 | homepage.workspace = true
+   | ^^^^^^^^
+...
+11 | repository.workspace = true
+   | ----------
+   |
+   = note: `cargo::redundant_homepage` is set to `warn` by default
+help: consider removing `package.homepage`
+warning: `mistralrs-mcp` (manifest) generated 1 warning
+warning: `package.homepage` is redundant with `package.repository`
+  --> mistralrs-core/Cargo.toml:13:1
+   |
+ 9 | repository.workspace = true
+   | ----------
+...
+13 | homepage.workspace = true
+   | ^^^^^^^^
+   |
+   = note: `cargo::redundant_homepage` is set to `warn` by default
+help: consider removing `package.homepage`
+warning: `mistralrs-core` (manifest) generated 1 warning
+warning: `package.homepage` is redundant with `package.repository`
+  --> mistralrs-paged-attn/Cargo.toml:13:1
+   |
+ 9 | repository.workspace = true
+   | ----------
+...
+13 | homepage.workspace = true
+   | ^^^^^^^^
+   |
+   = note: `cargo::redundant_homepage` is set to `warn` by default
+help: consider removing `package.homepage`
+warning: `mistralrs-paged-attn` (manifest) generated 1 warning
+warning: `package.homepage` is redundant with `package.repository`
+  --> mistralrs-quant/Cargo.toml:13:1
+   |
+ 9 | repository.workspace = true
+   | ----------
+...
+13 | homepage.workspace = true
+   | ^^^^^^^^
+   |
+   = note: `cargo::redundant_homepage` is set to `warn` by default
+help: consider removing `package.homepage`
+warning: `mistralrs-quant` (manifest) generated 1 warning
+warning: `package.homepage` is redundant with `package.repository`
+  --> mistralrs-audio/Cargo.toml:13:1
+   |
+ 9 | repository.workspace = true
+   | ----------
+...
+13 | homepage.workspace = true
+   | ^^^^^^^^
+   |
+   = note: `cargo::redundant_homepage` is set to `warn` by default
+help: consider removing `package.homepage`
+warning: `mistralrs-audio` (manifest) generated 1 warning
+warning: `package.homepage` is redundant with `package.repository`
+  --> mistralrs-pyo3/Cargo.toml:13:1
+   |
+ 9 | repository.workspace = true
+   | ----------
+...
+13 | homepage.workspace = true
+   | ^^^^^^^^
+   |
+   = note: `cargo::redundant_homepage` is set to `warn` by default
+help: consider removing `package.homepage`
+warning: `mistralrs-pyo3` (manifest) generated 1 warning
+warning: `package.homepage` is redundant with `package.repository`
+  --> mistralrs-server-core/Cargo.toml:13:1
+   |
+ 9 | repository.workspace = true
+   | ----------
+...
+13 | homepage.workspace = true
+   | ^^^^^^^^
+   |
+   = note: `cargo::redundant_homepage` is set to `warn` by default
+help: consider removing `package.homepage`
+warning: `mistralrs-server-core` (manifest) generated 1 warning
+warning: `package.homepage` is redundant with `package.repository`
+  --> mistralrs-code-exec/Cargo.toml:8:1
+   |
+ 8 | homepage.workspace = true
+   | ^^^^^^^^
+...
+11 | repository.workspace = true
+   | ----------
+   |
+   = note: `cargo::redundant_homepage` is set to `warn` by default
+help: consider removing `package.homepage`
+warning: `mistralrs-code-exec` (manifest) generated 1 warning
+warning: `package.homepage` is redundant with `package.repository`
+  --> mistralrs-vision/Cargo.toml:13:1
+   |
+ 9 | repository.workspace = true
+   | ----------
+...
+13 | homepage.workspace = true
+   | ^^^^^^^^
+   |
+   = note: `cargo::redundant_homepage` is set to `warn` by default
+help: consider removing `package.homepage`
+warning: `mistralrs-vision` (manifest) generated 1 warning
+warning: `package.homepage` is redundant with `package.repository`
+  --> mistralrs/Cargo.toml:13:1
+   |
+ 9 | repository.workspace = true
+   | ----------
+...
+13 | homepage.workspace = true
+   | ^^^^^^^^
+   |
+   = note: `cargo::redundant_homepage` is set to `warn` by default
+help: consider removing `package.homepage`
+warning: `mistralrs` (manifest) generated 1 warning
+warning: `package.homepage` is redundant with `package.repository`
+  --> mistralrs-sandbox/Cargo.toml:8:1
+   |
+ 8 | homepage.workspace = true
+   | ^^^^^^^^
+...
+11 | repository.workspace = true
+   | ----------
+   |
+   = note: `cargo::redundant_homepage` is set to `warn` by default
+help: consider removing `package.homepage`
+warning: `mistralrs-sandbox` (manifest) generated 1 warning
+warning: `package.homepage` is redundant with `package.repository`
+ --> mistralrs-cli/Cargo.toml:8:1
+  |
+8 | homepage.workspace = true
+  | ^^^^^^^^
+9 | repository.workspace = true
+  | ----------
+  |
+  = note: `cargo::redundant_homepage` is set to `warn` by default
+help: consider removing `package.homepage`
+warning: `mistralrs-cli` (manifest) generated 1 warning
+   Compiling mistralrs-quant v0.10.0 (/root/b3/mistral.rs/mistralrs-quant)
+warning: mistralrs-quant@0.10.0: Using 2 threads for compilation
+warning: mistralrs-quant@0.10.0: Using cached cutlass at /root/.cudaforge/git/checkouts/cutlass-7127592069c2fe01
+warning: mistralrs-quant@0.10.0: Compiling 1 of 63 kernels
+    Finished `release` profile [optimized] target(s) in 1m 45s
+     Running unittests src/lib.rs (/root/k/target/release/build/mistralrs-quant/6fd69e22a138c5ca/out/mistralrs_quant-6fd69e22a138c5ca)
+
+running 81 tests
+test lora::dynamic::cuda::tests::adapter_dispatch_enforces_shapes_rank_and_scale ... ok
+test lora::dynamic::cuda::tests::cuda_dispatch_accepts_decode_and_prefill_inputs ... ok
+test lora::dynamic::cuda::tests::cuda_dispatch_rejects_dtype_and_layout_mismatches ... ok
+test lora::dynamic::execution::tests::adapter_table_owns_linear_and_expert_weights ... ok
+test lora::dynamic::execution::tests::adapter_table_rejects_duplicate_sites ... ok
+test lora::dynamic::execution::tests::adapter_tables_must_match_their_runtime ... ok
+test lora::dynamic::execution::tests::persistent_adapter_table_for_an_unrouted_slot_is_inactive ... ok
+test lora::dynamic::execution::tests::persistent_adapter_table_routes_installed_weights ... ok
+test lora::dynamic::execution::tests::adapter_table_installation_is_unique_per_slot ... ok
+test lora::dynamic::execution::tests::repeated_row_scope_expands_one_route ... ok
+test lora::dynamic::execution::tests::row_remaps_reuse_execution_local_resources ... ok
+test lora::dynamic::execution::tests::row_scope_is_restored_after_panic ... ok
+test lora::dynamic::execution::tests::scope_is_restored_after_panic ... ok
+test lora::dynamic::execution::tests::site_weights_block_adapter_table_for_the_same_slot ... ok
+test lora::dynamic::execution::tests::scopes_nest_and_restore ... ok
+test lora::dynamic::execution::tests::ragged_sequence_slots_expand_in_packed_order ... ok
+test lora::dynamic::expert_cuda::tests::direct_dispatch_matches_work_and_projection_boundaries ... ok
+test lora::dynamic::expert_cuda::tests::weak_identity_rejects_expired_and_reordered_entries ... ok
+test lora::dynamic::execution::tests::row_range_scopes_all_executions_and_restores_routes ... ok
+test lora::dynamic::execution::tests::expert_weights_cannot_be_rebound_to_another_site ... ok
+test lora::dynamic::execution::tests::duplicate_insert_does_not_replace_installed_weights ... ok
+test lora::dynamic::execution::tests::scopes_are_thread_local ... ok
+test lora::dynamic::execution::tests::weights_for_an_unrouted_slot_do_not_activate_the_site ... ok
+test lora::dynamic::execution::tests::sites_from_another_runtime_are_rejected ... ok
+test lora::dynamic::expert::tests::packed_projection_validation_rejects_bad_shapes ... ok
+test lora::dynamic::loader::expert::tests::loads_flat_fused_b_with_expert_major_rank_columns_after_tp_slice ... ok
+test lora::dynamic::loader::expert::tests::loads_packed_interleaved_gate_up_tensors ... ok
+test lora::dynamic::loader::expert::tests::packs_mixtral_w1_w3_w2_names ... ok
+test lora::dynamic::loader::tests::column_sharding_gathers_runtime_order_from_canonical_output_rows ... ok
+test lora::dynamic::loader::tests::accepts_safetensors_header_metadata ... ok
+test lora::dynamic::loader::expert::tests::packs_per_expert_peft_tensors_with_rank_padding ... ok
+test lora::dynamic::execution::tests::row_scope_rejects_out_of_range_routes_without_running ... ok
+test lora::dynamic::loader::tests::embedding_and_malformed_lora_tensors_are_unconsumed ... ok
+test lora::dynamic::loader::tests::loads_each_fused_projection_slice ... ok
+test lora::dynamic::loader::tests::loads_peft_weights_with_column_sharding ... ok
+test lora::dynamic::loader::tests::loads_compact_expert_site_from_safetensors_metadata ... ok
+test lora::dynamic::linear::tests::embedding_delegates_unless_its_site_is_active ... ok
+test lora::dynamic::linear::tests::fast_path_capabilities_are_hidden_only_for_the_targeted_site ... ok
+test lora::dynamic::loader::tests::loads_peft_weights_with_row_sharding ... ok
+test lora::dynamic::loader::tests::loads_peft_weights_with_runtime_feature_permutations ... ok
+test lora::dynamic::loader::tests::rejects_all_unconsumed_tensor_kinds ... ok
+test lora::dynamic::loader::tests::rejects_routed_moe_expert_sites_at_load_time ... ok
+test lora::dynamic::loader::tests::rejects_tensor_sites_declared_as_excluded ... ok
+test lora::dynamic::loader::tests::rejects_tensor_sites_outside_declared_targets ... ok
+test lora::dynamic::loader::tests::row_sharding_gathers_runtime_order_from_canonical_input_columns ... ok
+test lora::dynamic::loader::tests::site_prefix_alias_loads_canonical_qwen35_moe_adapter_names ... ok
+test lora::dynamic::loader::tests::tensor_index_matches_standard_and_named_pairs ... ok
+test lora::dynamic::loader::tests::tensor_index_rejects_incomplete_and_ambiguous_pairs ... ok
+test lora::dynamic::moe_cuda::tests::descriptor_abi_matches_cuda ... ok
+test lora::dynamic::moe_cuda::tests::direct_rank128_uses_one_shot_recompute_budget ... ok
+test lora::dynamic::moe_cuda::tests::metadata_capacity_covers_worst_case_pair_fragmentation ... ok
+test lora::dynamic::moe_cuda::tests::projection_layout_supports_packed_gate_up_and_routed_down ... ok
+test lora::dynamic::moe_cuda::tests::direct_small_batch_split_plan_matches_vllm_chunking ... ok
+test lora::dynamic::moe_cuda::tests::selected_descriptor_rank_validation_rejects_invalid_ranges ... ok
+test lora::dynamic::moe_cuda::tests::output_split_heuristic_fills_small_grids_with_bounded_duplication ... ok
+test lora::dynamic::moe_cuda::tests::output_recompute_cap_balances_occupancy_and_redundant_shrink ... ok
+test lora::dynamic::moe_cuda::tests::grouped_wmma_split_plan_uses_the_launched_grid ... ok
+test lora::dynamic::reference::tests::weights_for_another_site_leave_base_output_unchanged ... ok
+test lora::dynamic::moe_cuda::tests::descriptors_reject_invalid_rank_and_partial_pointers ... ok
+test lora::dynamic::reference::tests::reference_rejects_route_shape_weight_and_dtype_mismatches ... ok
+test lora::dynamic::reference::tests::reference_rejects_different_leading_dimensions_with_equal_row_counts ... ok
+test lora::dynamic::registry::tests::linear_and_expert_sites_share_one_id_namespace ... ok
+test lora::dynamic::registry::tests::linear_feature_maps_must_be_permutations ... ok
+test lora::dynamic::registry::tests::new_sites_cannot_be_registered_after_finalization ... ok
+test lora::dynamic::registry::tests::site_ids_are_independent_of_registration_order ... ok
+test lora::dynamic::registry::tests::site_prefix_aliases_apply_to_linear_and_expert_sites ... ok
+test lora::dynamic::moe_cuda::tests::selected_descriptor_rank_validation_uses_only_requested_slices ... ok
+test lora::dynamic::registry::tests::duplicate_sites_must_have_the_same_specification ... ok
+test lora::dynamic::registry::tests::duplicate_sites_must_have_the_same_feature_maps ... ok
+test lora::dynamic::loader::expert::tests::loads_flat_target_parameters_and_applies_tp_shards ... ok
+test lora::dynamic::expert::tests::cpu_reference_supports_f16_and_bf16 ... ok
+test lora::dynamic::expert::tests::routed_weights_scale_down_delta_before_it_is_added ... ok
+test lora::dynamic::raw::tests::raw_site_activity_matches_delta_execution ... ok
+test lora::dynamic::linear::tests::wrapper_is_inert_without_an_execution_scope ... ok
+test lora::dynamic::reference::tests::mixed_sequence_slots_match_reference_math ... ok
+test lora::dynamic::expert::tests::mixed_base_and_adapters_follow_token_and_expert_routes ... ok
+test lora::dynamic::linear::tests::site_placement_comes_from_the_var_builder ... ok
+test lora::dynamic::cuda::tests::cuda_grouped_matches_per_adapter_loop ... ok
+test lora::dynamic::cuda::tests::cuda_grouped_handles_more_adapters_than_one_launch_holds ... ok
+test lora::dynamic::cuda::tests::cuda_and_fallback_match_at_a_bf16_rounding_boundary ... ok
+test lora::dynamic::cuda::tests::cuda_prefill_and_decode_match_reference_for_mixed_slots ... ok
+
+test result: ok. 81 passed; 0 failed; 0 ignored; 0 measured; 390 filtered out; finished in 6.02s
+

@@ -1,0 +1,33 @@
+22:24:55 patch applied:  4 files changed, 568 insertions(+), 12 deletions(-)
+22:24:55 test start
+22:46:55 test exit 0
+test lora::dynamic::reference::tests::reference_rejects_route_shape_weight_and_dtype_mismatches ... ok
+test lora::dynamic::reference::tests::weights_for_another_site_leave_base_output_unchanged ... ok
+test lora::dynamic::moe_cuda::tests::grouped_wmma_split_plan_uses_the_launched_grid ... ok
+test lora::dynamic::moe_cuda::tests::metadata_capacity_covers_worst_case_pair_fragmentation ... ok
+test lora::dynamic::registry::tests::duplicate_sites_must_have_the_same_feature_maps ... ok
+test lora::dynamic::registry::tests::duplicate_sites_must_have_the_same_specification ... ok
+test lora::dynamic::registry::tests::linear_feature_maps_must_be_permutations ... ok
+test lora::dynamic::registry::tests::site_prefix_aliases_apply_to_linear_and_expert_sites ... ok
+test lora::dynamic::registry::tests::site_ids_are_independent_of_registration_order ... ok
+test lora::dynamic::moe_cuda::tests::selected_descriptor_rank_validation_uses_only_requested_slices ... ok
+test lora::dynamic::registry::tests::new_sites_cannot_be_registered_after_finalization ... ok
+test lora::dynamic::registry::tests::linear_and_expert_sites_share_one_id_namespace ... ok
+test lora::dynamic::expert::tests::routed_weights_scale_down_delta_before_it_is_added ... ok
+test lora::dynamic::raw::tests::raw_site_activity_matches_delta_execution ... ok
+test lora::dynamic::loader::expert::tests::loads_flat_target_parameters_and_applies_tp_shards ... ok
+test lora::dynamic::linear::tests::wrapper_is_inert_without_an_execution_scope ... ok
+test lora::dynamic::expert::tests::cpu_reference_supports_f16_and_bf16 ... ok
+test lora::dynamic::reference::tests::mixed_sequence_slots_match_reference_math ... ok
+test lora::dynamic::expert::tests::mixed_base_and_adapters_follow_token_and_expert_routes ... ok
+test lora::dynamic::linear::tests::site_placement_comes_from_the_var_builder ... ok
+test lora::dynamic::cuda::tests::cuda_grouped_matches_per_adapter_loop ... ok
+test lora::dynamic::cuda::tests::cuda_grouped_handles_more_adapters_than_one_launch_holds ... ok
+test lora::dynamic::cuda::tests::cuda_and_fallback_match_at_a_bf16_rounding_boundary ... ok
+test lora::dynamic::cuda::tests::cuda_prefill_and_decode_match_reference_for_mixed_slots ... ok
+test result: ok. 81 passed; 0 failed; 0 ignored; 0 measured; 390 filtered out; finished in 5.31s
+22:46:55 build start
+22:53:11 build exit 0
+22:53:11 grouped binary 301206896
+23:33:05 CHAIN DONE
+CHAIN_DONE

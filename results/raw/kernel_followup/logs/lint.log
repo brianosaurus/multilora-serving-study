@@ -1,0 +1,5 @@
+fmt exit 0
+clippy exit 0
+warning: unused workspace dependency `axum_static`
+warning: unused workspace dependency `hyper`
+LINT_DONE

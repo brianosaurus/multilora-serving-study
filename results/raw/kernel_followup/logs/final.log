@@ -1,0 +1,14 @@
+02:47:07 formatted patch applied:  4 files changed, 570 insertions(+), 12 deletions(-)
+02:47:07 fmt check
+error: 'cargo-fmt' is not installed for the toolchain 'stable-x86_64-unknown-linux-gnu'.
+help: run `rustup component add rustfmt` to install it
+02:47:07 fmt exit 1
+02:47:07 clippy start
+02:47:08 clippy exit 1
+error: 'cargo-clippy' is not installed for the toolchain 'stable-x86_64-unknown-linux-gnu'.
+02:47:08 test start
+02:49:02 test exit 0
+test lora::dynamic::cuda::tests::cuda_grouped_matches_per_adapter_loop ... ok
+test lora::dynamic::cuda::tests::cuda_grouped_handles_more_adapters_than_one_launch_holds ... ok
+test result: ok. 81 passed; 0 failed; 0 ignored; 0 measured; 390 filtered out; finished in 6.02s
+FINAL_DONE
