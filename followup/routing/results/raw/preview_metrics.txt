@@ -1,0 +1,21 @@
+aggregate over positions: mean
+noise 0.9696  threshold k*noise 2.9089
+check 1 (correct stand-in routed correctly, need 64/64): 10/64   [nearest candidate is right: 64/64; margin min 0.449 median 2.058]
+check 2 (swapped adapters pass, need 0/192): 0/192
+check 3 (base under an adapter name passes, need 0/64): 0/64
+check 4 (pairs above k*noise, need 10/10): 7/10   weakest pair base vs adapter_0003 at 1.954
+
+aggregate over positions: median
+noise 0.5357  threshold k*noise 1.6072
+check 1 (correct stand-in routed correctly, need 64/64): 35/64   [nearest candidate is right: 63/64; margin min -0.282 median 1.734]
+check 2 (swapped adapters pass, need 0/192): 0/192
+check 3 (base under an adapter name passes, need 0/64): 0/64
+check 4 (pairs above k*noise, need 10/10): 8/10   weakest pair base vs adapter_0003 at 1.051
+
+aggregate over positions: trim10
+noise 0.7231  threshold k*noise 2.1692
+check 1 (correct stand-in routed correctly, need 64/64): 26/64   [nearest candidate is right: 64/64; margin min 0.117 median 1.876]
+check 2 (swapped adapters pass, need 0/192): 0/192
+check 3 (base under an adapter name passes, need 0/64): 0/64
+check 4 (pairs above k*noise, need 10/10): 8/10   weakest pair base vs adapter_0003 at 1.576
+

@@ -1,0 +1,26 @@
+== A1: base model, no adapter, on the base model's own fp32 greedy continuations (16 prompts x 128 tokens)
+per-prompt mean |bf16 - fp32| : median 0.0156  min 0.0085  max 0.0225  mean 0.0155
+   per-prompt values: [0.014, 0.017, 0.01, 0.021, 0.022, 0.009, 0.019, 0.011, 0.017, 0.014, 0.009, 0.009, 0.02, 0.022, 0.022, 0.013]
+per-token distribution (2048 positions): p50 0.0047  p90 0.0451  p99 0.1062  max 0.200
+
+== for comparison, the adapters (64 request values = 16 prompts x 4 adapters)
+per-request mean: median 0.9696 (the 'noise' used by the rule)  min 0.1729  max 2.2943
+   by adapter (median over prompts): {'adapter_0000': 1.0252, 'adapter_0001': 1.0727, 'adapter_0002': 1.4886, 'adapter_0003': 0.453}
+
+== A2: per-token absolute logprob differences, pooled over the 64 (prompt, adapter) requests = 8192 positions
+percentiles: p50 0.4769  p90 2.6742  p99 6.5794  max 13.654
+share of positions above 1 nat: 31.372%   above 5 nats: 2.625%
+mean over all positions 1.0160; the top 5% of positions (410) contribute 27.3% of the sum; mean without them 0.7772
+median-over-positions per request, then median over requests: 0.5357
+
+10 largest per-token differences (adapter, prompt, position, token id, fp32 logprob, bf16 logprob):
+   adapter_0002 p 9 t 23 token   6541  fp32   -3.096  bf16  -16.751  |diff| 13.654
+   adapter_0001 p14 t 86 token    288  fp32   -1.868  bf16  -15.340  |diff| 13.472
+   adapter_0002 p11 t 23 token  91318  fp32   -0.933  bf16  -14.193  |diff| 13.260
+   adapter_0002 p 0 t 68 token     10  fp32   -2.371  bf16  -14.427  |diff| 12.056
+   adapter_0002 p 0 t 36 token   1039  fp32   -1.410  bf16  -13.042  |diff| 11.632
+   adapter_0001 p14 t 85 token   4149  fp32   -2.492  bf16  -13.140  |diff| 10.647
+   adapter_0003 p 1 t 75 token   4908  fp32   -2.562  bf16  -13.156  |diff| 10.594
+   adapter_0001 p 3 t 52 token   5614  fp32   -1.014  bf16  -11.453  |diff| 10.439
+   adapter_0002 p 0 t 64 token 101395  fp32   -2.191  bf16  -12.514  |diff| 10.324
+   adapter_0002 p 9 t 62 token  21806  fp32   -1.831  bf16  -12.131  |diff| 10.299

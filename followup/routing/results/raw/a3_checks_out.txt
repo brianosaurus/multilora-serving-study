@@ -1,0 +1,55 @@
+== runtime settings
+torch 2.11.0+cu128 | matmul.allow_tf32: False | cudnn.allow_tf32: True | float32_matmul_precision: highest
+fp32: base embed dtype torch.float32 | q_proj base weight dtype torch.float32 | lora_A dtype torch.float32 | lora_B dtype torch.float32 | lora scaling 2.0 | attn implementation sdpa | lm_head dtype torch.float32
+bf16: base embed dtype torch.bfloat16 | q_proj base weight dtype torch.bfloat16 | lora_A dtype torch.float32 | lora_B dtype torch.float32 | lora scaling 2.0 | attn implementation sdpa | lm_head dtype torch.bfloat16
+
+== alignment, ids and dtypes on 2 requests (adapter_0002 with prompts 0 and 9)
+prompt 0: token-id arrays identical between runs (prompt+continuation, 133 ids): True
+   fp32: logits dtype torch.float32; after .float() torch.float32; log_softmax output dtype torch.float32
+   bf16: logits dtype torch.bfloat16; after .float() torch.float32; log_softmax output dtype torch.float32
+   pos  token    fp32_teacher  bf16_teacher  fp32_prefix-only  bf16_prefix-only   (prefix-only = forward on prompt+T[:t], read the last position)
+     0     264       -0.9325       -0.7930           -0.9325           -0.9970
+     1     220       -3.0210       -3.1097           -3.0211           -3.2074
+     2      16       -0.9123       -0.4725           -0.9123           -0.2941
+     3      20       -1.1797       -1.4289           -1.1799           -1.6749
+     4      13       -1.6314       -1.8146           -1.6314           -1.7143
+     5     220       -1.0559       -2.2119           -1.0561           -1.9502
+     6      19       -2.3643       -2.3128           -2.3644           -1.9855
+     7      13       -0.2086       -1.7399           -0.2087           -1.6121
+     8      15       -0.0534       -2.5354           -0.0534           -0.8128
+     9     369       -2.5524       -5.6931           -2.5520           -3.8135
+prompt 9: token-id arrays identical between runs (prompt+continuation, 136 ids): True
+   fp32: logits dtype torch.float32; after .float() torch.float32; log_softmax output dtype torch.float32
+   bf16: logits dtype torch.bfloat16; after .float() torch.float32; log_softmax output dtype torch.float32
+   pos  token    fp32_teacher  bf16_teacher  fp32_prefix-only  bf16_prefix-only   (prefix-only = forward on prompt+T[:t], read the last position)
+     0     315       -2.2614       -5.3537           -2.2618           -6.1337
+     1     279       -1.6379       -2.5280           -1.6377           -2.4952
+     2     281       -1.8044       -5.4373           -1.8037           -5.6385
+     3    7444       -2.3027       -3.6357           -2.3026           -2.8190
+     4      11       -1.4660       -1.4438           -1.4662           -1.3903
+     5     438       -3.0529       -3.5577           -3.0527           -3.1069
+     6    1632       -2.5587       -6.0630           -2.5586           -6.2848
+     7     438       -0.6340       -0.5824           -0.6340           -0.3129
+     8     198       -2.3110       -0.4759           -2.3107           -1.1754
+     9     983       -2.5829       -7.2644           -2.5828           -4.2610
+
+== logit magnitudes (all 128 forced positions of each request)
+base          fp32: max|logit| per position median     30.0, p95     36.7, max     38.5; std of logits at a position, median   3.34
+base          bf16: max|logit| per position median     30.0, p95     36.7, max     38.5; std of logits at a position, median   3.34
+adapter_0000  fp32: max|logit| per position median     19.9, p95     21.8, max     23.6; std of logits at a position, median   2.97
+adapter_0000  bf16: max|logit| per position median     20.0, p95     22.2, max     23.9; std of logits at a position, median   2.97
+adapter_0002  fp32: max|logit| per position median     17.6, p95     20.8, max     27.5; std of logits at a position, median   3.04
+adapter_0002  bf16: max|logit| per position median     17.8, p95     20.8, max     27.0; std of logits at a position, median   3.00
+bf16 spacing between adjacent representable values: [64,128): 0.5, [128,256): 1.0, [256,512): 2.0
+
+== the 10 largest per-token differences: ranks under each model
+adapter_0002 p 9 t 23 token   6541 ' drive'       | fp32: rank     2 logit    14.3 (max   15.3, argmax 220) | bf16: rank 41757 logit    -0.3 (max   16.4, argmax 220)
+adapter_0001 p14 t 86 token    288 'es'           | fp32: rank     1 logit    14.8 (max   14.8, argmax 288) | bf16: rank  8606 logit     2.5 (max   16.6, argmax 86)
+adapter_0002 p11 t 23 token  91318 'Frozen'       | fp32: rank     1 logit    16.6 (max   16.6, argmax 91318) | bf16: rank  1897 logit     8.0 (max   17.0, argmax 4197)
+adapter_0002 p 0 t 68 token     10 '+'            | fp32: rank     3 logit    15.0 (max   16.4, argmax 60) | bf16: rank   633 logit     8.2 (max   21.2, argmax 1457)
+adapter_0002 p 0 t 36 token   1039 ' our'         | fp32: rank     2 logit    17.8 (max   18.2, argmax 320) | bf16: rank    71 logit    10.7 (max   18.1, argmax 320)
+adapter_0001 p14 t 85 token   4149 ' Math'        | fp32: rank     1 logit    13.8 (max   13.8, argmax 4149) | bf16: rank  6870 logit     4.2 (max   17.8, argmax 4997)
+adapter_0003 p 1 t 75 token   4908 '.*'           | fp32: rank     1 logit    15.5 (max   15.5, argmax 4908) | bf16: rank  1027 logit     9.2 (max   17.0, argmax 787)
+adapter_0001 p 3 t 52 token   5614 ' undefined'   | fp32: rank     1 logit    17.0 (max   17.0, argmax 5614) | bf16: rank   989 logit     8.6 (max   17.8, argmax 304)
+adapter_0002 p 0 t 64 token 101395 '姓'            | fp32: rank     1 logit    14.1 (max   14.1, argmax 101395) | bf16: rank  2918 logit     5.2 (max   16.5, argmax 82)
+adapter_0002 p 9 t 62 token  21806 ' Answer'      | fp32: rank     2 logit    17.9 (max   19.3, argmax 284) | bf16: rank 15690 logit     3.5 (max   17.4, argmax 284)
