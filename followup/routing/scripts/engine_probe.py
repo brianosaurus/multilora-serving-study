@@ -35,13 +35,15 @@ async def call_vllm(s, name, ids):
 
 async def call_sglang(s, name, ids, n_prompt):
     body = {"input_ids": ids, "sampling_params": {"max_new_tokens": 1, "temperature": 0}, "return_logprob": True,
-            "logprob_start_len": n_prompt, "lora_path": name}
+            "logprob_start_len": n_prompt - 1, "lora_path": name}
     async with s.post(a.url + "/generate", json=body) as r:
         d = await r.json()
-    lp = d["meta_info"]["input_token_logprobs"]            # entries [logprob, token_id, text|None] from logprob_start_len on
-    out = [e[0] for e in lp][-N:]
-    got = [e[1] for e in lp][-N:]
+    lp = d["meta_info"]["input_token_logprobs"]            # entries [logprob, token_id, text|None] from logprob_start_len on; the first has no logprob
+    assert lp[0][0] is None and len(lp) == N + 1, f"unexpected layout: {len(lp)} entries, first {lp[0][0]}"
+    out = [e[0] for e in lp][1:]
+    got = [e[1] for e in lp][1:]
     assert got == ids[-N:], "returned token ids do not match the forced ids"
+    assert all(x is not None for x in out), "None logprob in the forced range"
     return out
 
 async def call_mistralrs(s, name, ids, n_prompt):

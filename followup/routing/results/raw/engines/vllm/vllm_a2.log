@@ -1,0 +1,14 @@
+07:05:25 host follow-up-pod; GPU procs: 0; load 31.30 27.51 38.28 | gpu 210MHz,40,24.45W,0%,1MiB
+07:06:46 vllm up; load 27.65 27.21 37.28 | gpu 2520MHz,44,64.33W,0%,20508MiB
+07:06:46 start vllm_a2_serial: load 27.65 27.21 37.28 | gpu 2520MHz,44,64.33W,0%,20508MiB
+vllm serial: 320 calls in 7s; stats {'positions': 0, 'missing_topn': 0, 'dropped_roundtrip': 0, 'errors': 0}
+07:06:53 end vllm_a2_serial: load 27.47 27.18 37.16 | gpu 2685MHz,52,199.13W,39%,20552MiB
+07:06:53 start vllm_a2_mixed: load 27.47 27.18 37.16 | gpu 2685MHz,52,199.13W,39%,20552MiB
+vllm mixed: 320 calls in 3s; stats {'positions': 0, 'missing_topn': 0, 'dropped_roundtrip': 0, 'errors': 0}
+07:06:56 end vllm_a2_mixed: load 27.47 27.18 37.16 | gpu 2685MHz,51,273.73W,70%,20956MiB
+07:06:56 start vllm_a2_serial_repeat: load 27.47 27.18 37.16 | gpu 2685MHz,51,273.73W,70%,20956MiB
+vllm serial: 320 calls in 6s; stats {'positions': 0, 'missing_topn': 0, 'dropped_roundtrip': 0, 'errors': 0}
+07:07:03 end vllm_a2_serial_repeat: load 27.40 27.18 37.05 | gpu 2685MHz,50,189.33W,0%,20956MiB
+07:07:14 server stopped; gpu mem 1 MiB
+07:07:15 VLLM_A2_DONE
+VLLM_A2_DONE
