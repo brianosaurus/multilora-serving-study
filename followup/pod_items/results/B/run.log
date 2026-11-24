@@ -1,0 +1,16 @@
+08:47:56 start vllm_s16_n32; load 27.99 27.28 33.28
+09:17:13 vllm_s16_n32 ready=1 gpu_mem=20402 MiB
+09:17:26 start vllm_s32_n32; load 41.04 58.03 57.88
+09:26:13 vllm_s32_n32 ready=1 gpu_mem=20418 MiB
+09:26:26 start vllm_s64_n32; load 39.70 51.66 56.42
+09:33:13 vllm_s64_n32 ready=1 gpu_mem=20392 MiB
+09:33:26 start sglang_s16_n32; load 45.69 48.92 53.02
+09:52:09 sglang_s16_n32 ready=1 gpu_mem=22076 MiB
+09:52:22 start sglang_s32_n32; load 35.57 42.31 46.88
+10:02:11 sglang_s32_n32 ready=1 gpu_mem=22084 MiB
+10:02:25 start sglang_s64_n32; load 39.32 43.96 46.02
+10:11:47 sglang_s64_n32 ready=1 gpu_mem=22102 MiB
+10:12:00 start vllm_s64_n128; load 31.84 35.60 41.34
+10:20:16 vllm_s64_n128 ready=1 gpu_mem=20402 MiB
+10:20:29 REFUSED sglang_s64_n128: GPU not idle
+B_DONE
