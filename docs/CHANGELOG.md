@@ -110,6 +110,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Item D builds started (`runpod2`, pod clock about 07:20 UTC on 2026-11-24; plan committed earlier): `followup/pod_items/build_mistralrs.sh` builds the old and new mistral.rs trees one after the other with the flags of `followup/kernel_rerun/BUILD.md`, copies each binary to `/workspace/bin/mistralrs_{old,new}` and deletes its target directory. The builds run on the CPU while Item B (slot memory from startup logs) uses the GPU; no result of either depends on timing.
 
+- Script bug, Item D (pod clock 07:15 UTC on 2026-11-24, my error): the first start of `build_mistralrs.sh` did not create the `TMPDIR` it set, so nvcc could not write temporary files and the old-tree build failed after about a minute (exit 101); stopped, the script now creates the directories, and the builds were restarted. No binary from the failed attempt exists. Also: `followup-wip` branch on origin holds a backup of the local commits (author asked; `main` untouched).
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
