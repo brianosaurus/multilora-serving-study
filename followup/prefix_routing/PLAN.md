@@ -27,3 +27,7 @@ Synthetic adapters at scale 0.02, one model, rank 16, four adapters, 16 prompts 
 ## Prompts fixed (2026-11-24 about 06:45 UTC, local machine; token counts from the Qwen2.5 tokenizer on `runpod2`, before any engine or reference run)
 
 `prompts.json` (made by `make_prompts.py`, fixed text) has 16 prompts of 564 to 598 tokens. The shared token prefix is 579 tokens within group A (prompts 0 to 7) and 554 within group B (prompts 8 to 15); A and B share 2 tokens. This is longer than the "about 512" above; the cache thresholds are unchanged (at least 50% of the shared-prefix tokens, so at least 290 tokens of A and 277 of B must be reported cached in the warm pass).
+
+## Gate: power checks on the new prompts (pod clock 06:28 UTC on 2026-11-24, before any engine run)
+
+All four power checks pass under the unchanged rule (k = 3): noise (median bf16-vs-fp32 distance) 0.0204, margin threshold 0.0611. Check 1: 64 of 64 correct stand-in requests routed correctly (margin min 0.116, median 0.305); check 2: 0 of 192; check 3: 0 of 64; check 4: all 10 candidate pairs above the threshold (smallest 0.314). Engine verdicts are allowed. Fixed numbers for the engine analysis: noise 0.0204, threshold 0.0611 (`results/raw/analyze_prefix.txt`, `results/raw/refs_prefix.json`). Adapter checksums (`results/raw/adapter_sha256.txt`) equal the sweep's. This does not certify any engine.

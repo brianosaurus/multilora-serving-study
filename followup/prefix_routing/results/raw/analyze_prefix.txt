@@ -1,0 +1,19 @@
+noise (median of 64 bf16-vs-fp32 distances) = 0.0204; by adapter {'adapter_0000': 0.0237, 'adapter_0001': 0.0195, 'adapter_0002': 0.0205, 'adapter_0003': 0.0195}
+k = 3.0; margin threshold k*noise = 0.0611
+
+CHECK 1 (bf16 stand-in, correct routing, must pass all): routed correctly 64/64; margin min 0.1159 median 0.3054; d_right median 0.0204 p95 0.0308
+CHECK 2 (adapter j served under name i, must fail all): routed 'correctly' 0/192 (must be 0)
+CHECK 3 (base served under an adapter name, must fail all): routed 'correctly' 0/64 (must be 0)
+CHECK 4 (median over prompts of fp32 variant c1 vs reference of c2 on c2's tokens; unordered pair judged by the smaller direction):
+   base          adapter_0000   0.3621  0.3995  smaller  0.3621  ok
+   base          adapter_0001   0.4071  0.3140  smaller  0.3140  ok
+   base          adapter_0002   0.3969  0.3631  smaller  0.3631  ok
+   base          adapter_0003   0.3481  0.3998  smaller  0.3481  ok
+   adapter_0000  adapter_0001   0.5882  0.4157  smaller  0.4157  ok
+   adapter_0000  adapter_0002   0.5339  0.4659  smaller  0.4659  ok
+   adapter_0000  adapter_0003   0.4540  0.4068  smaller  0.4068  ok
+   adapter_0001  adapter_0002   0.5477  0.5751  smaller  0.5477  ok
+   adapter_0001  adapter_0003   0.4861  0.5456  smaller  0.4861  ok
+   adapter_0002  adapter_0003   0.4877  0.5556  smaller  0.4877  ok
+
+POWER CHECKS: {'check1': True, 'check2': True, 'check3': True, 'check4': True} => engine verdicts ALLOWED

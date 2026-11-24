@@ -90,6 +90,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - 3a references started (`runpod2`, pod clock 06:20 UTC on 2026-11-24, GPU idle, external CPU 1.29 cores median over 10 s, host load 12 from other tenants; no engine running): scale 0.02 adapters regenerated on the pod, 4 of 4 SHA-256 equal to `followup/routing/results/raw/sweep_s0.02/adapters_s0.02/manifest.json`; `refs.py` got a `MODEL_DIR` environment variable (default unchanged) because the pod's model path differs; `followup/prefix_routing/run_refs.sh` runs `refs.py` then `analyze.py` on `prompts.json`. The power checks decide whether any engine run is interpreted.
 
+- 3a power checks PASS on the new prompts (`runpod2`, pod clock 06:28 UTC on 2026-11-24; references took 8 minutes, no engine running): noise 0.0204, threshold 0.0611, checks 1 to 4 pass (64 of 64, 0 of 192, 0 of 64, all 10 pairs above threshold). Engine runs are allowed by the plan; none has been done. Data: `followup/prefix_routing/results/raw/`.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.

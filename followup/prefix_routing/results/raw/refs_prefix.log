@@ -1,0 +1,31 @@
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   0%|          | 1/338 [00:00<00:55,  6.08it/s]Loading weights:  30%|██▉       | 101/338 [00:00<00:00, 466.37it/s]Loading weights:  47%|████▋     | 160/338 [00:00<00:00, 492.94it/s]Loading weights:  65%|██████▍   | 219/338 [00:00<00:00, 525.83it/s]Loading weights:  83%|████████▎ | 279/338 [00:00<00:00, 536.69it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 494.76it/s]
+[      5s] fp32 model loaded
+[     31s] generated prompt 0
+[     57s] generated prompt 1
+[     83s] generated prompt 2
+[    109s] generated prompt 3
+[    136s] generated prompt 4
+[    162s] generated prompt 5
+[    188s] generated prompt 6
+[    215s] generated prompt 7
+[    241s] generated prompt 8
+[    266s] generated prompt 9
+[    292s] generated prompt 10
+[    317s] generated prompt 11
+[    344s] generated prompt 12
+[    372s] generated prompt 13
+[    400s] generated prompt 14
+[    427s] generated prompt 15
+[    433s] fp32 variant base done
+[    440s] fp32 variant adapter_0000 done
+[    446s] fp32 variant adapter_0001 done
+[    452s] fp32 variant adapter_0002 done
+[    459s] fp32 variant adapter_0003 done
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 5190.25it/s]
+[    463s] bf16 model loaded
+[    465s] bf16 variant base done
+[    469s] bf16 variant adapter_0000 done
+[    472s] bf16 variant adapter_0001 done
+[    475s] bf16 variant adapter_0002 done
+[    479s] bf16 variant adapter_0003 done
+[    479s] wrote results/raw/refs_prefix.json

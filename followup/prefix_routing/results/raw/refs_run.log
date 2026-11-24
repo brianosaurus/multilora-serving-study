@@ -1,0 +1,4 @@
+06:20:28 host 462339e34390; GPU compute procs: 0; extload 1.29 1.96 1.29
+06:28:35 references done (exit 0)
+06:28:35 analysis done: POWER CHECKS: {'check1': True, 'check2': True, 'check3': True, 'check4': True} => engine verdicts ALLOWED
+REFS_DONE
