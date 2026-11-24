@@ -1,0 +1,21 @@
+21:31:17 host 126ab78ffbd7; old b5b94e8c3b36fd11 new caa88e56293acb77
+21:31:28 start 1 old; load 16.01 15.95 12.35; external CPU: 13.41 16.31 15.68
+21:34:39 start 1 old ready=1
+21:42:18 start 1 old requests exit 0
+21:42:39 start 2 new; load 13.17 14.14 13.29; external CPU: 12.36 12.81 12.90
+21:43:07 start 2 new ready=1
+21:50:35 start 2 new requests exit 0
+21:50:56 start 3 old; load 16.13 15.79 14.36; external CPU: 14.02 14.82 15.80
+21:51:24 start 3 old ready=1
+21:58:30 start 3 old requests exit 0
+21:58:50 start 4 new; load 13.37 14.12 14.07; external CPU: 14.10 14.21 12.93
+21:59:18 start 4 new ready=1
+22:06:47 start 4 new requests exit 0
+22:07:08 start 5 old; load 12.23 14.71 14.97; external CPU: 12.31 12.86 11.88
+22:07:36 start 5 old ready=1
+22:14:33 start 5 old requests exit 0
+22:14:54 start 6 new; load 14.69 15.00 14.93; external CPU: 12.62 14.36 14.12
+22:15:22 start 6 new ready=1
+22:22:23 start 6 new requests exit 0
+22:22:33 elapsed 3083 s
+DONE

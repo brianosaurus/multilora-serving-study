@@ -1,0 +1,52 @@
+error responses: 0
+
+== old tree (starts [1, 3, 5]) ==
+| cell | start 1 | start 3 | start 5 | first-use difference in starts | reproducible |
+|---|---|---|---|---|
+| base | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0000 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0001 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0002 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0003 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0004 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0005 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0006 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0007 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+cells with a first-use difference in at least one start: 0 of 9
+
+== new tree (starts [2, 4, 6]) ==
+| cell | start 2 | start 4 | start 6 | first-use difference in starts | reproducible |
+|---|---|---|---|---|
+| base | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0000 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0001 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0002 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0003 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0004 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0005 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0006 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+| adapter_0007 | same (1 distinct) | same (1 distinct) | same (1 distinct) | 0 of 3 | no |
+cells with a first-use difference in at least one start: 0 of 9
+
+== second round (3 requests per adapter, after 6 each); any cell where the 3 differ ==
+start 1 old: round 2 not self-consistent: none; round 2 differs from round 1 steady output: none
+start 2 new: round 2 not self-consistent: none; round 2 differs from round 1 steady output: none
+start 3 old: round 2 not self-consistent: none; round 2 differs from round 1 steady output: none
+start 4 new: round 2 not self-consistent: none; round 2 differs from round 1 steady output: none
+start 5 old: round 2 not self-consistent: none; round 2 differs from round 1 steady output: none
+start 6 new: round 2 not self-consistent: none; round 2 differs from round 1 steady output: none
+
+== first request of each cell vs the steady output, by tree: how many distinct texts across the 3 starts of a tree per adapter ==
+old base:1 adapter_0000:1 adapter_0001:1 adapter_0002:1 adapter_0003:1 adapter_0004:1 adapter_0005:1 adapter_0006:1 adapter_0007:1
+new base:1 adapter_0000:1 adapter_0001:1 adapter_0002:1 adapter_0003:1 adapter_0004:1 adapter_0005:1 adapter_0006:1 adapter_0007:1
+
+== old vs new, steady output (request 2) per adapter, by start pair ==
+base old distinct 1 new distinct 1 same set
+adapter_0000 old distinct 1 new distinct 1 same set
+adapter_0001 old distinct 1 new distinct 1 same set
+adapter_0002 old distinct 1 new distinct 1 same set
+adapter_0003 old distinct 1 new distinct 1 same set
+adapter_0004 old distinct 1 new distinct 1 same set
+adapter_0005 old distinct 1 new distinct 1 same set
+adapter_0006 old distinct 1 new distinct 1 same set
+adapter_0007 old distinct 1 new distinct 1 same set

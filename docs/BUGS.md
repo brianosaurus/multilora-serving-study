@@ -140,3 +140,8 @@ Closed loop, concurrency 16, 220 requests per run, uniform choice among N adapte
 - Not known: the cause. A concurrent mistral.rs build (nvcc, CPU only) and a vLLM start with `CUDA_HOME` set (a script mistake, fixed, see CHANGELOG) were running around the time; neither is shown to be the cause. A container with an abnormally killed GPU process (`pkill -9`) is another candidate; not tested. Driver 595.112.07, open kernel module.
 - Upstream search: not done (this looks like a host or driver state, not engine code); if it recurs on the dedicated machine, search NVIDIA forums for `cuInit 999` with the driver version.
 - Effect: Item B, the 3d reproduction, the 3e experiment and the dry run of `run_session.sh` need the GPU and are blocked until it recovers (a pod restart by the author may be needed; `/dev/shm` contents, the adapters and the model copy there, would be lost and regenerated from the scripts). CPU-only work continues.
+
+## Item D (3e): mistral.rs first-use difference, not reproduced (2026-11-24, pod clock 21:31 to 22:22)
+
+Not a bug found. Lead: in the kernel rerun's 128-completion check the first prompt with each adapter varied between launches. Test: 6 starts, old and new trees alternating, serial identical requests (3 base, 6 per adapter, 3 more per adapter), 8 adapters, `/v1/completions`, `temperature` 0. Result: 0 of 9 cells differ between request 1 and later requests in any start; one output per cell across all starts and both trees. The earlier variation (8 adapters in flight together after a restart) is not explained and was not tested here. See `followup/pod_items/RESULTS.md`, Item D.
+
