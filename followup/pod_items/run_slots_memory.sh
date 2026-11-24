@@ -15,7 +15,8 @@ for cfg in "vllm 16 32" "vllm 32 32" "vllm 64 32" "vllm 64 128" "sglang 16 32" "
     CMD=($ENVS/sglang/bin/python -m sglang.launch_server --model-path $M --served-model-name qwen --port 30000 --mem-fraction-static 0.85 --context-length 4096 --enable-lora --max-lora-rank 16 --max-loras-per-batch $slots --lora-target-modules q_proj k_proj v_proj o_proj gate_proj up_proj down_proj --lora-paths)
   fi
   for n in $(names $nad); do CMD+=("$n=$adir/$n"); done
-  PATH=$ENVS/$eng/bin:/usr/local/cuda/bin:$PATH CUDA_HOME=/usr/local/cuda setsid nohup "${CMD[@]}" > $D/server_$tag.log 2>&1 < /dev/null & SP=$!
+  if [ $eng = vllm ]; then ENVSET=(env PATH=$ENVS/vllm/bin:$PATH); else ENVSET=(env PATH=$ENVS/sglang/bin:/usr/local/cuda/bin:$PATH CUDA_HOME=/usr/local/cuda); fi   # vLLM without CUDA_HOME: with it flashinfer JIT-built a sampling module with nvcc 12.8 against torch cu130 and the engine died with "CUDA error: unknown error" (2026-11-24)
+  setsid nohup "${ENVSET[@]}" "${CMD[@]}" > $D/server_$tag.log 2>&1 < /dev/null & SP=$!
   ok=0; for i in $(seq 1 200); do [ "$(curl -s -o /dev/null -w %{http_code} -m 3 localhost:$PORT/health)" = 200 ] && { ok=1; break; }; kill -0 $SP 2>/dev/null || break; sleep 3; done
   sleep 5; mem=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader)
   say "$tag ready=$ok gpu_mem=$mem"; printf "%s\t%s\t%s\t%s\t%s\t%s\n" $tag $eng $slots $nad $ok "$mem" >> $D/summary.tsv

@@ -47,7 +47,8 @@ start_server() { # kind slots nad adapterdir extra...   kind: vllm | sglang | sg
     CMD=($ENVS/$kind/bin/python -m sglang.launch_server --model-path $M --served-model-name qwen --port 30000 --mem-fraction-static 0.85 --context-length 4096 --enable-lora --max-lora-rank 16 --max-loras-per-batch $slots --lora-target-modules q_proj k_proj v_proj o_proj gate_proj up_proj down_proj "${extra[@]}" --lora-paths)
   fi
   for n in $(names $nad); do CMD+=("$n=$adir/$n"); done
-  PATH=$ENVS/$([ $kind = vllm ] && echo vllm || echo $kind)/bin:/usr/local/cuda/bin:$PATH CUDA_HOME=/usr/local/cuda setsid nohup "${CMD[@]}" > "$OUT/server_$TAG.log" 2>&1 < /dev/null &
+  if [ $kind = vllm ]; then ENVSET=(env PATH=$ENVS/vllm/bin:$PATH); else ENVSET=(env PATH=$ENVS/$kind/bin:/usr/local/cuda/bin:$PATH CUDA_HOME=/usr/local/cuda); fi   # vLLM without CUDA_HOME (flashinfer JIT with nvcc 12.8 against torch cu130 crashed vLLM on the pod)
+  setsid nohup "${ENVSET[@]}" "${CMD[@]}" > "$OUT/server_$TAG.log" 2>&1 < /dev/null &
   PID=$!; for i in $(seq 1 200); do [ "$(curl -s -o /dev/null -w %{http_code} -m 3 localhost:$PORT/health)" = 200 ] && return 0; kill -0 $PID 2>/dev/null || return 1; sleep 3; done; return 1; }
 stop_server() { kill $PID 2>/dev/null; sleep 6; pkill -9 -f "[v]llm serve|[s]glang.launch_server|[s]glang::|[V]LLM::EngineCore" 2>/dev/null; sleep 4; }
 loadgen() { # out rate nreq warm adapters offset popularity seed

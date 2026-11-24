@@ -112,6 +112,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Script bug, Item D (pod clock 07:15 UTC on 2026-11-24, my error): the first start of `build_mistralrs.sh` did not create the `TMPDIR` it set, so nvcc could not write temporary files and the old-tree build failed after about a minute (exit 101); stopped, the script now creates the directories, and the builds were restarted. No binary from the failed attempt exists. Also: `followup-wip` branch on origin holds a backup of the local commits (author asked; `main` untouched).
 
+- Script bug, Item B and the session script (pod clock 07:16 UTC on 2026-11-24, my error): both started vLLM with `CUDA_HOME=/usr/local/cuda` and the CUDA 12.8 `nvcc` on the PATH; vLLM's flashinfer then JIT-built a sampling module against torch 2.14.0+cu130 and the engine died at warm-up with "CUDA error: unknown error" (two starts, `ready=0`, no result). The 3a vLLM starts, which worked, had not set it. Item B was stopped, the flashinfer JIT cache removed, and vLLM now starts without it in `run_slots_memory.sh` and in `run_session.sh`. SGLang keeps it (it worked).
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
