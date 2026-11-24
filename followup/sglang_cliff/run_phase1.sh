@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-# Phase 1 runner (plan: followup/sglang_cliff/PLAN.md). Run on `runpod`, host 126ab78ffbd7 only.
+# Phase 1 runner (plan: followup/sglang_cliff/PLAN.md). Host must equal HOST_EXPECT (default runpod 126ab78ffbd7; runpod2 run: HOST_EXPECT=48bd787e389e PYL=/root/envs/sglang/bin/python).
 # Usage: run_phase1.sh [--wait]   (--wait: wait for the GPU and other study jobs instead of refusing)
 R=/root/msf_study; D=$R/followup/sglang_cliff/results/phase1; mkdir -p $D; L=$D/run.log
 say() { echo "$(date -u +%T) $*" | tee -a $L; }
-[ "$(hostname)" = 126ab78ffbd7 ] || { echo "REFUSED: host $(hostname) is not 126ab78ffbd7"; exit 2; }
-M=/dev/shm/models/Qwen2.5-1.5B-Instruct; A=/dev/shm/adapters; PYL=/root/envs/vllm/bin/python
+HOST_EXPECT=${HOST_EXPECT:-126ab78ffbd7}
+[ "$(hostname)" = "$HOST_EXPECT" ] || { echo "REFUSED: host $(hostname) is not $HOST_EXPECT"; exit 2; }
+M=/dev/shm/models/Qwen2.5-1.5B-Instruct; A=/dev/shm/adapters; PYL=${PYL:-/root/envs/vllm/bin/python}
 busy() { [ "$(nvidia-smi --query-compute-apps=pid --format=csv,noheader | wc -l)" != 0 ] || pgrep -f "run_rerun.sh|run_session.sh|run_item|run_cold_pass.sh|run_slots_memory" >/dev/null; }
 # adapter checksums against the manifest
 $PYL - <<'P' || { say "REFUSED: adapter checksum mismatch"; exit 3; }
