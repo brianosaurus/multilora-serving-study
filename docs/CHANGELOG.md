@@ -133,6 +133,18 @@ Changes to the plan after the first run are recorded here with the reason. Entri
   - SGLang `main` (`0e9cff98f5b7`) install finished at 09:44 pod clock; import and serve not yet checked, so the Item A check on `runpod` is open.
   - mistral.rs: old tree built (exit 0, 21,861 s, sha256 `b5b94e8c3b36fd11098e8e0befed5a9fc943b1d5b4ca19b224727b7bf100f7be`, target removed). New tree compiling, about 1 h 20 min in at 16:15; `target_new` 5.3 GB plus `tmp_new` 0.84 GB, growing about 30 MB per 2 min. The old tree's peak target size was not recorded, so I cannot say how much the new tree still needs, and my own quota on `/workspace` cannot be read (`df` shows only the shared filesystem).
   - GPU idle. Author's request to rerun `sglang_s64_n128` alongside the build was held at condition 1 (disk fit not confirmable); awaiting the author's choice. Nothing was changed on the pod.
+- Correction: several entries and PLAN headings labeled "local, UTC" give times later than the commits that contain them (2026-11-24, found by comparing each stated time with `git log`; my error, not a clock fault). The old lines are not edited. Commit times (committer date, UTC) are the record. Stated time, commit, commit time, difference:
+  - 3a plan: "about 06:30 UTC" in this file and `followup/prefix_routing/PLAN.md` line 1; fce582a, 06:09; 21 min later.
+  - 3a prompts: "about 06:45 UTC" in `prefix_routing/PLAN.md`; 461a808, 06:19; 26 min.
+  - 3a runner and smoke criteria: "about 06:55 UTC" in this file and `prefix_routing/PLAN.md`; 3a2ec70, 06:31; 24 min.
+  - Amendment 1: "about 07:00 UTC" in `prefix_routing/PLAN.md`; 021bd36, 06:35; 25 min.
+  - Amendment 2 (plan text "07:15 UTC local"): this file and `prefix_routing/PLAN.md`; 01efff9, 06:42; 33 min.
+  - Item A and B plans: "about 08:00 UTC local" in `followup/pod_items/PLAN.md`; eba3622, 06:52; 68 min.
+  - Item C and D plans: "about 08:20 UTC local" in this file and `pod_items/PLAN.md`; 71e62ab, 06:56; 84 min.
+  - Dedicated-session plan: "about 09:00 UTC local" in this file and `followup/dedicated_session/PLAN.md`; 00db375, 07:07; 113 min.
+  - 3e source notes: "about 08:10 UTC local" in this file; 77dea95, 07:48; 22 min.
+  - So the range is 21 to 113 minutes, wider than the 20 to 70 minutes I first thought. Entries whose stated time matches their commit (for example the csgmv A/B plan, 03:55 against b17df6a at 03:54) are not listed. The pod-clock times (for example Item B, 08:47:56 to 10:20:29) are a different source; the pod clock was compared with the author's machine at 16:11 UTC (see the status check above) and agreed within about 1 s.
+  - What this does and does not change: every plan above was committed before the run it covers (Item B plan committed 06:52, its first start 08:02 pod clock), so the "written before any run" statements hold on commit times. Only the stated writing times were wrong.
 
 ## 2026-11-21 (before any run)
 
