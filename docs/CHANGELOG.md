@@ -78,6 +78,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Time correction (2026-11-24, 03:55 UTC local machine clock): the "records restored" entry above says "about 04:00 UTC"; the commit was made at about 03:52 UTC (check `git log`). The commit's own timestamp is authoritative.
 
+- Step 2 (no GPU, local machine, 2026-11-24 about 04:30 UTC): (2a) the mistral.rs A2 routing result is not in this repository; the run was on the pod and the last record here is the plan entry (run order changed to mixed first, repeat on 20 calls), so no result is committed and where it stopped is not known from here. (2b) working-set analysis of the main grid (vLLM `results/raw/main/vllm`, SGLang `results/raw/main_rerun1/sglang`): `followup/working_set/RESULTS.md`; the data contradict the simple form of the statement for windows of 1, 5 and 10 s with a threshold of 16 (they exceed 16 in healthy cells) and fit the instantaneous count better; correlation only, queued requests are counted. (2c) condition table for PR #10286 next to ours added to `followup/sglang_issues/FACTS.md` (section C). (2d) B8 still chat-only on SGLang `main` 5d14e90 by reading source; flag added in #11304 for chat; related open PR #52665 (preferred-sampling-params on completions) overlaps the function but not the flag; issue and fix sketch drafted in `followup/sglang_issues/B8_ISSUE_DRAFT.md`, not posted. Nothing was posted anywhere.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
