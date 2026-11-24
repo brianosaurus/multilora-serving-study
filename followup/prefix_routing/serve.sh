@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # sourced by the run scripts: start_vllm / start_sglang / stop_engine, state(); flags as in followup/routing/PLAN.md (A2 notes) with prefix caching ON
-A=/dev/shm/adapters_s0.02; MODEL=/dev/shm/models/Qwen2.5-1.5B-Instruct
+A=${A_DIR:-/dev/shm/adapters_s0.02}; MODEL=${MODEL:-/dev/shm/models/Qwen2.5-1.5B-Instruct}   # overridable for the dedicated machine
 state() { echo "load $(cut -d' ' -f1-3 /proc/loadavg) | extload $(/workspace/envs/vllm/bin/python /workspace/study/followup/kernel_rerun/extload.py check 6) | gpu $(nvidia-smi --query-gpu=clocks.sm,temperature.gpu,power.draw,utilization.gpu,memory.used --format=csv,noheader | tr -d ' ')"; }
 start_vllm() {  # $1 = log, extra flags in $2...
   local log=$1; shift

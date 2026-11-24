@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 # Balanced kernel benchmark on a quiet machine (plan: PLAN.md in this directory, including Amendment 1 on what "quiet" means).
 # Usage: run_rerun.sh --host EXPECTED_HOSTNAME --old OLD_BIN --new NEW_BIN --model DIR --adapters DIR --loadgen PATH --python PY --out DIR
-#                    [--requests 150] [--warmup 20] [--blocks 6] [--max-load 2] [--start-ext 1] [--max-ext 2] [--dry-run]
+#                    [--requests 150] [--warmup 20] [--blocks 6] [--max-load 2] [--start-ext 1] [--max-ext 2] [--seed N] [--dry-run]
+#   --seed N (Amendment 2): cell order within each server session is shuffled with seed N+10*block+position, recorded in the log; 0 keeps the fixed order of attempt 1.
 # Refuses to start unless: the hostname matches, the GPU is idle, the 1-minute load average is <= max-load (checked once, before the first run),
 # and external CPU use (host busy cores minus this container's own; extload.py) is <= start-ext cores over 10 s.
 # Before each run external use must be <= start-ext over 6 s (waits up to 120 s, then runs and flags). During each run any sample with
 # external use above max-ext marks the run LOAD_ABOVE_LIMIT. The load average is recorded for information only.
 # --dry-run only tests the script's logic (tiny counts, the checks downgraded to warnings); its output must be discarded or labeled.
 set -u
-REQ=150; WARM=20; BLOCKS=6; MAXLOAD=2; STARTEXT=1; MAXEXT=2; DRY=0
+REQ=150; WARM=20; BLOCKS=6; MAXLOAD=2; STARTEXT=1; MAXEXT=2; DRY=0; SEED=0
 while [ $# -gt 0 ]; do case $1 in
   --host) HOST=$2; shift 2;; --old) OLD=$2; shift 2;; --new) NEW=$2; shift 2;; --model) M=$2; shift 2;; --adapters) A=$2; shift 2;;
   --loadgen) LG=$2; shift 2;; --python) PY=$2; shift 2;; --out) OUT=$2; shift 2;; --requests) REQ=$2; shift 2;; --warmup) WARM=$2; shift 2;;
-  --blocks) BLOCKS=$2; shift 2;; --max-load) MAXLOAD=$2; shift 2;; --start-ext) STARTEXT=$2; shift 2;; --max-ext) MAXEXT=$2; shift 2;;
+  --blocks) BLOCKS=$2; shift 2;; --max-load) MAXLOAD=$2; shift 2;; --start-ext) STARTEXT=$2; shift 2;; --max-ext) MAXEXT=$2; shift 2;; --seed) SEED=$2; shift 2;;
   --dry-run) DRY=1; shift;; *) echo "unknown arg $1"; exit 2;; esac; done
 for v in HOST OLD NEW M A LG PY OUT; do [ -n "${!v:-}" ] || { echo "missing --$(echo $v | tr A-Z a-z)"; exit 2; }; done
 HERE="$(cd "$(dirname "$0")" && pwd)"; EXT="$PY $HERE/extload.py"
@@ -62,7 +63,9 @@ for ord in "${ORDERS[@]:0:$BLOCKS}"; do
     say "block $blk position $pos: $bin up (load $(load1))"
     "$PY" "$LG" --engine mistralrs --url http://localhost:1234 --tokenizer "$M" --requests "$REQ" --warmup "$WARM" --seed 5 --concurrency 8 --adapters 8 \
           --popularity uniform --out "$OUT/raw/warm_${bin}_b$blk.json" > /dev/null 2>&1
-    for conc in 8 32; do for nad in 0 1 4 8; do run_cell $blk $pos $bin "c${conc}_a${nad}" $conc $nad; done; done
+    cells=$("$PY" -c "import random,sys;c=[(k,n) for k in (8,32) for n in (0,1,4,8)];seed=int(sys.argv[1]);random.Random(seed).shuffle(c) if seed else None;print(' '.join(f'{k}:{n}' for k,n in c))" $([ "$SEED" = 0 ] && echo 0 || echo $((SEED+10*blk+pos))))
+    say "block $blk position $pos $bin: cell order (seed $([ "$SEED" = 0 ] && echo fixed || echo $((SEED+10*blk+pos)))): $cells"
+    for cell in $cells; do conc=${cell%%:*}; nad=${cell##*:}; run_cell $blk $pos $bin "c${conc}_a${nad}" $conc $nad; done
     kill $SP 2>/dev/null; sleep 5; kill -9 $SP 2>/dev/null; sleep 4
   done
 done

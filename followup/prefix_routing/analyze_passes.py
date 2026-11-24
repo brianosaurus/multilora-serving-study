@@ -2,7 +2,7 @@
 """3a analysis (rules fixed in PLAN.md, Amendment 2). Run on the pod: analyze_passes.py. Writes results/raw/analysis_3a.txt content to stdout."""
 import json, subprocess, itertools, os, re
 PY = "/workspace/envs/vllm/bin/python"; S = "/workspace/study/followup/routing/scripts"
-RAW = "results/raw"; REFS = f"{RAW}/refs_prefix.json"; POW = f"{RAW}/refs_prefix_power.json"
+TAG = os.environ.get("PASS_TAG", "passes"); RAW = "results/raw"; REFS = f"{RAW}/refs_prefix.json"; POW = f"{RAW}/refs_prefix_power.json"
 R = json.load(open(REFS)); SHARED = [579] * 8 + [554] * 8
 def share(calls_or_rows, key_p):
     num = den = 0
@@ -13,14 +13,14 @@ def share(calls_or_rows, key_p):
 out = []
 # SGLang
 for name in ("sglang_cold", "sglang_warm"):
-    f = f"{RAW}/sglang/passes/{name}.json"
+    f = f"{RAW}/sglang/{TAG}/{name}.json"
     if not os.path.exists(f): out.append(f"{name}: missing"); continue
     d = json.load(open(f))
     r = subprocess.run([PY, f"{S}/analyze_engine.py", REFS, f, POW], capture_output=True, text=True)
     out.append(f"== {name}: errors {d['stats']['errors']}; shared-prefix tokens reported cached: {share(d['calls'], 'p')}")
     out.append(r.stdout.strip() + r.stderr.strip())
 # vLLM fallback
-nc = [f"{RAW}/vllm/passes/vllm_nc{i}.json" for i in (1, 2, 3)]; wc = f"{RAW}/vllm/passes/vllm_wc2.json"
+nc = [f"{RAW}/vllm/{TAG}/vllm_nc{i}.json" for i in (1, 2, 3)]; wc = f"{RAW}/vllm/{TAG}/vllm_wc2.json"
 if all(os.path.exists(f) for f in nc + [wc]):
     key = lambda d: {(r["a"], r["p"]): r["text"] for r in d["complete"]}
     N = [key(json.load(open(f))) for f in nc]; W = json.load(open(wc)); Wk = key(W)
@@ -35,7 +35,7 @@ if all(os.path.exists(f) for f in nc + [wc]):
     sh = share(W["complete"], "p")
     cnt = {}
     for fn in ("metrics_before", "metrics_after"):
-        pth = f"{RAW}/vllm/passes/{fn}.txt"
+        pth = f"{RAW}/vllm/{TAG}/{fn}.txt"
         if os.path.exists(pth):
             for l in open(pth):
                 m = re.match(r"(vllm:prefix_cache_\w+_total)\S*\s+([\d.e+]+)", l)

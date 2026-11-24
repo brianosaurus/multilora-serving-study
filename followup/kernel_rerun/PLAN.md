@@ -43,3 +43,7 @@ Amendment (the author's wording of the idea, with one refinement stated here):
 - During each run: any sample with external use above 2 cores marks the run `LOAD_ABOVE_LIMIT`. The load average is still recorded at every sample, for information only.
 - A rerun with any flagged run is reported as invalid, as before. The design, the 6 blocks and the establishment rule are unchanged.
 - Known bias, stated in advance: if a container process exits between two samples its CPU time disappears from the "own" sum, which makes external use look larger, so the check errs toward flagging.
+
+## Amendment 2: shortened design with shuffled cell order (author approved, 2026-11-24 about 09:00 UTC, before any rerun on the dedicated machine)
+
+One server start per binary (old, new, byte-identical old copy) per block with 8 adapters loaded; all cells (0, 1, 4 and 8 active adapters, concurrency 8 and 32) against that server, with adapters varied per request; six block orderings balanced; the cell order inside each server session is shuffled with a recorded seed (`run_rerun.sh --seed N` uses N + 10 times the block + the position; 0 keeps the fixed order of attempt 1). Everything else, including Amendment 1 and the establishment rule at each concurrency, is unchanged. The same text is in `followup/dedicated_session/PLAN.md`.

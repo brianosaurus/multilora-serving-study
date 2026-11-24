@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # 3a step 2 (per engine). sglang: server restarted, cold mixed probe pass, warm mixed probe pass (same server).
 # vllm (fallback, Amendment 2): server with --no-enable-prefix-caching: 3 runs of 'complete'; then a fresh cache-on server: 2 runs of 'complete'.
-# usage: run_passes.sh vllm|sglang
-cd /workspace/study/followup/prefix_routing; . ./serve.sh; E=$1; D=results/raw/$E/passes; mkdir -p $D; L=$D/passes.log; : > $L
+# usage: [PASS_TAG=name A_DIR=adapters MODEL=model] run_passes.sh vllm|sglang   (PASS_TAG keeps a repeat from overwriting earlier data)
+cd /workspace/study/followup/prefix_routing; . ./serve.sh; E=$1; D=results/raw/$E/${PASS_TAG:-passes}; mkdir -p $D; L=$D/passes.log; : > $L
 PY=/workspace/envs/vllm/bin/python; R=results/raw/refs_prefix.json
 say() { echo "$(date -u +%T) $*" >> $L; }
 gpu_idle || { say "REFUSED: GPU not idle"; exit 1; }
