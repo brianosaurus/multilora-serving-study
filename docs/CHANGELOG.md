@@ -100,6 +100,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - 3a passes done and analyzed (`runpod2`, pod clock 06:43 to 06:48 UTC on 2026-11-24; FLAGGED: external CPU 14 to 17 cores at every reading against the plan's limit of 2, and 6 to 11 cores later with nothing of ours running, no continuous sampler; not yet repeated in a quiet window): SGLang routed 64 of 64 in the cold and the warm pass (cache reported 95.6% and 100% of the shared prefix); vLLM fallback met its rule (cache 96.0%, fw = f0 = 0.609, no misroute) at low resolution because the no-cache runs themselves agree on only 61% of completions. No misrouting seen. Details in `followup/prefix_routing/RESULTS.md`.
 
+- Decision (author, 2026-11-24 after 3a): the pod host is not quiet, so timing runs move to a dedicated machine. On `runpod2`, now: 3d, 3e, the memory and KV part of 3c (from startup logs), and the SGLang `main` build for 3b. To the dedicated machine: 3b timing runs, 3c 64-slot latency runs, 4a, 4b, plus a repeat of the 3a SGLang radix-on passes to clear their flag; one script for all of them with the `run_rerun.sh` checks. 3a results stay labeled as flagged and are not exempted from the rule. Plans for items A (SGLang `main` environment) and B (slot memory from logs) written in `followup/pod_items/PLAN.md` before running them (2026-11-24 about 08:00 UTC local).
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
