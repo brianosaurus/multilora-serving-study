@@ -108,6 +108,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Item A done (`runpod2`, pod clock 07:12 UTC on 2026-11-24, no latency measured): SGLang `main` at `0e9cff98f5b7` (contains #46500) installed as `/workspace/envs/sglang_main`, starts with the study's LoRA flags, `--lora-drain-wait-threshold` exists in both builds. The install needed `/root/.cargo/bin` on the PATH. 128 adapters at scale 0.05 regenerated, 128 of 128 equal to the study's manifest; 32 at scale 0.02 generated for the dedicated session. Results: `followup/pod_items/RESULTS.md`.
 
+- Item D builds started (`runpod2`, pod clock about 07:20 UTC on 2026-11-24; plan committed earlier): `followup/pod_items/build_mistralrs.sh` builds the old and new mistral.rs trees one after the other with the flags of `followup/kernel_rerun/BUILD.md`, copies each binary to `/workspace/bin/mistralrs_{old,new}` and deletes its target directory. The builds run on the CPU while Item B (slot memory from startup logs) uses the GPU; no result of either depends on timing.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
