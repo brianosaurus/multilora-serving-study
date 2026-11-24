@@ -120,6 +120,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - 3e source notes written (2026-11-24 about 08:10 UTC local, before the experiment): `followup/mistralrs_first_use/NOTES.md`. No lazy adapter loading found in `mistralrs-core/src/adapter/`; the per-use caches found belong to the expert path; the first-use lead is not explained by what was read, and the experiment of Item D decides.
 
+- Disk finding on `runpod` (2026-11-24 about 07:52 UTC): the `/workspace` volume is at its quota ("Disk quota exceeded" on a 2 GB write and on `uv`); the existing `claude-scratch` (31 GB) and `kvc-diff` (20 GB) hold about 51 GB of it. Nothing was deleted. My directories (`envs`, `src`, `setup`, `bin`, `msf_study`) live on the 30 GB root disk under `/root` with symlinks from `/workspace`, so every script path is unchanged; engine environments (vllm about 9 GB, sglang about 11 GB) fit; mistral.rs builds (a 10 GB target each) and Rust (1.6 GB) are tight and may need space from `/workspace`, which is the author's decision. The SGLang 0.5.23 resolve needed `--prerelease=allow` on this pod (flash-attn-4 pre-release marker); the versions that resolve are compared with `runpod2`'s in `followup/pod_runpod2/SETUP.md` once done.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
