@@ -18,7 +18,7 @@ for cfg in "vllm 16 32" "vllm 32 32" "vllm 64 32" "sglang 16 32" "sglang 32 32" 
   for n in $(names $nad); do CMD+=("$n=$adir/$n"); done
   if [ $eng = vllm ]; then ENVSET=(env PATH=$ENVS/vllm/bin:$PATH); else ENVSET=(env PATH=$ENVS/sglang/bin:/usr/local/cuda/bin:$PATH CUDA_HOME=/usr/local/cuda); fi   # vLLM without CUDA_HOME: with it flashinfer JIT-built a sampling module with nvcc 12.8 against torch cu130 and the engine died with "CUDA error: unknown error" (2026-11-24)
   setsid nohup "${ENVSET[@]}" "${CMD[@]}" > $D/server_$tag.log 2>&1 < /dev/null & SP=$!
-  ok=0; for i in $(seq 1 200); do [ "$(curl -s -o /dev/null -w %{http_code} -m 3 localhost:$PORT/health)" = 200 ] && { ok=1; break; }; kill -0 $SP 2>/dev/null || break; sleep 3; done
+  ok=0; for i in $(seq 1 600); do [ "$(curl -s -o /dev/null -w %{http_code} -m 3 localhost:$PORT/health)" = 200 ] && { ok=1; break; }; kill -0 $SP 2>/dev/null || break; sleep 3; done
   sleep 5; mem=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader)
   say "$tag ready=$ok gpu_mem=$mem"; printf "%s\t%s\t%s\t%s\t%s\t%s\n" $tag $eng $slots $nad $ok "$mem" >> $D/summary.tsv
   kill $SP 2>/dev/null; sleep 8; pkill -9 -f "[v]llm serve|[s]glang.launch_server|[s]glang::|[V]LLM::EngineCore" 2>/dev/null; sleep 5
