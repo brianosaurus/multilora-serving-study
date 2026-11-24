@@ -74,6 +74,10 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Records restored (2026-11-24, about 04:00 UTC, local machine `OIs-MacBook-Pro.local`, not the pod): commit 3fea235 (a rebase of local work onto 630365b, where the author chose the local side of three conflicts) removed 29 lines from this file (every 2026-11-23 follow-up entry), 49 lines from `followup/routing/PLAN.md` (implementation notes, calibration-sweep protocol, Amendment 1, A2 notes) and 12 lines from `followup/kernel_rerun/PLAN.md` (Amendment 1). No other file lost lines (`docs/BUGS.md` had one line extended, not lost). This commit restores that text; it is unchanged from 630365b (the two PLAN files are byte-identical to `git show 630365b:<path>`; for this file the 630365b entries are inserted as they were). One passage was edited on both sides (the "Exploratory follow-up" entry): both versions are kept and marked above. 3fea235 is not reverted and history is not rewritten. A check, `scripts/check_record_deletions.sh`, now fails if a commit removes lines from this file or any PLAN.md; it is installed as the local pre-commit hook.
 
+- csgmv A/B planned (2026-11-24 about 03:55 UTC, local machine, author approved, before any run): after a non-maintainer comment on SGLang discussion #52614 listed four differences between PR #10286 and our csgmv runs (adapter count, open against closed loop, model size, radix cache), a one-condition-at-a-time A/B is fixed in `followup/csgmv_ab/PLAN.md`. Not run. The reply to the comment is a draft only and has not been posted.
+
+- Time correction (2026-11-24, 03:55 UTC local machine clock): the "records restored" entry above says "about 04:00 UTC"; the commit was made at about 03:52 UTC (check `git log`). The commit's own timestamp is authoritative.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
