@@ -1,0 +1,15 @@
+06:31:32 host 462339e34390; load 5.49 6.65 5.19 | extload 0.24 0.27 4.64 | gpu 210MHz,38,20.63W,0%,1MiB
+06:33:59 server up; load 17.53 17.28 9.81 | extload 14.27 14.59 16.20 | gpu 2520MHz,42,63.38W,0%,20508MiB
+vllm smoke: done in 1s; stats {'errors': 0}
+vllm control: done in 0s; stats {'errors': 0}
+06:34:20 stopped; load 12.82 16.23 9.62 | extload 14.46 15.18 11.79 | gpu 210MHz,41,20.89W,0%,1MiB
+smoke cached: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] errors 0
+control {'kind': 'probe', 'adapter': 0, 'prompt': 0, 'prompt_tokens': 721, 'cached': 0}
+control {'kind': 'probe', 'adapter': 0, 'prompt': 1, 'prompt_tokens': 722, 'cached': 0}
+control {'kind': 'probe', 'adapter': 1, 'prompt': 1, 'prompt_tokens': 722, 'cached': 0}
+control {'kind': 'probe', 'adapter': 1, 'prompt': 2, 'prompt_tokens': 726, 'cached': 0}
+control {'kind': 'plain', 'adapter': 0, 'prompt': 0, 'prompt_tokens': 593, 'cached': 576}
+control {'kind': 'plain', 'adapter': 0, 'prompt': 1, 'prompt_tokens': 594, 'cached': 576}
+control {'kind': 'plain', 'adapter': 1, 'prompt': 1, 'prompt_tokens': 594, 'cached': 576}
+control {'kind': 'plain', 'adapter': 1, 'prompt': 2, 'prompt_tokens': 598, 'cached': 576}
+SMOKE_CONTROL_DONE

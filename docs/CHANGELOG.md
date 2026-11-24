@@ -94,6 +94,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - 3a runner written (2026-11-24 about 06:55 UTC, local machine, before any engine run): `prefix_probe.py`, `serve.sh`, `run_smoke_control.sh`; the reading of the smoke test and the control (thresholds 290 cached tokens for a hit, 16 for no cross-adapter hit) is fixed in `followup/prefix_routing/PLAN.md` before the run. Next: smoke and control for vLLM, then SGLang, each on a fresh server.
 
+- 3a, first vLLM smoke and control run (`runpod2`, pod clock 06:31 to 06:34 UTC on 2026-11-24): probe calls report 0 cached tokens, plain calls 576; the control was confounded (same server, earlier calls had written the cache), so Amendment 1 in `followup/prefix_routing/PLAN.md` (written 07:00 UTC local, before any pass) runs each call kind on a fresh server and drops the smoke. vLLM probe calls do not read the prefix cache, so the plan's fallback applies to vLLM. Data kept: `followup/prefix_routing/results/raw/vllm_first_run_confounded/`.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.

@@ -17,6 +17,7 @@ ap.add_argument("--refs", required=True)
 ap.add_argument("--mode", required=True, choices=["mixed", "smoke", "control", "complete"])
 ap.add_argument("--concurrency", type=int, default=16)
 ap.add_argument("--out", required=True)
+ap.add_argument("--kinds", default="probe,plain", help="control mode: which call kinds, in order")
 a = ap.parse_args()
 R = json.load(open(a.refs)); C = R["candidates"]; N = R["n_tokens"]; ADP = C[1:]
 stats = {"errors": 0}
@@ -69,7 +70,7 @@ async def main():
             out["calls"] = await asyncio.gather(*[g(c) for c in calls])
         elif a.mode == "control":
             rec = []
-            for kind in ("probe", "plain"):
+            for kind in a.kinds.split(","):
                 for (ai, p) in [(0, 0), (0, 1), (1, 1), (1, 2)]:
                     ids = R["prompt_ids"][p] + R["tokens"][p][1 + ai]; n_prompt = len(R["prompt_ids"][p])
                     pid = R["prompt_ids"][p] if kind == "plain" else ids
