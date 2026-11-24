@@ -73,3 +73,23 @@ files: results/raw/exp1/{vllm,sglang}/*_{zipf128,uni128}_r*_rep*.json
 files: results/raw/repA/sglang_{triton,csgmv}_c{8,32,128}_rep{0,1,2}.json ; references: results/raw/repA/ref_{triton,csgmv}_{start,end}.json
 reference run drift, triton: e2e p50 start 794 ms, end 795 ms (+0.1%)
 reference run drift, csgmv: e2e p50 start 808 ms, end 814 ms (+0.8%)
+
+## C. Benchmark conditions: PR #10286 next to ours (added 2026-11-24)
+
+PR column from the PR #10286 description (read 2026-11-24 with `gh api`; the numbers were also quoted in a comment on discussion #52614, whose author is not a maintainer). Our column from `results/raw/repA/`, `scripts/exploratory/repA.sh` and `scripts/loadgen.py`. Each difference is a hypothesis for the gap; none was varied alone (see `followup/csgmv_ab/PLAN.md`).
+
+| Condition | PR #10286 | This study (B1) |
+|---|---|---|
+| Model | Llama-3.1-8B-Instruct | Qwen2.5-1.5B-Instruct |
+| GPU | not stated in the PR text I read | one RTX 4090 |
+| Adapters | 1 (`--lora-paths lora=...`) | 32 synthetic, rank 16, Zipf popularity |
+| Slots | not set (one adapter) | `--max-loras-per-batch 16` |
+| Radix cache | off (`--disable-radix-cache`) | on (flag not set) |
+| Load | open loop, `--request-rate` 2, 8, 16, inf | closed loop, concurrency 8, 32, 128 |
+| Requests | 1000 prompts | 500 per run, 50 warm-up excluded |
+| Prompts | ShareGPT | synthetic, 256 input tokens, 128 output tokens, temperature 0 |
+| Tool | `sglang.bench_serving` | `scripts/loadgen.py` |
+| Repeats | not stated | 3 |
+| Reported metric | median E2E latency, ITL, TTFT; throughput | p95 TTFT, TPOT, E2E (pre-registered), medians also given |
+| Headline result | median E2E -9%, -40%, -70%, -81% at 2, 8, 16, inf | E2E p95, change in the median of 3 repeats: -0.6%, -4.5%, -3.6% at 8, 32, 128 |
+| Baseline TTFT p50 at the highest load | 15157 ms (rate inf) | 762 ms (concurrency 128) |
