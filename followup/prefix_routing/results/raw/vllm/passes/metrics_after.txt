@@ -1,0 +1,4 @@
+vllm:prefix_cache_queries_total{engine="0",model_name="qwen"} 74272.0
+vllm:prefix_cache_queries_created{engine="0",model_name="qwen"} 1.7955028248120112e+09
+vllm:prefix_cache_hits_total{engine="0",model_name="qwen"} 65280.0
+vllm:prefix_cache_hits_created{engine="0",model_name="qwen"} 1.7955028248120284e+09

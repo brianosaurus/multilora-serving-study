@@ -1,0 +1,10 @@
+06:42:47 host 462339e34390; load 4.56 13.38 11.77 | extload 17.46 21.23 4.36 | gpu 210MHz,38,20.80W,0%,1MiB
+06:43:44 server up; load 6.49 12.20 11.46 | extload 14.66 15.31 7.81 | gpu 2520MHz,40,62.71W,0%,16162MiB
+06:43:44 start cold
+sglang mixed: done in 2s; stats {'errors': 0}
+06:43:53 end sglang_cold: load 7.81 12.38 11.52 | extload 15.49 15.83 9.85 | gpu 2520MHz,41,63.07W,0%,18512MiB
+06:43:53 start warm
+sglang mixed: done in 2s; stats {'errors': 0}
+06:44:01 end sglang_warm: load 9.85 12.66 11.62 | extload 14.12 14.22 10.90 | gpu 2520MHz,41,63.42W,0%,20756MiB
+06:44:19 stopped; load 13.49 13.32 11.86 | extload 14.52 14.64 13.85 | gpu 210MHz,38,20.89W,0%,1MiB
+PASSES_DONE

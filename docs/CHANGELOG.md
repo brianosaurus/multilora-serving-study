@@ -98,6 +98,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - 3a controls done and Amendment 2 written (pod runs 06:35 to 06:42 UTC, plan text 07:15 UTC local, before any pass): on fresh servers, same-adapter reuse of the shared prefix and no cross-adapter reuse on vLLM (plain calls) and SGLang (probe and plain calls); vLLM probe calls do not read the cache, so vLLM uses a declared completion-comparison fallback; SGLang uses the planned cold and warm probe passes. Script bug found and fixed (`pkill -f sglang` killed the run script itself). Details and the fixed decision rules in `followup/prefix_routing/PLAN.md`.
 
+- 3a passes done and analyzed (`runpod2`, pod clock 06:43 to 06:48 UTC on 2026-11-24; FLAGGED: external CPU 14 to 17 cores at every reading against the plan's limit of 2, and 6 to 11 cores later with nothing of ours running, no continuous sampler; not yet repeated in a quiet window): SGLang routed 64 of 64 in the cold and the warm pass (cache reported 95.6% and 100% of the shared prefix); vLLM fallback met its rule (cache 96.0%, fw = f0 = 0.609, no misroute) at low resolution because the no-cache runs themselves agree on only 61% of completions. No misrouting seen. Details in `followup/prefix_routing/RESULTS.md`.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.

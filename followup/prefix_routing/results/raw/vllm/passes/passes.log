@@ -1,0 +1,20 @@
+06:44:25 host 462339e34390; load 13.85 13.39 11.90 | extload 16.25 16.62 15.07 | gpu 210MHz,38,20.55W,0%,1MiB
+06:45:32 nocache server up; load 19.12 15.16 12.62 | extload 15.53 15.69 20.31 | gpu 2520MHz,40,62.51W,0%,20508MiB
+06:45:32 start nc1
+vllm complete: done in 2s; stats {'errors': 0}
+06:45:41 end vllm_nc1: load 20.13 15.51 12.76 | extload 13.99 15.85 20.76 | gpu 2520MHz,41,62.88W,0%,20638MiB
+06:45:41 start nc2
+vllm complete: done in 2s; stats {'errors': 0}
+06:45:49 end vllm_nc2: load 20.94 15.84 12.90 | extload 15.36 15.49 21.26 | gpu 2520MHz,41,62.22W,0%,20638MiB
+06:45:49 start nc3
+vllm complete: done in 2s; stats {'errors': 0}
+06:45:58 end vllm_nc3: load 21.26 15.99 12.96 | extload 14.06 14.42 20.92 | gpu 2520MHz,41,62.61W,0%,20638MiB
+06:47:16 cache server up; load 20.41 16.94 13.55 | extload 14.17 14.57 20.53 | gpu 2520MHz,41,62.11W,0%,20508MiB
+06:47:16 start wc1
+vllm complete: done in 1s; stats {'errors': 0}
+06:47:24 end vllm_wc1: load 20.49 17.08 13.63 | extload 14.05 14.10 20.29 | gpu 2520MHz,41,62.64W,0%,20638MiB
+06:47:24 start wc2
+vllm complete: done in 1s; stats {'errors': 0}
+06:47:32 end vllm_wc2: load 20.29 17.09 13.65 | extload 14.04 15.26 19.95 | gpu 2520MHz,42,63.28W,0%,20638MiB
+06:47:50 stopped; load 19.28 17.07 13.72 | extload 15.57 16.64 18.85 | gpu 210MHz,40,20.86W,0%,1MiB
+PASSES_DONE

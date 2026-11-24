@@ -1,0 +1,16 @@
+== sglang_cold: errors 0; shared-prefix tokens reported cached: 0.9561562224183583
+sglang / mixed: noise 0.0204, threshold 0.0611; requests evaluated 64/64 (0 incomplete)
+  routed correctly: 64/64  (PASS on the 100% rule)
+  margin d_wrong - d_right: min 0.1112 median 0.3080; d_right median 0.0196 (stand-in noise 0.0204), max 0.0596
+  not routed correctly: 0
+  probe stats: {'errors': 0}
+== sglang_warm: errors 0; shared-prefix tokens reported cached: 1.0
+sglang / mixed: noise 0.0204, threshold 0.0611; requests evaluated 64/64 (0 incomplete)
+  routed correctly: 64/64  (PASS on the 100% rule)
+  margin d_wrong - d_right: min 0.1129 median 0.3054; d_right median 0.0193 (stand-in noise 0.0204), max 0.0437
+  not routed correctly: 0
+  probe stats: {'errors': 0}
+== vLLM fallback: f0 (no-cache run vs no-cache run) 0.6094; fw (wc2 vs no-cache runs) 0.6094; margin 1/64 = 0.0156
+   cached share of shared prefix in wc2: 0.9602824360105914; counters: {'vllm:prefix_cache_queries_total': {'metrics_before': 0.0, 'metrics_after': 74272.0}, 'vllm:prefix_cache_hits_total': {'metrics_before': 0.0, 'metrics_after': 65280.0}}
+   misroutes (completion equals another adapter's in every no-cache run and own in none): []
+   rule: fw >= f0 - 1/64: True; cache used (share >= 0.5): True; misroutes 0: True
