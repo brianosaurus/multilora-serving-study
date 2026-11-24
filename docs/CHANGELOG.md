@@ -84,6 +84,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Step 3 setup done (`runpod2`, pod clock about 06:05 UTC, nothing measured): vLLM 0.34.0 and SGLang 0.5.23 installed in separate environments, model fetched, 32 adapters at scale 0.05 regenerated and equal to the study's checksums (32 of 32). Versions and notes in `followup/pod_runpod2/SETUP.md`. Not yet done: SGLang `main` build (3b), mistral.rs builds (3e), scale 0.02 adapters (4b), and the PLAN.md windows that must be declared before each run.
 
+- 3a plan written (2026-11-24 about 06:30 UTC, local machine, before any run; runs on `runpod2`): routing with prefix caching on for vLLM 0.34.0 and SGLang 0.5.23, `followup/prefix_routing/PLAN.md`. Rule unchanged (k = 3, four power checks first, 100% to pass); new prompts with two shared prefixes of about 512 tokens; cache hits confirmed by counters (at least 50% of shared-prefix tokens in the warm pass) and a cross-adapter control (at most one block cached across adapters); a declared fallback if vLLM bypasses the cache for `prompt_logprobs` requests. Not run.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
