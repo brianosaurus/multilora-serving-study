@@ -20,6 +20,8 @@
 
 ## Item B result: KV capacity and GPU memory by slots (pod clock 2026-11-24, attempt 2 plus one rerun)
 
+This section supersedes the line above that says `sglang_s64_n128` is not run: it was rerun at 19:15 (Amendment 3). The tables and numbers in the section above stay as written; this one adds the eighth row and the token view for both engines. `results/B/TABLE.md` was generated before the rerun and does not include the eighth row (rerun data: `results/B_rerun_sglang_s64_n128/`).
+
 One start per configuration, read from startup logs, no request sent, no variance estimated. Host `runpod` (126ab78ffbd7), shared and heavily loaded, so start times are not reported as results. Attempt 1 (10-minute limit, four timeouts) is failed by timeout and not used. `sglang_s64_n128` was REFUSED in attempt 2 (10:20:29, GPU not idle) and was rerun at 19:15 under Amendment 3 (60-minute limit); at that start the mistral.rs build was running (nice 19, 1 cargo process, load 10.2) and external CPU was 9.25 median / 17.77 max cores (`extload.py check 10`, above the quiet-machine rule; flagged, and irrelevant to a memory reading but stated).
 
 | Engine | Slots | Adapters | KV tokens | vs 16 slots | GPU memory used (nvidia-smi) |
