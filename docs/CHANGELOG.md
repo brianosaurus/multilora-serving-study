@@ -114,6 +114,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Script bug, Item B and the session script (pod clock 07:16 UTC on 2026-11-24, my error): both started vLLM with `CUDA_HOME=/usr/local/cuda` and the CUDA 12.8 `nvcc` on the PATH; vLLM's flashinfer then JIT-built a sampling module against torch 2.14.0+cu130 and the engine died at warm-up with "CUDA error: unknown error" (two starts, `ready=0`, no result). The 3a vLLM starts, which worked, had not set it. Item B was stopped, the flashinfer JIT cache removed, and vLLM now starts without it in `run_slots_memory.sh` and in `run_session.sh`. SGLang keeps it (it worked).
 
+- Incident (pod clock 07:21 UTC on 2026-11-24): CUDA driver init fails on `runpod2` (`cuInit` returns 999; logged as B9 in `docs/BUGS.md`). GPU-dependent items (B, 3d reproduction, 3e experiment, session dry run) are blocked; plans are unchanged. CPU-only work continues: mistral.rs builds (Item D builds), the 3d regression test, 3e source reading.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
