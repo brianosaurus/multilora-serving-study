@@ -1,0 +1,5 @@
+19:15:04 host 126ab78ffbd7; mistralrs build running: 1 cargo procs; load 10.22 10.86 11.97
+19:15:15 external CPU: 9.25 17.77 10.52
+19:15:15 start sglang_s64_n128
+19:20:45 sglang_s64_n128 ready=1 gpu_mem=22088 MiB
+DONE

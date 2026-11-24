@@ -146,6 +146,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
   - So the range is 21 to 113 minutes, wider than the 20 to 70 minutes I first thought. Entries whose stated time matches their commit (for example the csgmv A/B plan, 03:55 against b17df6a at 03:54) are not listed. The pod-clock times (for example Item B, 08:47:56 to 10:20:29) are a different source; the pod clock was compared with the author's machine at 16:11 UTC (see the status check above) and agreed within about 1 s.
   - What this does and does not change: every plan above was committed before the run it covers (Item B plan committed 06:52, its first start 08:02 pod clock), so the "written before any run" statements hold on commit times. Only the stated writing times were wrong.
 
+- Item B rerun, `sglang_s64_n128` (pod clock 2026-11-24 19:15:15 start, 19:20:45 ready; plan Amendment 3 committed as `cd0701d` before the run): ready, 22088 MiB, 535,031 KV tokens. Attempt 2's refusal at 10:20:29 ("GPU not idle") and this rerun are both reported. Context at start: the mistral.rs new-tree build was running (1 cargo process, nice 19), load average 10.2, external CPU 9.25 median and 17.77 max cores, above the quiet-machine rule; the row is flagged and no latency was measured. Item B is complete: 8 of 8 configurations, table in `followup/pod_items/RESULTS.md`. Start limit for this rerun 60 minutes (timeout only, not a result definition); the start took about 5.5 minutes.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.

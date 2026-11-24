@@ -17,3 +17,20 @@
 - SGLang, 32 adapters: 599,468 KV tokens at 16 slots, 582,060 at 32, 535,031 at 64 (-10.7% from 16 to 64).
 - The nvidia-smi column in `summary.tsv` does not show this: the 0.85 memory-utilization flag makes each engine reserve a fixed fraction, so it is not a measure of slot cost.
 - Attempt 1 (10-minute readiness limit, four timeouts on a shared host) is kept in `results/B_attempt1_timeouts/` and is not a result.
+
+## Item B result: KV capacity and GPU memory by slots (pod clock 2026-11-24, attempt 2 plus one rerun)
+
+One start per configuration, read from startup logs, no request sent, no variance estimated. Host `runpod` (126ab78ffbd7), shared and heavily loaded, so start times are not reported as results. Attempt 1 (10-minute limit, four timeouts) is failed by timeout and not used. `sglang_s64_n128` was REFUSED in attempt 2 (10:20:29, GPU not idle) and was rerun at 19:15 under Amendment 3 (60-minute limit); at that start the mistral.rs build was running (nice 19, 1 cargo process, load 10.2) and external CPU was 9.25 median / 17.77 max cores (`extload.py check 10`, above the quiet-machine rule; flagged, and irrelevant to a memory reading but stated).
+
+| Engine | Slots | Adapters | KV tokens | vs 16 slots | GPU memory used (nvidia-smi) |
+|---|---|---|---|---|---|
+| vLLM | 16 | 32 | 542,720 | +0.0% | 20402 MiB |
+| vLLM | 32 | 32 | 526,336 | -3.0% | 20418 MiB |
+| vLLM | 64 | 32 | 481,280 | -11.3% | 20392 MiB |
+| vLLM | 64 | 128 | 481,280 | -11.3% | 20402 MiB |
+| SGLang | 16 | 32 | 599,468 | +0.0% | 22076 MiB |
+| SGLang | 32 | 32 | 582,060 | -2.9% | 22084 MiB |
+| SGLang | 64 | 32 | 535,031 | -10.7% | 22102 MiB |
+| SGLang | 64 | 128 | 535,031 | -10.7% | 22088 MiB |
+
+Reading: from 16 to 64 slots the KV cache holds about 11% fewer tokens on both engines (vLLM 61,440 fewer, SGLang 64,437 fewer). At 28,672 bytes per token for Qwen2.5-1.5B-Instruct (28 layers, 2 KV heads, head dim 128, bf16) that is about 1.8 GB, or about 7% of the 24 GB card, for 48 more slots. From 16 to 32 slots the loss is about 3%. Total GPU memory used is flat (vLLM about 20.4 GB, SGLang about 22.1 GB) because both pre-allocate to a fraction of the card; the LoRA pool comes out of the KV share. 128 adapters on 64 slots gives the same KV capacity as 32 adapters on 64 slots on both engines, so adapters beyond the slot count cost no extra GPU memory here (they live in host memory). The 28,672-byte figure is my arithmetic from the model config, not a logged number; the token counts are from the logs.
