@@ -1,0 +1,9 @@
+08:02:01 start vllm_s16_n32; load 88.45 69.72 41.07
+08:13:03 vllm_s16_n32 ready=0 gpu_mem=1 MiB
+08:13:17 start vllm_s32_n32; load 63.95 75.58 56.60
+08:23:54 vllm_s32_n32 ready=0 gpu_mem=6996 MiB
+08:24:07 start vllm_s64_n32; load 36.40 42.65 48.80
+08:34:29 vllm_s64_n32 ready=0 gpu_mem=7382 MiB
+08:34:43 start sglang_s16_n32; load 38.22 35.45 41.16
+08:45:05 sglang_s16_n32 ready=0 gpu_mem=480 MiB
+08:45:18 start sglang_s32_n32; load 23.23 26.69 34.26

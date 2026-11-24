@@ -1,0 +1,4 @@
+vllm_s16_n32	vllm	16	32	0	1 MiB
+vllm_s32_n32	vllm	32	32	0	6996 MiB
+vllm_s64_n32	vllm	64	32	0	7382 MiB
+sglang_s16_n32	sglang	16	32	0	480 MiB
