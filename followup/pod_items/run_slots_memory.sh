@@ -5,8 +5,9 @@ D=/workspace/study/followup/pod_items/results/B; mkdir -p $D; L=$D/run.log; : > 
 M=/dev/shm/models/Qwen2.5-1.5B-Instruct; ENVS=/workspace/envs
 say() { echo "$(date -u +%T) $*" >> $L; }
 names() { for i in $(seq 0 $(( $1 - 1 ))); do printf "adapter_%04d " $i; done; }
-for cfg in "vllm 16 32" "vllm 32 32" "vllm 64 32" "vllm 64 128" "sglang 16 32" "sglang 32 32" "sglang 64 32" "sglang 64 128"; do
+for cfg in "vllm 16 32" "vllm 32 32" "vllm 64 32" "sglang 16 32" "sglang 32 32" "sglang 64 32" "vllm 64 128" "sglang 64 128"; do   # the two 128-adapter starts last, after the adapters exist (order only; no change to the plan)
   set -- $cfg; eng=$1; slots=$2; nad=$3; tag=${eng}_s${slots}_n${nad}; adir=/dev/shm/adapters; [ $nad = 128 ] && adir=/dev/shm/adapters_128
+  [ $nad = 128 ] && { while [ ! -f /root/setup/adapters.done ]; do sleep 10; done; }
   [ "$(nvidia-smi --query-compute-apps=pid --format=csv,noheader | wc -l)" = 0 ] || { say "REFUSED $tag: GPU not idle"; continue; }
   say "start $tag; load $(cut -d' ' -f1-3 /proc/loadavg)"
   if [ $eng = vllm ]; then PORT=8000
