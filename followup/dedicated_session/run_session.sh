@@ -12,11 +12,11 @@
 # reported, never silently used (analyze_session.py lists them). --dry-run: tiny counts, checks are warnings, output must be discarded.
 # Usage: run_session.sh --host HOSTNAME --out DIR [--seed N] [--blocks "B1 B2 B3 B4 B5"] [--dry-run]
 set -u
-HOST=; OUT=; SEED=20261124; BLOCKS="B1 B2 B3 B4 B5"; DRY=0
+HOST=; OUT=; SEED=20261124; BLOCKS="B1 B2 B3 B4 B5"; DRY=0; SHARED=0
 ROOT=${ROOT:-/workspace/study}; ENVS=${ENVS:-/workspace/envs}; BIN=${BIN:-/workspace/bin}
 M=${M:-/dev/shm/models/Qwen2.5-1.5B-Instruct}; A05=${A05:-/dev/shm/adapters}; A02=${A02:-/dev/shm/adapters_s0.02_32}
 while [ $# -gt 0 ]; do case $1 in --host) HOST=$2; shift 2;; --out) OUT=$2; shift 2;; --seed) SEED=$2; shift 2;;
-  --blocks) BLOCKS=$2; shift 2;; --dry-run) DRY=1; shift;; *) echo "unknown arg $1"; exit 2;; esac; done
+  --blocks) BLOCKS=$2; shift 2;; --dry-run) DRY=1; shift;; --shared-host) SHARED=1; shift;; *) echo "unknown arg $1"; exit 2;; esac; done
 [ -n "$HOST" ] && [ -n "$OUT" ] || { echo "need --host and --out"; exit 2; }
 HERE="$ROOT/followup/dedicated_session"; SC="$ROOT/scripts"; PYL=$ENVS/vllm/bin/python; EXT="$PYL $ROOT/followup/kernel_rerun/extload.py"
 NREQ=500; WARM=50; REPS=3; [ "$DRY" = 1 ] && { NREQ=30; WARM=5; REPS=1; }
@@ -30,7 +30,8 @@ hyg() { nvidia-smi --query-gpu=clocks.sm,temperature.gpu,power.draw,clocks_throt
 gpu_idle || { say "REFUSED: GPU not idle"; exit 4; }
 read -r em ex l0 <<< "$($EXT check 10)"
 if gt "$l0" 2 || gt "$em" 1; then
-  if [ "$DRY" = 1 ]; then say "WARNING (dry run): load $l0 or external CPU median $em above limit"; else say "REFUSED: load average $l0 (limit 2) or external CPU median $em cores over 10 s (limit 1)"; exit 5; fi
+  if [ "$SHARED" = 1 ]; then say "SHARED HOST (Amendment 8): load $l0 or external CPU median $em above the start limit; recorded, not gating; every run is flagged by its own checks"
+  elif [ "$DRY" = 1 ]; then say "WARNING (dry run): load $l0 or external CPU median $em above limit"; else say "REFUSED: load average $l0 (limit 2) or external CPU median $em cores over 10 s (limit 1)"; exit 5; fi
 fi
 say "host $(hostname) ok; $(nproc) cores; load $l0; external CPU median $em max $ex; GPU: $(nvidia-smi --query-gpu=name,driver_version --format=csv,noheader); seed $SEED; blocks: $BLOCKS"
 { echo "repo commit: $(cat $ROOT/SOURCE_COMMIT.txt 2>/dev/null)"; for e in vllm sglang sglang_main; do echo "== $e"; uv pip list --python $ENVS/$e/bin/python 2>/dev/null | grep -i -E "^(vllm|sglang|sglang-kernel|torch|transformers|flashinfer-python) "; done; \
@@ -89,7 +90,7 @@ B1) # 3a repeat of the SGLang radix-on passes
   echo -e "B1\t3a_repeat\tpasses\t-\t-\t$flag\text_before=$pre ext_max=$emax" >> "$TSV"; say "B1 done, flag $flag"; cd - >/dev/null;;
 B2) # 4a
   bash $ROOT/followup/kernel_rerun/run_rerun.sh --host $HOST --old $BIN/mistralrs_old --new $BIN/mistralrs_new --model $M --adapters $A05 \
-     --loadgen $SC/loadgen.py --python $PYL --out $OUT/kernel_rerun --seed $SEED $([ "$DRY" = 1 ] && echo "--dry-run");;
+     --loadgen $SC/loadgen.py --python $PYL --out $OUT/kernel_rerun --seed $SEED $([ "$DRY" = 1 ] && echo "--dry-run") $([ "$SHARED" = 1 ] && echo "--shared-host");;
 B3) # 4b: 0.02 adapters, 32 of them
   for s in $(shuf_seeded $SEED vllm:16 vllm:32 sglang:16 sglang:32); do eng=${s%%:*}; sl=${s##*:}
     server_session "4b_${eng}_s${sl}" $eng $sl 32 $A02 "" "zipf32:zipf:32:10,20,40 uni32:uniform:32:10,20,40"; done;;

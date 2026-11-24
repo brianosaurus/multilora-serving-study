@@ -9,12 +9,12 @@
 # external use above max-ext marks the run LOAD_ABOVE_LIMIT. The load average is recorded for information only.
 # --dry-run only tests the script's logic (tiny counts, the checks downgraded to warnings); its output must be discarded or labeled.
 set -u
-REQ=150; WARM=20; BLOCKS=6; MAXLOAD=2; STARTEXT=1; MAXEXT=2; DRY=0; SEED=0
+REQ=150; WARM=20; BLOCKS=6; MAXLOAD=2; STARTEXT=1; MAXEXT=2; DRY=0; SEED=0; SHARED=0
 while [ $# -gt 0 ]; do case $1 in
   --host) HOST=$2; shift 2;; --old) OLD=$2; shift 2;; --new) NEW=$2; shift 2;; --model) M=$2; shift 2;; --adapters) A=$2; shift 2;;
   --loadgen) LG=$2; shift 2;; --python) PY=$2; shift 2;; --out) OUT=$2; shift 2;; --requests) REQ=$2; shift 2;; --warmup) WARM=$2; shift 2;;
   --blocks) BLOCKS=$2; shift 2;; --max-load) MAXLOAD=$2; shift 2;; --start-ext) STARTEXT=$2; shift 2;; --max-ext) MAXEXT=$2; shift 2;; --seed) SEED=$2; shift 2;;
-  --dry-run) DRY=1; shift;; *) echo "unknown arg $1"; exit 2;; esac; done
+  --dry-run) DRY=1; shift;; --shared-host) SHARED=1; shift;; *) echo "unknown arg $1"; exit 2;; esac; done
 for v in HOST OLD NEW M A LG PY OUT; do [ -n "${!v:-}" ] || { echo "missing --$(echo $v | tr A-Z a-z)"; exit 2; }; done
 HERE="$(cd "$(dirname "$0")" && pwd)"; EXT="$PY $HERE/extload.py"
 mkdir -p "$OUT"; LOG="$OUT/run.log"; SUM="$OUT/summary.txt"; : > "$LOG"; : > "$SUM"
@@ -27,7 +27,8 @@ gpu_apps=$(nvidia-smi --query-compute-apps=pid --format=csv,noheader | wc -l); g
 { [ "$gpu_apps" = 0 ] && [ "$gpu_mem" -lt 500 ]; } || { say "REFUSED: GPU is not idle ($gpu_apps compute processes, ${gpu_mem} MiB used)"; exit 4; }
 read -r ext_med ext_max l0 <<< "$($EXT check 10)"
 if gt "$l0" "$MAXLOAD" || gt "$ext_med" "$STARTEXT"; then
-  if [ "$DRY" = 1 ]; then say "WARNING (dry run only): load average $l0 (limit $MAXLOAD) or external CPU median $ext_med cores (limit $STARTEXT) is above the limit"
+  if [ "$SHARED" = 1 ]; then say "SHARED HOST (Amendment 8 of the dedicated session): load $l0 or external CPU median $ext_med cores above the start limit; recorded, not gating; every run is flagged by its own checks"
+  elif [ "$DRY" = 1 ]; then say "WARNING (dry run only): load average $l0 (limit $MAXLOAD) or external CPU median $ext_med cores (limit $STARTEXT) is above the limit"
   else say "REFUSED: load average $l0 (limit $MAXLOAD) or external CPU median $ext_med cores over 10 s (limit $STARTEXT)"; exit 5; fi
 fi
 say "host $(hostname) ok; $(nproc) cores; load $l0; external CPU median $ext_med max $ext_max cores over 10 s; GPU idle; gpu: $(nvidia-smi --query-gpu=name,clocks.sm,temperature.gpu --format=csv,noheader)"
