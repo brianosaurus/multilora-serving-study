@@ -2,7 +2,7 @@
 
 ## 2d findings (read-only, SGLang `main` at 5d14e90, 2026-11-24 02:55 UTC)
 
-- Still chat-only on `main` by source: `serving_chat.py` reads `model_config.get_default_sampling_params()` (lines 424 to 434) and passes it as `model_generation_config=` at line 1267; `serving_completions.py` has no reference to `default_sampling_params`, `sampling_defaults` or `generation_config`, and its `_build_sampling_params` (line 148) copies `request.temperature`, `request.top_p`, `request.top_k`, `request.repetition_penalty` and the other fields directly. Not yet confirmed by running a server on `main` (that is item 3d, GPU).
+- Still chat-only on `main` by source: `serving_chat.py` reads `model_config.get_default_sampling_params()` (lines 424 to 434) and passes it as `model_generation_config=` at line 1267; `serving_completions.py` has no reference to `default_sampling_params`, `sampling_defaults` or `generation_config`, and its `_build_sampling_params` (line 148) copies `request.temperature`, `request.top_p`, `request.top_k`, `request.repetition_penalty` and the other fields directly. Confirmed by running a server on `main` on 2026-11-24 (Item C, below).
 - Intent: the flag was added in #11304 (merged 2025-10-08, by a collaborator), titled "[oai serving chat] Add argument `--sampling-defaults` and fix `ChatCompletionRequest` defaults". Its text speaks only about `ChatCompletionRequest` and says nothing for or against other endpoints. The log line says "chat". Neither shows that chat-only is intended; they show the change was written for chat. `git blame` was not needed beyond this: `serving_completions.py` commits on main touching sampling or defaults are #38049 (config refactor), #16711 (usage flag) and #15498 (seed), none about generation_config.
 - Overlap, checked 2026-11-24:
   - #45611 (open): `--preferred-sampling-params` on chat. A different flag and path; same family of problem.
@@ -11,26 +11,39 @@
   - #15764 (closed, not merged): preferred params on chat.
   No existing issue found for the `--sampling-defaults model` chat versus completions difference (keyword search, can miss).
 
-## Issue text (draft)
+## Issue text (draft; revised 2026-11-24 after the server-level reproduction on `main`; NOT posted)
 
-**Title:** `--sampling-defaults model` applies generation_config on /v1/chat/completions but not on /v1/completions (v0.5.23)
+**Title:** `--sampling-defaults model`: the model's generation_config is not applied on /v1/completions or /generate (main 0e9cff98f5b7)
 
-With the server default `--sampling-defaults model`, the model's `generation_config.json` is used for requests to `/v1/chat/completions` but not `/v1/completions` or `/generate`. Is chat-only intended? The flag was added in #11304 for `ChatCompletionRequest`; I could not find a statement about other endpoints.
+With the server default `--sampling-defaults model`, a request to `/v1/completions` that sets `temperature: 0` gets different output from the same request with the model's own `generation_config.json` values sent explicitly. On `/v1/chat/completions` the two give the same output. Is it intended that `/v1/completions` does not apply the model's defaults? I could not find a statement either way; the flag was added in #11304 for `ChatCompletionRequest`.
 
-Setup: SGLang 0.5.23, one RTX 4090, `Qwen/Qwen2.5-1.5B-Instruct` (`generation_config.json`: `repetition_penalty` 1.1, `top_p` 0.8, `top_k` 20, `temperature` 0.7). 64 fixed prompts, `max_tokens` 128, the request sets only `temperature: 0`, server started with defaults. Each output is compared with two transformers references (raw greedy with `repetition_penalty=1.0`; and Hugging Face's own default, which applies the model's penalty), by text prefix over the shorter length:
+Setup: SGLang `main` at `0e9cff98f5b7` (includes #46500), one RTX 4090, `Qwen/Qwen2.5-1.5B-Instruct` (`generation_config.json`: `repetition_penalty` 1.1, `top_p` 0.8, `top_k` 20, `temperature` 0.7), no LoRA, server flags default except `--context-length 8192`. 64 fixed prompts, 128 new tokens, one request at a time. Request (i) sets `temperature: 0` alone. Request (ii) sets `temperature: 0` and `repetition_penalty: 1.1`, `top_p: 0.8`, `top_k: 20`. For each endpoint I also repeated (i) to measure run-to-run noise. For `/v1/completions` and `/generate` the prompt is the chat-templated text, so all three endpoints see the same tokens.
 
-| Endpoint | equals raw only | equals HF-default only | equals both | equals neither |
-|---|---|---|---|---|
-| SGLang `/v1/completions` | 34 | 0 | 10 | 20 |
-| SGLang `/v1/chat/completions` | 6 | 1 | 10 | 47 |
-| vLLM 0.34.0 completions / chat | 2 / 2 | 28 / 26 | 9 / 9 | 25 / 27 |
-| mistral.rs v0.9.5 completions / chat | 2 / 1 | 25 / 25 | 9 / 10 | 28 / 28 |
+| Endpoint | (i) differs from (ii) | (i) differs from its repeat |
+|---|---|---|
+| `/v1/completions` | 48 of 64 | 0 of 64 |
+| `/generate` | 48 of 64 | 0 of 64 |
+| `/v1/chat/completions`, repeat pass | 0 of 64 | not applicable |
 
-vLLM and mistral.rs behave the same on both endpoints. SGLang's completions output looks like the raw reference; its chat output matches neither reference for 47 of 64 prompts, which may mean SGLang's repetition penalty differs from Hugging Face's; I did not look into that.
+On `/v1/completions`, (i) differs from (ii) on 48 prompts while repeats of (i) agree on all 64, so the difference is not noise. I read this as the model's defaults not being applied. `/v1/completions` (ii) equals `/generate` (ii) and `/v1/chat/completions` (ii) on 64 of 64 prompts.
 
-Source (v0.5.23, and `main` at 5d14e90 by reading): `serving_chat.py` uses `get_default_sampling_params()`; `serving_completions.py` does not.
+On `/v1/chat/completions`, the repeat of (i) gives the same text as (ii) on 64 of 64 prompts, and the server logs "Using default chat sampling params from model generation config: {'repetition_penalty': 1.1, 'temperature': 0.7, 'top_k': 20, 'top_p': 0.8}". So chat applies the defaults. Separately, the initial pass on a freshly started server differed from every later pass on 19 of 64 prompts; I have not found the cause, am testing it now, and do not claim it is related to this issue.
 
-Not known: whether chat-only is deliberate; behavior with `temperature > 0`; other models; whether #52665 changes this. Not tested on `main` yet. Data and scripts: `differential/results/raw/axis1/` and `differential/results/raw/c8_endpoints/` in the study repo (link to a commit before posting).
+Question for the maintainers: is `/generate` meant to ignore the model's defaults? It behaves like `/v1/completions` here, and I could not tell whether that is deliberate.
+
+Source (by reading `main` at `0e9cff98f5b7`): `serving_chat.py` reads `model_config.get_default_sampling_params()`; `serving_completions.py` has no reference to it, and its `_build_sampling_params` copies the request fields directly.
+
+Regression test (needs no GPU or model): `test_completions_sampling_defaults.py` builds `OpenAIServingCompletion` with a stub whose `get_default_sampling_params()` returns the three values, calls `_build_sampling_params` for a request that sets `temperature` alone, and asserts the model values are used. Output on `main` at `0e9cff98f5b7`:
+
+```
+FAIL test_model_defaults_apply_when_request_sets_only_temperature -> AssertionError 1.0
+PASS test_request_value_wins_over_model_default
+PASS test_schema_defaults_when_model_has_none
+```
+
+The failure is the assertion on `repetition_penalty` (1.0 where the model says 1.1). I have not written a fix.
+
+Not known: other models; behavior at `temperature > 0`; whether #52665 (open, adds `--preferred-sampling-params` on `/v1/completions`) changes this; whether `/generate` should follow chat. Data and scripts are in the study repo (link a commit before posting): `followup/pod_items/results/C_repro/`, `followup/pod_items/cross_endpoint.py`. An earlier comparison on v0.5.23 against vLLM 0.34.0 and mistral.rs v0.9.5 showed the same chat versus completions difference; vLLM and mistral.rs behave the same on both endpoints.
 
 AI tools helped with analysis scripts and code reading. The measurements and conclusions are mine.
 
