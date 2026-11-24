@@ -36,3 +36,10 @@ One start per configuration, read from startup logs, no request sent, no varianc
 | SGLang | 64 | 128 | 535,031 | -10.7% | 22088 MiB |
 
 Reading: from 16 to 64 slots the KV cache holds about 11% fewer tokens on both engines (vLLM 61,440 fewer, SGLang 64,437 fewer). At 28,672 bytes per token for Qwen2.5-1.5B-Instruct (28 layers, 2 KV heads, head dim 128, bf16) that is about 1.8 GB, or about 7% of the 24 GB card, for 48 more slots. From 16 to 32 slots the loss is about 3%. Total GPU memory used is flat (vLLM about 20.4 GB, SGLang about 22.1 GB) because both pre-allocate to a fraction of the card; the LoRA pool comes out of the KV share. 128 adapters on 64 slots gives the same KV capacity as 32 adapters on 64 slots on both engines, so adapters beyond the slot count cost no extra GPU memory here (they live in host memory). The 28,672-byte figure is my arithmetic from the model config, not a logged number; the token counts are from the logs.
+
+## Item A result on `runpod`: SGLang `main` imports and serves (pod clock 2026-11-24, 19:23 to 19:41 UTC; Amendment 4)
+
+- Import: `sglang` 0.5.24.dev2187+g0e9cff98f from `/root/src/sglang-main/python`, the pinned checkout `0e9cff98f5b7` (contains #46500).
+- Start: with the study's LoRA flags, 32 adapters, 16 slots, the server was healthy at 19:41:29, 17 min 45 s after the start at 19:23:44 (KV cache allocated at 19:30:33, 600,199 tokens; the log's final memory line at 19:39:07). GPU memory 22,112 MiB; stopped cleanly, GPU back to 1 MiB. `get_server_info` reports `lora_drain_wait_threshold` 0.0. No request was sent, so this says the server starts, nothing about speed or correctness.
+- Context: the mistral.rs build was running (1 cargo process, nice 19), load 7.8, external CPU 4.62 median and 5.99 max cores (above the quiet-machine rule; flagged, no latency measured). The 18-minute start would have failed the original 6-minute limit in `check_main.sh`, which is why Amendment 4 raised it.
+- Files: `results/A_runpod/` (the existing `results/A/` is the earlier `runpod2` check and is unchanged), `check_main_runpod.sh`.

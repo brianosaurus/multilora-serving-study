@@ -148,6 +148,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Item B rerun, `sglang_s64_n128` (pod clock 2026-11-24 19:15:15 start, 19:20:45 ready; plan Amendment 3 committed as `cd0701d` before the run): ready, 22088 MiB, 535,031 KV tokens. Attempt 2's refusal at 10:20:29 ("GPU not idle") and this rerun are both reported. Context at start: the mistral.rs new-tree build was running (1 cargo process, nice 19), load average 10.2, external CPU 9.25 median and 17.77 max cores, above the quiet-machine rule; the row is flagged and no latency was measured. Item B is complete: 8 of 8 configurations, table in `followup/pod_items/RESULTS.md`. Start limit for this rerun 60 minutes (timeout only, not a result definition); the start took about 5.5 minutes.
 
+- Item A server check on `runpod` done (pod clock 2026-11-24 19:23:44 start, 19:41:29 ready; plan Amendment 4, commit `8183c82`, before the run): SGLang `main` at `0e9cff98f5b7` imports and starts with the study's LoRA flags (32 adapters, 16 slots); 22,112 MiB, 600,199 KV tokens, `lora_drain_wait_threshold` 0.0; no request sent. The start took 17 min 45 s with the mistral.rs build running (nice 19), load 7.8, external CPU 4.62 median and 5.99 max cores (above the quiet rule; flagged, no latency measured). Results in `followup/pod_items/results/A_runpod/`.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
