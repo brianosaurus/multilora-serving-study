@@ -159,6 +159,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Item D done (pod clock 2026-11-24, 21:31:17 to 22:22:33; plan and Amendment 6 `aef4df7` committed before): the first-use lead is NOT reproduced on either mistral.rs tree. 0 of 9 cells showed a difference between request 1 and requests 2 to 6 in any of 6 starts (old, new, old, new, old, new), 0 error responses, one distinct output per cell across all starts, old and new equal, second round equal to the first; the adapters do change the output. The earlier launch-to-launch variation is still unexplained: it came from 8 distinct adapters in flight together, which this serial experiment does not reproduce. External CPU 12 to 14 cores at each start (above the quiet-machine rule; correctness read only). Results: `followup/pod_items/results/D/`, table in `followup/pod_items/RESULTS.md`, script `analyze_item_d.py`. The cold-pass test (Amendment 7) started at 22:28:08 pod clock.
 
+- Amendment 7 result (pod clock 2026-11-24, 22:28:08 to 22:44:32; plan committed before the run): with the radix cache on, pass 1 differs from pass 2 on 19 of 64 prompts (the same 19 as Item C); with `--disable-radix-cache`, on 0 of 64. By the reading fixed in advance, the cause of Item C's first-pass difference is cache-state numerics. One start per setting; load 18 to 21 and external CPU 15.6 to 18.4 cores at the starts (above the quiet rule; correctness read only). Results: `followup/pod_items/results/E_cold_pass/`. The GPU was idle afterwards.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.

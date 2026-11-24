@@ -85,3 +85,14 @@ Not reproduced. Six server starts alternating old (`21da642`, sha256 `b5b94e8câ€
 - Every request gave the same text per cell: each adapter produced exactly one distinct output across all 6 starts and both trees, and the old and new trees gave the same output. The second round matched the first round in all 6 starts.
 - The adapters do change the output (9 distinct texts across base and 8 adapters in start 1), so the test could have shown a difference.
 - Limits: this runs requests one at a time. The earlier variation (kernel rerun, 128-completion check, `docs/CHANGELOG.md` B1 to B3) came from 8 distinct adapters in flight together right after a restart, with the first prompt of each wave varying. This experiment does not reproduce that condition, so the earlier variation is still unexplained; this result says that serial first requests on these trees do not show it. No claim about the kernel is made. Context: host load 12 to 16 and external CPU 12 to 14 cores at every start, above the quiet-machine rule; this is a correctness read, no timing is used.
+
+## Item C follow-up: cold-pass test, Amendment 7 (pod clock 2026-11-24, 22:28:08 to 22:44:32; plan committed before the run)
+
+SGLang `main` `0e9cff98f5b7`, no LoRA, chat endpoint, 64 prompts, `temperature` 0 alone, 128 tokens, two back-to-back passes directly after readiness, one start per setting. Raw: `results/E_cold_pass/`.
+
+| Start | pass 1 vs pass 2 differ |
+|---|---|
+| radix cache on (default) | 19 of 64 prompts |
+| `--disable-radix-cache` | 0 of 64 prompts |
+
+By the reading fixed in Amendment 7 (differs with the cache on, not with it off): the cause is cache-state numerics. The 19 prompts with the cache on are the same 19 as in Item C (11, 22, 24, 30, 31, 32, 34, 35, 36, 37, 39, 40, 41, 45, 48, 52, 59, 61, 63). Limits: one start per setting, one model, one prompt set; this does not say which part of the cache path changes the numbers, and no later pass was run here (Item C's later passes agreed with each other). Context: load 18 to 21 and external CPU 15.6 to 18.4 cores at the starts (above the quiet-machine rule); a correctness read, no timing.

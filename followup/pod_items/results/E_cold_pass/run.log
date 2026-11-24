@@ -1,0 +1,7 @@
+22:28:08 host 126ab78ffbd7 start radix_on; load 18.36 16.77 15.88; external CPU: 18.38 19.09 18.00
+22:32:46 radix_on ready=1
+22:36:09 radix_on requests exit 0
+22:36:33 host 126ab78ffbd7 start radix_off; load 20.59 19.13 17.41; external CPU: 15.61 17.25 19.64
+22:41:11 radix_off ready=1
+22:44:32 radix_off requests exit 0
+DONE

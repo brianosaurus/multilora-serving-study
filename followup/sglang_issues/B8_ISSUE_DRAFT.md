@@ -27,7 +27,7 @@ Setup: SGLang `main` at `0e9cff98f5b7` (includes #46500), one RTX 4090, `Qwen/Qw
 
 On `/v1/completions`, (i) differs from (ii) on 48 prompts while repeats of (i) agree on all 64, so the difference is not noise. I read this as the model's defaults not being applied. `/v1/completions` (ii) equals `/generate` (ii) and `/v1/chat/completions` (ii) on 64 of 64 prompts.
 
-On `/v1/chat/completions`, the repeat of (i) gives the same text as (ii) on 64 of 64 prompts, and the server logs "Using default chat sampling params from model generation config: {'repetition_penalty': 1.1, 'temperature': 0.7, 'top_k': 20, 'top_p': 0.8}". So chat applies the defaults. Separately, the initial pass on a freshly started server differed from every later pass on 19 of 64 prompts; I have not found the cause, am testing it now, and do not claim it is related to this issue.
+On `/v1/chat/completions`, the repeat of (i) gives the same text as (ii) on 64 of 64 prompts, and the server logs "Using default chat sampling params from model generation config: {'repetition_penalty': 1.1, 'temperature': 0.7, 'top_k': 20, 'top_p': 0.8}". So chat applies the defaults. Separately, the initial pass on a freshly started server differed from every later pass on 19 of 64 prompts; With the radix cache disabled (`--disable-radix-cache`) the difference was absent (0 of 64), so it looks like a cache-state effect; I do not claim it is related to this issue.
 
 Question for the maintainers: is `/generate` meant to ignore the model's defaults? It behaves like `/v1/completions` here, and I could not tell whether that is deliberate.
 
