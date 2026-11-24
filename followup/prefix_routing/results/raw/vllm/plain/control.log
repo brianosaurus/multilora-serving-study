@@ -1,0 +1,9 @@
+06:35:19 host 462339e34390; load 5.20 13.43 9.07 | extload 14.15 14.20 8.06 | gpu 210MHz,39,20.68W,0%,1MiB
+06:37:00 server up; load 20.29 16.95 10.82 | extload 14.82 15.12 20.35 | gpu 2520MHz,42,62.88W,0%,20508MiB
+vllm control: done in 0s; stats {'errors': 0}
+06:37:19 stopped; load 20.76 17.28 11.06 | extload 14.12 14.38 20.86 | gpu 210MHz,41,20.73W,0%,1MiB
+control {'kind': 'plain', 'adapter': 0, 'prompt': 0, 'prompt_tokens': 593, 'cached': 0}
+control {'kind': 'plain', 'adapter': 0, 'prompt': 1, 'prompt_tokens': 594, 'cached': 576}
+control {'kind': 'plain', 'adapter': 1, 'prompt': 1, 'prompt_tokens': 594, 'cached': 0}
+control {'kind': 'plain', 'adapter': 1, 'prompt': 2, 'prompt_tokens': 598, 'cached': 576}
+CONTROL_DONE

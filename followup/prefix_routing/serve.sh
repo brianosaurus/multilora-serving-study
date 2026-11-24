@@ -16,5 +16,5 @@ start_sglang() {
   for i in 0 1 2 3; do CMD+=("adapter_000$i=$A/adapter_000$i"); done
   "${CMD[@]}" > $log 2>&1 & SP=$!
   for i in $(seq 1 120); do [ "$(curl -s -o /dev/null -w %{http_code} -m 3 localhost:30000/health)" = 200 ] && return 0; kill -0 $SP 2>/dev/null || return 1; sleep 5; done; return 1; }
-stop_engine() { kill $SP 2>/dev/null; sleep 8; pkill -9 -f "EngineCore" 2>/dev/null; pkill -9 -f sglang 2>/dev/null; sleep 4; }
+stop_engine() { kill $SP 2>/dev/null; sleep 8; pkill -9 -f "EngineCore" 2>/dev/null; pkill -9 -f "sglang.launch_server" 2>/dev/null; pkill -9 -f "sglang::" 2>/dev/null; sleep 4; }
 gpu_idle() { [ "$(nvidia-smi --query-compute-apps=pid --format=csv,noheader | wc -l)" = 0 ]; }

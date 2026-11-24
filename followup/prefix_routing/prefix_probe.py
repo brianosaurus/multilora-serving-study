@@ -78,13 +78,15 @@ async def main():
                     rec.append({"kind": kind, "adapter": ai, "prompt": p, "prompt_tokens": len(pid), "cached": cached})
             out["control"] = rec
         else:
-            rec = []
-            for ai in range(4):
-                for p in range(len(R["prompts"])):
-                    ids = R["prompt_ids"][p]
+            jobs = [(ai, p) for ai in range(4) for p in range(len(R["prompts"]))]
+            random.Random(7).shuffle(jobs)
+            sem = asyncio.Semaphore(a.concurrency)
+            async def g(j):
+                ai, p = j; ids = R["prompt_ids"][p]
+                async with sem:
                     _, cached, text = await probe(s, ADP[ai], ids, len(ids), with_logprobs=False, max_new=32)
-                    rec.append({"a": ai, "p": p, "text": text, "cached": cached})
-            out["complete"] = rec
+                return {"a": ai, "p": p, "text": text, "cached": cached}
+            out["complete"] = await asyncio.gather(*[g(j) for j in jobs])
     out["stats"] = stats; out["seconds"] = time.time() - t0
     json.dump(out, open(a.out, "w"))
     print(f"{a.engine} {a.mode}: done in {out['seconds']:.0f}s; stats {stats}")

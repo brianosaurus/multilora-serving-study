@@ -1,0 +1,3 @@
+06:37:25 host 462339e34390; load 20.86 17.36 11.12 | extload 14.28 14.31 21.27 | gpu 210MHz,40,20.58W,0%,1MiB
+06:40:08 server up; load 14.92 18.90 12.90 | extload 15.18 15.29 15.41 | gpu 2520MHz,40,62.02W,0%,16162MiB
+sglang control: done in 9s; stats {'errors': 0}

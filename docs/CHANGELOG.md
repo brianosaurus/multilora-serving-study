@@ -96,6 +96,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - 3a, first vLLM smoke and control run (`runpod2`, pod clock 06:31 to 06:34 UTC on 2026-11-24): probe calls report 0 cached tokens, plain calls 576; the control was confounded (same server, earlier calls had written the cache), so Amendment 1 in `followup/prefix_routing/PLAN.md` (written 07:00 UTC local, before any pass) runs each call kind on a fresh server and drops the smoke. vLLM probe calls do not read the prefix cache, so the plan's fallback applies to vLLM. Data kept: `followup/prefix_routing/results/raw/vllm_first_run_confounded/`.
 
+- 3a controls done and Amendment 2 written (pod runs 06:35 to 06:42 UTC, plan text 07:15 UTC local, before any pass): on fresh servers, same-adapter reuse of the shared prefix and no cross-adapter reuse on vLLM (plain calls) and SGLang (probe and plain calls); vLLM probe calls do not read the cache, so vLLM uses a declared completion-comparison fallback; SGLang uses the planned cold and warm probe passes. Script bug found and fixed (`pkill -f sglang` killed the run script itself). Details and the fixed decision rules in `followup/prefix_routing/PLAN.md`.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
