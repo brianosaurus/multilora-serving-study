@@ -1,0 +1,5 @@
+07:09:12 host 462339e34390; load 17.69 13.84 12.70
+07:12:05 ready=1; gpu mem 22112 MiB
+version 0.5.24.dev2187+g0e9cff98f lora_drain_wait_threshold 0.0
+07:12:16 stopped; gpu mem 1 MiB
+CHECK_DONE

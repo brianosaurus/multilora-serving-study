@@ -1,0 +1,7 @@
+# Pod items: results (2026-11-24, `runpod2`, no latency measurements)
+
+## Item A: SGLang `main` environment
+- Checked out `0e9cff98f5b73267f7a84a034cba2668c3011ccc` (committer date 2026-11-24 06:46 UTC; `git ls-remote` before the clone returned the same SHA). Its history contains `259f0131c9` "[Feat] LoRA: revamp LoRADrainer for better performance (#46500)". Version string `0.5.24.dev2187+g0e9cff98f`, installed editable from `/workspace/src/sglang-main/python` into `/workspace/envs/sglang_main` (a hard-link copy of the v0.5.23 environment; the v0.5.23 environment still imports as 0.5.23).
+- The install needed a Rust toolchain on the PATH (`/root/.cargo/bin`): the first attempt failed with "cargo is required to discover the Rust extension modules"; the second compiled the Rust extension (about 10 minutes) and installed 10 packages. Package differences from the v0.5.23 environment: `followup/pod_runpod2/sglang_pip_diff.txt` (flashinfer 0.7.2 to 0.7.4, sglang-kernel 0.4.10 to 0.4.11, new sgl-fa3 and blake3, newer sgl-deep-ep, sgl-deep-gemm, sgl-flash-mla, humming-kernels, tml-renderers; torch unchanged).
+- Check: a server with the study's LoRA flags and the 32 study adapters reached ready (07:09 to 07:12 UTC) with 22,112 MiB of GPU memory used, reported the version above and `lora_drain_wait_threshold` 0.0 (the default; the flag exists in `--help` in both builds). No request was sent. Log: `results/A/`.
+- Disk: the first attempt's wheel downloads took the disk down to 6 GB free; clearing the uv cache brought it back to 25 GB free.

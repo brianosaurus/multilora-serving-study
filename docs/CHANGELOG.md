@@ -106,6 +106,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Dedicated-session plan, script and analysis written (2026-11-24 about 09:00 UTC local, before any run; no dedicated machine chosen yet): `followup/dedicated_session/{PLAN.md,run_session.sh,preflight.sh,analyze_session.py,cellinfo.py}`. Contains B1 (3a SGLang repeat), B2 (4a), B3 (4b), B4 (3b), B5 (3c 64 slots) with the checks of `run_rerun.sh`, and the definitions of "the cliff reproduces", "the slot fix reproduces", "improved/unchanged/worse" (3b) and "the cliff moved" (3c), all fixed before any run. Amendment 2 to the kernel rerun plan (shuffled cell order with recorded seed) in `followup/kernel_rerun/PLAN.md`; `run_rerun.sh` got `--seed`. `run_passes.sh`, `serve.sh` and `analyze_passes.py` got an output tag and path overrides so a repeat cannot overwrite the flagged 3a data. `analyze_session.py` was tested on synthetic cells only; the session script is not yet dry-run (needs a machine with the engines idle).
 
+- Item A done (`runpod2`, pod clock 07:12 UTC on 2026-11-24, no latency measured): SGLang `main` at `0e9cff98f5b7` (contains #46500) installed as `/workspace/envs/sglang_main`, starts with the study's LoRA flags, `--lora-drain-wait-threshold` exists in both builds. The install needed `/root/.cargo/bin` on the PATH. 128 adapters at scale 0.05 regenerated, 128 of 128 equal to the study's manifest; 32 at scale 0.02 generated for the dedicated session. Results: `followup/pod_items/RESULTS.md`.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.

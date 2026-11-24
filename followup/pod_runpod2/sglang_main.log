@@ -1,0 +1,3 @@
+ls-remote before: 0e9cff98f5b73267f7a84a034cba2668c3011ccc	refs/heads/main
+checked out: 0e9cff98f5b73267f7a84a034cba2668c3011ccc Tue Nov 24 14:46:19 2026 +0800
+259f0131c9 [Feat] LoRA: revamp LoRADrainer for better performance (#46500)
