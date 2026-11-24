@@ -102,6 +102,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Decision (author, 2026-11-24 after 3a): the pod host is not quiet, so timing runs move to a dedicated machine. On `runpod2`, now: 3d, 3e, the memory and KV part of 3c (from startup logs), and the SGLang `main` build for 3b. To the dedicated machine: 3b timing runs, 3c 64-slot latency runs, 4a, 4b, plus a repeat of the 3a SGLang radix-on passes to clear their flag; one script for all of them with the `run_rerun.sh` checks. 3a results stay labeled as flagged and are not exempted from the rule. Plans for items A (SGLang `main` environment) and B (slot memory from logs) written in `followup/pod_items/PLAN.md` before running them (2026-11-24 about 08:00 UTC local).
 
+- Plans for Items C (B8 reproduction and regression test, 3d) and D (mistral.rs first-use lead, 3e) written in `followup/pod_items/PLAN.md` before running them (2026-11-24 about 08:20 UTC local). Item A (SGLang `main` at `0e9cff98f5b7`, recorded) is installing on `runpod2`; its install needs a Rust toolchain on the PATH (`/root/.cargo/bin`), noted here because the v0.5.23 install did not.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
