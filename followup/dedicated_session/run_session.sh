@@ -37,7 +37,7 @@ say "host $(hostname) ok; $(nproc) cores; load $l0; external CPU median $em max 
 { echo "repo commit: $(cat $ROOT/SOURCE_COMMIT.txt 2>/dev/null)"; for e in vllm sglang sglang_main; do echo "== $e"; uv pip list --python $ENVS/$e/bin/python 2>/dev/null | grep -i -E "^(vllm|sglang|sglang-kernel|torch|transformers|flashinfer-python) "; done; \
   (cd $ROOT/../src/sglang-main 2>/dev/null && echo "sglang main commit: $(git rev-parse HEAD)"); sha256sum $BIN/* 2>/dev/null; } > "$OUT/versions.txt" 2>&1
 
-wait_quiet() { pre=NA; for t in $(seq 1 20); do read -r pm px pl <<< "$($EXT check 6)"; pre=$pm; gt "$pm" 1 || break; sleep 4; done; echo "$pre"; }
+wait_quiet() { pre=NA; for t in $(seq 1 $([ "$SHARED" = 1 ] && echo 1 || echo 20)); do read -r pm px pl <<< "$($EXT check 6)"; pre=$pm; gt "$pm" 1 || break; sleep 4; done; echo "$pre"; }
 names() { for i in $(seq 0 $(( $1 - 1 ))); do printf "adapter_%04d " "$i"; done; }
 PID=
 start_server() { # kind slots nad adapterdir extra...   kind: vllm | sglang | sglang_main
@@ -90,7 +90,7 @@ B1) # 3a repeat of the SGLang radix-on passes
   echo -e "B1\t3a_repeat\tpasses\t-\t-\t$flag\text_before=$pre ext_max=$emax" >> "$TSV"; say "B1 done, flag $flag"; cd - >/dev/null;;
 B2) # 4a
   bash $ROOT/followup/kernel_rerun/run_rerun.sh --host $HOST --old $BIN/mistralrs_old --new $BIN/mistralrs_new --model $M --adapters $A05 \
-     --loadgen $SC/loadgen.py --python $PYL --out $OUT/kernel_rerun --seed $SEED $([ "$DRY" = 1 ] && echo "--dry-run") $([ "$SHARED" = 1 ] && echo "--shared-host");;
+     --loadgen $SC/loadgen.py --python $PYL --out $OUT/kernel_rerun --seed $SEED $([ "$DRY" = 1 ] && echo "--dry-run --blocks 1") $([ "$SHARED" = 1 ] && echo "--shared-host");;
 B3) # 4b: 0.02 adapters, 32 of them
   for s in $(shuf_seeded $SEED vllm:16 vllm:32 sglang:16 sglang:32); do eng=${s%%:*}; sl=${s##*:}
     server_session "4b_${eng}_s${sl}" $eng $sl 32 $A02 "" "zipf32:zipf:32:10,20,40 uni32:uniform:32:10,20,40"; done;;

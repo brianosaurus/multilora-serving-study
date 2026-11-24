@@ -42,7 +42,7 @@ gpu_state() { nvidia-smi --query-gpu=clocks.sm,temperature.gpu,power.draw,clocks
 mkdir -p "$OUT/raw"
 run_cell() { # block pos bin name conc adapters
   blk=$1; pos=$2; bin=$3; name=$4; conc=$5; nad=$6
-  pre=NA; for t in $(seq 1 20); do read -r pm px pl <<< "$($EXT check 6)"; pre=$pm; gt "$pm" "$STARTEXT" || break; sleep 4; done
+  pre=NA; for t in $(seq 1 $([ "$SHARED" = 1 ] && echo 1 || echo 20)); do read -r pm px pl <<< "$($EXT check 6)"; pre=$pm; gt "$pm" "$STARTEXT" || break; sleep 4; done
   rm -f "$OUT/.samples"; "$PY" "$HERE/extload.py" sample "$OUT/.samples" 2 & sampler=$!
   g0=$(gpu_state)
   "$PY" "$LG" --engine mistralrs --url http://localhost:1234 --tokenizer "$M" --requests "$REQ" --warmup "$WARM" --seed 5 --concurrency "$conc" --adapters "$nad" \
