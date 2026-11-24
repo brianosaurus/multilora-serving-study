@@ -118,6 +118,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Pod change (author, 2026-11-24 about 07:45 UTC): "we are using `runpod` now". `runpod2` has the CUDA driver fault B9 and is abandoned for this follow-up (its data is in the repo; nothing on it is needed). `runpod` is host `126ab78ffbd7` (RTX 4090, driver 595.112.07, `cuInit` returns 0, 128 cores, 251 GB RAM, 19 GB `/dev/shm`, overlay root 30 GB, `/workspace` a 490 TB network filesystem with hard links). It is also a shared host (load average 25 to 40 at the time), so the decision stands: no timing runs here. The directories `/workspace/study`, `claude-scratch`, `kvc-diff` and `sglmain` already exist there from earlier work and are NOT touched; everything for this follow-up goes in new directories (`/workspace/msf_study` for the repo copy, `envs`, `src`, `bin`, `setup`). Paths in the copied scripts that say `/workspace/study` are changed to `/workspace/msf_study` on the pod only, not in the repo. Setup script: `followup/pod_items/setup_runpod.sh`. The runs that were planned for `runpod2` (Item A check, B, 3d reproduction, 3e, the dry run of `run_session.sh`) restart there; the plans in `followup/pod_items/PLAN.md` are unchanged apart from the machine.
 
+- 3e source notes written (2026-11-24 about 08:10 UTC local, before the experiment): `followup/mistralrs_first_use/NOTES.md`. No lazy adapter loading found in `mistralrs-core/src/adapter/`; the per-use caches found belong to the expert path; the first-use lead is not explained by what was read, and the experiment of Item D decides.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
