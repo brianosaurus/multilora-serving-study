@@ -82,6 +82,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Step 3 setup on a new pod, `runpod2` (container `462339e34390`, one RTX 4090, 64 cores, 48 GB disk; 2026-11-24 about 05:55 UTC pod clock; author approved the setup, nothing measured): the pod is not the earlier one and has no engines, model, adapters or repo, so the mistral.rs A2 files (2a) are not on it. Disk caches (pip, SGLang, tvm-ffi, uv, about 1.6 GB) were deleted at the author's request; `/root/claude-scratch` (created 02:00 UTC, another session's work) was left. Setup plan: copy this repo by rsync (no repo credentials on the pod); vLLM 0.34.0 and SGLang 0.5.23 each in its own virtualenv; Qwen2.5-1.5B-Instruct from Hugging Face; the study's adapters from `scripts/make_adapters.py` (seeds 0 to 3 and 0 to 31 at B scale 0.05, checked against `results/raw/adapters_manifest.json`; scale 0.02 for step 4b). Versions that resolve are recorded in the setup log. Because the pod's torch is 2.8.0 and the engines pin their own torch, each engine gets its own environment and the system torch is not touched. A load average of 12 on 64 cores was seen from other tenants; measured runs wait for the quiet check of Kernel rerun Amendment 1.
 
+- Step 3 setup done (`runpod2`, pod clock about 06:05 UTC, nothing measured): vLLM 0.34.0 and SGLang 0.5.23 installed in separate environments, model fetched, 32 adapters at scale 0.05 regenerated and equal to the study's checksums (32 of 32). Versions and notes in `followup/pod_runpod2/SETUP.md`. Not yet done: SGLang `main` build (3b), mistral.rs builds (3e), scale 0.02 adapters (4b), and the PLAN.md windows that must be declared before each run.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
