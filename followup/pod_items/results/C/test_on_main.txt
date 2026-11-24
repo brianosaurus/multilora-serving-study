@@ -1,0 +1,4 @@
+sglang main 0e9cff98f5b73267f7a84a034cba2668c3011ccc; env sglang_main; Tue Nov 24 07:22:28 UTC 2026
+FAIL test_model_defaults_apply_when_request_sets_only_temperature -> AssertionError 1.0
+PASS test_request_value_wins_over_model_default
+PASS test_schema_defaults_when_model_has_none
