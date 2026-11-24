@@ -38,9 +38,13 @@ Give the engine more slots and the cliff moves. vLLM, 32 adapters, p95 TTFT rang
 
 SGLang with 32 adapters on Zipf traffic: 16 slots gave 11.8 to 13.8 s at 40 rps; 32 slots gave 94 to 108 ms. At 80 rps, 9.7 to 9.8 s against 126 to 131 ms.
 
-So the advice is dull: size the slots to the number of adapters active at the same time. This is a configuration cliff, not a bug. I looked for a bug. I'd have been happier with a bug.
+So the advice is dull: size the slots to the number of adapters with requests in flight at the same time. This is a configuration cliff, not a bug. I looked for a bug. I'd have been happier with a bug.
+
+Working-set analysis [EXPLORATORY, no new runs]: I checked that advice against the request logs of the main grid (32 adapters, 16 slots, Zipf and uniform traffic, every rate, vLLM and SGLang, 3 repeats). A cell is healthy if its p95 TTFT was under 100 ms. The count of adapters with a request in flight (sent, not finished) was above 16 for at most 9% of the time in every healthy cell and for 72% or more of the time in every degraded cell. Distinct adapters over longer windows do not separate them: over 1 s windows the count was above 16 for 67 to 69% of the time at Zipf 20 rps and 32 to 33% at uniform 10 rps, both healthy, and over 5 and 10 s windows it was above 16 for 99 to 100% of the time in cells such as Zipf 10 rps and uniform 10 rps, also healthy. Caveat: the in-flight count includes requests waiting in the engine's queue, so in degraded cells it is partly a result of the slowdown, not just a cause. This is correlation, not mechanism. It covers 16 slots, one model and one GPU. Details: `followup/working_set/RESULTS.md`.
 
 Why SGLang falls so much harder past the cliff, I don't know. Reading its source suggested three suspects: no anti-starvation by default, synchronous adapter swaps, and eviction policy. I tried the drain threshold (1 s, my pick), overlap loading and FIFO eviction at 16 slots. Drain lowered 40-rps p95 by about 16%, to about 10 s. The others did nothing useful. Suspects mostly acquitted, culprit at large.
+
+A relevant change landed after the version I tested. SGLang PR #46500 (a LoRADrainer revamp, merged 2026-10-29) describes this situation. It is on main but not in v0.5.23: the drainer file at the v0.5.23 tag is identical to the file before that PR. A comparison against main is planned. [PENDING]
 
 ### 128 adapters, 32 slots [EXPLORATORY]
 
@@ -58,6 +62,27 @@ Look at those 20 rps ranges: several straddle the limit, so I'm not ranking anyo
 ## Did csgmv beat triton by 20 to 80%? No. [MEASURED]
 
 SGLang's docs claim 20 to 80% lower latency with the csgmv backend. My pre-registered bar was at least 20% lower median p95 at concurrency 32 and up, with non-overlapping ranges. At concurrency 128, csgmv was 3.6% lower on end-to-end p95 and 4.7% lower on TTFT p95 (ranges separate), with about 4.5% more throughput. At 32, the TTFT gain was 11% but the ranges overlapped. Not held, on this model and this GPU. The docs may be right elsewhere. The plan didn't say which latency, so I reported three. None reached 20%.
+
+For reference, the benchmark behind the documented 20 to 80% (SGLang PR #10286) next to mine:
+
+| Condition | PR #10286 | This study |
+|---|---|---|
+| Model | Llama-3.1-8B-Instruct | Qwen2.5-1.5B-Instruct |
+| Adapters | 1 | 32 synthetic, Zipf popularity, 16 slots |
+| Dataset | ShareGPT | synthetic, 256 input and 128 output tokens |
+| Load | open loop, request rates 2, 8, 16 and unlimited | closed loop, concurrency 8, 32 and 128 |
+| Radix cache | off | on |
+| Metric | median end-to-end latency, 9%, 40%, 70% and 81% lower | p95 TTFT, end-to-end and TPOT; end-to-end p95 3.6% to 4.5% lower at concurrency 32 and 128 |
+
+The comparison is not like for like, so "not held on this setup" says nothing about the docs' own conditions. A commenter on SGLang discussion #52614 suggested some of these differences as the reason. I varied none of them one at a time. A one-condition-at-a-time A/B is planned. [PENDING]
+
+Routing with prefix caching on [FLAGGED]: the host was not quiet during these passes (external CPU use 14 to 17 cores against the plan's limit of 2). Routing correctness does not depend on speed, but the plan's rule applies, so they stay flagged until the SGLang radix-cache passes are repeated in a quiet window (planned, [PENDING]). The prompts share prefixes across adapters; noise 0.0204, margin threshold 0.0611, all four power checks passed on them.
+
+- SGLang 0.5.23, radix cache on, 16 in flight: 64 of 64 requests routed correctly in the cold pass (fresh server) and the warm pass straight after (smallest margins 0.111 and 0.113). The cache served 95.6% (cold) and 100% (warm) of the shared-prefix tokens. A control on fresh servers showed same-adapter reuse of a 579-token prefix (579 cached) and none across adapters (0 cached on the opening call of the other adapter).
+- vLLM 0.34.0, prefix caching on: prompt-logprob calls report 0 cached tokens, so they bypass the cache and the log-probability rule could not be applied with the cache in use. As a fallback I compared 32-token greedy completions of the 64 adapter and prompt pairs. The cache served 96.0% of the shared-prefix tokens in the warm run (65,280 hits of 74,272 queried tokens). A control on fresh servers gave 0, 576, 0 and 576 cached tokens, so no cross-adapter hit, and no misroutes. The check is coarse: two identical cache-off runs agree on just 60.9% of completions, so it would catch a gross adapter swap, not a subtle one.
+- mistral.rs: [PENDING].
+
+Neither result is a correctness guarantee for an engine. One model, rank 16, four adapters at scale 0.02, 16 prompts in two prefix groups. Raw data: `followup/prefix_routing/`.
 
 ## mistral.rs: it's the launches, so I fixed the launches [MEASURED; exploratory, after the 24 hours]
 
@@ -93,6 +118,9 @@ One scare: the new build returned a few more empty completions than the old one 
 - I called mistral.rs's empty completions "unexplained failures", then "not engine failures", before checking either. They are end-of-text first tokens, and whether the other engines differ is still untested.
 - My first A/B of the new kernel was order-confounded. The controls said so, and I rebuilt the design.
 - The network volume lost its contents mid-study, so I reran the first vLLM grid; the summaries agreed to within a few percent.
+- I wrote "size for the working set, not the instantaneous count" before checking it. The analysis showed the reverse for 1 to 10 s windows.
+- The prefix-routing control was initially run on a server whose cache earlier calls had written, so a hit could not show crossing. The plan was amended before any pass and the control rerun on fresh servers.
+- A rebase on another machine deleted follow-up records from the changelog and plans. They were restored unchanged, and a check now blocks staged changes that delete records.
 - The first SGLang LoRA session failed my drift check and was rerun. The discarded numbers matched the rerun closely: the check was cautious, not wrong.
 
 ## Upstream
