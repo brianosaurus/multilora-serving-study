@@ -88,6 +88,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - 3a prompts fixed (2026-11-24 about 06:45 UTC): `followup/prefix_routing/prompts.json`, 16 prompts, shared prefixes of 579 and 554 tokens. Committed before any reference or engine run. Next: scale 0.02 adapters and the fp32 references on `runpod2`, after the quiet check.
 
+- 3a references started (`runpod2`, pod clock 06:20 UTC on 2026-11-24, GPU idle, external CPU 1.29 cores median over 10 s, host load 12 from other tenants; no engine running): scale 0.02 adapters regenerated on the pod, 4 of 4 SHA-256 equal to `followup/routing/results/raw/sweep_s0.02/adapters_s0.02/manifest.json`; `refs.py` got a `MODEL_DIR` environment variable (default unchanged) because the pod's model path differs; `followup/prefix_routing/run_refs.sh` runs `refs.py` then `analyze.py` on `prompts.json`. The power checks decide whether any engine run is interpreted.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.

@@ -15,7 +15,7 @@ THREADS = int(sys.argv[3]) if len(sys.argv) > 3 else 48
 torch.set_num_threads(THREADS)
 DEV = "cuda"
 import os
-M, A = "/root/k/model", os.environ.get("ADAPTER_DIR", "/root/k/adapters")
+M, A = os.environ.get("MODEL_DIR", "/root/k/model"), os.environ.get("ADAPTER_DIR", "/root/k/adapters")  # MODEL_DIR added 2026-11-24 for runpod2; default unchanged
 CANDS = ["base", "adapter_0000", "adapter_0001", "adapter_0002", "adapter_0003"]
 N = 128
 prompts = json.load(open(PROMPTS))
