@@ -43,3 +43,19 @@ Reading: from 16 to 64 slots the KV cache holds about 11% fewer tokens on both e
 - Start: with the study's LoRA flags, 32 adapters, 16 slots, the server was healthy at 19:41:29, 17 min 45 s after the start at 19:23:44 (KV cache allocated at 19:30:33, 600,199 tokens; the log's final memory line at 19:39:07). GPU memory 22,112 MiB; stopped cleanly, GPU back to 1 MiB. `get_server_info` reports `lora_drain_wait_threshold` 0.0. No request was sent, so this says the server starts, nothing about speed or correctness.
 - Context: the mistral.rs build was running (1 cargo process, nice 19), load 7.8, external CPU 4.62 median and 5.99 max cores (above the quiet-machine rule; flagged, no latency measured). The 18-minute start would have failed the original 6-minute limit in `check_main.sh`, which is why Amendment 4 raised it.
 - Files: `results/A_runpod/` (the existing `results/A/` is the earlier `runpod2` check and is unchanged), `check_main_runpod.sh`.
+
+## Item C result: B8 server-level reproduction on SGLang `main` (pod clock 2026-11-24, 20:57:51 start, 21:02:23 ready, 21:19:29 done; Amendment 5, commit `16f3da3`)
+
+SGLang `main` `0e9cff98f5b7`, Qwen2.5-1.5B-Instruct, no LoRA, default `--sampling-defaults`, `--context-length 8192`, one start, 64 prompts (`differential/results/prompts/prompts_main.jsonl`), one request at a time, 128 new tokens, `temperature` 0. (i) only `temperature` 0; (ii) plus the model's `repetition_penalty` 1.1, `top_p` 0.8, `top_k` 20; repeat of (i).
+
+| Endpoint | (i) vs (ii) differ | (i) vs repeat of (i) differ | Reading (rule fixed before the run) |
+|---|---|---|---|
+| `/v1/chat/completions` | 19 of 64 | 19 of 64 | applied (19 at most 19) |
+| `/v1/completions` | 48 of 64 | 0 of 64 | not applied (larger by 48, at least 8) |
+| `/generate` | 48 of 64 | 0 of 64 | not applied (larger by 48, at least 8) |
+
+- The server log records "Using default chat sampling params from model generation config: {'repetition_penalty': 1.1, 'temperature': 0.7, 'top_k': 20, 'top_p': 0.8}" at 21:02:18, as expected for chat.
+- Result: on `main`, the model defaults reach `/v1/chat/completions` and do not reach `/v1/completions` or `/generate`, as B8 describes. This reproduces B8 on `main` for this model and prompt set.
+- Not explained: on chat, two requests with identical parameters differed on 19 of 64 prompts, while completions and `/generate` repeated exactly (0 of 64). I did not investigate the cause; the rule compares against this baseline, so the reading holds, but the 19 is not a measured difference from the defaults alone. The repeat of (ii) was not run, so I cannot say whether the chat noise comes from the penalty or from something else.
+- Context at start: the mistral.rs build had just finished (0 cargo processes), load 5.2, external CPU 4.05 median (above the quiet-machine rule; flagged). This is a correctness read; no timing is used.
+- Regression test: `followup/sglang_issues/test_completions_sampling_defaults.py` fails on `main` (case 1), as written before a fix. No fix is written and nothing is posted. Raw outputs: `results/C_repro/repro.json`.

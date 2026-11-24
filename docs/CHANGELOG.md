@@ -150,6 +150,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Item A server check on `runpod` done (pod clock 2026-11-24 19:23:44 start, 19:41:29 ready; plan Amendment 4, commit `8183c82`, before the run): SGLang `main` at `0e9cff98f5b7` imports and starts with the study's LoRA flags (32 adapters, 16 slots); 22,112 MiB, 600,199 KV tokens, `lora_drain_wait_threshold` 0.0; no request sent. The start took 17 min 45 s with the mistral.rs build running (nice 19), load 7.8, external CPU 4.62 median and 5.99 max cores (above the quiet rule; flagged, no latency measured). Results in `followup/pod_items/results/A_runpod/`.
 
+- Item C done (pod clock 2026-11-24, start 20:57:51, finished 21:19:29; plan Amendment 5, commit `16f3da3`, before the run): B8 reproduces on SGLang `main` for Qwen2.5-1.5B-Instruct and the 64-prompt set. (i) vs (ii) differ on chat 19 of 64 (repeat noise 19 of 64: applied), on `/v1/completions` 48 of 64 (noise 0: not applied), on `/generate` 48 of 64 (noise 0: not applied). Unexplained: chat repeated with identical parameters differs on 19 of 64 prompts; completions and `/generate` repeat exactly; not investigated. Flagged for external CPU 4.05 cores at start (correctness read, no timing). Results: `followup/pod_items/results/C_repro/`, table in `followup/pod_items/RESULTS.md`. Nothing posted; no fix written.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
