@@ -4,12 +4,12 @@ One server start per configuration, no repeats, so no variance. Model Qwen2.5-1.
 
 ## vLLM
 
-| slots | adapters | Available KV cache memory (GiB) | consumed memory, weights + non-torch (GiB) | KV vs 16 slots |
-|---|---|---|---|---|
-| 16 | 32 | 15.62 | 3.85 | +0.0% |
-| 32 | 32 | 15.16 | 4.31 | -2.9% |
-| 64 | 32 | 13.99 | 5.48 | -10.4% |
-| 64 | 128 | 13.99 | 5.48 | -10.4% |
+| slots | adapters | KV cache size (tokens) | tokens vs 16 slots | Available KV cache memory (GiB) | GiB vs 16 slots | consumed memory, weights + non-torch (GiB) |
+|---|---|---|---|---|---|---|
+| 16 | 32 | 542,720 | +0.0% | 15.62 | +0.0% | 3.85 |
+| 32 | 32 | 526,336 | -3.0% | 15.16 | -2.9% | 4.31 |
+| 64 | 32 | 481,280 | -11.3% | 13.99 | -10.4% | 5.48 |
+| 64 | 128 | 481,280 | -11.3% | 13.99 | -10.4% | 5.48 |
 
 ## SGLang
 
@@ -18,7 +18,7 @@ One server start per configuration, no repeats, so no variance. Model Qwen2.5-1.
 | 16 | 32 | 599,468 | 8.00 | 8.00 | +0.0% |
 | 32 | 32 | 582,060 | 7.77 | 7.77 | -2.9% |
 | 64 | 32 | 535,031 | 7.14 | 7.14 | -10.7% |
-| 64 | 128 | not run (refused: GPU not idle) | | |
+| 64 | 128 | 535,031 | 7.14 | 7.14 | -10.7% |
 
 ## Derived
 

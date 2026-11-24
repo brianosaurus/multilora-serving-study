@@ -56,6 +56,24 @@ SGLang `main` `0e9cff98f5b7`, Qwen2.5-1.5B-Instruct, no LoRA, default `--samplin
 
 - The server log records "Using default chat sampling params from model generation config: {'repetition_penalty': 1.1, 'temperature': 0.7, 'top_k': 20, 'top_p': 0.8}" at 21:02:18, as expected for chat.
 - Result: on `main`, the model defaults reach `/v1/chat/completions` and do not reach `/v1/completions` or `/generate`, as B8 describes. This reproduces B8 on `main` for this model and prompt set.
-- Not explained: on chat, two requests with identical parameters differed on 19 of 64 prompts, while completions and `/generate` repeated exactly (0 of 64). I did not investigate the cause; the rule compares against this baseline, so the reading holds, but the 19 is not a measured difference from the defaults alone. The repeat of (ii) was not run, so I cannot say whether the chat noise comes from the penalty or from something else.
+- First-pass difference; cause not yet tested (Amendment 7). Chat with identical parameters differed between the first pass and every later pass on 19 of 64 prompts (same 19 each time); the later passes agree with each other. See the cross-endpoint comparison below.
 - Context at start: the mistral.rs build had just finished (0 cargo processes), load 5.2, external CPU 4.05 median (above the quiet-machine rule; flagged). This is a correctness read; no timing is used.
 - Regression test: `followup/sglang_issues/test_completions_sampling_defaults.py` fails on `main` (case 1), as written before a fix. No fix is written and nothing is posted. Raw outputs: `results/C_repro/repro.json`.
+
+### Item C, cross-endpoint comparison (computed by `cross_endpoint.py` from `results/C_repro/repro.json`)
+
+| Comparison (of 64 prompts) | prompts that differ |
+|---|---|
+| chat (ii) vs completions (ii) | 0 |
+| chat repeat vs completions (ii) | 0 |
+| completions (i) vs generate (i) | 0 |
+| completions (ii) vs generate (ii) | 0 |
+| chat (i) vs chat (ii) | 19 |
+| chat (i) vs chat repeat | 19 |
+| chat (ii) vs chat repeat | 0 |
+
+The 19 prompts are the same for chat (i) vs (ii) and chat (i) vs the repeat: 11, 22, 24, 30, 31, 32, 34, 35, 36, 37, 39, 40, 41, 45, 48, 52, 59, 61, 63. What this shows: the chat difference sits in the first pass on a fresh server, and every later pass agrees. On chat, temperature 0 alone gives the same output as sending the model defaults explicitly (the repeat of (i) equals (ii) on 64 of 64 prompts), and chat (ii) equals completions (ii) on 64 of 64. What it does not show: why the first pass differs. Candidates are a cold radix cache and warmup; Amendment 7 tests this after Item D. The server log line at 21:02:18 reads: "Using default chat sampling params from model generation config: {'repetition_penalty': 1.1, 'temperature': 0.7, 'top_k': 20, 'top_p': 0.8}".
+
+### Item D, adapters
+
+The 8 adapters used for Item D (`/dev/shm/adapters_s0.05_8`, made with `make_adapters.py --count 8 --first-seed 0 --b-std 0.05`) are byte-identical to the manifest's seeds 0 to 7: the `adapter_model.safetensors` sha256 matches for 8 of 8 (`results/D_prep/adapter_compare.txt`). Settings equal (b_std 0.05, rank 16, alpha 32, float16, same base-weights hash); library versions differ (torch 2.14.1 vs 2.14.0, transformers 5.19.0 vs 5.22.2), which did not change the files.

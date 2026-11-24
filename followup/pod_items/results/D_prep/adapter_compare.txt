@@ -1,0 +1,10 @@
+settings differing: none (b_std, rank, alpha, dtype, base weights hash equal)
+versions repo manifest: {'torch': '2.14.0+cu130', 'peft': '0.22.0', 'transformers': '5.22.2'} | pod manifest: {'torch': '2.14.1+cu130', 'peft': '0.22.0', 'transformers': '5.19.0'}
+adapter_0000 file sha256 on pod equals repo manifest: True | pod manifest equals repo manifest: True
+adapter_0001 file sha256 on pod equals repo manifest: True | pod manifest equals repo manifest: True
+adapter_0002 file sha256 on pod equals repo manifest: True | pod manifest equals repo manifest: True
+adapter_0003 file sha256 on pod equals repo manifest: True | pod manifest equals repo manifest: True
+adapter_0004 file sha256 on pod equals repo manifest: True | pod manifest equals repo manifest: True
+adapter_0005 file sha256 on pod equals repo manifest: True | pod manifest equals repo manifest: True
+adapter_0006 file sha256 on pod equals repo manifest: True | pod manifest equals repo manifest: True
+adapter_0007 file sha256 on pod equals repo manifest: True | pod manifest equals repo manifest: True

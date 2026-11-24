@@ -1,0 +1,81 @@
+{
+  "base": "/dev/shm/models/Qwen2.5-1.5B-Instruct",
+  "base_weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+  "rank": 16,
+  "alpha": 32,
+  "b_std": 0.05,
+  "dtype": "float16",
+  "targets": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ],
+  "init": "A ~ N(0, 1/fan_in), B ~ N(0, b_std^2), seeded per adapter",
+  "versions": {
+    "torch": "2.14.1+cu130",
+    "peft": "0.22.0",
+    "transformers": "5.19.0"
+  },
+  "adapters": [
+    {
+      "name": "adapter_0000",
+      "seed": 0,
+      "path": "/dev/shm/adapters_s0.05_8/adapter_0000",
+      "bytes": 36981464,
+      "sha256": "fce4dd005e5f34fcd4dcc79dacd169e67e40305e41298a98db6ce7fc0bc7ca94"
+    },
+    {
+      "name": "adapter_0001",
+      "seed": 1,
+      "path": "/dev/shm/adapters_s0.05_8/adapter_0001",
+      "bytes": 36981464,
+      "sha256": "c00297d248f78f57634ba75b1a4d6e6cb22289f0dfc54d07ec33fb1cd325aa22"
+    },
+    {
+      "name": "adapter_0002",
+      "seed": 2,
+      "path": "/dev/shm/adapters_s0.05_8/adapter_0002",
+      "bytes": 36981464,
+      "sha256": "e34619b183cd60ba5602e2b8a51fefaad56d3e17acb898d418cdcc4c5d222222"
+    },
+    {
+      "name": "adapter_0003",
+      "seed": 3,
+      "path": "/dev/shm/adapters_s0.05_8/adapter_0003",
+      "bytes": 36981464,
+      "sha256": "262dab4144713f1b231832559f92a5d84f4454bdb647713ca03d0767283da74d"
+    },
+    {
+      "name": "adapter_0004",
+      "seed": 4,
+      "path": "/dev/shm/adapters_s0.05_8/adapter_0004",
+      "bytes": 36981464,
+      "sha256": "e6674aa73ebb2d55c5ee73b6cedf6b9ac8a613c527a7b3ef05e5bc72c74a0f72"
+    },
+    {
+      "name": "adapter_0005",
+      "seed": 5,
+      "path": "/dev/shm/adapters_s0.05_8/adapter_0005",
+      "bytes": 36981464,
+      "sha256": "da47b89eb33bbdedc90f570e597c512d787fdf0028c987543d2124b39845582b"
+    },
+    {
+      "name": "adapter_0006",
+      "seed": 6,
+      "path": "/dev/shm/adapters_s0.05_8/adapter_0006",
+      "bytes": 36981464,
+      "sha256": "f380fa5e372e4742d149c0db33e69d7e5b7c10e18a2bcf5ae61ccc0a8e829884"
+    },
+    {
+      "name": "adapter_0007",
+      "seed": 7,
+      "path": "/dev/shm/adapters_s0.05_8/adapter_0007",
+      "bytes": 36981464,
+      "sha256": "f127b4a3455081b9527e22bdb8f82f69eb905186126376a590dea34d86096d8d"
+    }
+  ]
+}
