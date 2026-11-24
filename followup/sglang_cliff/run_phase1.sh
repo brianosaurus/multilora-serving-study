@@ -16,6 +16,13 @@ for a in m:
     if h!=a["sha256"]: print("MISMATCH",a["name"]); sys.exit(1)
 print("adapters ok")
 P
+for e in sglang sglang_main; do echo "== $e"; /root/envs/$e/bin/python - <<'P'
+import importlib.metadata as m
+for n in ("sglang","sglang-kernel","torch","triton","flashinfer-python","transformers","peft"):
+    try: print(n, m.version(n))
+    except Exception as x: print(n, "n/a")
+P
+done > $D/versions.txt 2>&1
 declare -A ENVOF=( [v23]=/root/envs/sglang [main]=/root/envs/sglang_main )
 declare -A FLAG=( [def]="" [d1]="--lora-drain-wait-threshold 1.0" [d02]="--lora-drain-wait-threshold 0.2" )
 ORDERS=( "v23-def main-def v23-d1 main-d1 v23-d02 main-d02" "main-d02 v23-d02 main-d1 v23-d1 main-def v23-def" "v23-d1 main-d02 main-def v23-d02 main-d1 v23-def" )
