@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+"""Writes prompts.json: 2 shared prefixes (about 512 tokens each), 8 suffixes each = 16 prompts. Fixed text, no randomness."""
+import json
+A = """You are reviewing the operations handbook of a regional water utility. The handbook describes how the utility treats, stores and delivers drinking water to about two hundred thousand customers across three districts. Read the excerpt below and then answer the question that follows it.
+
+Excerpt. Raw water arrives from two reservoirs and a set of wells. At the intake station the water passes through coarse screens that remove leaves, sticks and other debris, and then through fine screens with openings of about two millimetres. A small dose of potassium permanganate is added to oxidise dissolved iron and manganese, which would otherwise stain laundry and give the water a metallic taste. From the intake the water flows by gravity to the main treatment plant, a trip of roughly nine kilometres that takes about three hours at normal demand.
+
+At the plant the water enters a rapid-mix chamber where aluminium sulphate is added. The coagulant neutralises the electrical charge of the tiny particles suspended in the water so that they can stick together. In the flocculation basins, slow paddles stir the water gently for twenty-five minutes, and the particles grow into visible clumps called flocs. The water then moves to the sedimentation basins, where the flocs settle to the bottom over about four hours. The settled sludge is pumped to drying beds, and the clear water at the top is drawn off over weirs into the filter hall.
+
+The filters are twelve beds of anthracite coal over sand over gravel. Water trickles down through the media at a rate of about eight metres per hour, and the remaining fine particles, including most cysts and some bacteria, are caught in the pores between the grains. Each filter is washed in reverse every forty-eight hours, or sooner if the pressure drop across the bed rises above two metres of water. Turbidity is measured continuously at the outlet of every filter, and an alarm sounds if any reading exceeds 0.3 units for more than five minutes.
+
+After filtration the water is disinfected with chlorine gas, injected to reach a free chlorine concentration of about 1.2 milligrams per litre after thirty minutes of contact time in the clear well. Fluoride is adjusted to 0.7 milligrams per litre, and sodium hydroxide raises the pH to between 7.4 and 7.8 so that the water does not corrode pipes in customers' homes. Treated water is pumped to four elevated tanks and two ground-level reservoirs that together hold about forty million litres, roughly one and a half days of average use.
+
+Operators take samples at fifty-two points in the distribution network each week and test for coliform bacteria, chlorine residual and temperature. Any positive coliform result triggers a repeat sample within twenty-four hours and a flushing of the nearby mains. The utility publishes its results every year in a report to customers.
+
+"""
+B = """You are reading the maintenance notes for a small research telescope run by a university astronomy club. The telescope is a reflector with a thirty-centimetre mirror on a German equatorial mount, housed in a roll-off roof shed on the roof of the physics building. Read the notes below and then answer the question that follows them.
+
+Notes. The mirror is made of borosilicate glass with an aluminium coating applied eleven years ago. It sits in a cell with nine support points on a whiffletree, and three push-pull screws hold it in place. Collimation is checked at the start of every observing season using a laser collimator and a Cheshire eyepiece, and again whenever the telescope has been moved. A well-collimated telescope shows a round, symmetric diffraction pattern around a defocused star, and the club keeps a photograph of the correct pattern taped inside the shed door for comparison.
+
+The mount carries both optical tubes, the main reflector and a small refractor used as a guide scope. Polar alignment is done with the drift method on clear nights and with a polar scope when time is short. The worm gear in the right ascension axis has a periodic error of about twenty arcseconds peak to peak with a period of just under eight minutes, which is why long exposures need autoguiding. The guide camera takes a one-second exposure every two seconds, and the guiding software sends corrections to the mount through a serial cable. The declination axis is not guided during exposures shorter than five minutes.
+
+The main camera is a cooled monochrome sensor with a pixel size of 3.76 micrometres. It is cooled to minus ten degrees Celsius in summer and minus twenty in winter, and a set of thirty dark frames is taken at each temperature every three months. Flat fields are taken at dusk using a white screen stretched across the shed doorway. A filter wheel holds red, green, blue, luminance and hydrogen-alpha filters, and each filter has its own focus offset stored in the capture software, since a change of filter shifts the focus by a few hundredths of a millimetre.
+
+The roof is moved by a winch with limit switches at both ends. It must never be closed while the telescope points below forty degrees altitude, because the tube could strike the roof beam, and a sensor on the mount blocks the winch in that case. A rain sensor closes the roof automatically if more than a few drops are detected, provided that the telescope has been parked first. The shed is heated lightly in winter to keep the electronics above freezing.
+
+Observing logs are kept in a shared spreadsheet, and every session records the date, the seeing, the targets, the exposure times and any faults.
+
+"""
+SA = ["Why is potassium permanganate added at the intake station?",
+ "What happens to the flocs in the sedimentation basins?",
+ "How often is each filter washed in reverse, and what else can trigger a wash?",
+ "What free chlorine concentration is the disinfection step meant to reach?",
+ "Why is the pH raised before the water leaves the plant?",
+ "How much treated water can the utility store, in days of average use?",
+ "What does the utility do after a positive coliform result?",
+ "Explain in two sentences what the filter media do."]
+SB = ["How is collimation checked, and when?",
+ "Why do long exposures need autoguiding on this mount?",
+ "What is the periodic error of the worm gear?",
+ "Why does each filter have its own focus offset?",
+ "When must the roof not be closed, and what prevents it?",
+ "At what temperatures is the camera cooled?",
+ "How is polar alignment done on a clear night?",
+ "Explain in two sentences what a flat field is for."]
+P = [A + "Question: " + q + "\nAnswer:" for q in SA] + [B + "Question: " + q + "\nAnswer:" for q in SB]
+json.dump(P, open("followup/prefix_routing/prompts.json", "w"), indent=1)
+print(len(P), "prompts")

@@ -86,6 +86,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - 3a plan written (2026-11-24 about 06:30 UTC, local machine, before any run; runs on `runpod2`): routing with prefix caching on for vLLM 0.34.0 and SGLang 0.5.23, `followup/prefix_routing/PLAN.md`. Rule unchanged (k = 3, four power checks first, 100% to pass); new prompts with two shared prefixes of about 512 tokens; cache hits confirmed by counters (at least 50% of shared-prefix tokens in the warm pass) and a cross-adapter control (at most one block cached across adapters); a declared fallback if vLLM bypasses the cache for `prompt_logprobs` requests. Not run.
 
+- 3a prompts fixed (2026-11-24 about 06:45 UTC): `followup/prefix_routing/prompts.json`, 16 prompts, shared prefixes of 579 and 554 tokens. Committed before any reference or engine run. Next: scale 0.02 adapters and the fp32 references on `runpod2`, after the quiet check.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.

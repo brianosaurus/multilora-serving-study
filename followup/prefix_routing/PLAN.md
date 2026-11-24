@@ -23,3 +23,7 @@ Question: when requests for different adapters share a long prompt prefix and th
 ## Limits stated in advance
 
 Synthetic adapters at scale 0.02, one model, rank 16, four adapters, 16 prompts of about 550 tokens, two prefix groups. Two of the four adapters' cache behavior is not distinguished from the other two. The probe forces tokens instead of decoding normally, so it does not test the decode path's use of the cache. No claim about other engines, models or cache settings.
+
+## Prompts fixed (2026-11-24 about 06:45 UTC, local machine; token counts from the Qwen2.5 tokenizer on `runpod2`, before any engine or reference run)
+
+`prompts.json` (made by `make_prompts.py`, fixed text) has 16 prompts of 564 to 598 tokens. The shared token prefix is 579 tokens within group A (prompts 0 to 7) and 554 within group B (prompts 8 to 15); A and B share 2 tokens. This is longer than the "about 512" above; the cache thresholds are unchanged (at least 50% of the shared-prefix tokens, so at least 290 tokens of A and 277 of B must be reported cached in the warm pass).
