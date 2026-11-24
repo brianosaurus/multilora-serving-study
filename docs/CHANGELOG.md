@@ -92,6 +92,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - 3a power checks PASS on the new prompts (`runpod2`, pod clock 06:28 UTC on 2026-11-24; references took 8 minutes, no engine running): noise 0.0204, threshold 0.0611, checks 1 to 4 pass (64 of 64, 0 of 192, 0 of 64, all 10 pairs above threshold). Engine runs are allowed by the plan; none has been done. Data: `followup/prefix_routing/results/raw/`.
 
+- 3a runner written (2026-11-24 about 06:55 UTC, local machine, before any engine run): `prefix_probe.py`, `serve.sh`, `run_smoke_control.sh`; the reading of the smoke test and the control (thresholds 290 cached tokens for a hit, 16 for no cross-adapter hit) is fixed in `followup/prefix_routing/PLAN.md` before the run. Next: smoke and control for vLLM, then SGLang, each on a fresh server.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.

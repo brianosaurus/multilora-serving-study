@@ -31,3 +31,13 @@ Synthetic adapters at scale 0.02, one model, rank 16, four adapters, 16 prompts 
 ## Gate: power checks on the new prompts (pod clock 06:28 UTC on 2026-11-24, before any engine run)
 
 All four power checks pass under the unchanged rule (k = 3): noise (median bf16-vs-fp32 distance) 0.0204, margin threshold 0.0611. Check 1: 64 of 64 correct stand-in requests routed correctly (margin min 0.116, median 0.305); check 2: 0 of 192; check 3: 0 of 64; check 4: all 10 candidate pairs above the threshold (smallest 0.314). Engine verdicts are allowed. Fixed numbers for the engine analysis: noise 0.0204, threshold 0.0611 (`results/raw/analyze_prefix.txt`, `results/raw/refs_prefix.json`). Adapter checksums (`results/raw/adapter_sha256.txt`) equal the sweep's. This does not certify any engine.
+
+## Runner and smoke criteria (2026-11-24 about 06:55 UTC, local machine, before any engine run)
+
+Files: `prefix_probe.py` (modes mixed, smoke, control, complete), `serve.sh` (server start and stop, flags as in the A2 notes with prefix caching on; vLLM also `--enable-prompt-tokens-details`), `run_smoke_control.sh` (one fresh server per engine: 12-call smoke, then the control; no pass). The passes are run afterwards by a second script once the smoke and control results are read.
+Control, as run: probe calls and plain calls (prompt only, `max_tokens` 1, no logprobs) in the order (adapter 0, prompt 0), (adapter 0, prompt 1), (adapter 1, prompt 1), (adapter 1, prompt 2); prompts 0, 1 and 2 share a 579-token prefix. Cached tokens are read per call (vLLM: `usage.prompt_tokens_details.cached_tokens`; SGLang: `meta_info.cached_tokens`); vLLM's `prefix_cache_hits` and `prefix_cache_queries` counters are saved after the control.
+Reading of the control, fixed now:
+- Cache works for the call type if the second call (same adapter, shared prefix) reports at least 290 cached tokens (50% of 579).
+- No cross-adapter hit if the third call (other adapter, same prefix, not yet cached for that adapter) reports at most 16 cached tokens (vLLM block size; for SGLang the page size read from its log, or 1 if none is printed). More is a finding.
+- If the probe-type calls report fewer than 290 cached tokens on the second call while the plain calls report at least 290, the probe bypasses the cache and the fallback in this plan is used for that engine. If neither type reports hits, the cache is not exercised and that engine's 3a result is "cache not exercised".
+- If cached tokens are not reported at all (`None`), the vLLM counters decide; SGLang has no counter fallback here and would be reported as "not measured".
