@@ -140,6 +140,13 @@ Predictions (PLAN.md option 5): H1 (TPOT below 20 ms) holds; H2 (p95 at least 3x
 Reading: with the graph range raised, SGLang's 16-slot throughput matches vLLM's (36.7 requests/s, about 4.7k tok/s) and TPOT falls from 43 to 12-14 ms. The step time above 48 requests, not the slot rule, was the main reason a slot stayed held 5 times longer. A gap to vLLM remains in p95 TTFT (2.1-3.1 s against 1.45 s). I have not run the 32-slot cell with the larger range, nor tested whether main without LoRA behaves the same, nor the default on other GPUs.
 Consequences: the earlier readings "every scheduling lever is exhausted" and "the cliff is a slots-versus-adapters threshold" were incomplete: the slot count matters, but the capacity lost at 16 slots was largely this step-time penalty. Page claim "same slots, same traffic" was not the same setting; a line was added to "Things I got wrong" in `docs/DRAFT_POST.md` and `docs/DRAFT_POST_long.md`. Single flag, shared host, screening only; any timing claim for the page needs the dedicated machine.
 
+## Option 2 read: what is left of the gap to vLLM (from existing traces, no new runs, FLAGGED)
+At 16 slots and 40 rps, graph limit 256 (3 starts) against stock and vLLM:
+- SGLang with the limit raised: mean wait 0.35, 0.46, 0.37 s; p95 wait 2.0, 3.0, 2.1 s; non-running adapters' median wait 1.2, 1.5, 1.2 s; mean decode batch 52 to 57 (max 81 to 92); 72 to 84 loads. Stock: mean wait 2.03 s, p95 13.1 s, non-running median 9.5 s, mean batch 102.
+- vLLM: mean queue 0.24 s, p95 TTFT 1.45 s, TPOT 10 ms. SGLang with the limit: TPOT 12 to 14 ms.
+- Reading: a slot is held about one request lifetime (128 tokens), which is 1.5 to 1.8 s in SGLang here and 1.3 s in vLLM, and the wait of a non-running adapter is about one to two lifetimes. A 20 to 40% longer step plus the spread over three starts is the size of the remaining gap. I cannot separate those from this data. The decode-call CPU time in the trace is 2 ms in both and says nothing about GPU step time.
+- Not tested: GPU step time of the LoRA kernels in each engine (needs a profile), and repeats on the dedicated machine.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.
