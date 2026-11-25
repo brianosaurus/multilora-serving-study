@@ -248,6 +248,26 @@ Plan `8ba8516`, amendment 4 `630cf3d` (first run matched arrivals to loadgen req
 - Drainer starts: slot turnover is higher than stock at 40 rps (40 and 47 changes against 10 to 14), unchanged at 20 rps (121 and 122). That agrees with the drainer moving waiting around without adding capacity.
 - Not tested: why the slow 20 rps starts begin with fewer loads in the first seconds.
 
+## Option 11 result: queue-aware eviction check (existing traces, FLAGGED)
+Plan `53394a6` committed before the analysis; script `evict_queue.py`, output `results/phase2/evict_queue.txt`. Eviction rule: `mem_pool.py:810-856` (candidates are pool adapters not in the current batch and not pinned, victim chosen by `lora_eviction_policy` = `lru`, `eviction_policy.py:47,64-76`); the queue is not consulted.
+
+| group (after 5 s) | starts | evictions | evicted adapter had at least 1 request waiting |
+|---|---|---|---|
+| 20 rps slow (`B_main-16`, `E_main-16-P1`) | 2 | 59 | 0 (0%) |
+| 20 rps normal stock | 7 | 868 | 2 (0%) |
+| 20 rps drainer | 2 | 247 | 0 |
+| 20 rps raised limit | 6 | 742 | 1 (0%) |
+| 40 rps slow (`B_main-16`, `E_main-16-U4`) | 2 | 40 | 0 |
+| 40 rps normal stock | 7 | 139 | 0 |
+| 40 rps drainer | 2 | 106 | 73 (69%) |
+| 40 rps raised limit | 6 | 289 | 2 (1%) |
+
+- Predictions fail: 0% of evictions in the slow 20 rps starts hit an adapter with a waiting request (predicted at least 30%), and no top-4 adapter was evicted with any waiting request (predicted 5 or more). The normal part holds (0%, at most 10%). By the plan, no patch plan is written.
+- Why it comes out this way: a waiting request for an adapter that is already in the pool is admitted whenever the batch has room (`scheduler.py` `can_schedule_lora_req` counts distinct adapters in the batch, not pool residents), so an adapter is only evicted while idle and with nothing queued for it. LRU is not throwing out adapters that requests are waiting for.
+- The top-4 adapters in the slow starts were evicted 18 to 36 s after the first arrival, within about 2 s of each other and with 0 waiting. The arrival phase of a run ends about 27 s after the first arrival (550 requests at 20 rps), so these are evictions during the drain at the end of the run, not part of the slow state.
+- Unplanned: the drainer at 40 rps evicts an adapter with requests waiting for it in 69% of its evictions (73 of 106; 36 and 37 per start), against 0 in stock. That fits what the drainer does: it blocks admission for the draining adapter, its queued requests wait, then it is evicted when it empties, and those requests need a reload. It also had about three times the loads of stock at 40 rps.
+- The queue-aware eviction patch is not planned: the check it rests on failed.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.

@@ -1,0 +1,52 @@
+FLAGGED: existing traced screening starts; 'after 5 s' = 5 s after the first arrival
+
+start                    rate    group slow evicts with waiting  share max waiting
+D_main-16-d02              20  drainer         123            0     0%           0
+D_main-16-d1               20  drainer         124            0     0%           0
+H_main-16-cg256-1          20   raised         125            0     0%           0
+H_main-16-cg256-2          20   raised         125            0     0%           0
+H_main-16-cg256-3          20   raised         123            1     1%           1
+K2_main-16-cg256-ovl-1     20   raised         123            0     0%           0
+K2_main-16-cg256-ovl-2     20   raised         124            0     0%           0
+K2_main-16-cg256-ovl-3     20   raised         122            0     0%           0
+B_main-16                  20    stock  YES     28            0     0%           0
+B_v23-16                   20    stock         123            0     0%           0
+E_main-16-P1               20    stock  YES     31            0     0%           0
+E_main-16-P2               20    stock         124            0     0%           0
+E_main-16-P3               20    stock         123            1     1%           1
+E_main-16-P6               20    stock         124            0     0%           0
+E_main-16-U1               20    stock         123            0     0%           0
+E_main-16-U4               20    stock         128            1     1%           1
+E_main-16-U5               20    stock         123            0     0%           0
+D_main-16-d02              40  drainer          53           37    70%          43
+D_main-16-d1               40  drainer          53           36    68%          42
+H_main-16-cg256-1          40   raised          50            0     0%           0
+H_main-16-cg256-2          40   raised          40            0     0%           0
+H_main-16-cg256-3          40   raised          51            0     0%           0
+K2_main-16-cg256-ovl-1     40   raised          50            1     2%           1
+K2_main-16-cg256-ovl-2     40   raised          49            1     2%           1
+K2_main-16-cg256-ovl-3     40   raised          49            0     0%           0
+B_main-16                  40    stock  YES     18            0     0%           0
+B_v23-16                   40    stock          18            0     0%           0
+E_main-16-P1               40    stock          22            0     0%           0
+E_main-16-P2               40    stock          22            0     0%           0
+E_main-16-P3               40    stock          17            0     0%           0
+E_main-16-P6               40    stock          22            0     0%           0
+E_main-16-U1               40    stock          18            0     0%           0
+E_main-16-U4               40    stock  YES     22            0     0%           0
+E_main-16-U5               40    stock          20            0     0%           0
+
+20 rps slow         : starts 2, evictions 59, with waiting 0 (0%)
+20 rps normal stock : starts 7, evictions 868, with waiting 2 (0%)
+20 rps drainer      : starts 2, evictions 247, with waiting 0 (0%)
+20 rps raised       : starts 6, evictions 742, with waiting 1 (0%)
+40 rps slow         : starts 2, evictions 40, with waiting 0 (0%)
+40 rps normal stock : starts 7, evictions 139, with waiting 0 (0%)
+40 rps drainer      : starts 2, evictions 106, with waiting 73 (69%)
+40 rps raised       : starts 6, evictions 289, with waiting 2 (1%)
+
+Top-4 adapter evictions in slow starts: (seconds after first arrival, popularity rank, waiting count)
+  B_main-16 @20: (34.2,r4,w0) (34.9,r2,w0) (35.7,r3,w0) (36.0,r1,w0)
+  B_main-16 @40: (22.3,r4,w0) (22.5,r2,w0) (22.8,r1,w0) (22.8,r3,w0)
+  E_main-16-P1 @20: (30.3,r4,w0) (30.8,r2,w0) (31.8,r3,w0) (32.1,r1,w0)
+  E_main-16-U4 @40: (18.9,r4,w0) (19.1,r2,w0) (19.5,r3,w0) (19.7,r1,w0)
