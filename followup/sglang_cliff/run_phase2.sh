@@ -87,5 +87,9 @@ J) # dedicated-style rerun on runpod2: stock vs graph limit 256, 16 and 32 slots
     tag=J_${c}-r$rnd; sl=${CFG[$c]%%:*}; EXTRA="${CFG[$c]#*:}"; PATCHPY=; XENV=
     start_sglang $tag main $sl 0 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; }
     stop_server; say "done $tag"; done; done;;
+K) # Phase 3 option 8: raised graph limit plus overlap loading
+  for n in 1 2 3; do tag=K_main-16-cg256-ovl-$n; PATCHPY=; XENV=; EXTRA="--cuda-graph-max-bs-decode 256 --enable-lora-overlap-loading"
+    start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
+    stop_server; say "done $tag"; done;;
 esac
 echo "DONE_$PART" >> $L
