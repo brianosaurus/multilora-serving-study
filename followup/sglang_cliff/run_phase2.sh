@@ -59,5 +59,9 @@ G) # Phase 3 option 3: slot sweep on stock main, traced
   for sl in 20 24 28; do tag=G_main-$sl; PATCHPY=; XENV=
     start_sglang $tag main $sl 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
     stop_server; say "done $tag"; done;;
+H) # Phase 3 option 5: decode CUDA graph limit raised, stock main code
+  for n in 1 2 3; do tag=H_main-16-cg256-$n; PATCHPY=; XENV=; EXTRA="--cuda-graph-max-bs-decode 256"
+    start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
+    stop_server; say "done $tag"; done;;
 esac
 echo "DONE_$PART" >> $L
