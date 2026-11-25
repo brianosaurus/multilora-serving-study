@@ -191,6 +191,22 @@ Host 48bd787e389e; plan `c489bca` committed before the runs; untraced. External 
 - This changes one earlier reading: Phase 2 found loads contradicted as the cause (3% of busy time) in the stock server, where slow steps hide them. With the graph limit raised the same loads take 24% of the window.
 - Not tested: what part of the 50 to 60 ms is host-side weight preparation (`pin_memory` per load), what part is waiting on the GPU, and whether `--enable-lora-overlap-loading` removes it.
 
+## Option 8 result: overlap loading on top of the raised graph limit (K2), FLAGGED
+`runpod2` host 48bd787e389e; plan `2f91385` plus amendment 3 `c4fcf68` (all three first starts, `K_main-16-cg256-ovl-1..3`, failed at launch on `--max-loaded-loras`; no measurement) committed before the runs; flags `--cuda-graph-max-bs-decode 256 --enable-lora-overlap-loading --max-loaded-loras 32`; traced; external CPU at the three starts 1.0 to 3.0 cores.
+
+| 40 rps | graph limit 256 (H, 3 starts) | plus overlap loading (K2, 3 starts) |
+|---|---|---|
+| p95 TTFT | 2.08, 3.14, 2.18 s | 1.92, 1.92, 1.97 s |
+| p99 TTFT | 2.5, 3.7, 2.9 s | 2.27, 2.32, 2.40 s |
+| TPOT p50 | 12.1, 14.2, 12.4 ms | 11.3, 11.4, 11.5 ms |
+| requests/s | 36.7, 35.7, 36.5 | 37.1, 36.9, 37.1 |
+| decode interval with a load (median) | 57.9, 64.5, 57.2 ms | 50.5, 50.4, 51.6 ms |
+| excess time in load intervals | 24.2, 23.0, 23.6% | 21.2, 21.1, 21.5% |
+
+20 rps: p95 116, 115, 116 ms, 0 errors (reference H: 95, 101, 81 ms).
+Predictions: K1 (median p95 at most 1.8 s, each start below 2.18 s) half holds: each start is below 2.18 s but the median is 1.92 s, not 1.8 s, so K1 fails as stated. K2 (requests/s at least 36.4 in each start) holds. K3 (20 rps passes 3 of 3) holds. K4 (excess at most 12%) fails: 21.1 to 21.5%.
+Reading: overlap loading gives a small gain (p95 about 12 to 15% lower, TPOT about 1 ms lower, throughput about 1% higher) and much tighter run-to-run spread, but it does not remove the stall: a decode step that follows a load is still about 44 ms longer than one that does not, and about a fifth of the busy window is spent in those steps. So the stall is not mainly the host-to-device copy of the weights. vLLM is still ahead (p95 1.45 s, TPOT 10 ms). Not tested: what else runs in the load path (adapter memory pool writes, eviction, graph input setup), a GPU-synchronized timeline.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.

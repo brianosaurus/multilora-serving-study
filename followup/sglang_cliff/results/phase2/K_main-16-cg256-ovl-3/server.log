@@ -1,0 +1,24 @@
+/root/src/sglang-main/python/sglang/launch_server.py:56: UserWarning: 'python -m sglang.launch_server' is still supported, but 'sglang serve' is the recommended entrypoint.
+  Example: sglang serve --model-path <model> [options]
+  warnings.warn(
+[2026-11-25 06:45:51] Attention backend not specified. Use flashinfer backend by default.
+[2026-11-25 06:45:53] kill_process_tree called: parent_pid=106511, include_parent=False, pid=106511
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/root/src/sglang-main/python/sglang/launch_server.py", line 69, in <module>
+    run_server(server_args)
+  File "/root/src/sglang-main/python/sglang/launch_server.py", line 52, in run_server
+    launch_server(server_args)
+  File "/root/src/sglang-main/python/sglang/srt/entrypoints/http_server.py", line 3323, in launch_server
+    ) = Engine._launch_subprocesses(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/src/sglang-main/python/sglang/srt/entrypoints/engine.py", line 1231, in _launch_subprocesses
+    server_args.check_server_args()
+  File "/root/src/sglang-main/python/sglang/srt/server_args.py", line 517, in check_server_args
+    check_server_args(self)
+  File "/root/src/sglang-main/python/sglang/srt/arg_groups/validation_hook.py", line 382, in check_server_args
+    check_lora_server_args(server_args)
+  File "/root/src/sglang-main/python/sglang/srt/arg_groups/lora_hook.py", line 62, in check_lora_server_args
+    cfg.max_loaded_loras is not None
+AssertionError: Enabling LoRA overlap loading requires pinning LoRA adapter weights in CPU memory, so --max-loaded-loras must be less than or equal to double --max-loras-per-batch: 32

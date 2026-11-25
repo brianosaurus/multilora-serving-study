@@ -245,3 +245,32 @@ DONE_I
 {"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 40.788391954265535, "p95": 62.632176099577904, "p99": 72.83500946941784}, "tpot_ms": {"p50": 13.28719802352959, "p95": 18.98840703221411}, "tok_per_s": 5010.8, "max_send_lag_s": 0.002}
 06:36:09 done J_C32-r3
 DONE_J
+06:44:24 start K_main-16-cg256-ovl-1 host 48bd787e389e load 10.81 5.75 4.35 external CPU: 11.41 11.93 11.83
+06:44:40 K_main-16-cg256-ovl-1 ready=0 trace=1
+06:44:53 done K_main-16-cg256-ovl-1
+06:45:03 start K_main-16-cg256-ovl-2 host 48bd787e389e load 9.53 6.17 4.56 external CPU: 1.20 3.83 8.45
+06:45:18 K_main-16-cg256-ovl-2 ready=0 trace=1
+06:45:31 done K_main-16-cg256-ovl-2
+06:45:41 start K_main-16-cg256-ovl-3 host 48bd787e389e load 5.61 5.61 4.44 external CPU: 0.56 1.69 4.91
+06:45:56 K_main-16-cg256-ovl-3 ready=0 trace=1
+06:46:10 done K_main-16-cg256-ovl-3
+DONE_K
+06:46:26 start K2_main-16-cg256-ovl-1 host 48bd787e389e load 3.36 5.02 4.29 external CPU: 1.18 1.56 3.00
+06:47:09 K2_main-16-cg256-ovl-1 ready=1 trace=1
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 34.14903947850689, "p95": 115.64239645376787, "p99": 311.385517213493}, "tpot_ms": {"p50": 7.935472712283735, "p95": 9.385068959595015}, "tok_per_s": 2591.6, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 41.717682499438524, "p95": 1915.6099247920793, "p99": 2267.4226639210247}, "tpot_ms": {"p50": 11.315482295041273, "p95": 12.144101000533945}, "tok_per_s": 4740.2, "max_send_lag_s": 0.002}
+06:48:35 K2_main-16-cg256-ovl-1 trace lines: 10305
+06:48:48 done K2_main-16-cg256-ovl-1
+06:48:58 start K2_main-16-cg256-ovl-2 host 48bd787e389e load 2.59 4.07 4.04 external CPU: 1.02 1.42 2.35
+06:49:41 K2_main-16-cg256-ovl-2 ready=1 trace=1
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 34.32010201504454, "p95": 115.30783393536667, "p99": 322.5616794463706}, "tpot_ms": {"p50": 7.899544819159155, "p95": 9.384611267394819}, "tok_per_s": 2592.3, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 42.37187100807205, "p95": 1916.1273153324125, "p99": 2322.552232848247}, "tpot_ms": {"p50": 11.38411828327748, "p95": 12.379626901526972}, "tok_per_s": 4709.8, "max_send_lag_s": 0.002}
+06:51:06 K2_main-16-cg256-ovl-2 trace lines: 10266
+06:51:19 done K2_main-16-cg256-ovl-2
+06:51:29 start K2_main-16-cg256-ovl-3 host 48bd787e389e load 3.08 3.68 3.89 external CPU: 1.08 1.52 2.68
+06:52:13 K2_main-16-cg256-ovl-3 ready=1 trace=1
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 34.2228714725934, "p95": 115.51394061534663, "p99": 317.95763823902166}, "tpot_ms": {"p50": 7.892654433215815, "p95": 9.409659871956201}, "tok_per_s": 2592.1, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 42.70236805314198, "p95": 1967.5961659231687, "p99": 2402.2115073411255}, "tpot_ms": {"p50": 11.479120396136299, "p95": 12.616994244818333}, "tok_per_s": 4737.6, "max_send_lag_s": 0.002}
+06:53:38 K2_main-16-cg256-ovl-3 trace lines: 10260
+06:53:51 done K2_main-16-cg256-ovl-3
+DONE_K2
