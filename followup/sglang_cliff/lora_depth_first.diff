@@ -1,0 +1,67 @@
+diff --git a/python/sglang/srt/managers/scheduler.py b/python/sglang/srt/managers/scheduler.py
+index aa3a580d08..46dfbc1b41 100644
+--- a/python/sglang/srt/managers/scheduler.py
++++ b/python/sglang/srt/managers/scheduler.py
+@@ -21,7 +21,7 @@ import signal
+ import sys
+ import time
+ from array import array
+-from collections import deque
++from collections import Counter, deque
+ from contextlib import ExitStack, contextmanager, nullcontext
+ from functools import partial
+ from http import HTTPStatus
+@@ -4760,6 +4760,13 @@ class Scheduler(
+             # Account for LoRAs that are already loaded in the adder, such as chunked requests
+             running_loras.update(req.lora_id for req in adder.can_run_list)
+ 
++            # Depth-first (experiment, off by default): count waiting requests per adapter.
++            self._lora_depth = (
++                Counter(r.lora_id for r in self.waiting_queue)
++                if os.environ.get("SGLANG_LORA_DEPTH_FIRST") == "1"
++                else None
++            )
++
+             if self.lora_drainer:
+                 lora_manager = self.tp_worker.model_runner.lora_manager
+                 self.lora_drainer.update_draining_state(
+@@ -5092,6 +5099,11 @@ class Scheduler(
+         if req.lora_id in running_loras:
+             return True
+ 
++        if getattr(self, "_lora_depth", None) is not None and not self._lora_depth_ok(
++            req, running_loras
++        ):
++            return False
++
+         if self.enable_lora_overlap_loading:
+             # For overlapping loading of LoRA weights with computation, we will load each
+             # adapter one at a time, as opposed to loading them in one batch
+@@ -5104,6 +5116,27 @@ class Scheduler(
+                 new_lora_set
+             )
+ 
++    def _lora_depth_ok(self, req: Req, running_loras: set[Optional[str]]) -> bool:
++        """Give a free adapter slot only to the adapters with the most waiting requests.
++
++        A request that has waited longer than SGLANG_LORA_DEPTH_MAX_AGE_S (default 10) is
++        always allowed, so adapters with few waiting requests are delayed, not starved.
++        """
++        free = (
++            self.tp_worker.model_runner.lora_manager.max_loras_per_batch
++            - len(running_loras)
++        )
++        if free <= 0:
++            return True
++        max_age = float(os.environ.get("SGLANG_LORA_DEPTH_MAX_AGE_S", "10"))
++        if time.perf_counter() - req.time_stats.wait_queue_entry_time > max_age:
++            return True
++        depth = self._lora_depth
++        counts = sorted((n for k, n in depth.items() if k not in running_loras), reverse=True)
++        if len(counts) <= free:
++            return True
++        return depth[req.lora_id] >= counts[free - 1]
++
+     def _get_all_pp_reqs(self) -> List[Req]:
+         return [
+             req

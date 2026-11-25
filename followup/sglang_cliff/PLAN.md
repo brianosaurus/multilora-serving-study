@@ -77,3 +77,22 @@ Reading: a hypothesis is "supported" if all its predictions hold in both SGLang 
 
 ### Output
 `results/phase2/` (raw), `results/phase2/analysis.txt`, and `RESULTS.md`: what was measured, which hypothesis the data supports, what is open. Phase 3 (a patch) only after the author's go.
+
+## Phase 3: depth-first slot admission (patch A), screening A/B
+
+### What changes
+Patch `lora_depth_first.diff` on SGLang main `0e9cff98f5b7`, one file (`scheduler.py`, +34 -1), applied in a separate worktree `/root/src/sglang-lora-depth` on `runpod2` (host `48bd787e389e`); the stock install and `/root/src/sglang-main` are not edited. The patched server gets the worktree through `PYTHONPATH`; the printed `sglang.__file__` is logged at each patched start. Behavior is off unless `SGLANG_LORA_DEPTH_FIRST=1`.
+Rule: when the running set has `f` free adapter slots, a waiting request whose adapter is not running is admitted only if its adapter is among the `f` adapters with the most waiting requests (ties admit). A request that has waited more than `SGLANG_LORA_DEPTH_MAX_AGE_S` (default 10) is always allowed, so a shallow adapter is delayed, not starved. Requests for running adapters are untouched. The drainer stays off (default).
+The 10 s cap was chosen before any patched run and is not tuned.
+
+### Runs (part E of `run_phase2.sh`)
+Main `0e9cff98f5b7`, 16 slots, traced, Zipf-32, seed 1, 20 rps then 40 rps on one start, six starts in the order U P P U U P (U = stock, P = patched). Same host rule, busy rule and warm-up as Phase 2. FLAGGED screening only; no timing claim for the page.
+
+### Predicted effect (fixed now)
+Measured at 40 rps, medians over the three starts of each kind:
+- **P1:** patched p95 TTFT is at most 0.5 times unpatched, ranges not overlapping, and still above 500 ms. I do not expect this patch to reach the 500 ms bar, because the demand for distinct adapters at 40 rps is about 31 and 16 slots cannot serve it.
+- **P2:** patched mean decode batch size and completed requests per second are each at least 1.15 times unpatched.
+- **P3:** patched p99 TTFT is not above unpatched p99 (the age cap stops tail adapters from being made worse).
+- **P4 (20 rps):** all three patched starts have p95 TTFT at most 500 ms with 0 errors.
+Reading: P1 and P2 hold = "reduces the cliff, does not remove it" and the patch is a fix candidate for the capacity part. Patched p95 within 20% of unpatched = the capacity explanation is contradicted. P3 failing = the patch trades tail latency for throughput and is not a candidate as written.
+Not predicted: whether it matches vLLM, and why 20 rps sometimes tips into the slow state.

@@ -14,7 +14,7 @@ start_sglang() { # tag eng slots trace(0|1)
   say "start $tag host $(hostname) load $(cut -d' ' -f1-3 /proc/loadavg) external CPU: $($PYL $R/followup/kernel_rerun/extload.py check 10 2>&1 | tail -1)"
   CMD=($E/bin/python -m sglang.launch_server --model-path $M --served-model-name qwen --port 30000 --mem-fraction-static 0.85 --context-length 4096 --enable-lora --max-lora-rank 16 --max-loras-per-batch $slots --lora-target-modules q_proj k_proj v_proj o_proj gate_proj up_proj down_proj $EXTRA --lora-paths)
   for i in $(seq 0 31); do CMD+=("adapter_$(printf %04d $i)=$A/adapter_$(printf %04d $i)"); done
-  if [ $trace = 1 ]; then PP="PYTHONPATH=$TR SGLANG_CLIFF_TRACE_DIR=$O/trace"; else PP="SGLANG_CLIFF_NOTRACE=1"; fi
+  if [ $trace = 1 ]; then PP="PYTHONPATH=$TR${PATCHPY:+:$PATCHPY} SGLANG_CLIFF_TRACE_DIR=$O/trace $XENV"; else PP="SGLANG_CLIFF_NOTRACE=1"; fi
   setsid nohup env PATH=$E/bin:/usr/local/cuda/bin:$PATH CUDA_HOME=/usr/local/cuda $PP "${CMD[@]}" > $O/server.log 2>&1 < /dev/null & SP=$!
   ok=0; for i in $(seq 1 600); do [ "$(curl -s -o /dev/null -w %{http_code} -m 3 localhost:30000/health)" = 200 ] && { ok=1; break; }; kill -0 $SP 2>/dev/null || break; sleep 3; done
   say "$tag ready=$ok trace=$trace"; [ $ok = 1 ]
@@ -48,6 +48,12 @@ C) tag=C_vllm-16; O=$D/$tag; mkdir -p $O; E=/root/envs/vllm
 D) # diagnostic (Phase 3 step 1): main, 16 slots, drainer on, traced; EXTRA flags per cell
   for cfg in "d1:--lora-drain-wait-threshold 1.0" "d02:--lora-drain-wait-threshold 0.2"; do tag=D_main-16-${cfg%%:*}; EXTRA="${cfg#*:}"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
+    stop_server; say "done $tag"; done;;
+E) # Phase 3 A/B: main 16 slots traced; U = stock main, P = depth-first patch (worktree on PYTHONPATH + flag); order U P P U U P
+  PATCHDIR=/root/src/sglang-lora-depth/python
+  n=0; for v in U P P U U P; do n=$((n+1)); tag=E_main-16-$v$n; PATCHPY=; XENV=
+    [ $v = P ] && { PATCHPY=$PATCHDIR; XENV="SGLANG_LORA_DEPTH_FIRST=1"; }
+    start_sglang $tag main 16 1 && { [ $v = P ] && say "$tag sglang from: $(PYTHONPATH=$PATCHPY $E/bin/python -c 'import sglang;print(sglang.__file__)')"; warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
     stop_server; say "done $tag"; done;;
 esac
 echo "DONE_$PART" >> $L
