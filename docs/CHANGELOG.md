@@ -161,6 +161,8 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Amendment 7 result (pod clock 2026-11-24, 22:28:08 to 22:44:32; plan committed before the run): with the radix cache on, pass 1 differs from pass 2 on 19 of 64 prompts (the same 19 as Item C); with `--disable-radix-cache`, on 0 of 64. By the reading fixed in advance, the cause of Item C's first-pass difference is cache-state numerics. One start per setting; load 18 to 21 and external CPU 15.6 to 18.4 cores at the starts (above the quiet rule; correctness read only). Results: `followup/pod_items/results/E_cold_pass/`. The GPU was idle afterwards.
 
+- Scope change (author's decision, 2026-11-24; plan `followup/dedicated_session/PLAN.md` Amendment 10, committed before any run it governs): from the dedicated session only B2 (kernel rerun with the c8 0- and 1-adapter controls) runs, then SGLang cliff Phase 2. Dropped: B1, the 3a repeat (cannot clear its flag on a shared host); B4, 3b SGLang main against v0.5.23 (answered by the SGLang cliff Phase 1, commit `1db7146`); B5, the 3c latency runs. B3, 4b (0.02 adapters), runs only if both finish and the author says go. (The author's message wrote "B3/B4" for 3b; in `run_session.sh` 3b is B4 and 4b is B3, so I mapped by content.) No definition or threshold changed. The 3a results stay labeled flagged. The dry run is stopped when its B2 part ends.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.

@@ -55,3 +55,13 @@ Finding from the dry run on `runpod` (not a result): with `--shared-host` the pe
 - Change: with `--shared-host`, the wait before each run is one external-CPU check (6 s, recorded as `ext_before`), with no retries. The 120 s wait stays for runs without `--shared-host`. Flags, the LENGTH check, reference runs and the drift rule are unchanged; a run whose `ext_before` is above 1 core or whose external CPU rises above 2 cores is flagged LOAD_ABOVE_LIMIT as before.
 - The estimate in `ESTIMATE.md` assumed no waiting beyond the start checks; the removal of the retry loop brings the shared-host runtime back to that estimate (about 6.8 hours plus slow starts), not the 20 retries.
 - The dry run in progress is stopped and restarted after this change; its output is discarded.
+
+## Amendment 10: scope change, decided by the author (written before any run it governs; time is the commit's)
+Decision (author, in the conversation): from the dedicated session run only B2 (the kernel rerun, which already includes the c8 controls with 0 and 1 adapters, cells 8:0 and 8:1 of the cell list), then SGLang cliff Phase 2 (`followup/sglang_cliff/PLAN.md`, its own plan and host rule). 4b runs only if both finish and the author says go.
+Block names, mapped by content (the message used "B3/B4" for 3b; in `run_session.sh` 3b is B4 and 4b is B3):
+- Dropped B1, the 3a repeat: it cannot clear its flag on a shared host (Amendment 8: it clears the flag only if its runs are unflagged, and on `runpod` every run has been flagged). The 3a results stay labeled flagged.
+- Dropped B4, 3b (SGLang `main` against v0.5.23): answered by the SGLang cliff Phase 1 (`followup/sglang_cliff/results/phase1/analysis.txt`, commit `1db7146`, whose title reads "no material effect from #46500 on this workload"). The drainer comparison is not run here.
+- Dropped B5, the 3c latency runs (128 adapters on 64 slots): not run. The 3c memory part (Item B) is done.
+- B3, 4b (cliff rerun with the 0.02 adapters): not run unless both B2 and Phase 2 finish and the author says go.
+- Kept: B2 and Phase 2. No definition or threshold changes: every definition, bar, limit, the 5% drift rule, the shuffled order of Amendment 2 and Amendments 8 and 9 stay as written. The dry run of `run_session.sh` is stopped when its B2 part ends; its B3 to B5 parts are not run.
+- Reporting: dropped blocks are stated as not run in the final report, with the reason above.
