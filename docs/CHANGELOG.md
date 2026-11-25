@@ -169,6 +169,11 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 - The mistral.rs binaries I copied to `runpod2:/root/bin` earlier (sha256 matched) stay there unused; I will not delete them unless the author says so.
 - Expected runtime on `runpod`: about 10 to 14 hours (dry run measured about 5 minutes per cell); external CPU there is above the limits, so runs will be flagged LOAD_ABOVE_LIMIT.
 
+## 2026-11-25 (SGLang slow-state investigation stopped; written before any further run)
+
+- Author's decision: stop the slow-state investigation and record it as open in `followup/sglang_cliff/RESULTS.md` (ruled out: batch above 48 as the trigger, slot capture in strict form, LRU evicting adapters with waiting requests; the raised limit avoided it in every start so far; 4 of 27 stock 20 rps starts tipped). No further runs for it.
+- `followup/sglang_cliff/draft-issue.md` (not posted) gets one line on the drainer's evictions at 40 rps (73 of 106 with requests waiting).
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.

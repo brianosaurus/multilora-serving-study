@@ -29,6 +29,7 @@ With the larger range at 16 slots, p95 TTFT is about 2.2 s against vLLM's 1.45 s
 - The drainer from PR #46500 (`--lora-drain-wait-threshold` 1.0 and 0.2): p95 8.8 s and 8.5 s. It moves waiting from non-running adapters to running ones; mean wait does not fall.
 - A patch that gives a free slot to the adapter with the most waiting requests (10 s age cap): p95 13.50 s against 13.46 s stock. The rule rejected 11 requests in 550, because 99.9% of admission checks found no free slot.
 - An offline replay of drain-victim policies (including one that knows the future arrivals) changes p95 by at most 2%.
+- The drainer at 40 rps evicted adapters that still had requests waiting in 69% of its evictions (73 of 106, 2 starts) and made about three times the loads of stock, which fits it not lowering mean wait.
 - Eviction order: in the slow 20 rps starts none of 59 evictions after the first 5 s hit an adapter with a request waiting, so LRU is not evicting adapters the queue needs. (The drainer at 40 rps does: 69% of its evictions had waiting requests.)
 
 ## Open
