@@ -123,6 +123,23 @@ Other observations:
 - The slow-state start (U4) behaves differently: draining there makes p95 worse (15.8 s against 14.8 s) and mean wait much worse.
 - Reading: the drain trades tail latency for mean latency and total completion time; which running adapter is drained barely matters. This is a model of the scheduler on one workload with fixed decode times.
 
+## Option 5 result: decode CUDA graph limit raised (part H), FLAGGED screening
+`runpod2` host 48bd787e389e; plan `af0fb3c` committed before the runs; stock main `0e9cff98f5b7`, 16 slots, only `--cuda-graph-max-bs-decode 256` changed; three starts, seed 1; stock references E U1, U5 (normal state) and U4 (slow state); vLLM from Part C.
+
+| 40 rps | stock main (U1, U5) | graph limit 256 (3 starts) | vLLM 0.34.0 |
+|---|---|---|---|
+| p95 TTFT | 13.44, 13.46 s | 2.08, 3.14, 2.18 s | 1.45 s |
+| p99 TTFT | 15.4 s | 2.5, 3.7, 2.9 s | 1.8 s |
+| TPOT p50 | 43.3, 43.7 ms | 12.1, 14.2, 12.4 ms | 10.0 ms |
+| requests/s | 23.6 | 36.7, 35.7, 36.5 | 36.7 |
+| tok/s | 3011, 3018 | 4694, 4569, 4662 | 4676 |
+| decode CPU time, 49+ requests | 31.6 ms | 2.0, 2.5, 2.0 ms | n/a |
+
+20 rps: all three starts passed (p95 95, 101, 81 ms), 0 errors.
+Predictions (PLAN.md option 5): H1 (TPOT below 20 ms) holds; H2 (p95 at least 3x lower, at most 4.5 s) holds (6.5x, 4.3x, 6.2x); H3 (requests/s at least 30.7) holds; H4 (decode CPU time under 10 ms at 49+) holds; H5 (20 rps passes 3 of 3) holds. Not at the study's 500 ms bar at 40 rps (2.1 to 3.1 s).
+Reading: with the graph range raised, SGLang's 16-slot throughput matches vLLM's (36.7 requests/s, about 4.7k tok/s) and TPOT falls from 43 to 12-14 ms. The step time above 48 requests, not the slot rule, was the main reason a slot stayed held 5 times longer. A gap to vLLM remains in p95 TTFT (2.1-3.1 s against 1.45 s). I have not run the 32-slot cell with the larger range, nor tested whether main without LoRA behaves the same, nor the default on other GPUs.
+Consequences: the earlier readings "every scheduling lever is exhausted" and "the cliff is a slots-versus-adapters threshold" were incomplete: the slot count matters, but the capacity lost at 16 slots was largely this step-time penalty. Page claim "same slots, same traffic" was not the same setting; a line was added to "Things I got wrong" in `docs/DRAFT_POST.md` and `docs/DRAFT_POST_long.md`. Single flag, shared host, screening only; any timing claim for the page needs the dedicated machine.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.
