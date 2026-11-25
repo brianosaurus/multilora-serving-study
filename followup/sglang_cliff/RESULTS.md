@@ -147,6 +147,35 @@ At 16 slots and 40 rps, graph limit 256 (3 starts) against stock and vLLM:
 - Reading: a slot is held about one request lifetime (128 tokens), which is 1.5 to 1.8 s in SGLang here and 1.3 s in vLLM, and the wait of a non-running adapter is about one to two lifetimes. A 20 to 40% longer step plus the spread over three starts is the size of the remaining gap. I cannot separate those from this data. The decode-call CPU time in the trace is 2 ms in both and says nothing about GPU step time.
 - Not tested: GPU step time of the LoRA kernels in each engine (needs a profile), and repeats on the dedicated machine.
 
+## Option 6 result: step-time microbench (I) and rerun (J) on `runpod2`, FLAGGED
+Host 48bd787e389e; plan `c489bca` committed before the runs; untraced. External CPU at the 15 starts: under 5 cores at 14 of them; `J_C32-r2` had 22.6, 23.4 and 14.5 (its 40 rps p95 was 53 ms, so no visible effect). So these runs are mostly quiet but not a dedicated-machine measurement; any page number still needs the dedicated session.
+
+**I, TPOT p50 in ms at fixed concurrency (300 requests, 0 errors in all):**
+
+| | N=16 base | N=16 16 adapters | N=48 base | N=48 16 adapters | N=96 base | N=96 16 adapters |
+|---|---|---|---|---|---|---|
+| SGLang stock | 4.9 | 5.8 | 5.7 | 6.8 | 33.5 | 33.5 |
+| SGLang graph limit 256 | 4.9 | 5.8 | 5.7 | 6.7 | 7.1 | 8.3 |
+| vLLM 0.34.0 | 4.6 | 7.2 | 5.3 | 8.6 | 6.6 | 10.3 |
+
+- M1 holds: stock at N=96 is 4.0 times the raised limit (33.5 against 8.3; needed 2.5), and at N=16 they are equal. The graph limit is the whole step-time effect, and it shows without any adapter swapping (base model, N=96: 33.5 against 7.1).
+- M2 fails, and in the other direction: with 16 resident adapters SGLang's step is shorter than vLLM's (ratio 0.81, 0.78, 0.81 at N=16, 48, 96). On the base model SGLang is 1.08 to 1.10 times vLLM. So my statement that the remaining gap looked like a 20 to 40% longer SGLang step was wrong for the all-resident case.
+- Open-loop at 40 rps with 32 adapters, TPOT is 12 to 14 ms for SGLang (raised limit) against 10 ms for vLLM, while with 16 resident adapters SGLang is 6.7 to 8.3 ms against vLLM's 8.6 to 10.3. So the extra SGLang step time under the Zipf-32 load appears only when adapters are being swapped. This is consistent with the swap cost (72 to 84 synchronous loads in the traced raised-limit runs) but I have not measured it as the cause.
+
+**J, 40 rps / 20 rps, median over 3 starts (p95 TTFT; requests/s):**
+
+| config | 40 rps p95 (each start) | requests/s | 20 rps p95 (each start) |
+|---|---|---|---|
+| S16 stock | 13.50 s (13.50, 13.45, 13.63) | 23.5 | 83 ms (91, 79, 83) |
+| C16 limit 256 | 2.18 s (2.15, 2.43, 2.18) | 36.4 | 88 ms (93, 88, 82) |
+| S32 stock | 98 ms (106, 95, 98) | 31.3 | 48 ms |
+| C32 limit 256 | 63 ms (686, 53, 63) | 39.2 | 46 ms |
+
+- J1 holds (each C16 start at most 4.5 s, 6.2 times lower than S16). J3 holds (20 rps passed 3 of 3 for C16, S32, C32). J4 holds (36.4 against 23.5 is 1.55 times).
+- J2 fails: one C32 start (round 1) had p95 686 ms (p99 958 ms), above 500 ms. Its external CPU at start was under 5 cores, so I have no explanation; the other two C32 starts were 53 and 63 ms.
+- Unplanned: stock at 32 slots also completes fewer requests (31.3 per second against 39.2 with the limit raised) at the same 40 rps offered, though its p95 passes. So the graph range costs throughput at 32 slots too.
+- Not tested: whether the swap cost explains the remaining 16-slot gap to vLLM; the dedicated machine; other GPUs and memory settings.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.
