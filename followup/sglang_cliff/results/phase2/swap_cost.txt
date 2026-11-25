@@ -1,0 +1,8 @@
+H_main-16-cg256-1: decode intervals 1265 without load, 67 with load; load events 71, loads 82
+  median interval no-load 6.4 ms (mean batch 53), with-load 57.9 ms; load call time 1.64 s = 10.8% of 15.1 s; excess 3.65 s = 24.2%
+H_main-16-cg256-2: decode intervals 1166 without load, 60 with load; load events 64, loads 72
+  median interval no-load 6.4 ms (mean batch 57), with-load 64.5 ms; load call time 1.57 s = 10.1% of 15.5 s; excess 3.57 s = 23.0%
+H_main-16-cg256-3: decode intervals 1261 without load, 68 with load; load events 73, loads 84
+  median interval no-load 6.4 ms (mean batch 53), with-load 57.2 ms; load call time 1.66 s = 10.9% of 15.2 s; excess 3.58 s = 23.6%
+E_main-16-U1: decode intervals 663 without load, 23 with load; load events 29, loads 37
+  median interval no-load 33.7 ms (mean batch 103), with-load 70.1 ms; load call time 0.73 s = 3.2% of 22.7 s; excess 0.97 s = 4.3%

@@ -19,6 +19,9 @@ Qwen2.5-1.5B-Instruct, RTX 4090, rank-16 adapters on q/k/v/o/gate/up/down, 32 ad
 - main, 16 slots, 40 rps, `--cuda-graph-max-bs-decode 256`: p95 TTFT 2.08, 3.14, 2.18 s (stock 13.4-13.5 s); TPOT p50 12-14 ms (stock 43 ms); requests/s 36.7, 35.7, 36.5 (stock 23.6). vLLM 0.34.0 same load: 1.45 s, 10 ms, 36.7.
 - The decode call CPU time jumps from 1.9 ms to 31.7 ms at batch size 49 in stock, exactly one above the largest captured graph.
 
+## Second effect once decode is fast
+- With the graph limit raised, each adapter load is followed by a decode interval 51-58 ms longer than the 6.4 ms median; about 24% of the busy window at 40 rps and 16 slots (CPU timestamps, 3 starts, shared host). Not yet separated into host-side copy and GPU wait.
+
 ## What did not help (all main `0e9cff98f5b7`, 16 slots, 40 rps)
 - PR #46500's drainer (`--lora-drain-wait-threshold` 1.0 and 0.2): p95 8.8 s and 8.5 s. It moves waiting from non-running to running adapters; mean wait about the same.
 - Depth-first admission patch (a free slot goes to the adapter with the most waiting requests, 10 s age cap): p95 13.50 s against 13.46 s stock. The rule rejected 11 requests in 550.

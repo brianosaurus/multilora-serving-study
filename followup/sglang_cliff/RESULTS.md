@@ -176,6 +176,21 @@ Host 48bd787e389e; plan `c489bca` committed before the runs; untraced. External 
 - Unplanned: stock at 32 slots also completes fewer requests (31.3 per second against 39.2 with the limit raised) at the same 40 rps offered, though its p95 passes. So the graph range costs throughput at 32 slots too.
 - Not tested: whether the swap cost explains the remaining 16-slot gap to vLLM; the dedicated machine; other GPUs and memory settings.
 
+## Option 7 result: swap cost around adapter loads (existing traces, FLAGGED)
+`swap_cost.py` on `H_main-16-cg256-1..3` (graph limit 256, 16 slots, 40 rps) and stock `E_main-16-U1`; plan `ce8a3ee` committed before the analysis; output `results/phase2/swap_cost.txt`.
+
+| cell | decode intervals, no load / with load | median interval no load | median interval with a load | load call time | excess time in load intervals |
+|---|---|---|---|---|---|
+| graph limit 256, start 1 | 1265 / 67 | 6.4 ms | 57.9 ms | 1.64 s (10.8% of 15.1 s) | 3.65 s (24.2%) |
+| graph limit 256, start 2 | 1166 / 60 | 6.4 ms | 64.5 ms | 1.57 s (10.1%) | 3.57 s (23.0%) |
+| graph limit 256, start 3 | 1261 / 68 | 6.4 ms | 57.2 ms | 1.66 s (10.9%) | 3.58 s (23.6%) |
+| stock, start U1 | 663 / 23 | 33.7 ms | 70.1 ms | 0.73 s (3.2%) | 0.97 s (4.3%) |
+
+- S1 holds: the median decode step without a load is 6.4 ms (at most 9), close to the resident microbench. S2 holds: a decode interval that contains a load is 51 to 58 ms longer in the median (needed 15). S3 holds: the excess is 23 to 24% of the busy window (needed 8%).
+- Reading: with the graph limit raised, adapter loads stall decoding for about 50 to 60 ms each, of which about 20 ms is the CPU time inside the load call. About a quarter of the busy window is spent in those stalls. Without the stalls the average step would be near the resident microbench. This is the best explanation I have for SGLang's 12 to 14 ms TPOT against vLLM's 10 ms, but it is from CPU timestamps, not GPU-synchronized, and it does not show how vLLM avoids the stall.
+- This changes one earlier reading: Phase 2 found loads contradicted as the cause (3% of busy time) in the stock server, where slow steps hide them. With the graph limit raised the same loads take 24% of the window.
+- Not tested: what part of the 50 to 60 ms is host-side weight preparation (`pin_memory` per load), what part is waiting on the GPU, and whether `--enable-lora-overlap-loading` removes it.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.
