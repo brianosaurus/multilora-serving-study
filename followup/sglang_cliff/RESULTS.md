@@ -104,6 +104,25 @@ Other observations:
 - S2 holds: requests/s rises 23.6, 25.0, 28.8, 30.0 and the 28-slot value is 0.94 of the 32-slot value (needed 0.9).
 - Reading: at this load the cliff location follows the number of adapters in use at once (about 31 distinct per decode batch at 32 slots). 16 to 24 slots fail; 28 passes p95 with a tail; 32 passes cleanly. One repeat per cell, one GPU, one model, one 550-request burst.
 
+## Option 4 result: would a reuse predictor pick better drain victims? (offline replay, FLAGGED)
+`replay_slots.py` on the 40 rps request lists of six 16-slot starts; plan `8148574` committed before the replay; output `results/phase2/replay_slots.txt`. Decode time per request is fixed at its measured value, so batch-size effects on step time are not modeled.
+
+| median over 5 normal cells | p95 TTFT | mean wait | makespan |
+|---|---|---|---|
+| measured | 13.3 s | 2.06 s | n/a |
+| F (FCFS skip) | 13.06 s | 2.03 s | 22.5 s |
+| R1 drain, soonest-to-empty victim | 9.49 s | 3.55 s | 28.3 s |
+| R2 victim by expected arrivals (30 s rate) | 9.36 s | 3.51 s | 27.9 s |
+| R3 victim by lowest rate | 9.46 s | 3.57 s | 28.1 s |
+| R4 oracle (actual future arrivals) | 9.29 s | 3.43 s | 28.0 s |
+
+- V1 holds: the model's FCFS matches the measured p95 and mean wait within 2% in all 5 normal cells.
+- V2 holds: R1 lowers p95 by 27% (the measured drainer was 35% lower), and raises mean wait by about 75% and makespan by about 25%. The measured drainer also raised mean wait (3.3 s against 2.03 s stock).
+- V3 holds: R2 is 1% and R3 is 0% below R1 on p95. A rate-based reuse predictor does not choose better victims here.
+- V4 holds: the oracle, which knows the true future arrivals, is 2% below R1. No predictor can gain much on this workload.
+- The slow-state start (U4) behaves differently: draining there makes p95 worse (15.8 s against 14.8 s) and mean wait much worse.
+- Reading: the drain trades tail latency for mean latency and total completion time; which running adapter is drained barely matters. This is a model of the scheduler on one workload with fixed decode times.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.

@@ -1,0 +1,45 @@
+FLAGGED: replay of screening data; decode time per request fixed at its measured value
+
+cell          policy     p95 TTFT s  mean wait s  makespan s
+main-16-U1    measured        13.28         2.06         nan
+main-16-U1    F               13.06         2.02        22.5
+main-16-U1    R1               9.49         3.54        28.2
+main-16-U1    R2               9.26         3.49        28.0
+main-16-U1    R3               9.30         3.50        27.8
+main-16-U1    R4               9.23         3.40        28.0
+main-16-U5    measured        13.29         2.06         nan
+main-16-U5    F               13.02         2.01        22.5
+main-16-U5    R1               9.49         3.63        28.5
+main-16-U5    R2               9.43         3.51        27.8
+main-16-U5    R3               9.66         3.56        28.1
+main-16-U5    R4               9.29         3.44        27.8
+main-16-P2    measured        13.36         2.07         nan
+main-16-P2    F               13.09         2.03        22.6
+main-16-P2    R1               9.41         3.55        28.7
+main-16-P2    R2               9.45         3.54        28.0
+main-16-P2    R3               9.55         3.57        28.1
+main-16-P2    R4               9.29         3.41        27.9
+main-16-P3    measured        13.27         2.07         nan
+main-16-P3    F               13.06         2.03        22.6
+main-16-P3    R1               9.48         3.57        28.3
+main-16-P3    R2               9.36         3.50        27.9
+main-16-P3    R3               9.46         3.57        28.0
+main-16-P3    R4               9.26         3.39        27.9
+main-16-P6    measured        13.32         2.06         nan
+main-16-P6    F               13.04         2.02        22.5
+main-16-P6    R1               9.63         3.54        28.5
+main-16-P6    R2               9.36         3.51        27.8
+main-16-P6    R3               9.46         3.58        28.2
+main-16-P6    R4               9.45         3.47        28.1
+main-16-U4    measured        15.20         2.82         nan
+main-16-U4    F               14.84         2.75        28.5
+main-16-U4    R1              15.81         6.75        38.1
+main-16-U4    R2              16.13         6.53        38.9
+main-16-U4    R3              16.13         6.53        38.9
+main-16-U4    R4              15.21         6.08        38.0
+
+V1 model check: F p95 within 25% of measured in 5/5 cells; mean wait in 5/5 (need >= 4 each)
+V2 R1 vs F p95: -27% (need <= -15%)
+V3/V4 R2 vs R1 p95: -1%  mean wait -2%  makespan -2%
+V3/V4 R3 vs R1 p95: -0%  mean wait -0%  makespan -1%
+V3/V4 R4 vs R1 p95: -2%  mean wait -4%  makespan -2%
