@@ -54,6 +54,33 @@ FLAGGED screening, one repeat per cell, `runpod2` host 48bd787e389e, seed 1. Dat
 - Single 20 rps cell: both drainer runs passed (81-90 ms). The drainer-off 16-slot 20 rps run in B was a slow-state run. One repeat each, so this is not evidence that the drainer prevents the slow state.
 - I have not counted drain starts and ends; the tracer does not log drainer decisions.
 
+## Phase 3 result: depth-first admission (part E), FLAGGED screening
+`runpod2` host 48bd787e389e; main `0e9cff98f5b7`; 16 slots; plan `0ecb5ab` committed before the runs; order U P P U U P (starts U1, P2, P3, U4, U5, P6); seed 1; patched server loaded from `/root/src/sglang-lora-depth` (logged at each patched start).
+
+| 40 rps | stock (3 starts) | patched (3 starts) |
+|---|---|---|
+| p95 TTFT | 13.46 s median (13.44, 13.46, 15.21) | 13.50 s median (13.46, 13.50, 13.51) |
+| p99 TTFT | 15.40 s | 15.45 s |
+| requests/s completed | 23.6 (23.6, 23.6, 18.4) | 23.6 |
+| mean decode batch | 101.7 (101.7, 101.4, 123.9) | 102.0-104.3 |
+| loads | 36-37, 35 | 33-38 |
+| mean wait | 2.03 s (2.03, 2.03, 2.77) | 2.03-2.04 s |
+
+20 rps: patched p95 81-85 ms, 3 of 3 passed. Stock p95 82, 82 and 214 ms, 0 errors.
+
+Predictions (PLAN.md Phase 3):
+- P1 (patched p95 at most 0.5x stock): fails. Ratio 1.00.
+- P2 (batch size and requests/s at least 1.15x): fails. Ratio 1.00.
+- P3 (p99 not above stock): holds (equal).
+- P4 (20 rps all pass): holds.
+Per the plan's reading rule, patched within 20% of stock means the explanation "the slot goes to the wrong waiting adapter, so capacity is lost" is contradicted for this rule. The patch is not a fix candidate.
+
+What I checked: the flag and the patched path reach the server environment (expansion of the runner's env string on the pod), and a direct call of the new function returns the intended answers (one free slot: deepest adapter yes, shallower no, aged request yes; two free slots: top two yes). What I did not check: how many times the rule rejected a request in the real runs; the tracer has no counter. The identical numbers fit a rule that rarely changed the choice. A likely reason, not tested: under FCFS the oldest waiting request is usually from an adapter that already has the most waiting requests, so the depth rule picks the same adapter.
+
+Other observations:
+- The stock 40 rps cells vary: one start (U4) ran at 18.4 requests/s and 2352 tok/s (p95 15.2 s), the same slow state as the earlier `B_main-16` cell (16.6 requests/s, 2121 tok/s). Two of the four stock main 16-slot 40 rps starts so far were in it. The 20 rps stock U4 also had p95 214 ms. One start in the slow state was not tied to anything I measured (external CPU 0.5-2 at U4 start).
+- Throughput at 16 slots is about 23.6 requests/s in the normal state, 31.9 at 32 slots.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.

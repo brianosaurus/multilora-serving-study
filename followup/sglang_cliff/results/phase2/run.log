@@ -70,3 +70,43 @@ DONE_C
 01:55:51 D_main-16-d02 trace lines: 8241
 01:56:04 done D_main-16-d02
 DONE_D
+03:13:41 start E_main-16-U1 host 48bd787e389e load 1.24 1.17 2.06 external CPU: 2.29 3.58 1.36
+03:14:21 E_main-16-U1 ready=1 trace=1
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 35.89741443283856, "p95": 81.66844117222342, "p99": 215.04359937738616}, "tpot_ms": {"p50": 8.091043987986081, "p95": 9.368879753705773}, "tok_per_s": 2588.9, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 73.21713701821864, "p95": 13436.4238904207, "p99": 15402.845443362603}, "tpot_ms": {"p50": 43.265604098257796, "p95": 48.96597528379176}, "tok_per_s": 3011.2, "max_send_lag_s": 0.002}
+03:16:01 E_main-16-U1 trace lines: 8176
+03:16:14 done E_main-16-U1
+03:16:24 start E_main-16-P2 host 48bd787e389e load 2.79 1.98 2.23 external CPU: 1.20 1.50 2.43
+03:17:10 E_main-16-P2 ready=1 trace=1
+03:17:11 E_main-16-P2 sglang from: /root/src/sglang-lora-depth/python/sglang/__init__.py
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 34.893003990873694, "p95": 81.07933860155725, "p99": 221.97486398741597}, "tpot_ms": {"p50": 8.142149968688766, "p95": 9.458925402915751}, "tok_per_s": 2589.2, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 70.99771953653544, "p95": 13498.079570056869, "p99": 15459.42476115888}, "tpot_ms": {"p50": 43.79575996472698, "p95": 49.28882583131552}, "tok_per_s": 3004.0, "max_send_lag_s": 0.002}
+03:18:50 E_main-16-P2 trace lines: 8198
+03:19:03 done E_main-16-P2
+03:19:13 start E_main-16-P3 host 48bd787e389e load 2.47 2.36 2.34 external CPU: 0.55 1.92 2.33
+03:19:53 E_main-16-P3 ready=1 trace=1
+03:19:54 E_main-16-P3 sglang from: /root/src/sglang-lora-depth/python/sglang/__init__.py
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 36.302521999459714, "p95": 83.80733204539864, "p99": 216.0995137155985}, "tpot_ms": {"p50": 8.223840374202563, "p95": 9.35917767090173}, "tok_per_s": 2585.7, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 72.61147897224873, "p95": 13507.544741343008, "p99": 15447.681222225074}, "tpot_ms": {"p50": 43.677183653238984, "p95": 49.732673787383554}, "tok_per_s": 3016.4, "max_send_lag_s": 0.002}
+03:21:33 E_main-16-P3 trace lines: 8170
+03:21:46 done E_main-16-P3
+03:21:56 start E_main-16-U4 host 48bd787e389e load 2.37 2.29 2.31 external CPU: 0.52 0.54 2.01
+03:22:37 E_main-16-U4 ready=1 trace=1
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 40.57833045953885, "p95": 213.90919751720494, "p99": 388.0452542146658}, "tpot_ms": {"p50": 9.08248303925589, "p95": 11.287811588742855}, "tok_per_s": 2586.7, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 92.67247596289963, "p95": 15205.886833119435, "p99": 17384.64409201173}, "tpot_ms": {"p50": 66.43826122428695, "p95": 74.71701213393331}, "tok_per_s": 2352.1, "max_send_lag_s": 0.018}
+03:24:29 E_main-16-U4 trace lines: 7474
+03:24:42 done E_main-16-U4
+03:24:52 start E_main-16-U5 host 48bd787e389e load 12.62 5.93 3.61 external CPU: 12.67 13.02 12.29
+03:25:39 E_main-16-U5 ready=1 trace=1
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 35.06868751719594, "p95": 81.62153636221768, "p99": 228.5842728265561}, "tpot_ms": {"p50": 8.153607063252098, "p95": 9.319219766569683}, "tok_per_s": 2589.2, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 75.70829847827554, "p95": 13461.964444798648, "p99": 15377.250815582229}, "tpot_ms": {"p50": 43.66907469266439, "p95": 49.69310040405116}, "tok_per_s": 3017.8, "max_send_lag_s": 0.002}
+03:27:18 E_main-16-U5 trace lines: 8213
+03:27:31 done E_main-16-U5
+03:27:41 start E_main-16-P6 host 48bd787e389e load 3.60 5.24 3.79 external CPU: 0.69 1.43 3.04
+03:28:21 E_main-16-P6 ready=1 trace=1
+03:28:22 E_main-16-P6 sglang from: /root/src/sglang-lora-depth/python/sglang/__init__.py
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 35.95024300739169, "p95": 85.1142946805339, "p99": 221.33155490853807}, "tpot_ms": {"p50": 8.132602330608893, "p95": 9.380889486880811}, "tok_per_s": 2589.0, "max_send_lag_s": 0.003}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 71.40877255005762, "p95": 13463.517143903298, "p99": 15383.041518692626}, "tpot_ms": {"p50": 44.4715797518908, "p95": 49.50049408687659}, "tok_per_s": 3011.9, "max_send_lag_s": 0.011}
+03:30:01 E_main-16-P6 trace lines: 8201
+03:30:14 done E_main-16-P6
+DONE_E
