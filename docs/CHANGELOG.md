@@ -163,6 +163,12 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 
 - Scope change (author's decision, 2026-11-24; plan `followup/dedicated_session/PLAN.md` Amendment 10, committed before any run it governs): from the dedicated session only B2 (kernel rerun with the c8 0- and 1-adapter controls) runs, then SGLang cliff Phase 2. Dropped: B1, the 3a repeat (cannot clear its flag on a shared host); B4, 3b SGLang main against v0.5.23 (answered by the SGLang cliff Phase 1, commit `1db7146`); B5, the 3c latency runs. B3, 4b (0.02 adapters), runs only if both finish and the author says go. (The author's message wrote "B3/B4" for 3b; in `run_session.sh` 3b is B4 and 4b is B3, so I mapped by content.) No definition or threshold changed. The 3a results stay labeled flagged. The dry run is stopped when its B2 part ends.
 
+## 2026-11-25 (B2 host decision; written before the run)
+
+- Author's decision: B2 runs on `runpod` (`126ab78ffbd7`), not `runpod2`. Recorded as Amendment 12 of `followup/dedicated_session/PLAN.md`; Amendment 11 is not used and no B2 data exists from `runpod2`.
+- The mistral.rs binaries I copied to `runpod2:/root/bin` earlier (sha256 matched) stay there unused; I will not delete them unless the author says so.
+- Expected runtime on `runpod`: about 10 to 14 hours (dry run measured about 5 minutes per cell); external CPU there is above the limits, so runs will be flagged LOAD_ABOVE_LIMIT.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
