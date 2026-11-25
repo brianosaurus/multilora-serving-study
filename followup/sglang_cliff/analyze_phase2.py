@@ -36,7 +36,7 @@ def load_trace(cell):
 
 
 res = {}
-for cell in sorted(glob.glob(f"{D}/B_*")):
+for cell in sorted(glob.glob(f"{D}/[BD]_*")):
     tag = os.path.basename(cell)[2:]; ev = load_trace(cell)
     marks = {}
     for line in open(f"{cell}/marks.jsonl"):

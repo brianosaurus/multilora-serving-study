@@ -38,6 +38,22 @@ Predictions against the data (the script's checks are in `analysis.txt`; the C c
 - **My Phase 1 explanation of the two 20 rps failures was probably wrong.** I attributed them to pod CPU spikes (external CPU 19 to 22 cores at those starts). The Phase 2 failure started with external CPU at 1.6 cores, on a quiet pod. The spikes may be unrelated. I have not shown what tips the server over at 20 rps.
 - Batches in the traces show running decode batches of up to about 170 requests, so the limit that binds is distinct adapters, not batch size.
 
+## Phase 3 diagnostic: main, 16 slots, drainer on (no behavior change; traced)
+FLAGGED screening, one repeat per cell, `runpod2` host 48bd787e389e, seed 1. Data in `results/phase2/D_main-16-d1` (threshold 1.0) and `D_main-16-d02` (0.2).
+
+| main, 16 slots | 20 rps p95 TTFT | 40 rps p95 TTFT | 40 rps tok/s | 40 rps loads / evicts | 40 rps mean wait | non-resident median wait | resident median wait |
+|---|---|---|---|---|---|---|---|
+| drainer off (B) | 23.2 s (slow state) | 18.5 s | 2121 | 29 / 29 | 4.00 s | 13.6 s | 0.00 s |
+| drainer 1.0 s | 90 ms | 8.8 s | 3001 | 71 / 71 | 3.29 s | 2.9 s | 3.35 s |
+| drainer 0.2 s | 81 ms | 8.5 s | 2964 | 76 / 76 | 3.37 s | 2.6 s | 4.37 s |
+| main, 32 slots (B) | 47 ms | 94 ms | 4080 | 8 / 7 | 0.00 s | n/a | 0.00 s |
+
+- The drainer moves waiting from non-resident adapters (13.6 s median) to everyone (resident median up from 0.00 s to 3.4-4.4 s). Mean wait barely changes (4.00 s to 3.3 s). It does not remove the cliff at 40 rps.
+- Requests completed per second at 40 rps offered (550-request burst, so a lower bound on capacity): 16 slots 23.2-23.5 with the drainer, 16.6 without, 31.9 at 32 slots. Every 16-slot cell completes work more slowly than it arrives. A change to which request is admitted next cannot make the queue short in that regime unless it also raises throughput.
+- Decode batch mean at 40 rps: 87 (drainer) vs 173 (off) vs 127 (32 slots). The drainer lowers concurrency while it drains.
+- Single 20 rps cell: both drainer runs passed (81-90 ms). The drainer-off 16-slot 20 rps run in B was a slow-state run. One repeat each, so this is not evidence that the drainer prevents the slow state.
+- I have not counted drain starts and ends; the tracer does not log drainer decisions.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.
