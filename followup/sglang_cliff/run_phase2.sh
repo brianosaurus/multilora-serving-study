@@ -12,7 +12,7 @@ start_sglang() { # tag eng slots trace(0|1)
   local tag=$1 eng=$2 slots=$3 trace=$4 O=$D/$1; mkdir -p $O; E=${ENVOF[$eng]}
   busy && { say "REFUSED $tag: GPU or another job busy"; return 1; }
   say "start $tag host $(hostname) load $(cut -d' ' -f1-3 /proc/loadavg) external CPU: $($PYL $R/followup/kernel_rerun/extload.py check 10 2>&1 | tail -1)"
-  CMD=($E/bin/python -m sglang.launch_server --model-path $M --served-model-name qwen --port 30000 --mem-fraction-static 0.85 --context-length 4096 --enable-lora --max-lora-rank 16 --max-loras-per-batch $slots --lora-target-modules q_proj k_proj v_proj o_proj gate_proj up_proj down_proj --lora-paths)
+  CMD=($E/bin/python -m sglang.launch_server --model-path $M --served-model-name qwen --port 30000 --mem-fraction-static 0.85 --context-length 4096 --enable-lora --max-lora-rank 16 --max-loras-per-batch $slots --lora-target-modules q_proj k_proj v_proj o_proj gate_proj up_proj down_proj $EXTRA --lora-paths)
   for i in $(seq 0 31); do CMD+=("adapter_$(printf %04d $i)=$A/adapter_$(printf %04d $i)"); done
   if [ $trace = 1 ]; then PP="PYTHONPATH=$TR SGLANG_CLIFF_TRACE_DIR=$O/trace"; else PP="SGLANG_CLIFF_NOTRACE=1"; fi
   setsid nohup env PATH=$E/bin:/usr/local/cuda/bin:$PATH CUDA_HOME=/usr/local/cuda $PP "${CMD[@]}" > $O/server.log 2>&1 < /dev/null & SP=$!
@@ -45,5 +45,9 @@ C) tag=C_vllm-16; O=$D/$tag; mkdir -p $O; E=/root/envs/vllm
   if [ $ok = 1 ]; then warm vllm http://localhost:8000 $tag
     for rate in 20 40; do curl -s localhost:8000/metrics > $O/metrics_before_r$rate.txt; load $tag vllm http://localhost:8000 $rate 1; curl -s localhost:8000/metrics > $O/metrics_after_r$rate.txt; done; fi
   stop_server; say "done $tag";;
+D) # diagnostic (Phase 3 step 1): main, 16 slots, drainer on, traced; EXTRA flags per cell
+  for cfg in "d1:--lora-drain-wait-threshold 1.0" "d02:--lora-drain-wait-threshold 0.2"; do tag=D_main-16-${cfg%%:*}; EXTRA="${cfg#*:}"
+    start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
+    stop_server; say "done $tag"; done;;
 esac
 echo "DONE_$PART" >> $L
