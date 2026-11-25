@@ -1,0 +1,25 @@
+blocks 1-4; per-block % change in median time per streamed chunk vs old
+c8 a0 new  median   -3.3%  range -13.0 to +24.4  faster 3/4
+c8 a0 old2 median   -4.6%  range -18.2 to +14.5  faster 2/4
+c8 a0 old median ms 21.87 new 21.39
+c8 a1 new  median   +3.0%  range +1.7 to +6.3  faster 0/4
+c8 a1 old2 median   +1.8%  range -3.6 to +4.3  faster 1/4
+c8 a1 old median ms 73.29 new 75.98
+c8 a4 new  median  -20.8%  range -21.2 to -20.2  faster 4/4
+c8 a4 old2 median   -0.0%  range -3.0 to +1.0  faster 2/4
+c8 a4 old median ms 100.69 new 79.76
+c8 a8 new  median  -30.1%  range -31.2 to -29.4  faster 4/4
+c8 a8 old2 median   -0.3%  range -3.5 to +1.7  faster 3/4
+c8 a8 old median ms 114.41 new 79.73
+c32 a0 new  median   -0.3%  range -29.2 to +42.8  faster 2/4
+c32 a0 old2 median  +13.9%  range -29.3 to +36.6  faster 2/4
+c32 a0 old median ms 43.98 new 43.49
+c32 a1 new  median   -1.5%  range -15.9 to +10.2  faster 2/4
+c32 a1 old2 median   +0.8%  range -13.1 to +13.8  faster 1/4
+c32 a1 old median ms 121.24 new 118.98
+c32 a4 new  median  -16.1%  range -19.6 to -11.7  faster 4/4
+c32 a4 old2 median   -1.1%  range -10.1 to +6.3  faster 2/4
+c32 a4 old median ms 152.72 new 128.62
+c32 a8 new  median  -32.3%  range -35.2 to -29.3  faster 4/4
+c32 a8 old2 median   -1.4%  range -7.2 to +1.4  faster 2/4
+c32 a8 old median ms 180.89 new 123.52
