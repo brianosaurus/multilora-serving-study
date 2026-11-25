@@ -95,5 +95,14 @@ K2) # option 8 after amendment 3: raised graph limit, overlap loading, --max-loa
   for n in 1 2 3; do tag=K2_main-16-cg256-ovl-$n; PATCHPY=; XENV=; EXTRA="--cuda-graph-max-bs-decode 256 --enable-lora-overlap-loading --max-loaded-loras 32"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
     stop_server; say "done $tag"; done;;
+L) # option 9.1: launch-only graph range check, no load
+  for cfg in "L1_lora-default:lora:" "L2_nolora-085:nolora:--mem-fraction-static 0.85" "L3_nolora-default:nolora:"; do tag=${cfg%%:*}; rest=${cfg#*:}; kind=${rest%%:*}; mf=${rest#*:}; O=$D/$tag; mkdir -p $O
+    busy && { say "REFUSED $tag: busy"; continue; }
+    say "start $tag host $(hostname) load $(cut -d' ' -f1-3 /proc/loadavg)"
+    CMD=(/root/envs/sglang_main/bin/python -m sglang.launch_server --model-path $M --served-model-name qwen --port 30000 --context-length 4096 $mf)
+    if [ $kind = lora ]; then CMD+=(--enable-lora --max-lora-rank 16 --max-loras-per-batch 16 --lora-target-modules q_proj k_proj v_proj o_proj gate_proj up_proj down_proj --lora-paths); for i in $(seq 0 31); do CMD+=("adapter_$(printf %04d $i)=$A/adapter_$(printf %04d $i)"); done; fi
+    setsid nohup env PATH=/root/envs/sglang_main/bin:/usr/local/cuda/bin:$PATH CUDA_HOME=/usr/local/cuda SGLANG_CLIFF_NOTRACE=1 "${CMD[@]}" > $O/server.log 2>&1 < /dev/null & SP=$!
+    ok=0; for i in $(seq 1 300); do [ "$(curl -s -o /dev/null -w %{http_code} -m 3 localhost:30000/health)" = 200 ] && { ok=1; break; }; kill -0 $SP 2>/dev/null || break; sleep 3; done
+    say "$tag ready=$ok"; sleep 5; stop_server; say "done $tag"; done;;
 esac
 echo "DONE_$PART" >> $L
