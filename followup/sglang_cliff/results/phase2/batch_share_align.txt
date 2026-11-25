@@ -1,0 +1,4 @@
+B_main-16 20 rps: first request over 1 s TTFT sent at 3.6 s (loadgen clock); mean batch above 48 from 5 s, for 5 s running from 5 s; mean batch in the second of the first slow request: 29
+E_main-16-P1 20 rps: first request over 1 s TTFT sent at 3.4 s (loadgen clock); mean batch above 48 from 5 s, for 5 s running from 5 s; mean batch in the second of the first slow request: 24
+B_main-16 40 rps: first request over 1 s TTFT sent at 0.0 s (loadgen clock); mean batch above 48 from 1 s, for 5 s running from 1 s; mean batch in the second of the first slow request: 46
+E_main-16-U4 40 rps: first request over 1 s TTFT sent at 1.3 s (loadgen clock); mean batch above 48 from 2 s, for 5 s running from 2 s; mean batch in the second of the first slow request: 41

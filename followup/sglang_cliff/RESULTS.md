@@ -211,3 +211,22 @@ Reading: overlap loading gives a small gain (p95 about 12 to 15% lower, TPOT abo
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.
 - Everything here is one GPU, one 1.5B model, a 550-request burst, one repeat per Phase 2 cell. The SGLang v0.5.23 and main environments differ in kernel packages.
+
+## Phase 3 option 9 (plan: PLAN.md, option 9; the time is the commit's)
+
+### 9.1 Launch-only check (part L, `runpod2` host 48bd787e389e, stock main `0e9cff98f5b7`, no load; FLAGGED screening, one launch each)
+| launch | `mem_fraction_static` chosen | decode CUDA graph capture (`Capture target decode CUDA graph end. bs=[...]`) | `max_total_num_tokens` |
+|---|---|---|---|
+| L1: LoRA as in the study, no `--mem-fraction-static` | 0.704 | 1, 2, 4, 8, 12, 16, 24, 32, 40, 48 | 474,066 |
+| L2: no LoRA, `--mem-fraction-static 0.85` | 0.85 | 1, 2, 4, 8, 12, 16, 24, 32, 40, 48 | 620,315 |
+| L3: no LoRA, no `--mem-fraction-static` | 0.704 | 1, 2, 4, 8, 12, 16, 24, 32, 40, 48 | 494,181 |
+- The prediction held: the largest captured decode batch is 48 in all three launches. 48 is SGLang's default on this 24 GB GPU (RTX 4090, 4 MiB used before each launch); it is not a result of my 0.85 and not caused by LoRA. The default memory fraction chosen is 0.704, below 0.85.
+- Logs: `results/phase2/L1_lora-default/server.log`, `L2_nolora-085/`, `L3_nolora-default/`. This tests the default of this build on this GPU only.
+
+### 9.2 Slow state against batch size (existing traces, no GPU; `batch_share.py`, output `results/phase2/batch_share.txt`; FLAGGED screening starts)
+Predictions as written in PLAN.md, and what the data show:
+- (a) At 20 rps the two slow starts (`B_main-16`, `E_main-16-P1`) spend 57% and 55% of decode calls above batch 48; the nine normal stock-limit starts spend 0%. Held.
+- (b) At 40 rps the slow starts spend 94% and 75% above 48, and the normal stock starts 57% to 74% (median 71%). The share does not separate slow from normal at 40 rps, as the plan predicted; the author's expectation that it would did not hold.
+- (c) The twelve raised-limit windows (`H_*`, `K2_*`): the longest run of decode calls above 256 is 0 and the largest batch is 92. Held.
+- (d) The first request over 1 s TTFT comes after the batch has been above 48 for at least 5 s: NOT held. `batch_share.py` compares two clocks (the load generator's `t_send` and the timeline from `marks.jsonl`, which starts before the load generator does); `batch_share_align.py` puts both on the load generator's clock. At 20 rps the first request over 1 s TTFT was sent at 3.6 s (`B_main-16`) and 3.4 s (`E_main-16-P1`) while the mean batch was 29 and 24, and the mean batch first exceeded 48 at 5 s. So slow requests appear before the batch passes 48, not after 5 s above it. (The first output of `batch_share.py`, 3.6 against 13 s and 3.4 against 15 s, mixes the two clocks and should not be read.)
+- Reading: slow starts do spend most decode calls above 48 where normal starts do not (20 rps), which fits the graph limit as the cause of slow steps once the batch is large. The traces do not show that passing 48 triggers the slow state: slow requests begin earlier, during the ramp, and at 40 rps the share above 48 is high in normal starts too. The trigger is not established. Limits: traced starts only, one start per slow case, 2 slow starts per rate, a decode call's `n` is the batch at the time of the call.

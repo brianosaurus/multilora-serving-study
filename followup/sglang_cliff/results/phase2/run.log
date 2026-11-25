@@ -274,3 +274,13 @@ DONE_K
 06:53:38 K2_main-16-cg256-ovl-3 trace lines: 10260
 06:53:51 done K2_main-16-cg256-ovl-3
 DONE_K2
+07:35:16 start L1_lora-default host 48bd787e389e load 1.66 3.57 4.64
+07:35:56 L1_lora-default ready=1
+07:36:14 done L1_lora-default
+07:36:14 start L2_nolora-085 host 48bd787e389e load 2.30 3.44 4.53
+07:36:52 L2_nolora-085 ready=1
+07:37:10 done L2_nolora-085
+07:37:10 start L3_nolora-default host 48bd787e389e load 2.01 3.17 4.37
+07:37:47 L3_nolora-default ready=1
+07:38:05 done L3_nolora-default
+DONE_L
