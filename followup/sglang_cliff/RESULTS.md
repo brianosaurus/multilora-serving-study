@@ -89,6 +89,21 @@ Other observations:
 - Reading: in 16-slot overload all 16 slots are in use almost all the time, so the scheduler seldom has a free slot to give out and there is almost nothing to reorder. The no-effect result for depth-first admission is real, not a rule that never ran: it ran about 100 times in 550 requests.
 - From the traces (CPU time in the decode call, a lower bound): decode calls with 50 to 300 requests all take about 32 ms at both 16 and 32 slots, so batch size, not step time, tracks throughput.
 
+## Phase 3 option 3 result: slot sweep on stock main (FLAGGED screening, one start per cell)
+`runpod2` host 48bd787e389e, plan `68101da` committed before the runs, seed 1, traced. 16-slot reference: E stock starts (median 13.46 s p95, 23.6 requests/s); 32-slot reference: `B_main-32`.
+
+| slots | 40 rps p95 | 40 rps p99 | requests/s | tok/s | 20 rps p95 |
+|---|---|---|---|---|---|
+| 16 | 13.46 s | 15.40 s | 23.6 | 3011 | 82 ms |
+| 20 | 11.68 s | 14.18 s | 25.0 | 3191 | 71 ms |
+| 24 | 9.00 s | 12.52 s | 28.8 | 3674 | 60 ms |
+| 28 | 107 ms | 9.54 s | 30.0 | 3833 | 53 ms |
+| 32 | 94 ms | 109 ms | 31.9 | 4080 | 47 ms |
+
+- S1 holds on the p95 rule: 28 slots passes (107 ms, 0 errors); 20 and 24 fail. But 28 slots has p99 9.5 s: more than 1% of requests still waited seconds, so the cliff is just under the edge there, not gone.
+- S2 holds: requests/s rises 23.6, 25.0, 28.8, 30.0 and the 28-slot value is 0.94 of the 32-slot value (needed 0.9).
+- Reading: at this load the cliff location follows the number of adapters in use at once (about 31 distinct per decode batch at 32 slots). 16 to 24 slots fail; 28 passes p95 with a tail; 32 passes cleanly. One repeat per cell, one GPU, one model, one 550-request burst.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.
