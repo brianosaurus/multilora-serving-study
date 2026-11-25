@@ -207,6 +207,27 @@ Host 48bd787e389e; plan `c489bca` committed before the runs; untraced. External 
 Predictions: K1 (median p95 at most 1.8 s, each start below 2.18 s) half holds: each start is below 2.18 s but the median is 1.92 s, not 1.8 s, so K1 fails as stated. K2 (requests/s at least 36.4 in each start) holds. K3 (20 rps passes 3 of 3) holds. K4 (excess at most 12%) fails: 21.1 to 21.5%.
 Reading: overlap loading gives a small gain (p95 about 12 to 15% lower, TPOT about 1 ms lower, throughput about 1% higher) and much tighter run-to-run spread, but it does not remove the stall: a decode step that follows a load is still about 44 ms longer than one that does not, and about a fifth of the busy window is spent in those steps. So the stall is not mainly the host-to-device copy of the weights. vLLM is still ahead (p95 1.45 s, TPOT 10 ms). Not tested: what else runs in the load path (adapter memory pool writes, eviction, graph input setup), a GPU-synchronized timeline.
 
+## Option 9 result: graph range default, and the slow state against batch size (FLAGGED)
+Plan `f59a35f`, runner part L and `batch_share.py` committed before the launches and the analysis. `runpod2` host 48bd787e389e.
+
+**9.1 Launch-only check** (stock main `0e9cff98f5b7`, no load; `results/phase2/L*_*/server.log`):
+
+| launch | `mem_fraction_static` used | decode graphs captured | free memory after capture |
+|---|---|---|---|
+| L1 LoRA as in the study, no memory flag | 0.704 (SGLang's choice) | 1, 2, 4, 8, 12, 16, 24, 32, 40, 48 | 5.36 GB |
+| L2 no LoRA, `--mem-fraction-static 0.85` | 0.85 | same, up to 48 | 2.10 GB |
+| L3 no LoRA, no memory flag | 0.704 | same, up to 48 | 5.44 GB |
+
+Prediction held: the largest captured decode batch is 48 in all three, and SGLang's own default fraction is below 0.85 (0.704). So 48 is SGLang's default decode graph range for this 24 GB GPU; it is not caused by my 0.85 and not by LoRA, and more free memory (5.4 GB) did not enlarge it. `cuda_graph_max_bs_decode` is `None` in `server_args` (resolved later). Not tested: other GPUs, and whether the default depends on the GPU class or on something else.
+**Correction:** I said the range was short "probably because I left about 2 GB free at capture time with 0.85" (in conversation, and as a parenthetical in the "Things I got wrong" lines of both draft posts). That explanation was wrong; the draft-post lines were edited and a CHANGELOG correction entry added.
+
+**9.2 Slow state against batch size** (`batch_share.py`, traced starts, `results/phase2/batch_share.txt`):
+- (a) holds: at 20 rps the two slow starts (`B_main-16`, `E_main-16-P1`; p95 23.2 and 16.9 s) spent 57% and 55% of decode calls above 48; the 9 normal stock starts spent 0%.
+- (b) mine holds, the author's does not: at 40 rps the two slow starts (`B_main-16` 2121 tok/s, `E_main-16-U4` 2352 tok/s) spent 94% and 75% above 48, but the 9 normal stock starts spent 70 to 74%, so the share does not separate them. What does differ: the slow 40 rps starts' batches peaked at 355 and 283 and had runs of 91 and 63 decode calls above 256; the normal 16-slot stock starts peaked at 213 to 217 and never exceeded 256. Not a clean separator: `B_v23-16` (2934 tok/s) peaked at 307 and `B_main-32` and `G_main-28` also exceeded 256 without a slow state.
+- (c) holds: the 12 raised-limit windows (`H_*`, `K2_*`) peaked at a batch of 92 and never had a decode call above 256.
+- (d) fails: in both slow 20 rps starts the first request that waited over 1 s arrived 3.6 and 3.7 s after the first arrival (queue length 1 and 7, non-resident adapter), before the decode batch ever stayed above 48 (from about 13 to 15 s into the window). So the batch above 48 follows the stall; it is not what starts it at 20 rps.
+- Unplanned: in both slow 20 rps starts the loadgen's first arrival came late (8.5 and 9.7 s after the mark; 5.8 to 6.7 s in all normal starts), and loads stopped after the first seconds (30 to 31 loads in the first 5 s, then 35 to 37 by 20 s, against 119 to 124 in normal starts) while non-resident arrivals kept coming (117 to 121). Two slow starts only. The late first arrival may mean the host was slow at the start; the earlier CPU-spike explanation was withdrawn, and this does not restore it. The cause is not identified.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.

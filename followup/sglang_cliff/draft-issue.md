@@ -8,7 +8,7 @@ Launching with `--cuda-graph-max-bs-decode 256` (no code change) gives p95 TTFT 
 
 ## Setup
 Qwen2.5-1.5B-Instruct, RTX 4090 (24 GB), `--mem-fraction-static 0.85`, `--context-length 4096`, `--enable-lora --max-lora-rank 16`, all seven projection modules, 32 rank-16 adapters, Zipf popularity, open-loop Poisson arrivals, 500 requests plus 50 warm-up, 256 input and 128 output tokens, seed 1. SGLang main `0e9cff98f5b7` (v0.5.23 behaves the same at 16 slots). vLLM 0.34.0 with `--max-loras 16`.
-With this memory fraction the capture log reads `Capture target decode CUDA graph end. bs=[1, 2, 4, 8, 12, 16, 24, 32, 40, 48], ... avail mem=1.98 GB`. I did not test other memory fractions or GPUs.
+The capture log reads `Capture target decode CUDA graph end. bs=[1, 2, 4, 8, 12, 16, 24, 32, 40, 48]`. The same range of at most 48 is captured with SGLang's own default memory fraction (it chose 0.704, leaving 5.4 GB free), with `--mem-fraction-static 0.85` (2.1 GB free), and with or without LoRA, so 48 is the default for this 24 GB GPU and more free memory does not enlarge it. I did not test other GPUs.
 
 ## Evidence
 - **Step time against batch size** (trace of the decode call, CPU time): about 1.9 ms for 48 or fewer requests, 31.7 ms for 49 or more, flat to 300. Closed loop at fixed concurrency on the base model: 5.7 ms per token at 48 against 33.5 ms at 96 in stock, and 7.1 ms at 96 with the larger range (vLLM 6.6 ms).
@@ -29,7 +29,7 @@ With the larger range at 16 slots, p95 TTFT is about 2.2 s against vLLM's 1.45 s
 
 ## Open
 - Why vLLM, which skips a request whose adapter does not fit in the same way, has mean queue time 0.24 s while stock SGLang has 2 to 4 s. The graph limit explains most of that, but the gap that remains is not explained.
-- At 16 slots and 20 rps, 4 of 27 stock starts tipped into a slow state (p95 above 10 s), and 2 of 4 stock starts at 40 rps ran at 2.1 to 2.4k tokens/s instead of 3k. I did not find the trigger.
+- Slow state: at 16 slots and 20 rps, 4 of 27 stock starts tipped (p95 above 10 s), and 2 of 4 stock starts at 40 rps ran at 2.1 to 2.4k tokens/s instead of 3k. In the two traced slow 20 rps starts the first request that waited more than 1 s arrived 3.6 to 3.7 s into the run, before the decode batch ever stayed above 48; the batch then grew to 130+ and stayed there, and loads stopped (35 in 20 s against about 120 in normal starts). At 40 rps the share of decode calls above 48 does not separate slow from normal starts (94 and 75% against 70 to 74%). I did not find the trigger.
 - One start at 32 slots with the larger range had p95 686 ms; the other two were 53 and 63 ms.
 
 ## Question for maintainers

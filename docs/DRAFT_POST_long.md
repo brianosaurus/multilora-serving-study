@@ -117,7 +117,7 @@ Neither result is a correctness guarantee for an engine. One model, rank 16, fou
 - A rebase on another machine deleted follow-up records from the changelog and plans. They were restored unchanged, and a check now blocks staged changes that delete records.
 - A network volume lost its contents mid-study, so the first vLLM grid was rerun. Its per-step summaries agree with the rerun to within a few percent.
 - The first SGLang LoRA session failed my drift check. I added a second warm-up and reran it. The discarded session's numbers matched the rerun closely.
-- I wrote that SGLang and vLLM had "same slots, same traffic" and called the SGLang cliff a configuration cliff. In my launch the SGLang decode CUDA graphs covered batches of at most 48, and vLLM's covered far more. Raising the SGLang limit with one flag took 40 rps p95 TTFT from 13.5 s to 2.1 to 3.1 s on 16 slots (3 starts, shared host, screening only). The engines were not at the same setting, so part of the SGLang slots story is this. Not yet rerun on the dedicated machine.
+- I wrote that SGLang and vLLM had "same slots, same traffic" and called the SGLang cliff a configuration cliff. SGLang's default decode CUDA graph range on this 24 GB GPU stops at a batch of 48, with my 0.85 memory fraction and with SGLang's own default, and with or without LoRA; vLLM's default covers far more. I first guessed the short range came from my memory setting; the check showed it did not. Raising the SGLang limit with one flag took 40 rps p95 TTFT from 13.5 s to 2.1 to 3.1 s on 16 slots (3 starts, shared host, screening only). The two defaults were not equivalent, so part of the SGLang slots story is this. Not yet rerun on the dedicated machine.
 
 ## 8. Bugs and upstream work
 
