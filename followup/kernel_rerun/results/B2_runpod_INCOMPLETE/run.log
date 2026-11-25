@@ -1,0 +1,56 @@
+03:09:12 SHARED HOST (Amendment 8 of the dedicated session): load 9.67 or external CPU median 7.25 cores above the start limit; recorded, not gating; every run is flagged by its own checks
+03:09:13 host 126ab78ffbd7 ok; 128 cores; load 9.67; external CPU median 7.25 max 9.15 cores over 10 s; GPU idle; gpu: NVIDIA GeForce RTX 4090, 210 MHz, 46
+03:09:24 binaries: old b5b94e8c3b36fd11  new caa88e56293acb77  old2 b5b94e8c3b36fd11
+03:09:52 block 1 position 1: old up (load 8.79)
+03:15:27 block 1 position 1 old: cell order (seed 20261135): 8:0 8:4 32:0 32:8 8:8 32:1 8:1 32:4
+03:41:59 block 1 position 2: new up (load 13.76)
+03:46:06 block 1 position 2 new: cell order (seed 20261136): 32:8 8:4 8:1 8:0 32:1 32:0 32:4 8:8
+04:09:15 block 1 position 3: old2 up (load 10.30)
+04:14:46 block 1 position 3 old2: cell order (seed 20261137): 32:8 32:4 32:0 8:4 32:1 8:8 8:0 8:1
+04:40:56 block 2 position 1: new up (load 4.82)
+04:45:01 block 2 position 1 new: cell order (seed 20261145): 32:0 8:0 32:8 32:1 8:1 8:8 32:4 8:4
+05:08:13 block 2 position 2: old2 up (load 4.58)
+05:13:40 block 2 position 2 old2: cell order (seed 20261146): 8:8 32:8 8:0 8:4 32:4 8:1 32:0 32:1
+05:39:28 block 2 position 3: old up (load 8.15)
+05:44:59 block 2 position 3 old: cell order (seed 20261147): 8:0 8:1 32:4 8:4 8:8 32:8 32:1 32:0
+06:11:22 block 3 position 1: old2 up (load 6.92)
+06:16:53 block 3 position 1 old2: cell order (seed 20261155): 32:8 8:4 32:1 32:0 8:1 32:4 8:0 8:8
+06:43:33 block 3 position 2: old up (load 5.78)
+06:49:04 block 3 position 2 old: cell order (seed 20261156): 8:0 8:1 32:4 8:8 32:1 8:4 32:0 32:8
+07:15:03 block 3 position 3: new up (load 6.89)
+07:19:07 block 3 position 3 new: cell order (seed 20261157): 32:1 32:4 32:0 8:0 32:8 8:8 8:1 8:4
+07:42:39 block 4 position 1: new up (load 5.34)
+07:46:43 block 4 position 1 new: cell order (seed 20261165): 8:8 8:0 32:8 32:4 32:0 8:4 8:1 32:1
+08:09:49 block 4 position 2: old up (load 9.44)
+08:15:23 block 4 position 2 old: cell order (seed 20261166): 32:8 32:4 32:1 8:1 8:8 8:4 32:0 8:0
+08:41:45 block 4 position 3: old2 up (load 10.92)
+08:47:35 block 4 position 3 old2: cell order (seed 20261167): 32:0 8:8 8:1 32:8 8:0 32:1 32:4 8:4
+09:13:55 block 5 position 1: old up (load 7.02)
+09:19:37 block 5 position 1 old: cell order (seed 20261175): 8:0 32:8 32:4 32:0 8:8 8:4 32:1 8:1
+09:51:43 block 5 position 2: old2 up (load 3.90)
+09:52:21 block 5 position 2 old2: cell order (seed 20261176): 32:8 32:4 32:0 32:1 8:8 8:0 8:4 8:1
+10:05:09 block 5 position 3: new up (load 4.52)
+10:05:47 block 5 position 3 new: cell order (seed 20261177): 32:1 8:0 32:0 8:1 8:4 32:8 8:8 32:4
+10:18:37 block 6 position 1: old2 up (load 7.14)
+10:19:15 block 6 position 1 old2: cell order (seed 20261185): 32:8 32:1 8:8 8:0 32:4 32:0 8:1 8:4
+10:32:03 block 6 position 2: new up (load 4.35)
+10:32:41 block 6 position 2 new: cell order (seed 20261186): 32:8 8:8 32:1 8:1 32:4 8:4 8:0 32:0
+10:45:30 block 6 position 3: old up (load 4.81)
+10:46:09 block 6 position 3 old: cell order (seed 20261187): 8:4 8:0 32:1 32:8 8:8 32:0 32:4 8:1
+10:52:48 runs finished; flagged runs: 144
+6 blocks; runs above the load limit: 144
+  flagged runs (first 5): ['blk1 pos1 old c8_a0', 'blk1 pos1 old c8_a4', 'blk1 pos1 old c32_a0', 'blk1 pos1 old c32_a8', 'blk1 pos1 old c8_a8']
+
+conc adapters | median ms per token old / new / old2 | new vs old: median change, blocks faster | old2 vs old: median change | tok/s new/old
+   8        0 | missing runs
+   8        1 | missing runs
+   8        4 | missing runs
+   8        8 | missing runs
+  32        0 | missing runs
+  32        1 | missing runs
+  32        4 | missing runs
+  32        8 | missing runs
+
+Establishment rule (PLAN.md): at a cell, (a) the new build is faster in ALL blocks, and (b) the median change is larger in magnitude than the largest median change at the same concurrency in the unchanged-code cells (0 and 1 adapters, new vs old) and in the old-vs-old-copy control (any adapter count).
+concurrency 8: incomplete
+concurrency 32: incomplete

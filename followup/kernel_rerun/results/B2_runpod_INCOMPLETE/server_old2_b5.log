@@ -1,0 +1,30 @@
+[2m2026-11-25T09:45:34.885302Z[0m [32m INFO[0m [2mmistralrs_core::utils::tokens[0m[2m:[0m Could not load token at "/root/.cache/huggingface/token", using no HF token.
+[2m2026-11-25T09:45:35.154256Z[0m [32m INFO[0m [2mmistralrs_core::utils::tokens[0m[2m:[0m Could not load token at "/root/.cache/huggingface/token", using no HF token.
+[2m2026-11-25T09:45:35.419599Z[0m [32m INFO[0m [2mmistralrs_core::pipeline::paths[0m[2m:[0m Loading LoRA adapter `adapter_0000` from `/dev/shm/adapters/adapter_0000` at revision `main`
+[2m2026-11-25T09:45:35.420146Z[0m [32m INFO[0m [2mmistralrs_core::utils::tokens[0m[2m:[0m Could not load token at "/root/.cache/huggingface/token", using no HF token.
+[2m2026-11-25T09:45:35.671317Z[0m [32m INFO[0m [2mmistralrs_core::pipeline::paths[0m[2m:[0m Loading LoRA adapter `adapter_0001` from `/dev/shm/adapters/adapter_0001` at revision `main`
+[2m2026-11-25T09:45:35.671796Z[0m [32m INFO[0m [2mmistralrs_core::utils::tokens[0m[2m:[0m Could not load token at "/root/.cache/huggingface/token", using no HF token.
+[2m2026-11-25T09:45:35.926351Z[0m [32m INFO[0m [2mmistralrs_core::pipeline::paths[0m[2m:[0m Loading LoRA adapter `adapter_0002` from `/dev/shm/adapters/adapter_0002` at revision `main`
+[2m2026-11-25T09:45:35.926784Z[0m [32m INFO[0m [2mmistralrs_core::utils::tokens[0m[2m:[0m Could not load token at "/root/.cache/huggingface/token", using no HF token.
+[2m2026-11-25T09:45:36.164409Z[0m [32m INFO[0m [2mmistralrs_core::pipeline::paths[0m[2m:[0m Loading LoRA adapter `adapter_0003` from `/dev/shm/adapters/adapter_0003` at revision `main`
+[2m2026-11-25T09:45:36.164840Z[0m [32m INFO[0m [2mmistralrs_core::utils::tokens[0m[2m:[0m Could not load token at "/root/.cache/huggingface/token", using no HF token.
+[2m2026-11-25T09:45:36.401100Z[0m [32m INFO[0m [2mmistralrs_core::pipeline::paths[0m[2m:[0m Loading LoRA adapter `adapter_0004` from `/dev/shm/adapters/adapter_0004` at revision `main`
+[2m2026-11-25T09:45:36.401534Z[0m [32m INFO[0m [2mmistralrs_core::utils::tokens[0m[2m:[0m Could not load token at "/root/.cache/huggingface/token", using no HF token.
+[2m2026-11-25T09:45:36.646373Z[0m [32m INFO[0m [2mmistralrs_core::pipeline::paths[0m[2m:[0m Loading LoRA adapter `adapter_0005` from `/dev/shm/adapters/adapter_0005` at revision `main`
+[2m2026-11-25T09:45:36.646804Z[0m [32m INFO[0m [2mmistralrs_core::utils::tokens[0m[2m:[0m Could not load token at "/root/.cache/huggingface/token", using no HF token.
+[2m2026-11-25T09:45:36.884883Z[0m [32m INFO[0m [2mmistralrs_core::pipeline::paths[0m[2m:[0m Loading LoRA adapter `adapter_0006` from `/dev/shm/adapters/adapter_0006` at revision `main`
+[2m2026-11-25T09:45:36.885370Z[0m [32m INFO[0m [2mmistralrs_core::utils::tokens[0m[2m:[0m Could not load token at "/root/.cache/huggingface/token", using no HF token.
+[2m2026-11-25T09:45:37.132066Z[0m [32m INFO[0m [2mmistralrs_core::pipeline::paths[0m[2m:[0m Loading LoRA adapter `adapter_0007` from `/dev/shm/adapters/adapter_0007` at revision `main`
+[2m2026-11-25T09:45:37.132500Z[0m [32m INFO[0m [2mmistralrs_core::utils::tokens[0m[2m:[0m Could not load token at "/root/.cache/huggingface/token", using no HF token.
+[2m2026-11-25T09:45:38.612393Z[0m [32m INFO[0m [2mmistralrs_quant::utils::log[0m[2m:[0m DType selected is BF16.
+[2m2026-11-25T09:45:38.618085Z[0m [32m INFO[0m [2mmistralrs_core::pipeline::loaders::auto_device_map[0m[2m:[0m Reserving 578 MiB on the primary device and 356 MiB on mapped devices for activations (predicted).
+[2m2026-11-25T09:45:38.622361Z[0m [32m INFO[0m [2mmistralrs_core::pipeline::loaders::auto_device_map[0m[2m:[0m Using paged execution limits for automatic device mapping [3mmax_num_seqs[0m[2m=[0m256 [3mmax_num_batched_tokens[0m[2m=[0m4096 [3mmax_prefill_chunk_tokens[0m[2m=[0m512
+[2m2026-11-25T09:45:38.622987Z[0m [32m INFO[0m [2mmistralrs_quant::utils::log[0m[2m:[0m Model has 28 repeating layers.
+[2m2026-11-25T09:45:38.623173Z[0m [32m INFO[0m [2mmistralrs_quant::utils::log[0m[2m:[0m Loading model according to the following repeating layer mappings:
+[2m2026-11-25T09:45:38.623685Z[0m [32m INFO[0m [2mmistralrs_quant::utils::log[0m[2m:[0m Layers 0-27: cuda[0] (24 GB)
+[2m2026-11-25T09:45:38.768813Z[0m [32m INFO[0m [2mmistralrs_quant::utils::log[0m[2m:[0m FlashAttention is enabled.
+[2m2026-11-25T09:45:38.781824Z[0m [32m INFO[0m [2mmistralrs_core::pipeline::normal[0m[2m:[0m Loading model weights.
+Error: failed to read LoRA adapter file `/dev/shm/adapters/adapter_0000/adapter_model.safetensors`: No space left on device (os error 28) at path "/tmp/.tmpfIfJNC"
+
+Caused by:
+    No space left on device (os error 28) at path "/tmp/.tmpfIfJNC"

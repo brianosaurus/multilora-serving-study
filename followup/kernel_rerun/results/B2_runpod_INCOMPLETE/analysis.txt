@@ -1,0 +1,16 @@
+6 blocks; runs above the load limit: 144
+  flagged runs (first 5): ['blk1 pos1 old c8_a0', 'blk1 pos1 old c8_a4', 'blk1 pos1 old c32_a0', 'blk1 pos1 old c32_a8', 'blk1 pos1 old c8_a8']
+
+conc adapters | median ms per token old / new / old2 | new vs old: median change, blocks faster | old2 vs old: median change | tok/s new/old
+   8        0 | missing runs
+   8        1 | missing runs
+   8        4 | missing runs
+   8        8 | missing runs
+  32        0 | missing runs
+  32        1 | missing runs
+  32        4 | missing runs
+  32        8 | missing runs
+
+Establishment rule (PLAN.md): at a cell, (a) the new build is faster in ALL blocks, and (b) the median change is larger in magnitude than the largest median change at the same concurrency in the unchanged-code cells (0 and 1 adapters, new vs old) and in the old-vs-old-copy control (any adapter count).
+concurrency 8: incomplete
+concurrency 32: incomplete

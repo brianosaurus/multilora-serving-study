@@ -174,6 +174,13 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 - Author's decision: stop the slow-state investigation and record it as open in `followup/sglang_cliff/RESULTS.md` (ruled out: batch above 48 as the trigger, slot capture in strict form, LRU evicting adapters with waiting requests; the raised limit avoided it in every start so far; 4 of 27 stock 20 rps starts tipped). No further runs for it.
 - `followup/sglang_cliff/draft-issue.md` (not posted) gets one line on the drainer's evictions at 40 rps (73 of 106 with requests waiting).
 
+## 2026-11-25 (B2 on runpod: ended incomplete)
+
+- B2 on `runpod` finished at 10:52 UTC pod clock (script exit; started 03:09). Blocks 1 to 4 have data; blocks 5 and 6 failed at server start because the root disk was full (BUGS.md B10). Not 6 blocks, so the establishment rule is not evaluated (analysis prints "missing runs"). All 144 runs with data are flagged LOAD_ABOVE_LIMIT.
+- No result is drawn from blocks 1 to 4: they are not the pre-registered design. No rerun is started until the author decides; a rerun needs the disk freed first. Nothing is deleted on the pod without the author's say.
+- All servers stopped, GPU idle on `runpod` (1 MiB, 0 processes). Phase 2 of the SGLang cliff finished earlier on `runpod2` (not run by this session).
+- Results copied to `followup/kernel_rerun/results/B2_runpod_INCOMPLETE/` (the 549 MB copy of the old binary excluded). Local commit only.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
