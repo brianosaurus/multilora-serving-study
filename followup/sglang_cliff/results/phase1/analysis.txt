@@ -1,0 +1,21 @@
+FLAGGED: shared host, screening run
+
+rate 20 rps  (p95 TTFT ms per round; pass = p95<=500 and 0 errors)
+  v23-def   p95 [92, 177, 80] median 92  pass 3/3  max_ttft_s [0.6, 0.5, 0.6]  errors [0, 0, 0]  tok/s [2584, 2707, 2363]  lag>0.05s 0
+  v23-d1    p95 [84, 173, 76] median 84  pass 3/3  max_ttft_s [0.6, 0.5, 0.6]  errors [0, 0, 0]  tok/s [2584, 2706, 2363]  lag>0.05s 0
+  v23-d02   p95 [10859, 195, 78] median 195  pass 2/3  max_ttft_s [12.7, 0.5, 0.6]  errors [0, 0, 0]  tok/s [1949, 2706, 2363]  lag>0.05s 0
+  main-def  p95 [92, 131, 73] median 92  pass 3/3  max_ttft_s [0.5, 0.5, 0.6]  errors [0, 0, 0]  tok/s [2590, 2707, 2364]  lag>0.05s 0
+  main-d1   p95 [104, 116, 75] median 104  pass 3/3  max_ttft_s [0.7, 0.5, 0.6]  errors [0, 0, 0]  tok/s [2589, 2706, 2363]  lag>0.05s 0
+  main-d02  p95 [7433, 154, 75] median 154  pass 2/3  max_ttft_s [9.0, 0.5, 0.6]  errors [0, 0, 0]  tok/s [1916, 2706, 2363]  lag>0.05s 0
+rate 40 rps  (p95 TTFT ms per round; pass = p95<=500 and 0 errors)
+  v23-def   p95 [13550, 12073, 13379] median 13379  pass 0/3  max_ttft_s [16.1, 15.4, 16.2]  errors [0, 0, 0]  tok/s [3098, 3159, 2950]  lag>0.05s 0
+  v23-d1    p95 [11067, 11244, 10281] median 11067  pass 0/3  max_ttft_s [12.6, 12.9, 12.1]  errors [0, 0, 0]  tok/s [2833, 3068, 2853]  lag>0.05s 0
+  v23-d02   p95 [13346, 9910, 9457] median 9910  pass 0/3  max_ttft_s [14.5, 11.6, 10.3]  errors [0, 0, 0]  tok/s [2769, 3020, 2831]  lag>0.05s 0
+  main-def  p95 [13671, 12029, 11694] median 12029  pass 0/3  max_ttft_s [15.9, 15.4, 15.0]  errors [0, 0, 0]  tok/s [3001, 3079, 2906]  lag>0.05s 0
+  main-d1   p95 [9953, 8729, 8665] median 8729  pass 0/3  max_ttft_s [10.9, 9.7, 9.4]  errors [0, 0, 0]  tok/s [2651, 2891, 2728]  lag>0.05s 0
+  main-d02  p95 [13884, 9185, 8418] median 9185  pass 0/3  max_ttft_s [15.6, 9.9, 9.8]  errors [0, 0, 0]  tok/s [2334, 2847, 2714]  lag>0.05s 0
+
+Reading rule at 40 rps
+  def : v23 median 13379 ms, main median 12029 ms, ratio 1.11x, ranges disjoint False, main passes 0/3, v23 passes 0/3 -> no material effect
+  d1  : v23 median 11067 ms, main median 8729 ms, ratio 1.27x, ranges disjoint True, main passes 0/3, v23 passes 0/3 -> no material effect
+  d02 : v23 median 9910 ms, main median 9185 ms, ratio 1.08x, ranges disjoint False, main passes 0/3, v23 passes 0/3 -> no material effect
