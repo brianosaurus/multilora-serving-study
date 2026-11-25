@@ -28,7 +28,7 @@ load() { # tag engine url rate seed
 warm() { for s in 998 997; do $PYL $R/scripts/loadgen.py --engine $1 --url $2 --tokenizer $M --rate 40 --requests 300 --warmup 0 --adapters 0 --seed $s --out $D/$3/warm_$s.json >/dev/null 2>&1; done; }
 case $PART in
 A) # tracing overhead: main, 16 slots, 20 rps; U P P U U P
-  n=0; for v in U P P U U P; do n=$((n+1)); tag=A_${n}_$v; tr=0; [ $v = P ] && tr=1
+  n=0; for v in ${ORDER:-U P P U U P}; do n=$((n+1)); tag=A_${n}_$v; tr=0; [ $v = P ] && tr=1
     start_sglang $tag main 16 $tr && { warm sglang http://localhost:30000 $tag; load $tag sglang http://localhost:30000 20 1; [ $tr = 1 ] && say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl 2>/dev/null | wc -l)"; }
     stop_server; say "done $tag"; done;;
 B) for cfg in v23-16 main-16 main-32 v23-32; do eng=${cfg%%-*}; sl=${cfg#*-}; tag=B_$cfg
@@ -51,7 +51,7 @@ D) # diagnostic (Phase 3 step 1): main, 16 slots, drainer on, traced; EXTRA flag
     stop_server; say "done $tag"; done;;
 E) # Phase 3 A/B: main 16 slots traced; U = stock main, P = depth-first patch (worktree on PYTHONPATH + flag); order U P P U U P
   PATCHDIR=/root/src/sglang-lora-depth/python
-  n=0; for v in U P P U U P; do n=$((n+1)); tag=E_main-16-$v$n; PATCHPY=; XENV=
+  n=0; for v in ${ORDER:-U P P U U P}; do n=$((n+1)); tag=E_main-16-$v$n; PATCHPY=; XENV=
     [ $v = P ] && { PATCHPY=$PATCHDIR; XENV="SGLANG_LORA_DEPTH_FIRST=1"; }
     start_sglang $tag main 16 1 && { [ $v = P ] && say "$tag sglang from: $(PYTHONPATH=$PATCHPY $E/bin/python -c 'import sglang;print(sglang.__file__)')"; warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
     stop_server; say "done $tag"; done;;

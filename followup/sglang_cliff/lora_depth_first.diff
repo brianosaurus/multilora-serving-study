@@ -1,5 +1,5 @@
 diff --git a/python/sglang/srt/managers/scheduler.py b/python/sglang/srt/managers/scheduler.py
-index aa3a580d08..46dfbc1b41 100644
+index aa3a580d08..39e1ed1b97 100644
 --- a/python/sglang/srt/managers/scheduler.py
 +++ b/python/sglang/srt/managers/scheduler.py
 @@ -21,7 +21,7 @@ import signal
@@ -37,7 +37,7 @@ index aa3a580d08..46dfbc1b41 100644
          if self.enable_lora_overlap_loading:
              # For overlapping loading of LoRA weights with computation, we will load each
              # adapter one at a time, as opposed to loading them in one batch
-@@ -5104,6 +5116,27 @@ class Scheduler(
+@@ -5104,6 +5116,36 @@ class Scheduler(
                  new_lora_set
              )
  
@@ -51,16 +51,25 @@ index aa3a580d08..46dfbc1b41 100644
 +            self.tp_worker.model_runner.lora_manager.max_loras_per_batch
 +            - len(running_loras)
 +        )
++        c = self.__dict__.setdefault("_depth_stats", [0, 0, 0, 0])  # calls, free==0, aged, rejected
++        c[0] += 1
++        if c[0] % 2000 == 0:
++            logger.warning("lora_depth calls=%d no_free=%d aged_allow=%d rejected=%d", *c)
 +        if free <= 0:
++            c[1] += 1
 +            return True
 +        max_age = float(os.environ.get("SGLANG_LORA_DEPTH_MAX_AGE_S", "10"))
 +        if time.perf_counter() - req.time_stats.wait_queue_entry_time > max_age:
++            c[2] += 1
 +            return True
 +        depth = self._lora_depth
 +        counts = sorted((n for k, n in depth.items() if k not in running_loras), reverse=True)
 +        if len(counts) <= free:
 +            return True
-+        return depth[req.lora_id] >= counts[free - 1]
++        ok = depth[req.lora_id] >= counts[free - 1]
++        if not ok:
++            c[3] += 1
++        return ok
 +
      def _get_all_pp_reqs(self) -> List[Req]:
          return [
