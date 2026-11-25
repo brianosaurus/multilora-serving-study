@@ -17,6 +17,9 @@ The capture log reads `Capture target decode CUDA graph end. bs=[1, 2, 4, 8, 12,
 - **With 16 resident adapters** (no swapping) SGLang's step is shorter than vLLM's: TPOT 5.8 / 6.7 / 8.3 ms at concurrency 16 / 48 / 96, against vLLM 7.2 / 8.6 / 10.3.
 - Slot sweep on stock main at 40 rps: 16 slots 13.5 s, 20 slots 11.7 s, 24 slots 9.0 s, 28 slots 107 ms (p99 9.5 s), 32 slots 94 ms.
 
+## Cost of the larger range
+- `--cuda-graph-max-bs-decode 256` leaves 1.44 GB free after capture instead of 1.98 GB (0.54 GB less), and the KV cache is not smaller: 600,201 tokens against 599,470 in stock (logs of `E_main-16-U1` and `H_main-16-cg256-1`).
+
 ## What is still slower than vLLM
 With the larger range at 16 slots, p95 TTFT is about 2.2 s against vLLM's 1.45 s (TPOT 12 to 14 ms against 10 ms).
 - Each adapter load is followed by a decode step about 50 to 60 ms longer than the 6.4 ms median; those steps take about 23 to 24% of the busy window (CPU timestamps from a log-only trace, 3 starts).

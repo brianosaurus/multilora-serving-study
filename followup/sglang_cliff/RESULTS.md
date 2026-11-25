@@ -228,6 +228,26 @@ Prediction held: the largest captured decode batch is 48 in all three, and SGLan
 - (d) fails: in both slow 20 rps starts the first request that waited over 1 s arrived 3.6 and 3.7 s after the first arrival (queue length 1 and 7, non-resident adapter), before the decode batch ever stayed above 48 (from about 13 to 15 s into the window). So the batch above 48 follows the stall; it is not what starts it at 20 rps.
 - Unplanned: in both slow 20 rps starts the loadgen's first arrival came late (8.5 and 9.7 s after the mark; 5.8 to 6.7 s in all normal starts), and loads stopped after the first seconds (30 to 31 loads in the first 5 s, then 35 to 37 by 20 s, against 119 to 124 in normal starts) while non-resident arrivals kept coming (117 to 121). Two slow starts only. The late first arrival may mean the host was slow at the start; the earlier CPU-spike explanation was withdrawn, and this does not restore it. The cause is not identified.
 
+## Option 10 result: slot-capture test for the slow state (existing traces, FLAGGED)
+Plan `8ba8516`, amendment 4 `630cf3d` (first run matched arrivals to loadgen requests by order and failed its own check in 24 of 33 windows; kept as `results/phase2/slot_capture_v1_positional.txt`; the rerun matches per adapter and passes all checks: one-to-one map, per-adapter counts equal, resident set never above 16). Script `slot_capture.py`, output `results/phase2/slot_capture.txt`. "After 5 s" = 5 s after the first arrival.
+
+| group | resident-set changes after 5 s | evictions after 5 s | decode calls with every resident adapter running |
+|---|---|---|---|
+| 20 rps slow (`B_main-16`, `E_main-16-P1`) | 24, 29 | 28, 31 | 78%, 80% |
+| 20 rps normal stock (7 starts) | 121 to 123 | 123 to 128 | 13 to 23% |
+| 40 rps slow (`B_main-16`, `E_main-16-U4`) | 12, 13 | 18, 22 | 91%, 89% |
+| 40 rps normal stock (7 starts) | 10 to 14 | 17 to 22 | 86% (all seven) |
+| drainer starts (`D_*`), 40 rps | 40, 47 | 53, 53 | 78%, 82% |
+| raised-limit starts (`H_*`, `K2_*`), 40 rps | 36 to 50 | 40 to 51 | 76 to 88% |
+
+- (a) fails: slow 20 rps starts changed their resident set 24 and 29 times after 5 s (predicted at most 2). The normal part holds (121 to 123, at least 10).
+- (b) fails: 78 and 80% at 20 rps (predicted at least 90%); 91 and 89% at 40 rps. The normal part holds at 20 rps (13 to 23%, at most 50%) and fails at 40 rps (86%).
+- (c) fails: 28 and 31 evictions at 20 rps, 18 and 22 at 40 rps (predicted at most 5).
+- Reading: the strict form (slots frozen, no turnover) is contradicted. The slow 20 rps starts do turn slots over, but at about a fifth of the normal rate (24 to 29 changes against 121 to 123 in the same time), with nearly all slots busy most of the time (78 to 80% against 13 to 23%): turnover is slow, not stopped. At 40 rps there is no separation: slow and normal stock starts both have about 86 to 91% of decode calls with every slot busy and 10 to 14 changes.
+- Unplanned, who held the slots: in normal 20 rps starts the hottest adapters held a slot almost all the time (rank 1 and 2 at 100%) and the tail rotated (50 to 60%); in both slow 20 rps starts even ranks 1 and 2 held a slot only 80 to 91% of the time, and low-ranked adapters held slots for long periods (rank 14 at 97% and rank 26 at 78% in `B_main-16`; ranks 17, 18, 21, 22, 24 at 51 to 78% in both). So in the slow state slots are tied up by mid-ranked and tail adapters while hot adapters are repeatedly pushed out. Two starts only; not a mechanism test.
+- Drainer starts: slot turnover is higher than stock at 40 rps (40 and 47 changes against 10 to 14), unchanged at 20 rps (121 and 122). That agrees with the drainer moving waiting around without adding capacity.
+- Not tested: why the slow 20 rps starts begin with fewer loads in the first seconds.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.

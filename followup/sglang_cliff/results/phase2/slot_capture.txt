@@ -1,0 +1,48 @@
+FLAGGED: existing traced screening starts; 'after 5 s' = 5 s after the first arrival
+
+start                    rate    group slow changes loads evict all running distinct  checks
+D_main-16-d02              20  drainer          121   123   123         12%       32  
+D_main-16-d1               20  drainer          122   124   124         14%       32  
+H_main-16-cg256-1          20   raised          121   125   125         14%       32  
+H_main-16-cg256-2          20   raised          121   125   125         14%       32  
+H_main-16-cg256-3          20   raised          120   123   123         15%       32  
+K2_main-16-cg256-ovl-1     20   raised          123   123   123         13%       32  
+K2_main-16-cg256-ovl-2     20   raised          124   124   124         13%       32  
+K2_main-16-cg256-ovl-3     20   raised          122   122   122         13%       32  
+B_main-16                  20    stock  YES      24    28    28         78%       32  
+B_v23-16                   20    stock          121   123   123         15%       32  
+E_main-16-P1               20    stock  YES      29    31    31         80%       32  
+E_main-16-P2               20    stock          122   124   124         13%       32  
+E_main-16-P3               20    stock          121   123   123         13%       32  
+E_main-16-P6               20    stock          123   124   124         13%       32  
+E_main-16-U1               20    stock          121   123   123         13%       32  
+E_main-16-U4               20    stock          122   128   128         23%       32  
+E_main-16-U5               20    stock          121   123   123         13%       32  
+D_main-16-d02              40  drainer           47    53    53         78%       32  
+D_main-16-d1               40  drainer           40    53    53         82%       32  
+H_main-16-cg256-1          40   raised           44    50    50         86%       32  
+H_main-16-cg256-2          40   raised           36    40    40         84%       32  
+H_main-16-cg256-3          40   raised           46    51    51         86%       32  
+K2_main-16-cg256-ovl-1     40   raised           50    50    50         88%       32  
+K2_main-16-cg256-ovl-2     40   raised           49    49    49         88%       32  
+K2_main-16-cg256-ovl-3     40   raised           49    49    49         88%       32  
+B_main-16                  40    stock  YES      12    18    18         91%       32  
+B_v23-16                   40    stock           12    18    18         86%       32  
+E_main-16-P1               40    stock           14    22    22         86%       32  
+E_main-16-P2               40    stock           14    22    22         86%       32  
+E_main-16-P3               40    stock           10    17    17         86%       32  
+E_main-16-P6               40    stock           14    22    22         86%       32  
+E_main-16-U1               40    stock           12    18    18         86%       32  
+E_main-16-U4               40    stock  YES      13    22    22         89%       32  
+E_main-16-U5               40    stock           11    20    20         86%       32  
+
+20 rps: slow n=2 changes (24, 29) evicts (28, 31) share-all-running [78, 80]%
+        normal stock n=7 changes (121, 123) evicts (123, 128) share-all-running [13, 13, 13, 13, 13, 15, 23]%
+40 rps: slow n=2 changes (12, 13) evicts (18, 22) share-all-running [91, 89]%
+        normal stock n=7 changes (10, 14) evicts (17, 22) share-all-running [86, 86, 86, 86, 86, 86, 86]%
+
+Slot-time share by popularity rank (rank:share of decode time resident), slow starts:
+  B_main-16 @20: r14:97% r7:83% r1:83% r6:83% r3:82% r13:81% r5:81% r2:80% r18:78% r17:78% r4:78% r26:78% r11:67% r21:66% r22:56% r24:51%
+  B_main-16 @40: r5:68% r19:68% r1:68% r3:68% r14:68% r9:68% r7:68% r2:67% r16:66% r4:66% r29:65% r30:64% r24:63% r11:61% r31:59% r22:57%
+  E_main-16-P1 @20: r7:91% r6:91% r1:91% r3:90% r13:89% r5:88% r2:86% r4:85% r14:75% r11:75% r21:74% r17:72% r18:67% r10:61% r22:60% r24:51%
+  E_main-16-U4 @40: r15:63% r19:63% r14:63% r9:63% r7:63% r1:63% r12:63% r3:62% r5:61% r2:60% r16:60% r4:59% r30:57% r24:56% r11:53% r20:53%
