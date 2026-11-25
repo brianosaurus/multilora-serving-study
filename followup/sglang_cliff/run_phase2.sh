@@ -63,5 +63,29 @@ H) # Phase 3 option 5: decode CUDA graph limit raised, stock main code
   for n in 1 2 3; do tag=H_main-16-cg256-$n; PATCHPY=; XENV=; EXTRA="--cuda-graph-max-bs-decode 256"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
     stop_server; say "done $tag"; done;;
+I) # step-time microbench: closed loop at fixed concurrency, base model vs 16 uniform adapters; three servers
+  micro() { # tag engine url
+    local O=$D/$1; for N in 16 48 96; do
+      $PYL $R/scripts/loadgen.py --engine $2 --url $3 --tokenizer $M --concurrency $N --requests 300 --warmup 50 --adapters 0 --seed 5 --out $O/micro_N${N}_base.json | cut -c1-220 | tee -a $L
+      $PYL $R/scripts/loadgen.py --engine $2 --url $3 --tokenizer $M --concurrency $N --requests 300 --warmup 50 --adapters 16 --popularity uniform --seed 5 --out $O/micro_N${N}_lora16.json | cut -c1-220 | tee -a $L
+    done; }
+  for cfg in "I_main-16-stock:" "I_main-16-cg256:--cuda-graph-max-bs-decode 256"; do tag=${cfg%%:*}; EXTRA="${cfg#*:}"; PATCHPY=; XENV=
+    start_sglang $tag main 16 0 && { warm sglang http://localhost:30000 $tag; micro $tag sglang http://localhost:30000; }
+    stop_server; say "done $tag"; done
+  tag=I_vllm-16; O=$D/$tag; mkdir -p $O; E=/root/envs/vllm
+  busy && { say "REFUSED $tag: busy"; exit 1; }
+  say "start $tag host $(hostname) load $(cut -d' ' -f1-3 /proc/loadavg) external CPU: $($PYL $R/followup/kernel_rerun/extload.py check 10 2>&1 | tail -1)"
+  CMD=($E/bin/vllm serve $M --served-model-name qwen --port 8000 --max-model-len 4096 --gpu-memory-utilization 0.85 --enable-lora --max-loras 16 --max-cpu-loras 64 --max-lora-rank 16 --lora-modules)
+  for i in $(seq 0 31); do CMD+=("adapter_$(printf %04d $i)=$A/adapter_$(printf %04d $i)"); done
+  setsid nohup env PATH=$E/bin:/usr/local/cuda/bin:$PATH CUDA_HOME=/usr/local/cuda "${CMD[@]}" > $O/server.log 2>&1 < /dev/null & SP=$!
+  ok=0; for i in $(seq 1 900); do [ "$(curl -s -o /dev/null -w %{http_code} -m 3 localhost:8000/health)" = 200 ] && { ok=1; break; }; kill -0 $SP 2>/dev/null || break; sleep 3; done
+  say "$tag ready=$ok"; [ $ok = 1 ] && { warm vllm http://localhost:8000 $tag; micro $tag vllm http://localhost:8000; }
+  stop_server; say "done $tag";;
+J) # dedicated-style rerun on runpod2: stock vs graph limit 256, 16 and 32 slots, 3 rounds, untraced
+  declare -A CFG=( [S16]="16:" [C16]="16:--cuda-graph-max-bs-decode 256" [S32]="32:" [C32]="32:--cuda-graph-max-bs-decode 256" )
+  rnd=0; for order in "S16 C16 S32 C32" "C32 S32 C16 S16" "C16 S32 S16 C32"; do rnd=$((rnd+1)); for c in $order; do
+    tag=J_${c}-r$rnd; sl=${CFG[$c]%%:*}; EXTRA="${CFG[$c]#*:}"; PATCHPY=; XENV=
+    start_sglang $tag main $sl 0 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; }
+    stop_server; say "done $tag"; done; done;;
 esac
 echo "DONE_$PART" >> $L
