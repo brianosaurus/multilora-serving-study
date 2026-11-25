@@ -110,3 +110,11 @@ DONE_D
 03:30:01 E_main-16-P6 trace lines: 8201
 03:30:14 done E_main-16-P6
 DONE_E
+03:44:25 start E_main-16-P1 host 48bd787e389e load 2.80 2.23 2.57 external CPU: 27.22 47.30 2.88
+03:45:15 E_main-16-P1 ready=1 trace=1
+03:45:15 E_main-16-P1 sglang from: /root/src/sglang-lora-depth/python/sglang/__init__.py
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 94.67739349929616, "p95": 16854.63386325281, "p99": 20178.19264352438}, "tpot_ms": {"p50": 46.754223496220476, "p95": 62.22608095043206}, "tok_per_s": 2003.8, "max_send_lag_s": 0.004}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 75.14923549024388, "p95": 13561.659296759171, "p99": 15503.123100642115}, "tpot_ms": {"p50": 44.645937027659, "p95": 49.99435510198534}, "tok_per_s": 2988.1, "max_send_lag_s": 0.007}
+03:47:16 E_main-16-P1 trace lines: 5279
+03:47:29 done E_main-16-P1
+DONE_E

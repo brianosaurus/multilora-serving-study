@@ -81,6 +81,14 @@ Other observations:
 - The stock 40 rps cells vary: one start (U4) ran at 18.4 requests/s and 2352 tok/s (p95 15.2 s), the same slow state as the earlier `B_main-16` cell (16.6 requests/s, 2121 tok/s). Two of the four stock main 16-slot 40 rps starts so far were in it. The 20 rps stock U4 also had p95 214 ms. One start in the slow state was not tied to anything I measured (external CPU 0.5-2 at U4 start).
 - Throughput at 16 slots is about 23.6 requests/s in the normal state, 31.9 at 32 slots.
 
+## Phase 3 follow-up: does the depth rule ever fire? (Amendment 2, one patched start, FLAGGED)
+`E_main-16-P1`, `runpod2` host 48bd787e389e, plan `a47f244` committed before the run. External CPU at start was 27 and 47 cores, so this start is noisy.
+- Counter at the end of the run: about 78,000 calls to the rule, 77,894 of them with no free adapter slot (99.9%). Rejections: 11. Aged allowances: 25. So about 100 calls reached the depth test and 11 were rejected (about 10%).
+- 40 rps: p95 TTFT 13.56 s, 23.4 requests/s, 0 errors, the same as stock (13.46 s, 23.6). Prediction (at least 5% rejected among tested calls; within 20% of stock) held.
+- 20 rps: p95 16.9 s, 15.7 requests/s, 2004 tok/s, 0 errors. This start tipped into the slow state at 20 rps (the prediction for it was not part of the amendment). One more slow start; the cause is still unknown.
+- Reading: in 16-slot overload all 16 slots are in use almost all the time, so the scheduler seldom has a free slot to give out and there is almost nothing to reorder. The no-effect result for depth-first admission is real, not a rule that never ran: it ran about 100 times in 550 requests.
+- From the traces (CPU time in the decode call, a lower bound): decode calls with 50 to 300 requests all take about 32 ms at both 16 and 32 slots, so batch size, not step time, tracks throughput.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.

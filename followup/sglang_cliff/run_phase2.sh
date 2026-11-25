@@ -55,5 +55,9 @@ E) # Phase 3 A/B: main 16 slots traced; U = stock main, P = depth-first patch (w
     [ $v = P ] && { PATCHPY=$PATCHDIR; XENV="SGLANG_LORA_DEPTH_FIRST=1"; }
     start_sglang $tag main 16 1 && { [ $v = P ] && say "$tag sglang from: $(PYTHONPATH=$PATCHPY $E/bin/python -c 'import sglang;print(sglang.__file__)')"; warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
     stop_server; say "done $tag"; done;;
+G) # Phase 3 option 3: slot sweep on stock main, traced
+  for sl in 20 24 28; do tag=G_main-$sl; PATCHPY=; XENV=
+    start_sglang $tag main $sl 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
+    stop_server; say "done $tag"; done;;
 esac
 echo "DONE_$PART" >> $L
