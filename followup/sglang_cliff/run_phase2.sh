@@ -148,6 +148,13 @@ U) # step 6 experiment 2: decode step cost by batch size, closed loop at concurr
     tag=${cfg%%:*}; r=${cfg#*:}; NOLORA=${r%%:*}; r=${r#*:}; EXTRA=${r%%:*}; ads=${r#*:}; PATCHPY=; XENV="SGLANG_CLIFF_PHASES=1 SGLANG_CLIFF_SUBPHASES=1"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for a in $ads; do for c in 32 64 96; do lc $tag $a $c; done; done; }
     stop_server; say "done $tag"; done; NOLORA=0; XENV=; EXTRA=;;
+V) # step 7: stock, cap48, cg256; 14 busy loops x2 rounds, then no busy loops x1
+  thr(){ say "$1 cpu.stat: $(tr '\n' ' ' < /sys/fs/cgroup/cpu/cpu.stat)"; }
+  for spec in k14-1 k14-2 k0-1; do k=${spec%-*}; k=${k#k}; for arm in stock cap48 cg256; do tag=V_main-16-$arm-$spec; PATCHPY=; XENV="SGLANG_CLIFF_PHASES=1"; RIDP=$tag
+    case $arm in stock) EXTRA=;; cap48) EXTRA="--max-running-requests 48";; cg256) EXTRA="--cuda-graph-max-bs-decode 256";; esac
+    for i in $(seq 1 $k); do python3 -c 'while True: pass' & echo $! >> /tmp/busy.pids; done; sleep 5; thr "$tag pre-start"
+    start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do thr "$tag pre-r$rate"; load $tag sglang http://localhost:30000 $rate 1; thr "$tag post-r$rate"; done; }
+    stop_server; [ -f /tmp/busy.pids ] && { xargs kill < /tmp/busy.pids 2>/dev/null; rm -f /tmp/busy.pids; }; say "done $tag"; done; done; RIDP=; XENV=; EXTRA=;;
 K) # Phase 3 option 8: raised graph limit plus overlap loading
   for n in 1 2 3; do tag=K_main-16-cg256-ovl-$n; PATCHPY=; XENV=; EXTRA="--cuda-graph-max-bs-decode 256 --enable-lora-overlap-loading"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }

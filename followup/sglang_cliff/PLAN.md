@@ -270,3 +270,15 @@ Experiment 2 (part U, instrumentation only): no busy loops; closed-loop load at 
 - (s) of the LoRA eager excess over no-LoRA eager (U1 minus U3), at least 50% is CPU time in the two `prepare_lora_batch` functions. If not, the excess is in the forward pass itself (kernel launches or GPU work), to be split in a later step.
 - Reported, no prediction: U1 base-model requests on the LoRA server against U3, and graph against eager per batch size.
 A code change is planned only after this step, against what (r) and (s) find.
+
+### Step 7 (option 18): fix candidates for decode outside the graph (runpod 64bba14d4768; engine flags change by design)
+Facts from the code (SGLang main `0e9cff98f5`): `DecodeCudaGraphRunner.can_run_graph` sends any decode batch above the largest captured size to eager; nothing splits a large batch into graph-sized replays; `max_running_requests` is unset (None) in these runs and the running batch reached 342.
+Two fix candidates:
+- A, cap: keep the running batch within the graph range (`--max-running-requests 48`). Testable with a flag. Cost: throughput when an eager large batch would beat a graph small batch (likely on larger GPUs or models; not measured here).
+- B, split: run a decode batch above the graph range as several graph replays. Needs a code change in the model runner; planned separately only if A shows that keeping decode in the graph is enough.
+Part V: arms stock, cap48 (`--max-running-requests 48`), cg256 (`--cuda-graph-max-bs-decode 256`); with 14 busy loops, 2 rounds interleaved (6 starts), then without busy loops one start per arm (3 starts); otherwise as part T. FLAGGED.
+Predictions (fixed now):
+- (t) with 14 busy loops, every cap48 start has 20 rps p95 TTFT at most 1 s, and 40 rps p95 at most the cg256 median in the same round set.
+- (u) without busy loops, cap48 output tokens per second at 40 rps is within 10% of cg256, and its 40 rps p95 is at most 1 s.
+- (v) cap48 has no decode step above 48 in any start.
+If (t) to (v) hold, A is a valid workaround on this hardware, and B (the general fix) is planned next. If (u) fails, capping costs throughput even here, and B is needed.
