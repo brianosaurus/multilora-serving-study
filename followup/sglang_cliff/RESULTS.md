@@ -345,6 +345,36 @@ Plan: PLAN.md trigger step 5. Data: `results/phase2_runpod_64bba/S_*`, `trigger5
 Exploratory check on parts Q and R traces (not pre-registered): slow and borderline k = 14 starts had 10 to 65% of 20 rps decode steps above batch 48 at 33 to 62 ms each, against about 2 ms at 48 or below; k = 0 starts stayed at 36 or below. Step 6 tests this.
 Things I got wrong: I named batch selection the most likely code-fix target after step 4.
 
+## Step 6: falling off the decode graph is the mechanism; eager decode is slow with or without LoRA (runpod 64bba14d4768, FLAGGED)
+
+Plan: PLAN.md step 6. Data: `results/phase2_runpod_64bba/T_*`, `U*`, `step6.txt`.
+
+Part T (14 busy loops, interleaved):
+
+| arm | 20 rps p95 by round | 40 rps p95 | decode steps above 48 at 20 rps |
+|---|---|---|---|
+| stock (48) | 13.8 s, 0.74 s, 8.1 s | 13.8 to 13.9 s | 32.6%, 0.1%, 22.8% |
+| graph 256 | 0.55 s, 0.95 s, 1.57 s | 2.7 to 3.3 s | 0%, 4.6%, 6.9% |
+
+(q) holds. Under contention, the stock starts that went slow are the ones whose decode batches left the graph; with the larger range none reached the stock slow levels, though 40 rps p95 is still about 3 s under contention (against about 14 s stock).
+
+Part U (no busy loops, closed loop), median wall time per decode step in ms:
+
+| server, requests | batch 1 to 48 | 49 to 64 | 65 to 96 |
+|---|---|---|---|
+| LoRA, stock, adapter requests | 1.7 to 1.9 | 31.5 | 31.4 |
+| LoRA, stock, base-model requests | 1.7 to 1.8 | 31.3 to 31.5 | 31.4 |
+| LoRA, graph 256, adapter requests | 1.7 to 1.9 | 2.0 | 2.0 |
+| no LoRA, stock | 1.3 | 18.7 to 18.9 | 18.7 |
+| no LoRA, graph 256 | 1.2 | 1.3 | 1.3 |
+
+- (r) fails: LoRA eager is 1.7 times no-LoRA eager, not 3 times. Eager decode is slow without LoRA too: 18.7 ms against 1.3 ms in the graph (about 14 times), flat across batch 49 to 96.
+- (s) fails: LoRA batch preparation is 0.57 ms per step, about 5% of the 12.6 ms LoRA excess.
+- Base-model requests on the LoRA server cost the same as adapter requests outside the graph (31.3 against 31.5 ms), so the LoRA excess is in the LoRA-wrapped layers being called, not in adapter weights.
+- Flat cost across batch size means eager decode here is bound by per-step CPU work (Python and kernel launches), not GPU work. That is also why CPU contention makes it worse.
+Root cause, as far as measured: the scheduler thread is CPU-bound; decode batches above the graph range run eagerly at about 15 to 25 times the per-step cost; any push past 48 (load, or CPU contention slowing the loop) makes steps much longer, so more requests queue and batches stay above 48. Keeping decode in the graph removes most of it.
+Things I got wrong: I expected the eager cost to be LoRA-specific (r) and in batch preparation (s); neither held.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.

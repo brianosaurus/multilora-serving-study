@@ -564,3 +564,144 @@ DONE_R0
 05:27:39 done R_main-16-k14-3
 DONE_R
 PART_R_DONE
+05:37:37 start S0_smoke host 64bba14d4768 load 2.36 12.64 14.50 external CPU: 1.28 1.43 2.15
+05:38:17 S0_smoke ready=1 trace=1
+{"rate": 5.0, "ok": 30, "errors": 0, "ttft_ms": {"p50": 42.39385800246964, "p95": 56.022574502276235, "p99": 67.63357249015827}, "tpot_ms": {"p50": 6.305724540960643, "p95": 7.034452592495826}, "tok_p
+05:38:45 done S0_smoke
+DONE_S0
+05:38:56 S_main-16-k0-1 pre-start cpu.stat: nr_periods 137631 nr_throttled 21295 throttled_time 211097636387454 nr_bursts 0 burst_time 0 
+05:39:06 start S_main-16-k0-1 host 64bba14d4768 load 2.25 9.94 13.36 external CPU: 1.33 1.59 2.38
+05:39:46 S_main-16-k0-1 ready=1 trace=1
+05:40:22 S_main-16-k0-1 pre-r20 cpu.stat: nr_periods 138475 nr_throttled 21303 throttled_time 211145178936483 nr_bursts 0 burst_time 0 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 35.455993998766644, "p95": 87.03043665263945, "p99": 239.89817062501965}, "tpot_ms": {"p50": 8.167685417307855, "p95": 9.531957140548966}, "tok_per_s": 2589.5, "max_send_lag_s": 0.002}
+05:40:56 S_main-16-k0-1 post-r20 cpu.stat: nr_periods 138816 nr_throttled 21304 throttled_time 211149703070459 nr_bursts 0 burst_time 0 
+05:40:56 S_main-16-k0-1 pre-r40 cpu.stat: nr_periods 138816 nr_throttled 21304 throttled_time 211149703070459 nr_bursts 0 burst_time 0 
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 72.69379850185942, "p95": 13568.666082600612, "p99": 15511.886089101754}, "tpot_ms": {"p50": 43.92577061811407, "p95": 50.989378182658385}, "tok_per_s": 3006.3, "max_send_lag_s": 0.003}
+05:41:25 S_main-16-k0-1 post-r40 cpu.stat: nr_periods 139108 nr_throttled 21305 throttled_time 211154262612633 nr_bursts 0 burst_time 0 
+05:41:38 done S_main-16-k0-1
+05:41:43 S_main-16-k14-1 pre-start cpu.stat: nr_periods 139280 nr_throttled 21305 throttled_time 211154262612633 nr_bursts 0 burst_time 0 
+05:41:54 start S_main-16-k14-1 host 64bba14d4768 load 3.77 7.22 11.75 external CPU: 1.13 1.40 5.50
+05:42:34 S_main-16-k14-1 ready=1 trace=1
+05:43:10 S_main-16-k14-1 pre-r20 cpu.stat: nr_periods 140141 nr_throttled 21322 throttled_time 211218636698196 nr_bursts 0 burst_time 0 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 75.11154499661643, "p95": 16283.748155455027, "p99": 19782.904522962777}, "tpot_ms": {"p50": 41.491969433074814, "p95": 43.438569296877965}, "tok_per_s": 2101.4, "max_send_lag_s": 0.003}
+05:43:50 S_main-16-k14-1 post-r20 cpu.stat: nr_periods 140541 nr_throttled 21324 throttled_time 211230230062773 nr_bursts 0 burst_time 0 
+05:43:50 S_main-16-k14-1 pre-r40 cpu.stat: nr_periods 140541 nr_throttled 21324 throttled_time 211230230062773 nr_bursts 0 burst_time 0 
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 77.12741700015613, "p95": 13929.966856546518, "p99": 15377.104691346465}, "tpot_ms": {"p50": 45.37976933071458, "p95": 56.91270085827548}, "tok_per_s": 2900.1, "max_send_lag_s": 0.008}
+05:44:21 S_main-16-k14-1 post-r40 cpu.stat: nr_periods 140853 nr_throttled 21326 throttled_time 211241057562373 nr_bursts 0 burst_time 0 
+05:44:34 done S_main-16-k14-1
+05:44:39 S_main-16-k14-2 pre-start cpu.stat: nr_periods 141033 nr_throttled 21326 throttled_time 211241057562373 nr_bursts 0 burst_time 0 
+05:44:49 start S_main-16-k14-2 host 64bba14d4768 load 14.91 11.00 12.45 external CPU: 0.27 1.15 14.93
+05:45:32 S_main-16-k14-2 ready=1 trace=1
+05:46:10 S_main-16-k14-2 pre-r20 cpu.stat: nr_periods 141946 nr_throttled 21344 throttled_time 211310837100791 nr_bursts 0 burst_time 0 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 36.98431250086287, "p95": 495.5630937500233, "p99": 822.4988337309333}, "tpot_ms": {"p50": 8.588488492123576, "p95": 16.42090028472216}, "tok_per_s": 2565.6, "max_send_lag_s": 0.003}
+05:46:46 S_main-16-k14-2 post-r20 cpu.stat: nr_periods 142302 nr_throttled 21346 throttled_time 211319862939200 nr_bursts 0 burst_time 0 
+05:46:46 S_main-16-k14-2 pre-r40 cpu.stat: nr_periods 142302 nr_throttled 21346 throttled_time 211319862939200 nr_bursts 0 burst_time 0 
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 73.75771299848566, "p95": 14273.841643297055, "p99": 16417.295235051202}, "tpot_ms": {"p50": 46.36145942517548, "p95": 50.74160556299128}, "tok_per_s": 2859.1, "max_send_lag_s": 0.01}
+05:47:17 S_main-16-k14-2 post-r40 cpu.stat: nr_periods 142613 nr_throttled 21348 throttled_time 211329576114517 nr_bursts 0 burst_time 0 
+05:47:30 done S_main-16-k14-2
+05:47:35 S_main-16-k14-3 pre-start cpu.stat: nr_periods 142793 nr_throttled 21348 throttled_time 211329576114517 nr_bursts 0 burst_time 0 
+05:47:45 start S_main-16-k14-3 host 64bba14d4768 load 16.00 13.34 13.11 external CPU: 0.30 2.41 15.77
+05:48:26 S_main-16-k14-3 ready=1 trace=1
+05:49:04 S_main-16-k14-3 pre-r20 cpu.stat: nr_periods 143685 nr_throttled 21365 throttled_time 211397593219739 nr_bursts 0 burst_time 0 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 34.39740500107291, "p95": 642.053638350262, "p99": 924.9976027508092}, "tpot_ms": {"p50": 8.470247228343204, "p95": 16.140876338590534}, "tok_per_s": 2589.3, "max_send_lag_s": 0.003}
+05:49:39 S_main-16-k14-3 post-r20 cpu.stat: nr_periods 144039 nr_throttled 21367 throttled_time 211408574254300 nr_bursts 0 burst_time 0 
+05:49:39 S_main-16-k14-3 pre-r40 cpu.stat: nr_periods 144039 nr_throttled 21367 throttled_time 211408574254300 nr_bursts 0 burst_time 0 
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 78.71846450143494, "p95": 13639.72100229839, "p99": 15583.476898024237}, "tpot_ms": {"p50": 46.497693402484366, "p95": 53.202369511042676}, "tok_per_s": 2950.5, "max_send_lag_s": 0.016}
+05:50:11 S_main-16-k14-3 post-r40 cpu.stat: nr_periods 144352 nr_throttled 21369 throttled_time 211417749355990 nr_bursts 0 burst_time 0 
+05:50:24 done S_main-16-k14-3
+DONE_S
+PART_S_DONE
+05:51:02 T_main-16-k14-stock-1 pre-start cpu.stat: nr_periods 144816 nr_throttled 21369 throttled_time 211417749355990 nr_bursts 0 burst_time 0 
+05:51:12 start T_main-16-k14-stock-1 host 64bba14d4768 load 10.20 13.69 13.46 external CPU: 0.58 1.46 11.00
+05:51:56 T_main-16-k14-stock-1 ready=1 trace=1
+05:52:40 T_main-16-k14-stock-1 pre-r20 cpu.stat: nr_periods 145798 nr_throttled 21386 throttled_time 211482593500237 nr_bursts 0 burst_time 0 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 88.15360700464225, "p95": 13806.035545300252, "p99": 19366.64529268055}, "tpot_ms": {"p50": 44.90168116535642, "p95": 74.52435451611856}, "tok_per_s": 1982.7, "max_send_lag_s": 0.013}
+05:53:28 T_main-16-k14-stock-1 post-r20 cpu.stat: nr_periods 146278 nr_throttled 21388 throttled_time 211493100966769 nr_bursts 0 burst_time 0 
+05:53:28 T_main-16-k14-stock-1 pre-r40 cpu.stat: nr_periods 146278 nr_throttled 21388 throttled_time 211493100966769 nr_bursts 0 burst_time 0 
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 269.608826503827, "p95": 13764.712418904306, "p99": 15544.152682767453}, "tpot_ms": {"p50": 44.586203055143244, "p95": 81.69440642917561}, "tok_per_s": 2977.6, "max_send_lag_s": 0.025}
+05:53:59 T_main-16-k14-stock-1 post-r40 cpu.stat: nr_periods 146589 nr_throttled 21390 throttled_time 211503834660189 nr_bursts 0 burst_time 0 
+05:54:12 done T_main-16-k14-stock-1
+05:54:17 T_main-16-k14-cg256-1 pre-start cpu.stat: nr_periods 146769 nr_throttled 21390 throttled_time 211503834660189 nr_bursts 0 burst_time 0 
+05:54:28 start T_main-16-k14-cg256-1 host 64bba14d4768 load 16.57 15.63 14.29 external CPU: 0.31 1.30 16.92
+05:55:14 T_main-16-k14-cg256-1 ready=1 trace=1
+05:55:44 T_main-16-k14-cg256-1 pre-r20 cpu.stat: nr_periods 147635 nr_throttled 21408 throttled_time 211568358568863 nr_bursts 0 burst_time 0 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 37.159354498726316, "p95": 552.7233498531128, "p99": 843.3500551096221}, "tpot_ms": {"p50": 8.523389657486806, "p95": 16.163794464574586}, "tok_per_s": 2589.6, "max_send_lag_s": 0.006}
+05:56:19 T_main-16-k14-cg256-1 post-r20 cpu.stat: nr_periods 147979 nr_throttled 21410 throttled_time 211577436408604 nr_bursts 0 burst_time 0 
+05:56:19 T_main-16-k14-cg256-1 pre-r40 cpu.stat: nr_periods 147979 nr_throttled 21410 throttled_time 211577436408604 nr_bursts 0 burst_time 0 
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 44.21999699843582, "p95": 2712.684232350147, "p99": 3362.2237350761134}, "tpot_ms": {"p50": 13.025774810994623, "p95": 14.034396104338027}, "tok_per_s": 4655.8, "max_send_lag_s": 0.003}
+05:56:40 T_main-16-k14-cg256-1 post-r40 cpu.stat: nr_periods 148199 nr_throttled 21412 throttled_time 211584435260385 nr_bursts 0 burst_time 0 
+05:56:53 done T_main-16-k14-cg256-1
+05:56:59 T_main-16-k14-stock-2 pre-start cpu.stat: nr_periods 148379 nr_throttled 21412 throttled_time 211584435260385 nr_bursts 0 burst_time 0 
+05:57:09 start T_main-16-k14-stock-2 host 64bba14d4768 load 16.10 15.96 14.64 external CPU: 1.56 3.99 15.93
+05:57:56 T_main-16-k14-stock-2 ready=1 trace=1
+05:58:33 T_main-16-k14-stock-2 pre-r20 cpu.stat: nr_periods 149324 nr_throttled 21428 throttled_time 211651440448270 nr_bursts 0 burst_time 0 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 37.31036500175833, "p95": 744.3430796502071, "p99": 983.9923823907154}, "tpot_ms": {"p50": 8.681583936992157, "p95": 17.060255133487306}, "tok_per_s": 2589.5, "max_send_lag_s": 0.002}
+05:59:08 T_main-16-k14-stock-2 post-r20 cpu.stat: nr_periods 149676 nr_throttled 21430 throttled_time 211659543957788 nr_bursts 0 burst_time 0 
+05:59:08 T_main-16-k14-stock-2 pre-r40 cpu.stat: nr_periods 149676 nr_throttled 21430 throttled_time 211659543957788 nr_bursts 0 burst_time 0 
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 73.1380139986868, "p95": 13916.993808699408, "p99": 15748.878458031104}, "tpot_ms": {"p50": 45.64010521259954, "p95": 50.621715163010315}, "tok_per_s": 3031.9, "max_send_lag_s": 0.008}
+05:59:38 T_main-16-k14-stock-2 post-r40 cpu.stat: nr_periods 149970 nr_throttled 21433 throttled_time 211666472132269 nr_bursts 0 burst_time 0 
+05:59:51 done T_main-16-k14-stock-2
+05:59:56 T_main-16-k14-cg256-2 pre-start cpu.stat: nr_periods 150151 nr_throttled 21433 throttled_time 211666472132269 nr_bursts 0 burst_time 0 
+06:00:06 start T_main-16-k14-cg256-2 host 64bba14d4768 load 16.11 16.13 14.95 external CPU: 1.41 3.72 16.02
+06:00:53 T_main-16-k14-cg256-2 ready=1 trace=1
+06:01:26 T_main-16-k14-cg256-2 pre-r20 cpu.stat: nr_periods 151050 nr_throttled 21448 throttled_time 211735157020513 nr_bursts 0 burst_time 0 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 40.78976349774166, "p95": 947.5707361994854, "p99": 1232.0969976612103}, "tpot_ms": {"p50": 8.754185751982503, "p95": 17.34207619251612}, "tok_per_s": 2593.5, "max_send_lag_s": 0.004}
+06:02:00 T_main-16-k14-cg256-2 post-r20 cpu.stat: nr_periods 151394 nr_throttled 21451 throttled_time 211742084945262 nr_bursts 0 burst_time 0 
+06:02:00 T_main-16-k14-cg256-2 pre-r40 cpu.stat: nr_periods 151394 nr_throttled 21451 throttled_time 211742084945262 nr_bursts 0 burst_time 0 
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 59.749416999693494, "p95": 3289.9921249496365, "p99": 4024.206885422099}, "tpot_ms": {"p50": 13.208811100837867, "p95": 21.873823268100477}, "tok_per_s": 4647.0, "max_send_lag_s": 0.009}
+06:02:23 T_main-16-k14-cg256-2 post-r40 cpu.stat: nr_periods 151622 nr_throttled 21454 throttled_time 211749024372790 nr_bursts 0 burst_time 0 
+06:02:36 done T_main-16-k14-cg256-2
+06:02:41 T_main-16-k14-stock-3 pre-start cpu.stat: nr_periods 151803 nr_throttled 21454 throttled_time 211749024372790 nr_bursts 0 burst_time 0 
+06:02:51 start T_main-16-k14-stock-3 host 64bba14d4768 load 16.08 15.99 15.08 external CPU: 0.46 0.90 15.91
+06:03:38 T_main-16-k14-stock-3 ready=1 trace=1
+06:04:16 T_main-16-k14-stock-3 pre-r20 cpu.stat: nr_periods 152759 nr_throttled 21474 throttled_time 211824645883842 nr_bursts 0 burst_time 0 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 73.56794050429016, "p95": 8128.559575903623, "p99": 12446.5394883704}, "tpot_ms": {"p50": 35.92262159448963, "p95": 50.14109624253609}, "tok_per_s": 2227.9, "max_send_lag_s": 0.004}
+06:04:59 T_main-16-k14-stock-3 post-r20 cpu.stat: nr_periods 153186 nr_throttled 21476 throttled_time 211834529948733 nr_bursts 0 burst_time 0 
+06:04:59 T_main-16-k14-stock-3 pre-r40 cpu.stat: nr_periods 153186 nr_throttled 21476 throttled_time 211834529948733 nr_bursts 0 burst_time 0 
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 248.84447950171307, "p95": 13775.875021454702, "p99": 15594.822123160557}, "tpot_ms": {"p50": 48.207226118106554, "p95": 83.33506654801847}, "tok_per_s": 2992.3, "max_send_lag_s": 0.033}
+06:05:29 T_main-16-k14-stock-3 post-r40 cpu.stat: nr_periods 153480 nr_throttled 21478 throttled_time 211842138787544 nr_bursts 0 burst_time 0 
+06:05:42 done T_main-16-k14-stock-3
+06:05:47 T_main-16-k14-cg256-3 pre-start cpu.stat: nr_periods 153660 nr_throttled 21479 throttled_time 211842423224426 nr_bursts 0 burst_time 0 
+06:05:57 start T_main-16-k14-cg256-3 host 64bba14d4768 load 16.13 16.09 15.29 external CPU: 0.18 0.53 15.95
+06:06:40 T_main-16-k14-cg256-3 ready=1 trace=1
+06:07:14 T_main-16-k14-cg256-3 pre-r20 cpu.stat: nr_periods 154531 nr_throttled 21494 throttled_time 211913232928588 nr_bursts 0 burst_time 0 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 40.78468299849192, "p95": 1566.5794263521034, "p99": 4164.484994482118}, "tpot_ms": {"p50": 8.487229031485672, "p95": 38.484488657484725}, "tok_per_s": 2587.5, "max_send_lag_s": 0.003}
+06:07:49 T_main-16-k14-cg256-3 post-r20 cpu.stat: nr_periods 154883 nr_throttled 21497 throttled_time 211920252829221 nr_bursts 0 burst_time 0 
+06:07:49 T_main-16-k14-cg256-3 pre-r40 cpu.stat: nr_periods 154883 nr_throttled 21497 throttled_time 211920252829221 nr_bursts 0 burst_time 0 
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 49.868482499732636, "p95": 3113.0001057474146, "p99": 3951.614942642845}, "tpot_ms": {"p50": 12.969739283472858, "p95": 21.148781324014333}, "tok_per_s": 4589.0, "max_send_lag_s": 0.004}
+06:08:11 T_main-16-k14-cg256-3 post-r40 cpu.stat: nr_periods 155102 nr_throttled 21499 throttled_time 211930163604246 nr_bursts 0 burst_time 0 
+06:08:24 done T_main-16-k14-cg256-3
+DONE_T
+PART_T_DONE
+06:08:35 start U1_lora-stock host 64bba14d4768 load 16.77 16.29 15.48 external CPU: 0.33 1.82 14.19
+06:09:15 U1_lora-stock ready=1 trace=1
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 272.18650599752436, "p95": 353.5838870517182, "p99": 382.50148808459176}, "tpot_ms": {"p50": 6.609187464558154, "p95": 7.552513666130148}, "tok_per_s": 3613.0, "max_send_lag_s": 0}
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 304.5836870005587, "p95": 4732.70774054472, "p99": 4802.94571360464}, "tpot_ms": {"p50": 32.857412964582956, "p95": 33.26616252290928}, "tok_per_s": 1544.2, "max_send_lag_s": 0}
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 358.9579750005214, "p95": 4948.43712549773, "p99": 4971.870815917064}, "tpot_ms": {"p50": 33.384217188991954, "p95": 33.83504244564564}, "tok_per_s": 1815.8, "max_send_lag_s": 0}
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 151.61410050131963, "p95": 199.9667114996555, "p99": 203.748366930231}, "tpot_ms": {"p50": 5.535363224433555, "p95": 6.097672141707543}, "tok_per_s": 4607.5, "max_send_lag_s": 0}
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 133.84988849793444, "p95": 158.86908555330592, "p99": 183.07234173415054}, "tpot_ms": {"p50": 33.03336105509372, "p95": 33.400271454364}, "tok_per_s": 1687.2, "max_send_lag_s": 0}
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 164.97744400112424, "p95": 198.65331554938166, "p99": 232.72662970957754}, "tpot_ms": {"p50": 33.68806500786133, "p95": 34.051061425196266}, "tok_per_s": 2313.7, "max_send_lag_s": 0}
+06:13:03 done U1_lora-stock
+06:13:13 start U2_lora-cg256 host 64bba14d4768 load 2.32 8.25 12.28 external CPU: 1.13 2.15 1.96
+06:13:56 U2_lora-cg256 ready=1 trace=1
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 250.15168699610513, "p95": 349.2714729964064, "p99": 364.13612423332927}, "tpot_ms": {"p50": 6.462124673236945, "p95": 7.594667647273571}, "tok_per_s": 3655.7, "max_send_lag_s": 0}
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 288.8917734962888, "p95": 1417.3117373000423, "p99": 1507.661590888456}, "tpot_ms": {"p50": 6.78624197244635, "p95": 6.984852236226603}, "tok_per_s": 5220.5, "max_send_lag_s": 0}
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 323.49829300073907, "p95": 1577.3999140455999, "p99": 1638.5749470042356}, "tpot_ms": {"p50": 7.560758742069343, "p95": 9.61373545745684}, "tok_per_s": 6221.8, "max_send_lag_s": 0}
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 149.27839749725536, "p95": 202.77354060526702, "p99": 205.21469050087035}, "tpot_ms": {"p50": 5.583303409452572, "p95": 6.110125047276296}, "tok_per_s": 4602.8, "max_send_lag_s": 0}
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 121.03947600189713, "p95": 142.34195569988512, "p99": 163.33394832232443}, "tpot_ms": {"p50": 6.106955858260736, "p95": 6.232458669271762}, "tok_per_s": 8135.9, "max_send_lag_s": 0}
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 158.1206105001911, "p95": 199.7792195481452, "p99": 205.8071214145457}, "tpot_ms": {"p50": 7.17591411811318, "p95": 7.456388858242184}, "tok_per_s": 9884.5, "max_send_lag_s": 0}
+06:16:13 done U2_lora-cg256
+06:16:23 start U3_nolora-stock host 64bba14d4768 load 2.43 5.53 10.45 external CPU: 0.36 0.58 2.06
+06:17:00 U3_nolora-stock ready=1 trace=1
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 143.66310849800357, "p95": 193.97477745114884, "p99": 198.9191778012173}, "tpot_ms": {"p50": 5.234504582704821, "p95": 5.756157094907308}, "tok_per_s": 4891.6, "max_send_lag_s": 0}
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 130.61396749981213, "p95": 153.139276049842, "p99": 166.77116882827244}, "tpot_ms": {"p50": 20.53936279523663, "p95": 20.708367712221676}, "tok_per_s": 2672.8, "max_send_lag_s": 0}
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 162.78043999773217, "p95": 188.29808409791437, "p99": 203.16035591313266}, "tpot_ms": {"p50": 20.600473925202724, "p95": 21.06746933819436}, "tok_per_s": 3703.0, "max_send_lag_s": 0}
+06:18:49 done U3_nolora-stock
+06:18:59 start U4_nolora-cg256 host 64bba14d4768 load 2.52 4.40 9.27 external CPU: 0.46 1.26 2.21
+06:19:39 U4_nolora-cg256 ready=1 trace=1
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 140.29611899968586, "p95": 192.9841059991304, "p99": 197.57534820775618}, "tpot_ms": {"p50": 5.222894811022414, "p95": 5.763726264148869}, "tok_per_s": 4888.0, "max_send_lag_s": 0}
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 116.2022455027909, "p95": 136.50544104712026, "p99": 157.451516336223}, "tpot_ms": {"p50": 5.822102936984114, "p95": 5.909843756262131}, "tok_per_s": 8557.5, "max_send_lag_s": 0}
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 156.86222499789437, "p95": 187.7070235557767, "p99": 191.13797207362947}, "tpot_ms": {"p50": 6.611174917330702, "p95": 6.962262311030576}, "tok_per_s": 10592.8, "max_send_lag_s": 0}
+06:21:03 done U4_nolora-cg256
+DONE_U
+PART_U_DONE
