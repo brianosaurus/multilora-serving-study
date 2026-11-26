@@ -351,3 +351,6 @@ Part AA (part X's protocol; arms stock, fix, vLLM; k in {0, 14}; 2 rounds; FLAGG
 - (f4) fix's 40 rps throughput at least 0.95 times cg256's in part X (4265 to 4664 without busy loops).
 - Reported, no prediction: the gap to vLLM.
 Part AB (larger model, later, separate amendment): 7 to 8B, KV cost of the range and throughput against stock.
+
+Part AA0 result (recorded before AA): GSM8K 66.26%, 0 degenerate generations (stock 67.5%; cg256 66.3%, 66.5%, 1 each); running limit 256 (was 4096), decode graphs captured to 256 (0.54 GB, against 0.15 GB to 48); KV pool 600,201 tokens, identical to stock (at `--mem-fraction-static 0.85` the graphs fit in the reserved headroom). (f1) and (f2) hold.
+Part AA, first attempt, invalid: `run_phase2.sh` defaults the load generator to `/root/envs/sglang/bin/python`, which does not exist on this pod, so no load ran; outputs moved to `results/phase2/broken_AA_pyl/`. Rerun with `PYL=/root/envs/sglang_main/bin/python`, protocol unchanged.
