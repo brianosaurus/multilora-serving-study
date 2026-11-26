@@ -335,6 +335,16 @@ What this shows: on a quiet host the scheduler's single thread is already busy a
 Limits: CPU time includes any CUDA synchronization spin-wait, so "CPU-bound" in run batch and process result may partly be GPU waiting; why the same work costs more CPU under contention (shared cores' SMT siblings, cache or memory bandwidth) is not measured; one host, three starts per condition.
 Things I got wrong: I expected preemption (k); the scheduler thread was not preempted.
 
+## Trigger step 5: batch selection is not the main cost (runpod 64bba14d4768, FLAGGED)
+
+Plan: PLAN.md trigger step 5. Data: `results/phase2_runpod_64bba/S_*`, `trigger5.txt`. 1 start at k = 0, 3 at k = 14; one k = 14 start was slow (p95 16.3 s), two were not (496 ms, 642 ms).
+- Batch selection (`get_next_batch_to_run`) costs 50 us of CPU per call at k = 0 and 55 us in the slow start, about 5% of the loop.
+- (o) holds by its wording but means little: the increase per call is only 4.9 us, so shares of it are unstable (one share is 201%, another is -207%). The untimed rest of `get_new_batch_prefill` and `can_schedule_lora_req` grow with the queue.
+- (p) holds: `can_schedule_lora_req` calls rose from 27 to 1151 per second in the slow start (requests re-checked on each pass while slots are full), at about 2.4 us each.
+- Step 4's "2206 us per call" was a median of per-bucket ratios in one start and overstated batch selection's weight; its total share of the loop was small there too (3.76 s of loop wall time, against 39.16 s in `run_batch`).
+Exploratory check on parts Q and R traces (not pre-registered): slow and borderline k = 14 starts had 10 to 65% of 20 rps decode steps above batch 48 at 33 to 62 ms each, against about 2 ms at 48 or below; k = 0 starts stayed at 36 or below. Step 6 tests this.
+Things I got wrong: I named batch selection the most likely code-fix target after step 4.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.

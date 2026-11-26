@@ -1,0 +1,40 @@
+FLAGGED: shared host; runpod 64bba14d4768; trigger step 5 (PLAN.md option 16); 20 rps window
+CPU microseconds per get_next_batch_to_run call (inclusive; see docstring), Spearman with queue length in brackets
+
+                                              k0-1             k14-1             k14-2             k14-3
+p95 TTFT ms                                     87             16284               496               642
+max queue                                        1                71                 3                 4
+get_next_batch_to_run                 50.2 [ 0.33]      55.1 [ 0.67]      54.8 [ 0.48]      57.8 [ 0.51]
+get_new_batch_prefill                 13.3 [ 0.33]      28.3 [ 0.66]      17.2 [ 0.48]      17.3 [ 0.51]
+update_running_batch                  16.2 [-0.20]       6.0 [ 0.44]      13.9 [ 0.01]      16.3 [ 0.01]
+process_pending_chunked_abort          1.7 [ 0.15]       1.7 [ 0.15]       1.9 [ 0.36]       1.9 [ 0.39]
+_process_hicache_events                1.8 [ 0.15]       1.9 [ 0.11]       2.1 [ 0.39]       2.2 [ 0.38]
+SchedulePolicy.calc_priority           0.3 [ 0.34]       0.9 [ 0.64]       0.4 [ 0.49]       0.4 [ 0.50]
+IndexedReqList.reorder                 0.1 [ 0.36]       1.0 [ 0.70]       0.2 [ 0.46]       0.2 [ 0.50]
+can_schedule_lora_req                  0.1 [ 0.34]       2.8 [ 0.76]       0.2 [ 0.48]       0.2 [ 0.50]
+PrefillAdder.add_one_req               0.8 [ 0.36]       1.7 [ 0.28]       1.4 [ 0.51]       1.4 [ 0.51]
+gnb other                             17.3 [ 0.32]      17.2 [ 0.60]      19.7 [ 0.48]      20.1 [ 0.51]
+prefill other                         12.0 [ 0.33]      21.9 [ 0.65]      15.0 [ 0.49]      15.1 [ 0.52]
+
+calls per second
+get_new_batch_prefill                         1214               970              1263              1162
+update_running_batch                           100                21                83                87
+process_pending_chunked_abort                 1214               970              1263              1162
+_process_hicache_events                       1214               970              1263              1162
+SchedulePolicy.calc_priority                    22                24                28                28
+IndexedReqList.reorder                          22                24                28                28
+can_schedule_lora_req                           27              1151                57                62
+PrefillAdder.add_one_req                        16                14                15                16
+
+slowest k=14 start: S_main-16-k14-1 (p95 16284 ms); increase in get-next-batch CPU per call: 4.9 us
+  prefill other                    share 200.9%  rho 0.6519304830277954
+  can_schedule_lora_req            share  55.2%  rho 0.7642054159959365
+  PrefillAdder.add_one_req         share  19.3%  rho 0.2817917467558432
+  IndexedReqList.reorder           share  18.8%  rho 0.703603104781205
+  SchedulePolicy.calc_priority     share  12.2%  rho 0.6390975938611179
+  process_pending_chunked_abort    share   1.7%  rho 0.14684005515945192
+  _process_hicache_events          share   1.2%  rho 0.1137536667279884
+  gnb other                        share  -2.4%  rho 0.5951874370580549
+  update_running_batch             share -206.9%  rho 0.4350013355837085
+(o) prefill other: share 200.9% (>=50%), rho 0.6519304830277954 (>=0.5): HOLDS
+(p) can_schedule_lora_req calls/s 1151 vs 27 (x5): HOLDS
