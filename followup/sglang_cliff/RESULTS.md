@@ -502,7 +502,7 @@ The investigation of what tips a start into the slow state stops here. It is rec
 
 ## Step 10: the fix (running limit = graph range, 24 GB range 256), against stock and vLLM (runpod 64bba14d4768, FLAGGED)
 
-Plan: PLAN.md step 10. Branch `decode-graph-range` on main `385262cabb` (commits `c83438fb19`, `3f6ac64fff`; not pushed), main's python tree overlaid on the `0e9cff98f5` environment. Data: `results/phase2_runpod_64bba/AA0_fix`, `AA_*` (traces left on the pod).
+Plan: PLAN.md step 10. Branch `decode-graph-range` on main `385262cabb` (commits `c83438fb19`, `3f6ac64fff`; not pushed), main's python tree overlaid on the `0e9cff98f5` environment. Data: `results/phase2_runpod_64bba/AA0_fix`, `AA_*` (with traces).
 
 Part AA0: GSM8K 66.26%, 0 degenerate (stock 67.5%, 0; cg256 66.3% and 66.5%, 1 each). Running limit 256 (was 4096); decode graphs to 256 take 0.54 GB (0.15 GB to 48); KV pool 600,201 tokens, the same as stock. (f1), (f2) hold.
 Things I got wrong: I said the larger range would take KV memory (about 1% here); at `--mem-fraction-static 0.85` it fits in the reserved headroom and the KV pool does not change.
