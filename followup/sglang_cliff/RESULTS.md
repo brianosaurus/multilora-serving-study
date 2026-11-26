@@ -452,6 +452,24 @@ PR preparation (part Z0, smoke only, `results/phase2_runpod_64bba/Z0_*`): the sp
 Leading suspicion, not yet tested: v2 removed a blocking copy that made the CPU wait for each chunk's replay; without it, the next chunk's attention planning may overwrite host-side staging buffers before the previous chunk's asynchronous copies have run. If so, v1 was correct only because of the accidental sync.
 Things I got wrong: I treated a 96-request, 64-token greedy comparison as enough correctness evidence and reported v2's speedup before an accuracy run.
 
+**Split debugging (parts Z2 to Z6; GSM8K, sgl-eval 0.1.3, 1319 problems, greedy, 128 concurrent; "degenerate" = last 40 words use at most 6 distinct words):**
+
+| variant | accuracy | degenerate |
+|---|---|---|
+| stock | 67.5% | 0 |
+| cg256 (two runs) | 66.3%, 66.5% | 1, 1 (the same problem, gsm8k-1169) |
+| v1 | 9.9% | many |
+| v2 | 8.5% (6.75% rebased) | many |
+| v2 + stream sync after each chunk | 67.4% | 0 |
+| v4 (wait on each chunk's staged copies) | 64.7% | 7 |
+| v4 + coarse WAR barrier (env) | 66.0% | 0 |
+| v4 + overlap schedule off | 66.6% | 0 |
+| v2 + coarse WAR barrier (env) | 10.0% | 314 |
+| v5 = v4 + clear the shared-read event after a split step (three runs) | 66.0%, 66.9%, 66.2% | 2, 1, 6 |
+
+Two races were found: (1) per-chunk attention planning overwrote host staging data before the previous chunk's asynchronous copies ran; (2) the scheduler's next-batch writes waited only for the last published shared-read event. Fixing both (v5) removes the gross corruption, but v5 still shows extra degenerate generations intermittently (6 in one of three runs, against 1 for cg256): (d5) and (d6) fail. A residual race remains. Correct variants cost 11 to 20 ms per decode step above 48 (eager 31 ms, one graph step about 2 ms); every earlier split timing figure came from incorrect code and is withdrawn.
+Things I got wrong: three times I reported a split version as working or fast before an accuracy run (v1's timing, v2's 12 to 4 ms, and calling v1's sync "accidental protection" when v1 was also wrong).
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.

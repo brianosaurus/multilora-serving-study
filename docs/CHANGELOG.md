@@ -256,3 +256,5 @@ Plan (option 13) and a correction of its base rate ("2 of 6" was wrong; 2 of 8) 
 - 2026-11-26: SGLang cliff step 9 part Y (FLAGGED). Split v2: 40 rps p95 9.3 to 9.4 s in all 4 starts (stock 13.5 to 16.9 s), TPOT 20 ms (stock 43 to 71), 4036 to 4074 tok/s (stock about 3000); oversized steps 2.1 times a graph step (z1 holds); z2 fails (one 20 rps p95 of 2.5 s under busy loops), z3 fails against cg256, z4 throughput half fails (12 to 13% below vLLM).
 
 - 2026-11-26: SGLang cliff: split v2 fails accuracy (GSM8K 6.75% against 67.5% stock and 66.3% cg256; generations degenerate). Split v2 timing results (Y0, Y, Z0) are invalid until fixed. Issue and PR drafts are on hold. Things I got wrong: called the greedy spot check sufficient and reported v2's speedup before an accuracy run.
+
+- 2026-11-26: SGLang cliff split debugging (Z2 to Z6). Two races found and fixed (staging buffers; scheduler WAR event); v5 GSM8K 66.0 to 66.9% but intermittent extra degenerate generations (6 in one of three runs), so a residual race remains and the split is not PR-ready. Correct variants cost 11 to 20 ms per oversized step (eager 31 ms). All earlier split timing withdrawn.
