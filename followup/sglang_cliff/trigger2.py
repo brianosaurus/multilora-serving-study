@@ -36,7 +36,7 @@ if len(sys.argv) > 2 and sys.argv[2] == "smoke":
     if rows: print("median ms  c2f %.2f  fe %.2f  h2s %.2f" % tuple(1000 * st.median(r[k] for r in rows) for k in ("c2f", "fe", "h2s")))
     sys.exit(0)
 res = {}
-for cell in sorted(glob.glob(f"{D}/M_main-16-*")):
+for cell in sorted(glob.glob(f"{D}/{os.environ.get('CELLS', 'M_main-16-')}*")):
     tag = os.path.basename(cell); marks = {int(json.loads(l)["rate"]): json.loads(l) for l in open(f"{cell}/marks.jsonl") if l.strip()}
     for rate in (20, 40):
         if not os.path.exists(f"{cell}/zipf32_r{rate}.json"): continue
