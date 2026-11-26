@@ -37,12 +37,14 @@ def analyse(cell, rate=20):
         if nm is None or i >= len(byname.get(nm, [])): continue
         r = byname[nm][i]; pr.append({"arr": x["t"], "send": r["t_send"], "rid": x["rid"], "adm": adm.get(x["rid"])})
     pr.sort(key=lambda p: p["send"])
-    d = [p["arr"] - p["send"] for p in pr]
-    out.update(n=len(pr), med_ms=1000 * st.median(d), p99_ms=1000 * pct(d, 99), first50_med_ms=1000 * st.median(d[:50]),
-               send0_minus_tstart=pr[0]["send"] - t0, arr0_minus_send0=pr[0]["arr"] - pr[0]["send"], arr0_minus_tstart=min(p["arr"] for p in pr) - t0)
-    waits = sorted([(p["arr"], p["adm"] - p["arr"], p["arr"] - p["send"]) for p in pr if p["adm"] is not None])
-    first = next(((a, w, dl) for a, w, dl in waits if w > 1), None)
-    out["first_gt1"] = None if first is None else {"t_after_first_arrival": first[0] - waits[0][0], "wait_s": first[1], "client_delay_ms": 1000 * first[2]}
+    a0, s0 = pr[0]["arr"], pr[0]["send"]
+    for p in pr: p["drift"] = (p["arr"] - a0) - (p["send"] - s0)
+    d = [p["drift"] for p in pr]
+    out.update(n=len(pr), med_ms=1000 * st.median(d), p99_ms=1000 * pct([abs(x) for x in d], 99), max_ms=1000 * max(abs(x) for x in d),
+               first50_med_ms=1000 * st.median(d[:50]), arr0_minus_tstart=min(p["arr"] for p in pr) - t0)
+    waits = sorted([(p["arr"], p["adm"] - p["arr"], p["drift"]) for p in pr if p["adm"] is not None])
+    first = next(((x, w, dl) for x, w, dl in waits if w > 1), None)
+    out["first_gt1"] = None if first is None else {"t_after_first_arrival": first[0] - waits[0][0], "wait_s": first[1], "drift_ms": 1000 * first[2]}
     return out
 
 
@@ -51,22 +53,18 @@ for cell in sorted(glob.glob(f"{D}/*_*")):
     if not os.path.isdir(f"{cell}/trace") or not os.path.exists(f"{cell}/zipf32_r20.json"): continue
     try: res[os.path.basename(cell)] = analyse(cell)
     except Exception as ex: res[os.path.basename(cell)] = {"checks": [f"error: {ex!r}"]}
-print("FLAGGED: existing shared-host data; descriptive client-path check (PLAN.md trigger step 1)\n")
-print(f"{'start':26s}{'n':>5s}{'med ms':>9s}{'p99 ms':>9s}{'f50 med':>9s}{'send0-t0':>10s}{'arr0-send0 ms':>15s}{'arr0-t0':>9s}  first wait>1s (t after 1st arrival, wait, client delay ms)  checks")
+print("FLAGGED: existing shared-host data; descriptive drift check (PLAN.md trigger step 1, Amendment 5)\n")
+print(f"{'start':26s}{'n':>5s}{'med ms':>9s}{'p99|d| ms':>11s}{'max|d| ms':>11s}{'f50 med':>9s}{'arr0-t0 s':>11s}  first wait>1s (t after 1st arrival, wait, drift ms)  checks")
 for k, o in res.items():
     if "med_ms" not in o: print(f"{k:26s} EXCLUDED: {o['checks']}"); continue
-    fg = o["first_gt1"]; fgs = "none" if fg is None else f"{fg['t_after_first_arrival']:.1f}s {fg['wait_s']:.1f}s {fg['client_delay_ms']:.1f}"
-    print(f"{k + (' *SLOW*' if k in SLOW else ''):26s}{o['n']:5d}{o['med_ms']:9.2f}{o['p99_ms']:9.1f}{o['first50_med_ms']:9.2f}{o['send0_minus_tstart']:10.2f}{1000*o['arr0_minus_send0']:15.1f}{o['arr0_minus_tstart']:9.2f}  {fgs:28s} {o['checks'] or ''}")
+    fg = o["first_gt1"]; fgs = "none" if fg is None else f"{fg['t_after_first_arrival']:.1f}s {fg['wait_s']:.1f}s {fg['drift_ms']:.1f}"
+    print(f"{k + (' *SLOW*' if k in SLOW else ''):26s}{o['n']:5d}{o['med_ms']:9.2f}{o['p99_ms']:11.1f}{o['max_ms']:11.1f}{o['first50_med_ms']:9.2f}{o['arr0_minus_tstart']:11.2f}  {fgs:28s} {o['checks'] or ''}")
 ok = {k: o for k, o in res.items() if "med_ms" in o and not o["checks"]}
 slow = {k: o for k, o in ok.items() if k in SLOW}; norm = {k: o for k, o in ok.items() if k not in SLOW}
 print(f"\nvalid windows: {len(ok)} (slow {len(slow)}, normal {len(norm)}); excluded: {[k for k in res if k not in ok]}")
 if slow and norm:
-    nm = st.median(o["med_ms"] for o in norm.values())
-    a = all(o["med_ms"] <= 20 and o["p99_ms"] <= 250 for o in ok.values()) and all(o["med_ms"] <= 2 * nm for o in slow.values())
-    b1 = all(o["arr0_minus_send0"] * 1000 <= 50 for o in ok.values())
-    dn = st.median(o["arr0_minus_tstart"] for o in norm.values())
-    diffs = {k: (o["arr0_minus_tstart"] - dn, o["send0_minus_tstart"] - st.median(x["send0_minus_tstart"] for x in norm.values())) for k, o in slow.items()}
-    b2 = all(t > 0 and s / t >= 0.9 for t, s in diffs.values()) if all(t > 0 for t, s in diffs.values()) else None
-    c = all(o["first_gt1"] is not None and o["first_gt1"]["client_delay_ms"] <= 250 for o in slow.values())
-    print(f"normal median client delay {nm:.2f} ms; extra time to first arrival vs normal median, and the part from load-generator start-up (send0-t0): {diffs}")
-    print(f"(a) {'HOLDS' if a else 'fails'}  (b1) {'HOLDS' if b1 else 'fails'}  (b2) {'HOLDS' if b2 else ('fails' if b2 is False else 'n/a')}  (c) {'HOLDS' if c else 'fails'}")
+    inside = lambda key, o: min(x[key] for x in norm.values()) <= o[key] <= max(x[key] for x in norm.values())
+    a = all(abs(o["med_ms"]) <= 5 and o["p99_ms"] <= 100 for o in ok.values()) and all(inside("med_ms", o) and inside("p99_ms", o) for o in slow.values())
+    c = all(o["first_gt1"] is not None and abs(o["first_gt1"]["drift_ms"]) <= 100 for o in slow.values())
+    print(f"normal windows: median drift range {min(x['med_ms'] for x in norm.values()):.2f}..{max(x['med_ms'] for x in norm.values()):.2f} ms, p99|d| range {min(x['p99_ms'] for x in norm.values()):.1f}..{max(x['p99_ms'] for x in norm.values()):.1f} ms")
+    print(f"(a') {'HOLDS' if a else 'fails'}  (c') {'HOLDS' if c else 'fails'}")

@@ -268,6 +268,16 @@ Plan `53394a6` committed before the analysis; script `evict_queue.py`, output `r
 - Unplanned: the drainer at 40 rps evicts an adapter with requests waiting for it in 69% of its evictions (73 of 106; 36 and 37 per start), against 0 in stock. That fits what the drainer does: it blocks admission for the draining adapter, its queued requests wait, then it is evicted when it empties, and those requests need a reload. It also had about three times the loads of stock at 40 rps.
 - The queue-aware eviction patch is not planned: the check it rests on failed.
 
+## Trigger step 1 result: client-path check for the slow state (existing traces, FLAGGED)
+Plan: PLAN.md, trigger step 1 and Amendment 5. Script `harness_check.py`; output `results/phase2/harness_check.txt`; the invalid first run is kept as `harness_check_v1_absolute_INVALID.txt` (it compared an epoch time with a relative one; its verdicts are void).
+What was measured: per 20 rps window (25 traced starts, all matched, none excluded), drift = (server arrival minus first server arrival) minus (`t_send` minus first `t_send`). The absolute client-to-server delay is not recoverable from the existing records, because `t_send` is relative to the load generator's own zero.
+- Normal windows (23): median drift 1.65 to 3.57 ms, p99 of |drift| 24 to 80 ms.
+- Slow windows: `B_main-16` median 16.0 ms, p99 246 ms, max 393 ms; `E_main-16-P1` median 17.4 ms, p99 367 ms, max 442 ms. Both are outside the normal range.
+- First request waiting more than 1 s: `B_main-16` drift 0.7 ms (3.6 s after the first arrival, wait 1.6 s); `E_main-16-P1` drift 155.7 ms (3.7 s, wait 2.7 s).
+Predictions: (a') fails (slow windows' median and p99 drift are outside the normal range); (c') fails (155.7 ms in `E_main-16-P1`, above 100 ms).
+Reading: in the slow windows, server arrival times fall behind send times by tens to hundreds of milliseconds as the run goes, while the load generator's own send lag stays at 3 to 4 ms (`max_send_lag_s`). The drift alone cannot say where the delay sits: the trace's `arrive` is logged when the scheduler enqueues a request, so a busy scheduler or a slow hand-off from the HTTP front end would show as this drift, and so would a client or network delay. The client send lag being small is the one piece of evidence against a client-side cause, and it is not a direct measurement of the receive side. This check therefore did not clear the client path and did not isolate the server path. It also does not explain the late first arrival (8.48 s and 9.68 s after `t_start` against 5.8 to 6.75 s), which this data cannot attribute.
+Next step if this line is pursued: have the load generator log an absolute send time and log a timestamp at HTTP receipt in the server front end (instrumentation only; needs a plan and a GPU), so the delay can be split into client to front end and front end to scheduler.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.

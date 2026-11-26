@@ -1,0 +1,32 @@
+FLAGGED: existing shared-host data; descriptive drift check (PLAN.md trigger step 1, Amendment 5)
+
+start                         n   med ms  p99|d| ms  max|d| ms  f50 med  arr0-t0 s  first wait>1s (t after 1st arrival, wait, drift ms)  checks
+A_2_P                       550     2.82       30.5       71.3     2.78       6.01  none                         
+A_3_P                       550     2.90       31.5       74.9     2.80       5.89  none                         
+A_6_P                       550     2.86       30.6       46.8     2.84       5.84  none                         
+B_main-16 *SLOW*            550    16.04      246.3      392.6     0.53       8.48  3.6s 1.6s 0.7                
+B_main-32                   550     2.30       24.2       32.1     2.11       5.92  none                         
+B_v23-16                    550     3.57       31.0       45.4     2.23       5.88  none                         
+B_v23-32                    550     2.49       27.0       33.2     2.45       5.92  none                         
+D_main-16-d02               550     2.87       30.8       47.3     3.13       6.03  none                         
+D_main-16-d1                550     2.50       36.2       71.5     2.89       5.83  none                         
+E_main-16-P1 *SLOW*         550    17.40      367.4      441.7     1.81       9.68  3.7s 2.7s 155.7              
+E_main-16-P2                550     2.94       31.7       51.5     3.30       5.82  none                         
+E_main-16-P3                550     2.61       30.3       43.7     2.31       5.88  none                         
+E_main-16-P6                550     2.88       30.1       70.2     2.85       5.82  none                         
+E_main-16-U1                550     2.66       41.2      215.6     2.54       6.00  none                         
+E_main-16-U4                550     2.29       46.7       93.5     3.37       6.75  none                         
+E_main-16-U5                550     3.05       30.1       45.4     3.14       5.86  none                         
+G_main-20                   550     3.20       29.6       32.4     3.87       5.89  none                         
+G_main-24                   550     2.70       28.0       33.8     1.61       5.89  none                         
+G_main-28                   550     1.65       26.9       30.4     2.60       5.90  none                         
+H_main-16-cg256-1           550     2.33       32.5       72.3     1.48       5.97  none                         
+H_main-16-cg256-2           550     2.43       31.9       70.9     2.76       5.95  none                         
+H_main-16-cg256-3           550     2.50       30.7       47.4    -0.27       6.40  none                         
+K2_main-16-cg256-ovl-1      550     2.77       75.2      137.1    10.24       5.93  none                         
+K2_main-16-cg256-ovl-2      550     3.48       79.7      134.9     9.84       5.83  none                         
+K2_main-16-cg256-ovl-3      550     3.13       77.9      142.0    14.95       5.88  none                         
+
+valid windows: 25 (slow 2, normal 23); excluded: []
+normal windows: median drift range 1.65..3.57 ms, p99|d| range 24.2..79.7 ms
+(a') fails  (c') fails
