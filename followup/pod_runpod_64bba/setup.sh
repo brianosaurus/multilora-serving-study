@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # Setup on `runpod` host 64bba14d4768 (new pod) for trigger step 2 (followup/sglang_cliff/PLAN.md, option 13).
-# Writes only to new paths: /root/src/sglang-main, /root/envs/sglang_main, /dev/shm/{models,adapters*}, /root/setup, /workspace/uvcache.
+# Writes only to new paths: /root/src/sglang-main, /root/envs/sglang_main, /dev/shm/{models,adapters*}, /root/setup, /root/uvcache.
 set -u; [ "$(hostname)" = 64bba14d4768 ] || { echo "REFUSED: host $(hostname)"; exit 2; }
-S=/root/setup; mkdir -p $S /root/src /root/envs; L=$S/setup.log; : > $L
+S=/root/setup; mkdir -p $S /root/src /root/envs; rm -rf /root/envs/sglang_main;  # partial env from an earlier attempt
+ L=$S/setup.log; : > $L
 say() { echo "$(date -u +%T) $*" >> $L; }
-export UV_CACHE_DIR=/workspace/uvcache
+export UV_CACHE_DIR=/root/uvcache  # local disk: the /workspace network volume is at its quota
 say "host $(hostname); $(nvidia-smi --query-gpu=name,driver_version --format=csv,noheader); nvcc: $(ls /usr/local/cuda/bin/nvcc 2>&1)"
 [ -d /root/src/sglang-main/.git ] || git clone -q --filter=blob:none https://github.com/sgl-project/sglang /root/src/sglang-main >> $L 2>&1; git -C /root/src/sglang-main checkout -q 0e9cff98f5b7 >> $L 2>&1
 say "sglang source at $(git -C /root/src/sglang-main log -1 --format='%H %cs')"
