@@ -6,7 +6,7 @@
 
 ## Motivation
 
-Fixes <issue link> (see also #33483). When `--max-running-requests` is not set it is derived from KV capacity (4096 on a 4090 with a 1.5B model), while the decode CUDA graph range on 24 GB GPUs is 48. A decode batch above the range runs eagerly; with LoRA an eager step costs about 31 ms against 2 ms for a replay, so requests drain slower than they arrive, the batch stays above the range, and waiting requests are served only after the load stops.
+Fixes #53431 (see also #33483). When `--max-running-requests` is not set it is derived from KV capacity (4096 on a 4090 with a 1.5B model), while the decode CUDA graph range on 24 GB GPUs is 48. A decode batch above the range runs eagerly; with LoRA an eager step costs about 31 ms against 2 ms for a replay, so requests drain slower than they arrive, the batch stays above the range, and waiting requests are served only after the load stops.
 
 vLLM avoids this by bounding the two together (`max_num_seqs` 256, graphs captured to 512). This PR does the same.
 

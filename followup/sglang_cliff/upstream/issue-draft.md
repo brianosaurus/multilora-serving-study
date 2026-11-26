@@ -1,4 +1,4 @@
-# DRAFT (not posted)
+# POSTED: https://github.com/sgl-project/sglang/issues/53431 (2026-11-26)
 
 **Title:** [Bug][Perf] Decode batches above the largest captured CUDA graph run eagerly and the server stays in a slow state (multi-LoRA reproduction of #33483, still on main)
 
