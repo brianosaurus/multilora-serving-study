@@ -287,6 +287,28 @@ Part M: 10 stock 16-slot starts, seed 1, 20 then 40 rps, all 550 requests matche
 Predictions: (a) holds (client to front end median at most 5 ms and p99 at most 50 ms in every 20 rps start). (b) not tested (no slow start). (c) holds: the spread across starts in time from `t_start` to the first server arrival (0.60 s) is all load-generator start-up (time to the first send, 0.60 s). (d) fails narrowly: one start (`M_main-16-10`, 106 ms) is 23% above the median of 86 ms, over the 20% bar; the others are within 15%.
 Reading: on this host the client path adds 2 to 3 ms and does not grow with load; the late first arrivals in the earlier slow starts (8.48 s and 9.68 s after `t_start`) are most likely load-generator start-up, given (c), but those two starts were on another host and were not re-measured. The slow-state trigger remains not established; this run could not test it because no slow start occurred.
 
+## Trigger step 3: CPU contention reproduces the slow state (runpod 64bba14d4768, FLAGGED)
+
+Plan: PLAN.md trigger step 3 and its two amendments. Data: `results/phase2_runpod_64bba/` (`N_*`, `P_*`, `Q_*`, `trigger3.txt`, `run.log`).
+
+- Part N (120 busy loops) was stopped after start 1: the load generator itself was starved (first send 81 s late, client to front end median 107 ms). Not evaluated.
+- Part P (affinity split) was stopped during its first loaded start: the container has a CPU quota of 17.85 CPUs although `nproc` shows 128, so affinity does not isolate the server. The 5 pinned no-load controls ran; none slow (20 rps p95 79 to 101 ms).
+- Part Q (k busy loops, no pinning, 3 rounds of k = 0, 8, 14):
+
+| k | 20 rps p95 TTFT by round (ms) | slow (p95 > 10 s) | hand-off + scheduler median at 20 rps (ms) | throttled periods during 20 rps |
+|---|---|---|---|---|
+| 0 | 82, 85, 83 | 0 of 3 | 4.4 to 4.6 | 0.6% |
+| 8 | 78, 79, 99 | 0 of 3 | 4.1 to 4.4 | 0.6% |
+| 14 | 20380, 5038, 19714 | 2 of 3 (third at 5.0 s) | 6.3 to 19.6 | 0.4 to 0.8% |
+
+Predictions:
+- (h) holds: no k = 0 start slow; throttled fraction 0.6%.
+- (i) first half holds (2 of 3 k = 14 starts slow); second half fails: slow starts were not more throttled (0.4% against 0.6%). The quota-throttling hypothesis is not supported. What reproduces the slow state is CPU contention from 14 busy processes (with the server and load generator, near the 17.85-CPU quota but not throttled), not throttling.
+- (j) holds: of the extra median delay in the two slow starts, 86% and 110% is in hand-off and scheduler.
+- The validity rule "first send within 1 s of `t_start`" was set wrong: every start, k = 0 included, sends 5.6 to 7.4 s after `t_start` (the gap includes load-generator start-up; step 2 measured only its spread). Applied as written, no start is valid. The other rule (client to front end median at most 5 ms) holds in every start (1.2 to 2.9 ms). I report the result with that rule only and say so. k = 14 starts sent first requests 0.4 to 1.7 s later than k = 0 starts.
+
+What this establishes: on this host, the slow state at 20 rps can be produced on demand (2 of 3 starts, plus one partial at 5 s) by CPU contention that the client survives, and when it occurs the delay builds between the front end and the scheduler. This fits the earlier slow starts on busy shared hosts. It does not yet say which part of the scheduler loop fails to recover; that is the next step (scheduler profiling at k = 14).
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.
