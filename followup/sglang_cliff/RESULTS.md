@@ -499,3 +499,23 @@ The investigation of what tips a start into the slow state stops here. It is rec
 - Ruled out as the trigger: a decode batch above 48 (slow requests begin before the batch passes 48 at 20 rps; at 40 rps the share above 48 is high in normal starts too, 70 to 74% against 94% and 75%); slot capture in its strict form (option 10); the LRU eviction order evicting adapters that have waiting requests (0 of 59 evictions after the first 5 s in the slow 20 rps starts, option 11).
 - The raised limit (`--cuda-graph-max-bs-decode 256`) avoided the slow state in every start so far. Four of 27 stock 20 rps starts tipped.
 - Not found: the trigger. No further runs are planned for it.
+
+## Step 10: the fix (running limit = graph range, 24 GB range 256), against stock and vLLM (runpod 64bba14d4768, FLAGGED)
+
+Plan: PLAN.md step 10. Branch `decode-graph-range` on main `385262cabb` (commits `c83438fb19`, `3f6ac64fff`; not pushed), main's python tree overlaid on the `0e9cff98f5` environment. Data: `results/phase2_runpod_64bba/AA0_fix`, `AA_*` (traces left on the pod).
+
+Part AA0: GSM8K 66.26%, 0 degenerate (stock 67.5%, 0; cg256 66.3% and 66.5%, 1 each). Running limit 256 (was 4096); decode graphs to 256 take 0.54 GB (0.15 GB to 48); KV pool 600,201 tokens, the same as stock. (f1), (f2) hold.
+Things I got wrong: I said the larger range would take KV memory (about 1% here); at `--mem-fraction-static 0.85` it fits in the reserved headroom and the KV pool does not change.
+
+Part AA (20 rps p95 TTFT; 40 rps p95 TTFT, median TPOT, output tok/s):
+
+| arm | no busy loops, round 1 | round 2 | 14 busy loops, round 1 | round 2 |
+|---|---|---|---|---|
+| stock | 83 ms; 13.5 s, 44 ms, 2981 | 78 ms; 13.4 s, 43 ms, 3040 | 1.01 s; 14.5 s, 53 ms, 2725 | 122 ms; 18.9 s, 76 ms, 2155 |
+| fix | 78 ms; 2.25 s, 12.3 ms, 4665 | 78 ms; 2.08 s, 12.2 ms, 4673 | 681 ms; 3.35 s, 13.8 ms, 4598 | 3.41 s; 7.93 s, 15.6 ms, 4014 |
+| vLLM 0.34.0 | 114 ms; 1.43 s, 10.1 ms, 4657 | 113 ms; 1.43 s, 10.0 ms, 4658 | 2.64 s; 1.44 s, 10.1 ms, 4671 | 2.87 s; 1.46 s, 10.2 ms, 4446 |
+
+- (f3) holds: the fix's worst 40 rps p95 (7.9 s) is below stock's best (13.4 s).
+- (f4) holds: 4665 and 4673 tok/s without busy loops, at or above cg256's 4265 to 4664 in part X; with busy loops 4014 to 4598.
+- vLLM: 40 rps p95 1.43 to 1.46 s in every start, unaffected by busy loops; the fix is 1.5 times that without busy loops and 2.3 to 5.4 times with them. At 20 rps with busy loops vLLM's p95 (2.6, 2.9 s) is worse than the fix's first start (0.68 s).
+- The first AA attempt ran no load (wrong Python path); see PLAN.md.
