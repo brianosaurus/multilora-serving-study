@@ -237,6 +237,25 @@ Z6) # variance: v5, cg256, v5
     arm=${cfg%%:*}; r=${cfg#*:}; PATCHPY=${r%%:*}; EXTRA=${r#*:}; tag=Z6_$arm; XENV="SGLANG_CLIFF_PHASES=1"
     start_sglang $tag main 16 1 && /root/envs/sgleval/bin/sgl-eval run gsm8k --base-url http://127.0.0.1:30000/v1 --model qwen --temperature 0 --max-tokens 512 --seed 0 --num-threads 128 --out-dir $D/$tag/sgleval > $D/$tag/sgleval.log 2>&1
     stop_server; say "done $tag"; done; PATCHPY=; XENV=; EXTRA=;;
+AA0) # step 10: fix config + gsm8k
+  tag=AA0_fix; PATCHPY=/root/src/sglang-graphrange/python; EXTRA=; XENV="SGLANG_CLIFF_PHASES=1"
+  start_sglang $tag main 16 1 && { say "$tag: $(grep -o 'max_running_requests defaults to [0-9]* (was [0-9]*)' $D/$tag/server.log | head -1) | $(grep -oE 'max_total_num_tokens=[0-9]+|max_running_requests=[0-9]+|cuda_graph_max_bs[^,]*' $D/$tag/server.log | sort -u | tr '\n' ' ')"
+    /root/envs/sgleval/bin/sgl-eval run gsm8k --base-url http://127.0.0.1:30000/v1 --model qwen --temperature 0 --max-tokens 512 --seed 0 --num-threads 128 --out-dir $D/$tag/sgleval > $D/$tag/sgleval.log 2>&1; tail -3 $D/$tag/sgleval.log | tee -a $L; }
+  stop_server; PATCHPY=; XENV=; say "done $tag";;
+AA) # step 10: stock, fix, vllm; k in {0,14}; 2 rounds (part X protocol)
+  thr(){ say "$1 cpu.stat: $(tr '\n' ' ' < /sys/fs/cgroup/cpu/cpu.stat)"; }
+  for rep in 1 2; do for k in 0 14; do for arm in stock fix vllm; do tag=AA_$arm-k$k-$rep; RIDP=; PATCHPY=; EXTRA=; XENV="SGLANG_CLIFF_PHASES=1"
+    [ $arm = fix ] && PATCHPY=/root/src/sglang-graphrange/python
+    for i in $(seq 1 $k); do python3 -c 'while True: pass' & echo $! >> /tmp/busy.pids; done; sleep 5; thr "$tag pre-start"
+    if [ $arm = vllm ]; then O=$D/$tag; mkdir -p $O; E=/root/envs/vllm
+      CMD=($E/bin/vllm serve $M --served-model-name qwen --port 8000 --max-model-len 4096 --gpu-memory-utilization 0.85 --enable-lora --max-loras 16 --max-cpu-loras 64 --max-lora-rank 16 --lora-modules)
+      for i in $(seq 0 31); do CMD+=("adapter_$(printf %04d $i)=$A/adapter_$(printf %04d $i)"); done
+      say "start $tag host $(hostname) load $(cut -d' ' -f1-3 /proc/loadavg)"
+      setsid nohup env PATH=$E/bin:/usr/local/cuda/bin:$PATH CUDA_HOME=/usr/local/cuda "${CMD[@]}" > $O/server.log 2>&1 < /dev/null & SP=$!
+      ok=0; for i in $(seq 1 900); do [ "$(curl -s -o /dev/null -w %{http_code} -m 3 localhost:8000/health)" = 200 ] && { ok=1; break; }; kill -0 $SP 2>/dev/null || break; sleep 3; done; say "$tag ready=$ok"
+      [ $ok = 1 ] && { warm vllm http://localhost:8000 $tag; for rate in 20 40; do thr "$tag pre-r$rate"; load $tag vllm http://localhost:8000 $rate 1; thr "$tag post-r$rate"; done; }
+    else RIDP=$tag; start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do thr "$tag pre-r$rate"; load $tag sglang http://localhost:30000 $rate 1; thr "$tag post-r$rate"; done; }; fi
+    stop_server; [ -f /tmp/busy.pids ] && { xargs kill < /tmp/busy.pids 2>/dev/null; rm -f /tmp/busy.pids; }; say "done $tag"; done; done; done; RIDP=; XENV=; EXTRA=; PATCHPY=;;
 K) # Phase 3 option 8: raised graph limit plus overlap loading
   for n in 1 2 3; do tag=K_main-16-cg256-ovl-$n; PATCHPY=; XENV=; EXTRA="--cuda-graph-max-bs-decode 256 --enable-lora-overlap-loading"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
