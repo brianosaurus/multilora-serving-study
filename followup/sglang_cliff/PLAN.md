@@ -228,3 +228,13 @@ Predictions (fixed now):
 - (f') in any slow valid start, at least 80% of its extra drift over the median normal start in its group is in hand-off and scheduler.
 - (g') in normal valid loaded starts, the hand-off and scheduler median at 20 rps is higher than in the controls.
 If (e') fails, contention from other cores is not shown to trigger the slow state, and the next step is in-process profiling of the scheduler (py-spy) during a slow start, which needs its own plan.
+
+Amendment 2 to trigger step 3 (after 5 controls and part of one loaded start of part P, before any further run): part P is stopped. The container has a CFS CPU quota of 17.85 CPUs (`cpu.cfs_quota_us` 1785000, period 100000) although `nproc` shows 128. Affinity does not separate the busy loops from the server under a shared quota: the 120 loops use up the quota and every process in the container is throttled. That also explains part N's starved client. In `P_main-16-pinload-1` the server took 8.5 minutes to start (the controls took about 40 s); it produced no load results. The 5 controls (`P_main-16-pin-1..5`) completed: 20 rps p95 79 to 101 ms, 40 rps 13.4 to 14.6 s, none slow. They are kept as pinned no-load controls.
+New hypothesis: the slow state is triggered by CPU quota throttling of the SGLang processes. The earlier slow starts were on shared containers whose quota use was not recorded.
+Part Q (replaces the loaded half of part P): no pinning. Busy-loop count k in {0, 8, 14}, chosen to leave the quota unused, near full and over full with the server's own use. Order k = 0, 8, 14, repeated 3 times (9 starts), otherwise as part M. `/sys/fs/cgroup/cpu/cpu.stat` (nr_periods, nr_throttled, throttled_time) is logged at server start, before and after each load rate. Engine and flags unchanged. FLAGGED.
+Validity check per start, as in part P (first send at most 1 s after `t_start`, client to front end median at most 5 ms at 20 rps). Starts that fail are reported as client-starved and not counted.
+Predictions (fixed now):
+- (h) no start at k = 0 is slow, and the throttled fraction (nr_throttled delta over nr_periods delta) during its 20 rps load is under 1%.
+- (i) if throttling triggers the slow state: at least 2 of the 3 valid k = 14 starts are slow, and across all valid starts, slow starts have a higher throttled fraction during 20 rps than every normal start.
+- (j) in any slow valid start, at least 80% of its extra drift over the median normal k = 0 start is in hand-off and scheduler.
+If (i) fails, throttling of this kind is not shown to be the trigger; the next step is py-spy profiling of the scheduler under load (own plan).

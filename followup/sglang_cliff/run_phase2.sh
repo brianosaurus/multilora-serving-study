@@ -106,6 +106,12 @@ P) # trigger step 3 amendment: run this part under taskset -c 0-15; 5 pinned con
     say "$tag affinity: $(taskset -pc $$ | cut -d: -f2) load: $(cut -d' ' -f1-3 /proc/loadavg)"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag load: $(cut -d' ' -f1-3 /proc/loadavg) trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
     stop_server; [ -f /tmp/busy.pids ] && { xargs kill < /tmp/busy.pids 2>/dev/null; rm -f /tmp/busy.pids; }; say "done $tag"; done; RIDP=;;
+Q) # trigger step 3 amendment 2: k busy loops (no pinning) in a 17.85-CPU quota container; cgroup throttle counters logged
+  thr(){ say "$1 cpu.stat: $(tr '\n' ' ' < /sys/fs/cgroup/cpu/cpu.stat)"; }
+  for rep in 1 2 3; do for k in 0 8 14; do tag=Q_main-16-k$k-$rep; PATCHPY=; XENV=; EXTRA=; RIDP=$tag
+    for i in $(seq 1 $k); do python3 -c 'while True: pass' & echo $! >> /tmp/busy.pids; done; sleep 5; thr "$tag pre-start"
+    start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do thr "$tag pre-r$rate"; load $tag sglang http://localhost:30000 $rate 1; thr "$tag post-r$rate"; done; }
+    stop_server; [ -f /tmp/busy.pids ] && { xargs kill < /tmp/busy.pids 2>/dev/null; rm -f /tmp/busy.pids; }; say "done $tag"; done; done; RIDP=;;
 K) # Phase 3 option 8: raised graph limit plus overlap loading
   for n in 1 2 3; do tag=K_main-16-cg256-ovl-$n; PATCHPY=; XENV=; EXTRA="--cuda-graph-max-bs-decode 256 --enable-lora-overlap-loading"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
