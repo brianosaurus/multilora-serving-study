@@ -210,3 +210,12 @@ Predictions (fixed now):
 If no slow start occurs in 10 starts: (b) is not tested, the components are reported for normal starts, and nothing is concluded about the trigger. The slow-state rate in the earlier stock 16-slot traced starts at seed 1 was 2 of 6 starts.
 Limits: one host, one seed (as before), front-end and scheduler clocks are the same machine clock; `recv` is after request parsing, so time inside the HTTP server before it is counted as client to front end.
 Correction to the line above (before any run): "2 of 6 starts" is wrong. The earlier traced main 16-slot starts with the stock graph limit and no drainer, at seed 1, are `B_main-16`, `E_main-16-U1`, `-U4`, `-U5` (stock code) and `E_main-16-P1`, `-P2`, `-P3`, `-P6` (depth-first patch, which had no measured effect). At 20 rps 2 of these 8 were slow (`B_main-16`, stock; `E_main-16-P1`, patched), and 1 of the 4 stock-code starts.
+
+### Trigger step 3 (option 14): does background CPU load cause the slow state? (new runs, `runpod` host `64bba14d4768`, no engine change)
+Why: both earlier slow starts were on shared hosts with other tenants; trigger step 2 on this pod (load average under 1) had 0 slow starts in 10. Under load the added wait was between the front end and the scheduler, which is CPU-bound Python.
+Runs (part N of `run_phase2.sh`): same as part M (stock main, 16 slots, traced with rids, two warm-ups, 20 and 40 rps, seed 1), 10 starts, with 120 busy-loop Python processes (`while True: pass`, the host has 128 CPUs) started before each server start and killed after each server stop. The engine and its flags are unchanged. Load average is logged per start. One GPU job at a time; shared host, FLAGGED.
+Predictions (fixed now):
+- (e) at least 2 of 10 starts are slow (20 rps p95 TTFT above 10 s). If 0 or 1, CPU contention of this kind is not shown to cause the slow state.
+- (f) if any start is slow, (b) from step 2 is tested on it: at least 80% of its extra drift over the median normal start in this part is in hand-off and scheduler.
+- (g) in normal starts, the hand-off and scheduler median at 20 rps is higher than in part M (4.5 to 5.2 ms).
+Limits: busy loops are not the same as the earlier hosts' unknown load; a negative result does not rule out other contention (memory bandwidth, PCIe, disk).
