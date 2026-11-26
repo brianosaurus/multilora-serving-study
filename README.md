@@ -1,6 +1,29 @@
 # multilora-serving-study
 
-Status: planning. There are no results yet. Nothing here should be read as a finding.
+Status: the pre-registered study has run, and follow-ups have been added since. The write-up is at https://brian.biz/multilora. The sections below this one were written before any run and are kept as the plan; they are not a description of the results. Every plan, amendment and correction is recorded in [docs/CHANGELOG.md](docs/CHANGELOG.md), which is append-only.
+
+Read results with these limits in mind:
+
+- One RTX 4090, one base model (Qwen2.5-1.5B-Instruct), synthetic rank-16 adapters. Nothing here transfers to other GPUs, larger models or real adapters without re-measuring.
+- Results from the pre-registered plan are separated from results run after the plan was fixed. The later ones are labeled **EXPLORATORY** on the page.
+- Runs on a shared host are labeled **FLAGGED**. They are screening results, not page-grade timing. The dedicated-machine rerun is still pending.
+- The pre-registered correctness gate failed, so correctness is not certified for any engine (see [docs/ADAPTER_CORRECTNESS.md](docs/ADAPTER_CORRECTNESS.md)).
+- Follow-ups went beyond the original scope (for example a grouped LoRA kernel for mistral.rs, under upstream review). The "Not in scope" line below describes the original plan only.
+
+## Where the evidence is
+
+| Topic | Plan | Results and data |
+|---|---|---|
+| Pre-registered grid (vLLM, SGLang, mistral.rs) | [docs/PLAN.md](docs/PLAN.md) | [results/raw/](results/raw/) (layout in [results/raw/README.md](results/raw/README.md)), [results/INTERIM_vLLM.md](results/INTERIM_vLLM.md) |
+| Slot count against KV capacity, SGLang 128-adapter rerun | [followup/pod_items/PLAN.md](followup/pod_items/PLAN.md) | [followup/pod_items/RESULTS.md](followup/pod_items/RESULTS.md), [followup/pod_items/results/B/TABLE.md](followup/pod_items/results/B/TABLE.md) |
+| SGLang latency cliff past the slot limit: the decode CUDA graph range, drainer, scheduling and eviction checks, and what is still unexplained | [followup/sglang_cliff/PLAN.md](followup/sglang_cliff/PLAN.md) | [followup/sglang_cliff/RESULTS.md](followup/sglang_cliff/RESULTS.md); raw runs in `followup/sglang_cliff/results/`; unposted upstream draft in [followup/sglang_cliff/draft-issue.md](followup/sglang_cliff/draft-issue.md) |
+| csgmv against triton backend (SGLang's documented 20 to 80%) | [followup/csgmv_ab/PLAN.md](followup/csgmv_ab/PLAN.md) | summarized on the page; raw data under [results/raw/](results/raw/) |
+| Adapters in flight against the working set | see [docs/CHANGELOG.md](docs/CHANGELOG.md) | [followup/working_set/RESULTS.md](followup/working_set/RESULTS.md) |
+| Routing and prefix-cache checks | [followup/routing/PLAN.md](followup/routing/PLAN.md), [followup/prefix_routing/PLAN.md](followup/prefix_routing/PLAN.md) | [followup/prefix_routing/RESULTS.md](followup/prefix_routing/RESULTS.md), [followup/routing/OBSERVATIONS.md](followup/routing/OBSERVATIONS.md) |
+| mistral.rs grouped LoRA kernel (rerun, incomplete) | [followup/kernel_rerun/PLAN.md](followup/kernel_rerun/PLAN.md) | [followup/kernel_rerun/results/](followup/kernel_rerun/results/) (B2 ended incomplete: disk full; recorded in [docs/BUGS.md](docs/BUGS.md)) |
+| Dedicated-machine session | [followup/dedicated_session/PLAN.md](followup/dedicated_session/PLAN.md) | pending |
+
+Open items, stated plainly: the cause of the roughly 50 ms stall after each SGLang adapter load, the trigger of SGLang's slow state, and the dedicated-machine rerun are not established.
 
 ## Question
 
