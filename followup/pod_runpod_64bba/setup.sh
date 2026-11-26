@@ -9,6 +9,8 @@ export UV_CACHE_DIR=/root/uvcache  # local disk: the /workspace network volume i
 say "host $(hostname); $(nvidia-smi --query-gpu=name,driver_version --format=csv,noheader); nvcc: $(ls /usr/local/cuda/bin/nvcc 2>&1)"
 [ -d /root/src/sglang-main/.git ] || git clone -q --filter=blob:none https://github.com/sgl-project/sglang /root/src/sglang-main >> $L 2>&1; git -C /root/src/sglang-main checkout -q 0e9cff98f5b7 >> $L 2>&1
 say "sglang source at $(git -C /root/src/sglang-main log -1 --format='%H %cs')"
+[ -x /root/.cargo/bin/cargo ] || { curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal > $S/rustup.log 2>&1; }; export PATH=/root/.cargo/bin:$PATH
+say "rust: $(cargo --version 2>&1)"
 (uv venv /root/envs/sglang_main --python 3.12 && uv pip install --python /root/envs/sglang_main/bin/python -e /root/src/sglang-main/python peft) > $S/sglang_main_install.log 2>&1
 say "install exit $?; import: $(/root/envs/sglang_main/bin/python -c 'import sglang;print(sglang.__version__)' 2>&1 | tail -1)"
 uv pip list --python /root/envs/sglang_main/bin/python 2>/dev/null | grep -i -E "^(sglang|sglang-kernel|torch|peft|transformers|flashinfer-python|triton|aiohttp|numpy) " > $S/versions.txt
