@@ -1,8 +1,8 @@
-# DRAFT (not posted)
+# POSTED: https://github.com/sgl-project/sglang/pull/53433 (2026-11-26)
 
 **Title:** [Perf] Keep decode inside CUDA graphs: default max_running_requests to the decode graph range, and raise the 24 GB tier's range to 256
 
-**Branch:** `brianosaurus:decode-graph-range` (based on `385262cabb`; not pushed)
+**Branch:** `brianosaurus:decode-graph-range` (based on `385262cabb`; pushed)
 
 ## Motivation
 
@@ -46,7 +46,7 @@ At 40 rps on main, every request that waited more than 1 s for its first token (
 
 ## Checklist
 
-- [ ] Format with pre-commit
+- [x] Format with pre-commit
 - [ ] Unit test: default running limit follows the graph range; explicit value unchanged; graphs disabled leaves it unchanged
 - [x] sgl-eval accuracy run
 - [x] Benchmark (shared host)
