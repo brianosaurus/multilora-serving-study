@@ -227,7 +227,9 @@ def _wrap_tokenizer_manager(mod):
     T._init_req_state, T._send_one_request = init, send
 
 
-_TARGETS = {"sglang.srt.managers.scheduler": _wrap_scheduler, "sglang.srt.lora.lora_manager": _wrap_lora,
+_TARGETS = {"sglang.srt.managers.scheduler": _wrap_scheduler,
+            "sglang.srt.lora.lora_manager": _multi(_wrap_lora, _wrap_sub(["LoRAManager"], "prepare_lora_batch")),
+            "sglang.srt.lora.backend.chunked_backend": _wrap_sub(["ChunkedSgmvLoRABackend"], "prepare_lora_batch"),
             "sglang.srt.managers.tokenizer_manager": _wrap_tokenizer_manager,
             "sglang.srt.managers.schedule_policy": _multi(_wrap_sub(["SchedulePolicy"], "calc_priority"), _wrap_sub(["PrefillAdder"], "add_one_req")),
             "sglang.srt.managers.scheduler_components.request_list": _wrap_sub(["IndexedReqList", "KeyedReqList", "ReqList"], "reorder")}

@@ -12,8 +12,9 @@ start_sglang() { # tag eng slots trace(0|1)
   local tag=$1 eng=$2 slots=$3 trace=$4 O=$D/$1; mkdir -p $O; E=${ENVOF[$eng]}
   busy && { say "REFUSED $tag: GPU or another job busy"; return 1; }
   say "start $tag host $(hostname) load $(cut -d' ' -f1-3 /proc/loadavg) external CPU: $($PYL $R/followup/kernel_rerun/extload.py check 10 2>&1 | tail -1)"
-  CMD=($E/bin/python -m sglang.launch_server --model-path $M --served-model-name qwen --port 30000 --mem-fraction-static 0.85 --context-length 4096 --enable-lora --max-lora-rank 16 --max-loras-per-batch $slots --lora-target-modules q_proj k_proj v_proj o_proj gate_proj up_proj down_proj $EXTRA --lora-paths)
-  for i in $(seq 0 31); do CMD+=("adapter_$(printf %04d $i)=$A/adapter_$(printf %04d $i)"); done
+  if [ "${NOLORA:-0}" = 1 ]; then CMD=($E/bin/python -m sglang.launch_server --model-path $M --served-model-name qwen --port 30000 --mem-fraction-static 0.85 --context-length 4096 $EXTRA)
+  else CMD=($E/bin/python -m sglang.launch_server --model-path $M --served-model-name qwen --port 30000 --mem-fraction-static 0.85 --context-length 4096 --enable-lora --max-lora-rank 16 --max-loras-per-batch $slots --lora-target-modules q_proj k_proj v_proj o_proj gate_proj up_proj down_proj $EXTRA --lora-paths)
+  for i in $(seq 0 31); do CMD+=("adapter_$(printf %04d $i)=$A/adapter_$(printf %04d $i)"); done; fi
   if [ $trace = 1 ]; then PP="PYTHONPATH=$TR${PATCHPY:+:$PATCHPY} SGLANG_CLIFF_TRACE_DIR=$O/trace $XENV"; else PP="SGLANG_CLIFF_NOTRACE=1"; fi
   setsid nohup env PATH=$E/bin:/usr/local/cuda/bin:$PATH CUDA_HOME=/usr/local/cuda $PP "${CMD[@]}" > $O/server.log 2>&1 < /dev/null & SP=$!
   ok=0; for i in $(seq 1 600); do [ "$(curl -s -o /dev/null -w %{http_code} -m 3 localhost:30000/health)" = 200 ] && { ok=1; break; }; kill -0 $SP 2>/dev/null || break; sleep 3; done
@@ -132,6 +133,21 @@ S) # trigger step 5: sub-phase timing inside batch selection; k=0 once, k=14 thr
     for i in $(seq 1 $k); do python3 -c 'while True: pass' & echo $! >> /tmp/busy.pids; done; sleep 5; thr "$tag pre-start"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do thr "$tag pre-r$rate"; load $tag sglang http://localhost:30000 $rate 1; thr "$tag post-r$rate"; done; }
     stop_server; [ -f /tmp/busy.pids ] && { xargs kill < /tmp/busy.pids 2>/dev/null; rm -f /tmp/busy.pids; }; say "done $tag"; done; RIDP=; XENV=;;
+T) # step 6 experiment 1: 14 busy loops, stock against graph range 256, interleaved, 3 rounds
+  thr(){ say "$1 cpu.stat: $(tr '\n' ' ' < /sys/fs/cgroup/cpu/cpu.stat)"; }
+  for rep in 1 2 3; do for arm in stock cg256; do tag=T_main-16-k14-$arm-$rep; PATCHPY=; XENV="SGLANG_CLIFF_PHASES=1"; RIDP=$tag
+    EXTRA=; [ $arm = cg256 ] && EXTRA="--cuda-graph-max-bs-decode 256"
+    for i in $(seq 1 14); do python3 -c 'while True: pass' & echo $! >> /tmp/busy.pids; done; sleep 5; thr "$tag pre-start"
+    start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do thr "$tag pre-r$rate"; load $tag sglang http://localhost:30000 $rate 1; thr "$tag post-r$rate"; done; }
+    stop_server; [ -f /tmp/busy.pids ] && { xargs kill < /tmp/busy.pids 2>/dev/null; rm -f /tmp/busy.pids; }; say "done $tag"; done; done; RIDP=; XENV=; EXTRA=;;
+U) # step 6 experiment 2: decode step cost by batch size, closed loop at concurrency 32, 64, 96; no busy loops
+  lc() { local O=$D/$1; echo "{\"conc\":$3,\"adapters\":$2,\"t_start\":$(date +%s.%N)," >> $O/marks.tmp
+    $PYL $R/scripts/loadgen.py --engine sglang --url http://localhost:30000 --tokenizer $M --concurrency $3 --requests 400 --warmup 40 --adapters $2 --popularity zipf --seed 1 --out $O/c$3_a$2.json | cut -c1-300 | tee -a $L
+    echo "\"t_end\":$(date +%s.%N)}" >> $O/marks.tmp; tr -d '\n' < $O/marks.tmp >> $O/marks.jsonl; echo >> $O/marks.jsonl; rm -f $O/marks.tmp; }
+  for cfg in "U1_lora-stock:0::32 0" "U2_lora-cg256:0:--cuda-graph-max-bs-decode 256:32 0" "U3_nolora-stock:1::0" "U4_nolora-cg256:1:--cuda-graph-max-bs-decode 256:0"; do
+    tag=${cfg%%:*}; r=${cfg#*:}; NOLORA=${r%%:*}; r=${r#*:}; EXTRA=${r%%:*}; ads=${r#*:}; PATCHPY=; XENV="SGLANG_CLIFF_PHASES=1 SGLANG_CLIFF_SUBPHASES=1"
+    start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for a in $ads; do for c in 32 64 96; do lc $tag $a $c; done; done; }
+    stop_server; say "done $tag"; done; NOLORA=0; XENV=; EXTRA=;;
 K) # Phase 3 option 8: raised graph limit plus overlap loading
   for n in 1 2 3; do tag=K_main-16-cg256-ovl-$n; PATCHPY=; XENV=; EXTRA="--cuda-graph-max-bs-decode 256 --enable-lora-overlap-loading"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }

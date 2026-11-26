@@ -260,3 +260,13 @@ Predictions (fixed now):
 - (o) in the slowest k = 14 start, one timed function (excluding its callers) accounts for at least 50% of the increase in get-next-batch CPU per call over the k = 0 start, and its CPU per call has Spearman at least 0.5 with queue length.
 - (p) `can_schedule_lora_req` calls per second at 20 rps are at least 5 times the k = 0 rate (requests re-checked on each pass while adapter slots are full).
 No patch is written or run in this step. A fix is planned in a separate step, against what (o) and (p) find.
+
+### Step 6 (option 17): does the graph range remove the contention trigger, and why is decode outside the graph so slow with LoRA (runpod 64bba14d4768)
+Exploratory finding that motivates this (existing traces, not pre-registered): in parts Q and R, slow and borderline k = 14 starts had 10 to 65% of 20 rps decode steps above batch 48 (the decode graph range), at 33 to 62 ms per step, against 1.9 to 3.1 ms for steps at 48 or below; k = 0 starts never went above 36. Part S's first k = 14 start showed batch selection at about 55 us per call (50 us at k = 0), about 5% of the loop: not the main cost.
+Experiment 1 (part T, engine flag change by design): 14 busy loops; arms stock and `--cuda-graph-max-bs-decode 256`, interleaved, 3 rounds (6 starts); otherwise as part R. FLAGGED.
+- (q) at most 1 of 3 cg256 starts has 20 rps p95 TTFT above 1 s, and every stock start is above 1 s or has decode steps above 48. If (q) holds, falling off the decode graph is what turns contention into the slow state.
+Experiment 2 (part U, instrumentation only): no busy loops; closed-loop load at concurrency 32, 64 and 96 (400 requests, 40 warm-up, seed 1). Servers: U1 LoRA stock (adapter requests, then base-model requests), U2 LoRA graph 256 (same), U3 no-LoRA stock, U4 no-LoRA graph 256. Per decode step: `run_batch` wall time by batch size from the trace, plus CPU time in `LoRAManager.prepare_lora_batch` and `ChunkedSgmvLoRABackend.prepare_lora_batch` per step.
+- (r) for decode steps of batch 49 to 96: LoRA eager (U1, adapter requests) per-step time is at least 3 times no-LoRA eager (U3) at the same batch size. If so, the extra cost is LoRA-specific.
+- (s) of the LoRA eager excess over no-LoRA eager (U1 minus U3), at least 50% is CPU time in the two `prepare_lora_batch` functions. If not, the excess is in the forward pass itself (kernel launches or GPU work), to be split in a later step.
+- Reported, no prediction: U1 base-model requests on the LoRA server against U3, and graph against eager per batch size.
+A code change is planned only after this step, against what (r) and (s) find.
