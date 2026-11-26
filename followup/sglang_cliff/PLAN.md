@@ -293,3 +293,17 @@ Predictions (fixed now):
 - (y) at k = 0, patch 40 rps output tokens per second is at least stock's in every round.
 - Reported, no prediction: patch against patch-cg256 (the cost of the 48 default against a larger graph range).
 Limits: one model (Qwen2.5-1.5B), one GPU, rank-16 adapters at 16 slots; larger models, where eager decode costs less relative to graphs, may lose throughput from the cap, and are not measured here.
+
+Step 8 stopped (before any further run): part W was stopped after 2 starts (`W_main-16-stock-k0-1`, `W_main-16-patch-k0-1`) because the cap patch will not be proposed; its comparisons move into step 9. The two finished starts are kept and labeled, not analyzed.
+
+### Step 9 (option 20): split decode batches above the graph range into graph replays; compare with stock, the cap, graph 256 and vLLM (runpod 64bba14d4768; engine behavior change by design)
+Patch (`split.diff`; local SGLang branch `decode-graph-split` on `0e9cff98f5`, not pushed): in `ModelRunner._forward_raw`, a plain decode batch larger than the largest captured graph is cut into even chunks of at most that size (`TboForwardBatchPreparer.filter_batch`), each chunk refills the LoRA batch info and replays a graph, outputs are copied out of the static buffers and concatenated, and sampling runs once on the whole batch. Falls back to eager for speculative decoding, DP attention gathers, dLLM, mrope, PP, and outputs it cannot merge. Loaded by putting the patched worktree's `python/` first on PYTHONPATH.
+Part X0 (correctness and smoke, no busy loops): servers stock, split and graph 256 (`cg256`), plus cg256 a second time; 96 concurrent greedy requests (64 tokens, adapters round-robin), completions compared pairwise; then on the split server a closed-loop load at concurrency 96 with phase timing.
+- (z0) the split server answers all 96 requests, and its completions match cg256 at least as often as stock's do. Reported, no prediction: cg256 against itself (run-to-run determinism).
+Part X: arms stock, cap48 (`--max-running-requests 48`), cg256, split, vLLM 0.34.0 (same flags as part C); conditions k = 0 and k = 14 busy loops; 2 rounds; arm order within each condition as listed. Otherwise as part V. FLAGGED. vLLM is installed in `/root/envs/vllm` with uv; the install log is kept.
+Predictions (fixed now):
+- (z1) split: decode steps above batch 48 have median wall time at most 3 times the median of steps at 48 or below, in every split start (stock: about 16 times).
+- (z2) split: 20 rps p95 TTFT at most 1 s in every start, and 40 rps p95 below every stock start in the same condition.
+- (z3) at k = 0, split 40 rps output tokens per second is at least stock's and at least 0.95 times cg256's, in every round.
+- (z4) at k = 0, vLLM's 40 rps p95 TTFT is lower than split's (adapter-load stalls, earlier results), and split's throughput is within 5% of vLLM's.
+Limits: one model (Qwen2.5-1.5B), one GPU, 16 adapter slots; shared host.
