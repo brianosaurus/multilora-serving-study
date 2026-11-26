@@ -133,9 +133,48 @@ def _wrap_phases(S):
                 except Exception:
                     pass
         return f
-    for name in ("ingest_requests", "get_next_batch_to_run", "run_batch", "process_batch_result"):
+    names = ["ingest_requests", "get_next_batch_to_run", "run_batch", "process_batch_result"]
+    if os.environ.get("SGLANG_CLIFF_SUBPHASES") == "1":  # trigger step 5: parts of get_next_batch_to_run
+        names += ["get_new_batch_prefill", "update_running_batch", "can_schedule_lora_req", "process_pending_chunked_abort",
+                  "_process_hicache_events"]
+    for name in names:
         if hasattr(S, name):
             setattr(S, name, mk(name, getattr(S, name)))
+    _PH["mk"] = mk
+
+
+def _wrap_sub(cls_names, meth):
+    def w(mod):
+        if os.environ.get("SGLANG_CLIFF_PHASES") != "1" or os.environ.get("SGLANG_CLIFF_SUBPHASES") != "1":
+            return
+        for cn in cls_names:
+            C = getattr(mod, cn, None)
+            if C is None or not hasattr(C, meth):
+                continue
+            o = getattr(C, meth)
+
+            def f(self, *a, _o=o, _n=f"{cn}.{meth}", **k):
+                w0, c0 = time.time(), time.thread_time()
+                try:
+                    return _o(self, *a, **k)
+                finally:
+                    try:
+                        r = _PH["p"].setdefault(_n, [0, 0.0, 0.0])
+                        r[0] += 1; r[1] += time.time() - w0; r[2] += time.thread_time() - c0
+                    except Exception:
+                        pass
+            setattr(C, meth, functools.wraps(o)(f))
+    return w
+
+
+def _multi(*fs):
+    def w(mod):
+        for f in fs:
+            try:
+                f(mod)
+            except Exception:
+                pass
+    return w
 
 
 def _wrap_lora(mod):
@@ -189,7 +228,9 @@ def _wrap_tokenizer_manager(mod):
 
 
 _TARGETS = {"sglang.srt.managers.scheduler": _wrap_scheduler, "sglang.srt.lora.lora_manager": _wrap_lora,
-            "sglang.srt.managers.tokenizer_manager": _wrap_tokenizer_manager}
+            "sglang.srt.managers.tokenizer_manager": _wrap_tokenizer_manager,
+            "sglang.srt.managers.schedule_policy": _multi(_wrap_sub(["SchedulePolicy"], "calc_priority"), _wrap_sub(["PrefillAdder"], "add_one_req")),
+            "sglang.srt.managers.scheduler_components.request_list": _wrap_sub(["IndexedReqList", "KeyedReqList", "ReqList"], "reorder")}
 
 
 class _Finder(importlib.abc.MetaPathFinder):

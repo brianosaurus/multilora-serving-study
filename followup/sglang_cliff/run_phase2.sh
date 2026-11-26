@@ -122,6 +122,16 @@ R) # trigger step 4: part Q protocol with scheduler-loop phase timing, k in {0, 
     for i in $(seq 1 $k); do python3 -c 'while True: pass' & echo $! >> /tmp/busy.pids; done; sleep 5; thr "$tag pre-start"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do thr "$tag pre-r$rate"; load $tag sglang http://localhost:30000 $rate 1; thr "$tag post-r$rate"; done; }
     stop_server; [ -f /tmp/busy.pids ] && { xargs kill < /tmp/busy.pids 2>/dev/null; rm -f /tmp/busy.pids; }; say "done $tag"; done; done; RIDP=; XENV=;;
+S0) # trigger step 5 pre-check
+  tag=S0_smoke; PATCHPY=; XENV="SGLANG_CLIFF_PHASES=1 SGLANG_CLIFF_SUBPHASES=1"; EXTRA=
+  start_sglang $tag main 16 1 && $PYL $R/scripts/loadgen.py --engine sglang --url http://localhost:30000 --tokenizer $M --rate 5 --requests 30 --warmup 0 --adapters 32 --popularity zipf --seed 1 --rid-prefix $tag --out $D/$tag/smoke.json | cut -c1-200 | tee -a $L
+  stop_server; XENV=; say "done $tag";;
+S) # trigger step 5: sub-phase timing inside batch selection; k=0 once, k=14 three times
+  thr(){ say "$1 cpu.stat: $(tr '\n' ' ' < /sys/fs/cgroup/cpu/cpu.stat)"; }
+  for spec in k0-1 k14-1 k14-2 k14-3; do k=${spec%-*}; k=${k#k}; tag=S_main-16-$spec; PATCHPY=; XENV="SGLANG_CLIFF_PHASES=1 SGLANG_CLIFF_SUBPHASES=1"; EXTRA=; RIDP=$tag
+    for i in $(seq 1 $k); do python3 -c 'while True: pass' & echo $! >> /tmp/busy.pids; done; sleep 5; thr "$tag pre-start"
+    start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do thr "$tag pre-r$rate"; load $tag sglang http://localhost:30000 $rate 1; thr "$tag post-r$rate"; done; }
+    stop_server; [ -f /tmp/busy.pids ] && { xargs kill < /tmp/busy.pids 2>/dev/null; rm -f /tmp/busy.pids; }; say "done $tag"; done; RIDP=; XENV=;;
 K) # Phase 3 option 8: raised graph limit plus overlap loading
   for n in 1 2 3; do tag=K_main-16-cg256-ovl-$n; PATCHPY=; XENV=; EXTRA="--cuda-graph-max-bs-decode 256 --enable-lora-overlap-loading"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }

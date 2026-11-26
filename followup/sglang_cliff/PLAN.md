@@ -251,3 +251,12 @@ Predictions, over the 20 rps window, slow k = 14 starts against k = 0 starts (fi
 - (m) adapter churn: adapter loads per second at 20 rps are at least 3 times the k = 0 median.
 - (n) the slow state is self-sustaining: after the first 1 s bucket with waiting queue above 50, the queue stays above 50 for the rest of the 20 rps window in slow starts.
 If no k = 14 start is slow, the phase data from loaded normal starts is reported and nothing is concluded about the mechanism.
+
+### Trigger step 5 (option 16): which part of batch selection grows with the queue (runpod 64bba14d4768, instrumentation only)
+Why: step 4 found get-next-batch CPU per call 2206 us against 311 us, Spearman 0.72 with queue length, under 14 busy loops. Settings in those runs: `schedule_policy` fcfs, no drainer, no overlap loading.
+Instrumentation (on only with `SGLANG_CLIFF_PHASES=1` and `SGLANG_CLIFF_SUBPHASES=1`, no behavior change): the step 4 phase buckets also time `Scheduler.get_new_batch_prefill`, `update_running_batch`, `can_schedule_lora_req`, `process_pending_chunked_abort`, `_process_hicache_events`, `SchedulePolicy.calc_priority`, `PrefillAdder.add_one_req` and the waiting queue's `reorder`. Nested calls are counted inside their callers too.
+Runs (part S): k = 0 once, then k = 14 three times; otherwise as part R. A pre-check (part S0) first confirms the new names appear. FLAGGED.
+Predictions (fixed now):
+- (o) in the slowest k = 14 start, one timed function (excluding its callers) accounts for at least 50% of the increase in get-next-batch CPU per call over the k = 0 start, and its CPU per call has Spearman at least 0.5 with queue length.
+- (p) `can_schedule_lora_req` calls per second at 20 rps are at least 5 times the k = 0 rate (requests re-checked on each pass while adapter slots are full).
+No patch is written or run in this step. A fix is planned in a separate step, against what (o) and (p) find.
