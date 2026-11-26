@@ -317,3 +317,7 @@ Step 9, PR preparation (no timing claims): the split commits were cherry-picked 
 
 Step 9, PR preparation, accuracy (part Z1): sgl-eval 0.1.3 (the version pinned in SGLang's `test` extra, own venv `/root/envs/sgleval`), GSM8K full set, greedy (`--temperature 0 --max-tokens 512 --seed 0`; greedy instead of the model's recommended sampling, to compare numerics), `--num-threads 128` so decode batches pass 48, base model on the LoRA server (`--model qwen`). Servers in order: stock (`0e9cff98f5`), split rebased on main (overlay as in Z0), cg256 (stock with `--cuda-graph-max-bs-decode 256`).
 - (z6) split's GSM8K accuracy is within 2 points of both stock's and cg256's. Reported: the three scores and how many decode steps ran above 48.
+
+Step 9, debugging the split's accuracy failure (part Z2; GSM8K exactly as part Z1). Variants, all on `0e9cff98f5`: v1 (`/root/src/sglang-split`, blocking copy per chunk), v2 (`/root/src/sglang-split2`), v2 plus `torch.cuda.current_stream().synchronize()` after each chunk's replay (`/root/src/sglang-split3`, debug only).
+Hypothesis: v2 lets the CPU prepare the next chunk while the previous chunk's asynchronous host-to-device copies are still queued, so shared host staging buffers are overwritten.
+- (d1) if the hypothesis is right: v1 and v2+sync score within 2 points of stock (67.5%), and v2 on `0e9cff98f5` fails as on main. If v1 also fails, the bug is elsewhere (not the race) and v1's earlier results are invalid too.
