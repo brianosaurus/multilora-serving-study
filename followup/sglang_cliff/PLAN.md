@@ -327,3 +327,7 @@ Version 4 (`split_v4.diff`, branch commit `3b60ef8997`): plan each chunk with `l
 Part Z3: GSM8K exactly as Z1 on v4, then a closed-loop concurrency-96 load (400 requests) on the same server.
 - (d2) v4 GSM8K is within 2 points of stock (67.5%).
 - (d3) v4's median decode step above 48 is at most 10 ms. Timing counts only if (d2) holds.
+
+Part Z3 result (recorded before Z4): v4 GSM8K 64.7% (stock 67.5%, cg256 66.3%, v2 with full sync 67.4%); 7 generations end in degenerate repetition (stock 0, cg256 1, full sync 0). (d2) fails; a remaining race is likely. Oversized steps 11.0 to 14.4 ms (d3 not counted).
+Part Z4 (isolation, GSM8K as Z1 on v4): (a) `SGLANG_FORCE_COARSE_WAR_BARRIER=1` (the scheduler's next-batch writes wait for the whole forward stream instead of the published shared-read event); (b) `--disable-overlap-schedule`.
+- (d4) if the remaining race is between the scheduler's next-batch writes and the chunk replays, both (a) and (b) have at most 1 degenerate generation and accuracy within 2 points of stock.
