@@ -181,6 +181,10 @@ Changes to the plan after the first run are recorded here with the reason. Entri
 - All servers stopped, GPU idle on `runpod` (1 MiB, 0 processes). Phase 2 of the SGLang cliff finished earlier on `runpod2` (not run by this session).
 - Results copied to `followup/kernel_rerun/results/B2_runpod_INCOMPLETE/` (the 549 MB copy of the old binary excluded). Local commit only.
 
+## 2026-11-25 (B2 rerun on runpod; written before the run)
+
+- Author's decision: rerun B2 on `runpod`, all 6 blocks. Amendment 13 of `followup/dedicated_session/PLAN.md`. Seed 20261125, output `/root/b2_runpod2`; the incomplete first run is kept separate. Disk freed on the author's instruction (`.cargo` registry and git, `.rustup`, `.triton`, `b2_runpod`): 3.3 GB free.
+
 ## 2026-11-21 (before any run)
 
 - Initial scaffold and plan.
