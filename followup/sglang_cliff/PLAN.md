@@ -219,3 +219,12 @@ Predictions (fixed now):
 - (f) if any start is slow, (b) from step 2 is tested on it: at least 80% of its extra drift over the median normal start in this part is in hand-off and scheduler.
 - (g) in normal starts, the hand-off and scheduler median at 20 rps is higher than in part M (4.5 to 5.2 ms).
 Limits: busy loops are not the same as the earlier hosts' unknown load; a negative result does not rule out other contention (memory bandwidth, PCIe, disk).
+
+Amendment to trigger step 3 (after start 1 of part N, before any further run): part N is stopped. Start 1 (`N_main-16-cpu-1`) had 20 rps p95 TTFT 84.8 s, but the load generator sent its first request 81 s after `t_start` and client to front end had median 107 ms (part M: 2 to 3 ms). The busy loops starved the client, so part N cannot separate a server slow state from a slow client; predictions (e) to (g) are not evaluated on it. Start 2 (`N_main-16-cpu-2`) was cut off during server start and is incomplete. Both are kept and labeled.
+Replacement, part P: the same runs, with CPU affinity separating the two sides. `run_phase2.sh P` itself runs under `taskset -c 0-15`, so the server, its child processes and the load generator use cores 0 to 15; the 120 busy loops are started with `taskset -c 16-127`. They still share memory bandwidth, caches and PCIe with the server, but not cores. Order: 5 control starts (pinned, no busy loops; `P_main-16-pin-1..5`), then 10 loaded starts (`P_main-16-pinload-1..10`). Engine and flags unchanged. FLAGGED.
+Validity check per loaded start (fixed now): first send at most 1 s after `t_start` and client to front end median at most 5 ms at 20 rps. A start that fails it is reported as client-starved and not counted.
+Predictions (fixed now):
+- (e') at least 2 of the valid loaded starts are slow (20 rps p95 TTFT above 10 s), and at most 1 of the 5 controls is.
+- (f') in any slow valid start, at least 80% of its extra drift over the median normal start in its group is in hand-off and scheduler.
+- (g') in normal valid loaded starts, the hand-off and scheduler median at 20 rps is higher than in the controls.
+If (e') fails, contention from other cores is not shown to trigger the slow state, and the next step is in-process profiling of the scheduler (py-spy) during a slow start, which needs its own plan.
