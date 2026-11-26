@@ -214,6 +214,12 @@ Z2) # debug: gsm8k on split v1, v2, v2+sync (all on 0e9)
     arm=${cfg%%:*}; PATCHPY=${cfg#*:}; EXTRA=; tag=Z2_$arm; XENV="SGLANG_CLIFF_PHASES=1"
     start_sglang $tag main 16 1 && { /root/envs/sgleval/bin/sgl-eval run gsm8k --base-url http://127.0.0.1:30000/v1 --model qwen --temperature 0 --max-tokens 512 --seed 0 --num-threads 128 --out-dir $D/$tag/sgleval > $D/$tag/sgleval.log 2>&1; tail -3 $D/$tag/sgleval.log | tee -a $L; }
     stop_server; say "done $tag"; done; PATCHPY=; XENV=;;
+Z3) # debug: gsm8k + c96 timing on split v4
+  tag=Z3_v4; PATCHPY=/root/src/sglang-split4/python; EXTRA=; XENV="SGLANG_CLIFF_PHASES=1"
+  start_sglang $tag main 16 1 && { /root/envs/sgleval/bin/sgl-eval run gsm8k --base-url http://127.0.0.1:30000/v1 --model qwen --temperature 0 --max-tokens 512 --seed 0 --num-threads 128 --out-dir $D/$tag/sgleval > $D/$tag/sgleval.log 2>&1
+    echo "{\"t_c96_start\":$(date +%s.%N)}" > $D/$tag/c96_mark.json
+    $PYL $R/scripts/loadgen.py --engine sglang --url http://localhost:30000 --tokenizer $M --concurrency 96 --requests 400 --warmup 40 --adapters 32 --popularity zipf --seed 1 --out $D/$tag/c96.json | cut -c1-300 | tee -a $L; }
+  stop_server; PATCHPY=; XENV=; say "done $tag";;
 K) # Phase 3 option 8: raised graph limit plus overlap loading
   for n in 1 2 3; do tag=K_main-16-cg256-ovl-$n; PATCHPY=; XENV=; EXTRA="--cuda-graph-max-bs-decode 256 --enable-lora-overlap-loading"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }

@@ -1,0 +1,175 @@
+diff --git c/python/sglang/srt/model_executor/model_runner.py w/python/sglang/srt/model_executor/model_runner.py
+index ac0dd009ba..c34a5ec53a 100644
+--- c/python/sglang/srt/model_executor/model_runner.py
++++ w/python/sglang/srt/model_executor/model_runner.py
+@@ -124,6 +124,7 @@ from sglang.srt.model_executor.cuda_graph_config import (
+     check_cuda_graph_backend,
+     cuda_graph_fully_disabled,
+ )
++from sglang.srt.model_executor.runner.decode_graph_split import maybe_execute_split_decode
+ from sglang.srt.model_executor.forward_batch_info import (
+     ForwardBatch,
+     PPProxyTensors,
+@@ -2138,6 +2139,20 @@ class ModelRunner:
+                 )
+                 return ModelRunnerOutput(logits_output=ret, can_run_graph=can_run_graph)
+ 
++            if (
++                mode_check()
++                and pp_proxy_tensors is None
++                and self.uocr_greedy_graph is None
++                and self.hisparse_coordinator is None
++            ):
++                ret = maybe_execute_split_decode(
++                    graph_runner=self.decode_cuda_graph_runner,
++                    lora_manager=self.lora_manager,
++                    forward_batch=forward_batch,
++                )
++                if ret is not None:
++                    return ModelRunnerOutput(logits_output=ret, can_run_graph=False)
++
+             # DP / MLP-sync padding + attn-tp normalization. Only the decode
+             # cuda-graph path above pre-pads its static buffers and returns
+             # early; the prefill cuda graph and the eager forward both run the
+diff --git c/python/sglang/srt/model_executor/runner/decode_graph_split.py w/python/sglang/srt/model_executor/runner/decode_graph_split.py
+new file mode 100644
+index 0000000000..7c595d149c
+--- /dev/null
++++ w/python/sglang/srt/model_executor/runner/decode_graph_split.py
+@@ -0,0 +1,136 @@
++# SPDX-License-Identifier: Apache-2.0
++"""Run a decode batch larger than the largest captured CUDA graph as several replays.
++
++Without this, such a batch runs eagerly. On launch-bound setups (small models, LoRA)
++an eager decode step costs several times a replay, so the running batch grows instead
++of draining and stays above the graph range (sgl-project/sglang#33483).
++"""
++
++from __future__ import annotations
++
++import dataclasses
++from typing import TYPE_CHECKING, List, Optional
++
++import torch
++
++from sglang.srt.batch_overlap.two_batch_overlap import TboForwardBatchPreparer
++from sglang.srt.layers.logits_processor import LogitsProcessorOutput
++from sglang.srt.model_executor.forward_batch_info import ForwardBatch
++
++if TYPE_CHECKING:
++    from sglang.srt.lora.lora_manager import LoRAManager
++    from sglang.srt.model_executor.runner.decode_cuda_graph_runner import (
++        DecodeCudaGraphRunner,
++    )
++
++
++def maybe_execute_split_decode(
++    *,
++    graph_runner: Optional[DecodeCudaGraphRunner],
++    lora_manager: Optional[LoRAManager],
++    forward_batch: ForwardBatch,
++) -> Optional[LogitsProcessorOutput]:
++    """Replay graphs over chunks of an oversized decode batch; None means run eagerly."""
++    if graph_runner is None or not _can_split(graph_runner, forward_batch):
++        return None
++    chunks = _make_chunks(forward_batch, chunk_bs=graph_runner.max_bs)
++    if not all(graph_runner.can_run_graph(c) for c in chunks):
++        return None
++    outputs: List[LogitsProcessorOutput] = []
++    staged: Optional[torch.cuda.Event] = None
++    for chunk in chunks:
++        if staged is not None:
++            # Planning stages metadata in host buffers shared by every replay and
++            # copies them asynchronously; the previous chunk's copies must land first.
++            staged.synchronize()
++        if lora_manager is not None:
++            # Graph replays read the LoRA batch info in place, so each chunk refills it.
++            lora_manager.prepare_lora_batch(chunk)
++        graph_runner.load_batch(chunk)
++        staged = torch.cuda.Event()
++        staged.record()
++        chunk.mark_forward_metadata_ready()
++        out = graph_runner.execute(chunk)
++        if not _is_mergeable(out):
++            return None
++        # Replay outputs are views of the graph's static buffers and the next replay
++        # overwrites them; the copy is queued on the same stream, so it runs first.
++        outputs.append(_clone_rows(out))
++    return _merge(outputs)
++
++
++def _can_split(graph_runner: DecodeCudaGraphRunner, forward_batch: ForwardBatch) -> bool:
++    return (
++        forward_batch.forward_mode.is_decode()
++        and forward_batch.spec_info is None
++        and forward_batch.batch_size > graph_runner.max_bs
++        and graph_runner.captured_req_width == 1
++        and not graph_runner.ragged_verify_mode
++        and not graph_runner.require_mlp_tp_gather
++        and not graph_runner.require_attn_tp_gather
++        and not graph_runner.is_dllm
++        and forward_batch.global_num_tokens_cpu is None
++        and forward_batch.mrope_positions is None
++    )
++
++
++def _make_chunks(forward_batch: ForwardBatch, *, chunk_bs: int) -> List[ForwardBatch]:
++    bs = forward_batch.batch_size
++    num_chunks = -(-bs // chunk_bs)
++    # Even sizes, so no chunk pads far up to the next captured size.
++    bounds = [bs * i // num_chunks for i in range(num_chunks + 1)]
++    chunks = []
++    for start, end in zip(bounds[:-1], bounds[1:]):
++        n = end - start
++        chunks.append(
++            TboForwardBatchPreparer.filter_batch(
++                forward_batch,
++                start_token_index=start,
++                end_token_index=end,
++                start_seq_index=start,
++                end_seq_index=end,
++                # torch.full launches a fill kernel; torch.tensor(n, device=...)
++                # would block on the previous chunk's replay.
++                out_num_token_non_padded=torch.full(
++                    (), n, dtype=torch.int32, device=forward_batch.input_ids.device
++                ),
++                out_num_token_non_padded_cpu=n,
++            )
++        )
++    return chunks
++
++
++def _clone_rows(out: LogitsProcessorOutput) -> LogitsProcessorOutput:
++    return dataclasses.replace(
++        out,
++        next_token_logits=_clone(out.next_token_logits),
++        hidden_states=_clone(out.hidden_states),
++        last_hidden_states=_clone(out.last_hidden_states),
++    )
++
++
++def _clone(t: Optional[torch.Tensor]) -> Optional[torch.Tensor]:
++    return None if t is None else t.clone()
++
++
++_MERGED_FIELDS = ("next_token_logits", "hidden_states", "last_hidden_states")
++
++
++def _is_mergeable(out: LogitsProcessorOutput) -> bool:
++    return all(
++        f.name in _MERGED_FIELDS or getattr(out, f.name) is None
++        for f in dataclasses.fields(LogitsProcessorOutput)
++    )
++
++
++def _merge(outputs: List[LogitsProcessorOutput]) -> LogitsProcessorOutput:
++    def cat(name: str) -> Optional[torch.Tensor]:
++        parts = [getattr(o, name) for o in outputs]
++        return None if parts[0] is None else torch.cat(parts, dim=0)
++
++    return dataclasses.replace(
++        outputs[0],
++        next_token_logits=cat("next_token_logits"),
++        hidden_states=cat("hidden_states"),
++        last_hidden_states=cat("last_hidden_states"),
++    )

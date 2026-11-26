@@ -321,3 +321,9 @@ Step 9, PR preparation, accuracy (part Z1): sgl-eval 0.1.3 (the version pinned i
 Step 9, debugging the split's accuracy failure (part Z2; GSM8K exactly as part Z1). Variants, all on `0e9cff98f5`: v1 (`/root/src/sglang-split`, blocking copy per chunk), v2 (`/root/src/sglang-split2`), v2 plus `torch.cuda.current_stream().synchronize()` after each chunk's replay (`/root/src/sglang-split3`, debug only).
 Hypothesis: v2 lets the CPU prepare the next chunk while the previous chunk's asynchronous host-to-device copies are still queued, so shared host staging buffers are overwritten.
 - (d1) if the hypothesis is right: v1 and v2+sync score within 2 points of stock (67.5%), and v2 on `0e9cff98f5` fails as on main. If v1 also fails, the bug is elsewhere (not the race) and v1's earlier results are invalid too.
+
+Part Z2 result (recorded before part Z3): GSM8K v1 9.9%, v2 8.5%, v2 with a full stream sync after each chunk 67.4% (stock 67.5%). The race hypothesis holds in its general form, and v1 is also wrong: its blocking copy ran while all chunks were being built, before any replay, so it never separated chunk executions. All split v1 and v2 timing results are invalid. The full sync costs 20.5 ms per oversized step (eager: 31.4 ms), too slow to be the fix.
+Version 4 (`split_v4.diff`, branch commit `3b60ef8997`): plan each chunk with `load_batch`, record a CUDA event after its staged copies, mark the chunk pre-planned, replay; before planning the next chunk, wait on that event only (the previous replay may still run). Suspected shared buffer: FlashInfer's pinned host plan workspace.
+Part Z3: GSM8K exactly as Z1 on v4, then a closed-loop concurrency-96 load (400 requests) on the same server.
+- (d2) v4 GSM8K is within 2 points of stock (67.5%).
+- (d3) v4's median decode step above 48 is at most 10 ms. Timing counts only if (d2) holds.
