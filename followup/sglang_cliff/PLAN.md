@@ -331,3 +331,9 @@ Part Z3: GSM8K exactly as Z1 on v4, then a closed-loop concurrency-96 load (400 
 Part Z3 result (recorded before Z4): v4 GSM8K 64.7% (stock 67.5%, cg256 66.3%, v2 with full sync 67.4%); 7 generations end in degenerate repetition (stock 0, cg256 1, full sync 0). (d2) fails; a remaining race is likely. Oversized steps 11.0 to 14.4 ms (d3 not counted).
 Part Z4 (isolation, GSM8K as Z1 on v4): (a) `SGLANG_FORCE_COARSE_WAR_BARRIER=1` (the scheduler's next-batch writes wait for the whole forward stream instead of the published shared-read event); (b) `--disable-overlap-schedule`.
 - (d4) if the remaining race is between the scheduler's next-batch writes and the chunk replays, both (a) and (b) have at most 1 degenerate generation and accuracy within 2 points of stock.
+
+Part Z4 result (recorded before Z5): with v4, coarse WAR barrier 66.0% and 0 degenerate; overlap schedule off 66.6% and 0 degenerate. (d4) holds: the remaining race was the scheduler's next-batch writes against the chunk replays.
+Version 5 (`split_v5.diff`, branch commit `2ee410e6ad`): v4 plus clearing `shared_read_done_event` after a split step, so the scheduler waits for the whole forward (its fallback, as after an eager step).
+Part Z5 (GSM8K as Z1, then concurrency-96 load as Z3): (a) v5, no env overrides; (b) v2 with `SGLANG_FORCE_COARSE_WAR_BARRIER=1`, to test whether the staging wait in v4 is needed at all.
+- (d5) v5 is within 2 points of stock (67.5%) with at most 1 degenerate generation.
+- Reported, no prediction: whether (b) is also correct; if it is, the first race was the same scheduler race and v4's staging wait can be dropped.
