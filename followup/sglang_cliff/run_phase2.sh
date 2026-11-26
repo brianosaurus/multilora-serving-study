@@ -87,6 +87,10 @@ J) # dedicated-style rerun on runpod2: stock vs graph limit 256, 16 and 32 slots
     tag=J_${c}-r$rnd; sl=${CFG[$c]%%:*}; EXTRA="${CFG[$c]#*:}"; PATCHPY=; XENV=
     start_sglang $tag main $sl 0 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; }
     stop_server; say "done $tag"; done; done;;
+M0) # trigger step 2 pre-check: one traced start, 30 requests at 5 rps with rids; not analyzed for timing
+  tag=M0_smoke; PATCHPY=; XENV=; EXTRA=
+  start_sglang $tag main 16 1 && $PYL $R/scripts/loadgen.py --engine sglang --url http://localhost:30000 --tokenizer $M --rate 5 --requests 30 --warmup 0 --adapters 32 --popularity zipf --seed 1 --rid-prefix $tag --out $D/$tag/smoke.json | cut -c1-300 | tee -a $L
+  stop_server; say "done $tag";;
 M) # trigger step 2 (PLAN.md, option 13): stock main, 16 slots, traced with front-end events; absolute send times and rids
   for n in $(seq 1 ${NSTARTS:-10}); do tag=M_main-16-$n; PATCHPY=; XENV=; EXTRA=; RIDP=$tag
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
