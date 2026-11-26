@@ -68,6 +68,7 @@ Found by a web search on 2026-11-21. These are summaries and have **not** yet be
 - LoRazor (vLLM, adapter diversity sweep): https://arxiv.org/pdf/2611.10049
 - EpiLoRA (compares vLLM, SGLang, TensorRT-LLM against the authors' own system): https://arxiv.org/pdf/2611.03899
 - A vLLM-only reproducible sweep: https://github.com/priyaltaneja/multi-lora-serving-benchmark
+- SGLang #33483 (decode CUDA graph limit against running-request limit; the same cliff mechanism, reported before this study's diagnosis): https://github.com/sgl-project/sglang/issues/33483
 - SGLang LoRA documentation: https://docs.sglang.io/advanced_features/lora.html
 - vLLM and AWS multi-LoRA for MoE: https://vllm.ai/blog/multi-lora
 

@@ -375,6 +375,16 @@ Part U (no busy loops, closed loop), median wall time per decode step in ms:
 Root cause, as far as measured: the scheduler thread is CPU-bound; decode batches above the graph range run eagerly at about 15 to 25 times the per-step cost; any push past 48 (load, or CPU contention slowing the loop) makes steps much longer, so more requests queue and batches stay above 48. Keeping decode in the graph removes most of it.
 Things I got wrong: I expected the eager cost to be LoRA-specific (r) and in batch preparation (s); neither held.
 
+## Prior art upstream (searched 2026-11-25, after step 6)
+
+The cliff mechanism was reported before this study's diagnosis. Anything posted from here must cite it.
+- sgl-project/sglang#33483 (Aug 2026, auto-closed for inactivity 2026-11-08, not fixed): an L40 with Qwen2.5-0.5B and default flags. Decode graphs are captured to 32 while `max_running_requests` is 4096, set by unrelated code; once the batch crosses the limit, decode runs eagerly and the system settles in a slow state it does not leave (19 of 20 runs), explained by Little's law. Both workarounds were measured there: `--max-running-requests 32`, and `--cuda-graph-max-bs 128`, which was better at the tail. A comment there reproduced it on an RTX 4090 at the 48 default (5.8 times worse median TPOT at 32 rps) and measured the cost of 48 to 128 as about 1.1% of the KV pool and 0.5 s of startup. The issue suggests matching the two defaults, a warning, and capturing larger graphs on first overflow.
+- #33900 (warning when a batch crosses the largest graph): never reviewed, auto-closed.
+- #37898 (32 GB tier 24 to 48, merged 2026-09-04), #46132 (35 to 60 GiB tier to 128, merged 2026-11-13), #40346 (RTX 5090 to 128, open since 2026-09-19, no review).
+- No issue or PR found that proposes running a decode batch above the graph range as several graph replays.
+What this study adds, as far as found: the LoRA case (eager decode at 31 ms per step against 19 ms without LoRA at the same batch size); CPU contention as a trigger at a load the server otherwise handles (20 rps); scheduler-loop measurements showing the loop is CPU-bound and is not preempted; and that the A10, 4090 and 5090 tier at tp below 4 is still 48 on main (`0e9cff98f5`).
+Things I got wrong: I diagnosed and drafted (`draft-issue.md`) without searching upstream issues for the mechanism first.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.

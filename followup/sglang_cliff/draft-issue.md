@@ -1,5 +1,7 @@
 # DRAFT (not posted): LoRA server falls out of decode CUDA graphs at batch 49 and its latency collapses at 16 slots
 
+> Note added 2026-11-25: this mechanism was already reported in sgl-project/sglang#33483 (closed for inactivity, not fixed). Do not post this draft as is; any post must cite #33483 and add only what is new (see RESULTS.md, "Prior art upstream").
+
 Status: local draft only. All numbers are FLAGGED screening runs on one RTX 4090 pod (3 starts per cell unless stated); not a dedicated-machine measurement. Not for posting without Brian's approval.
 
 ## Summary
