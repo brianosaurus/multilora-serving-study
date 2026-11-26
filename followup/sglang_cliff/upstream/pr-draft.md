@@ -1,4 +1,4 @@
-# DRAFT (not posted)
+# DRAFT (not posted) - ON HOLD: split v2 fails GSM8K (6.75%); see RESULTS.md
 
 **Title:** [Perf] Replay CUDA graphs over chunks of decode batches above the graph range
 

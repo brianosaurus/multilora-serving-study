@@ -1121,3 +1121,36 @@ PART_Y0_DONE
 08:42:27 done Y_splitv2-k14-2
 DONE_Y
 PART_Y_DONE
+08:47:49 start Z0_splitmain host 64bba14d4768 load 1.15 4.35 8.64 external CPU: 0.36 0.82 0.97
+08:48:36 Z0_splitmain ready=1 trace=1
+saved 96 completions to /root/msf_study/followup/sglang_cliff/results/phase2/Z0_splitmain/greedy.json
+{"rate": 0.0, "ok": 400, "errors": 0, "ttft_ms": {"p50": 603.0492344980303, "p95": 2664.48900110081, "p99": 2785.8325941046496}, "tpot_ms": {"p50": 13.900546700810311, "p95": 16.206772428233283}, "tok_per_s": 3542.6, "max_send_lag_s": 0}
+08:49:28 Z0_splitmain errors in log: 0
+08:49:41 done Z0_splitmain
+DONE_Z0
+08:54:47 start Z1_stock host 64bba14d4768 load 0.67 1.73 5.86 external CPU: 1.50 2.45 0.64
+08:55:27 Z1_stock ready=1 trace=1
+  avg_output_tokens    =  269.0 tokens
+  avg_thinking_tokens  =  0.0 tokens
+
+Metrics: /root/msf_study/followup/sglang_cliff/results/phase2/Z1_stock/sgleval/sgl_eval_gsm8k_20261126-085528/metrics.json
+Predictions: /root/msf_study/followup/sglang_cliff/results/phase2/Z1_stock/sgleval/sgl_eval_gsm8k_20261126-085528  (1 jsonl file(s))
+08:57:31 done Z1_stock
+08:57:42 start Z1_splitmain host 64bba14d4768 load 8.76 3.45 5.72 external CPU: 19.84 21.42 13.88
+08:58:34 Z1_splitmain ready=1 trace=1
+  avg_output_tokens    =  318.8 tokens
+  avg_thinking_tokens  =  0.0 tokens
+
+Metrics: /root/msf_study/followup/sglang_cliff/results/phase2/Z1_splitmain/sgleval/sgl_eval_gsm8k_20261126-085835/metrics.json
+Predictions: /root/msf_study/followup/sglang_cliff/results/phase2/Z1_splitmain/sgleval/sgl_eval_gsm8k_20261126-085835  (1 jsonl file(s))
+09:00:00 done Z1_splitmain
+09:00:10 start Z1_cg256 host 64bba14d4768 load 16.48 11.67 8.68 external CPU: 20.20 23.09 17.33
+09:01:06 Z1_cg256 ready=1 trace=1
+  avg_output_tokens    =  270.6 tokens
+  avg_thinking_tokens  =  0.0 tokens
+
+Metrics: /root/msf_study/followup/sglang_cliff/results/phase2/Z1_cg256/sgleval/sgl_eval_gsm8k_20261126-090107/metrics.json
+Predictions: /root/msf_study/followup/sglang_cliff/results/phase2/Z1_cg256/sgleval/sgl_eval_gsm8k_20261126-090107  (1 jsonl file(s))
+09:01:54 done Z1_cg256
+DONE_Z1
+PART_Z1_DONE

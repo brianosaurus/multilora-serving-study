@@ -254,3 +254,5 @@ Plan (option 13) and a correction of its base rate ("2 of 6" was wrong; 2 of 8) 
 - 2026-11-26: SGLang cliff step 9 (FLAGGED). Split v1 kept the cliff (40 rps p95 11 to 13 s; z1 to z3 fail); vLLM had the lowest 40 rps p95 in every start (1.5 s no contention, 2.7 to 3.7 s with). Split v2 (no blocking copy per chunk) cut oversized decode steps from 12.0 to 4.0 ms (z5 holds); part Y running. Things I got wrong: guessed attention planning as the per-chunk cost.
 
 - 2026-11-26: SGLang cliff step 9 part Y (FLAGGED). Split v2: 40 rps p95 9.3 to 9.4 s in all 4 starts (stock 13.5 to 16.9 s), TPOT 20 ms (stock 43 to 71), 4036 to 4074 tok/s (stock about 3000); oversized steps 2.1 times a graph step (z1 holds); z2 fails (one 20 rps p95 of 2.5 s under busy loops), z3 fails against cg256, z4 throughput half fails (12 to 13% below vLLM).
+
+- 2026-11-26: SGLang cliff: split v2 fails accuracy (GSM8K 6.75% against 67.5% stock and 66.3% cg256; generations degenerate). Split v2 timing results (Y0, Y, Z0) are invalid until fixed. Issue and PR drafts are on hold. Things I got wrong: called the greedy spot check sufficient and reported v2's speedup before an accuracy run.
