@@ -1,0 +1,7 @@
+01:20:25 host 64bba14d4768; NVIDIA GeForce RTX 4090, 595.112.07; nvcc: /usr/local/cuda/bin/nvcc
+01:20:25 sglang source at 0e9cff98f5b73267f7a84a034cba2668c3011ccc 2026-11-24
+01:20:33 rust: cargo 1.100.0 (3acc79c0c 2026-11-05)
+01:30:54 install exit 0; import: 0.5.24.dev2187+g0e9cff98f
+01:31:05 model sha256 dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee (study: dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee)
+adapters identical to the study manifest: 32 of 32 made; 128 in manifest
+01:31:45 SETUP_DONE

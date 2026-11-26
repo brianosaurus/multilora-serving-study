@@ -1,0 +1,2 @@
+requests with rid: 30; trace rids matching: 30; with recv+sent+arrive: 30
+median ms  c2f 2.28  fe 2.33  h2s 3.05

@@ -1,0 +1,9 @@
+aiohttp                      3.14.5
+flashinfer-python            0.7.4
+numpy                        2.3.5
+peft                         0.22.0
+sglang                       0.5.24.dev2187+g0e9cff98f /root/src/sglang-main/python
+sglang-kernel                0.4.11
+torch                        2.14.1
+transformers                 5.19.0
+triton                       3.8.0

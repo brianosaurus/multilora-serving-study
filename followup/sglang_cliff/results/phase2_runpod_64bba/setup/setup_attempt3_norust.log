@@ -1,0 +1,8 @@
+01:19:31 host 64bba14d4768; NVIDIA GeForce RTX 4090, 595.112.07; nvcc: /usr/local/cuda/bin/nvcc
+01:19:31 sglang source at 0e9cff98f5b73267f7a84a034cba2668c3011ccc 2026-11-24
+01:19:53 install exit 1; import: ModuleNotFoundError: No module named 'sglang'
+01:19:53 model sha256  (study: dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee)
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: '/dev/shm/adapters/manifest.json'
+01:19:53 SETUP_DONE
