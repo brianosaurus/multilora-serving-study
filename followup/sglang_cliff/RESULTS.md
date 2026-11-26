@@ -309,6 +309,32 @@ Predictions:
 
 What this establishes: on this host, the slow state at 20 rps can be produced on demand (2 of 3 starts, plus one partial at 5 s) by CPU contention that the client survives, and when it occurs the delay builds between the front end and the scheduler. This fits the earlier slow starts on busy shared hosts. It does not yet say which part of the scheduler loop fails to recover; that is the next step (scheduler profiling at k = 14).
 
+## Trigger step 4: the scheduler is CPU-bound; contention makes its work slower, not preempted (runpod 64bba14d4768, FLAGGED)
+
+Plan: PLAN.md trigger step 4. Data: `results/phase2_runpod_64bba/R_*`, `trigger4.txt`. Phase timing inside the scheduler process (py-spy could not attach: no SYS_PTRACE). Overhead check holds (k = 0 median p95 82 ms against 83 ms in part Q).
+
+20 rps window (about 28 s), seconds of wall time per loop phase (CPU time equal to within 0.15 s in every cell):
+
+| start | p95 TTFT | loop busy | ingest | get next batch | run batch | process result | get-next-batch CPU per call | rho with queue | max queue |
+|---|---|---|---|---|---|---|---|---|---|
+| k0-1 | 82 ms | 86% | 1.73 | 1.76 | 14.76 | 11.19 | 311 us | 0.31 | 2 |
+| k0-2 | 82 ms | 86% | 1.79 | 1.73 | 14.66 | 11.31 | 298 us | 0.42 | 2 |
+| k0-3 | 84 ms | 85% | 1.74 | 1.77 | 14.86 | 11.06 | 315 us | 0.32 | 1 |
+| k14-1 | 7.1 s | 88% | 1.94 | 1.67 | 23.87 | 5.70 | 499 us | 0.82 | 37 |
+| k14-2 | 28.3 s | 85% | 3.90 | 3.76 | 39.16 | 3.05 | 2206 us | 0.72 | 132 |
+| k14-3 | 9.8 s | 84% | 3.14 | 2.58 | 27.15 | 7.20 | 384 us | 0.77 | 50 |
+
+Predictions (one slow start by the 10 s rule, `k14-2`; the other two k = 14 starts reached 7.1 s and 9.8 s):
+- (k) preemption fails: involuntary context switches 4 per second against 6 at k = 0, off-CPU time 0.3%.
+- (l) work grows with the queue holds: get-next-batch CPU per call 2206 us against 311 us, Spearman 0.72 with queue length (0.72 to 0.82 in all k = 14 starts, 0.31 to 0.42 at k = 0).
+- (m) adapter churn fails: loads per second fell (0.78 against 4.68).
+- (n) self-sustaining fails: the queue in `k14-2` went above 50 and later drained.
+- Step 2's (b) on `k14-2`: 71% of the extra delay in hand-off and scheduler, below the 80% bar.
+
+What this shows: on a quiet host the scheduler's single thread is already busy about 85% of the 20 rps window, almost all in its own CPU work. Under contention it is not descheduled; the same work takes more CPU time (run batch up 60 to 165%), so demand passes 100% of one thread and the queue grows; then per-call batch selection cost grows with the queue, which slows it further. This is overload of a CPU-bound loop, not a latch.
+Limits: CPU time includes any CUDA synchronization spin-wait, so "CPU-bound" in run batch and process result may partly be GPU waiting; why the same work costs more CPU under contention (shared cores' SMT siblings, cache or memory bandwidth) is not measured; one host, three starts per condition.
+Things I got wrong: I expected preemption (k); the scheduler thread was not preempted.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.
