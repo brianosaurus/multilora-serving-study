@@ -402,6 +402,38 @@ Plan: PLAN.md step 7. Data: `results/phase2_runpod_64bba/V_*`, `step7.txt`. 20 r
 - Under contention the larger range lets batches grow to 156 to 231 and step time rises (median TPOT 13.6 to 17.2 ms against 9.6 for cap48); keeping batches within the graph does better than enlarging the graph. Without contention the two are close, with cg256 slightly ahead, as #33483 also found at the tail.
 Reading: keeping every decode step inside a captured graph is what matters. A cap does it at a concurrency cost, which is why vLLM derives its capture range from its running limit (on a 4090: running limit 256, graphs to 512). Next: a fix that keeps decode in the graph without lowering concurrency (derive the range from the limit, or split large batches into graph-sized replays).
 
+## Step 9: split decode into graph replays, against stock, cap, graph 256 and vLLM (runpod 64bba14d4768, FLAGGED; host busier than earlier parts, external load 4 to 9)
+
+Plan: PLAN.md step 9 and its amendment. Data: `results/phase2_runpod_64bba/X0_*`, `X_*`, `Y0_*`, `stepX.txt`.
+Part X0 (correctness): split answered all 96 greedy requests; identical completions against cg256: split 65 of 96, stock 61 of 96, cg256 against itself 79 of 96 (batch makeup changes numerics). (z0) holds.
+
+Part X, split version 1 (20 rps p95, 40 rps p95, 40 rps tok/s; rounds 1 and 2):
+
+| arm | no busy loops | 14 busy loops |
+|---|---|---|
+| stock | 85 ms, 13.5 s, 2986; 82 ms, 13.5 s, 3014 | 10.6 s, 16.9 s, 2354; 821 ms, 16.7 s, 2256 |
+| cap48 | 85 ms, 1.76 s, 4524; 83 ms, 1.94 s, 4471 | 737 ms, 7.9 s, 3162; 3.4 s, 13.3 s, 2384 |
+| cg256 | 92 ms, 2.2 s, 4664; 102 ms, 6.2 s, 4265 | 340 ms, 7.7 s, 4407; 3.3 s, 9.2 s, 3913 |
+| split v1 | 399 ms, 11.5 s, 3652; 4.4 s, 11.1 s, 3783 | 3.8 s, 12.7 s, 3484; 1.1 s, 12.8 s, 3459 |
+| vLLM 0.34.0 | 146 ms, 1.54 s, 4646; 153 ms, 1.47 s, 4655 | 949 ms, 2.7 s, 4364; 970 ms, 3.7 s, 3976 |
+
+- Split v1: (z1) fails (oversized steps 12 ms against 1.8 to 2.0 ms), (z2) fails, (z3) fails against cg256. It beats stock but keeps the cliff.
+- (z4) for v1: vLLM's 40 rps p95 is lower than split's (holds); throughput within 5% fails (split about 20% lower).
+- vLLM has the lowest 40 rps p95 in every start, with and without busy loops.
+
+Part Y0 (closed loop, concurrency 96, sub-phase timing): v1 against v2 (v2 removes a blocking `torch.tensor(n, device=cuda)` per chunk).
+
+| | v1 (2 starts) | v2 (2 starts) |
+|---|---|---|
+| decode step above 48, median | 12.0 ms | 4.0 ms |
+| `_make_chunks` per call | 7.31 ms | 0.21 ms |
+| `LoRAManager.prepare_lora_batch` per call | 1.0 ms (chunks plus the parent batch) | 1.0 ms |
+| graph `execute` per chunk | 0.64 ms | 0.65 ms |
+| output tok/s | 3315, 3319 | 3565, 3716 |
+
+(z5) holds: 67% lower. The blocking copy serialized each chunk's preparation behind the previous replay. Remaining split overhead is mostly LoRA batch preparation, about 1 ms per chunk plus 1 ms for the whole batch, which the split then discards.
+Things I got wrong: I expected the per-chunk cost to be attention metadata planning; it was a blocking host-to-device copy.
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.
