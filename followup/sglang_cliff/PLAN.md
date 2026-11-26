@@ -341,3 +341,13 @@ Part Z5 (GSM8K as Z1, then concurrency-96 load as Z3): (a) v5, no env overrides;
 Part Z5 result (recorded before Z6): v5 GSM8K 65.96%, 2 degenerate generations (the last two problems, gsm8k-1306 and -1318; stock 0, cg256 1, v4 with coarse barrier 0); (d5) fails narrowly on the degenerate count. v2 with the coarse barrier 10.0%, 314 degenerate: the staging race is real and separate, so both of v5's fixes are needed. Oversized steps with v5: 11.3 to 14.5 ms (eager 31.4 ms); the earlier 4 ms figures came from incorrect code.
 Part Z6 (variance check, GSM8K as Z1): v5 twice and cg256 once more, interleaved v5, cg256, v5.
 - (d6) v5 is correct if both repeats are within 2 points of stock and have no more degenerate generations than the cg256 runs (cg256: 1 so far). If v5 shows degenerate generations in both repeats while cg256 shows 0 or 1, a residual race remains.
+
+Step 10 (the fix, vLLM-style): branch `decode-graph-range` on SGLang main `385262cabb` (not pushed): commit `c83438fb19` defaults `max_running_requests`, when not set, to the largest decode graph batch size (the earlier cap patch); commit `0bf39c619b` raises the 24 GB tier's default decode graph range for tp < 4 from 48 to 256. Together every decode step replays a graph and the running limit is 256 on this setup, as vLLM (`max_num_seqs` 256, graphs to 512). The split is set aside (residual race, step 9). Main's python tree is overlaid on the `0e9cff98f5` environment as in Z0.
+Part AA0 (correctness and config): fix server; record the logged running limit, decode graph range and KV token count against stock (Z1 logs); GSM8K exactly as Z1.
+- (f1) GSM8K within 2 points of stock (67.5%), at most 1 degenerate generation (cg256: 1 per run).
+- (f2) running limit 256, graph range 256, KV tokens at least 97% of stock's.
+Part AA (part X's protocol; arms stock, fix, vLLM; k in {0, 14}; 2 rounds; FLAGGED):
+- (f3) fix's 40 rps p95 TTFT below every stock start in both conditions.
+- (f4) fix's 40 rps throughput at least 0.95 times cg256's in part X (4265 to 4664 without busy loops).
+- Reported, no prediction: the gap to vLLM.
+Part AB (larger model, later, separate amendment): 7 to 8B, KV cost of the range and throughput against stock.
