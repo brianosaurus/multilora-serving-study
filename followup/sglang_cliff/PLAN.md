@@ -337,3 +337,7 @@ Version 5 (`split_v5.diff`, branch commit `2ee410e6ad`): v4 plus clearing `share
 Part Z5 (GSM8K as Z1, then concurrency-96 load as Z3): (a) v5, no env overrides; (b) v2 with `SGLANG_FORCE_COARSE_WAR_BARRIER=1`, to test whether the staging wait in v4 is needed at all.
 - (d5) v5 is within 2 points of stock (67.5%) with at most 1 degenerate generation.
 - Reported, no prediction: whether (b) is also correct; if it is, the first race was the same scheduler race and v4's staging wait can be dropped.
+
+Part Z5 result (recorded before Z6): v5 GSM8K 65.96%, 2 degenerate generations (the last two problems, gsm8k-1306 and -1318; stock 0, cg256 1, v4 with coarse barrier 0); (d5) fails narrowly on the degenerate count. v2 with the coarse barrier 10.0%, 314 degenerate: the staging race is real and separate, so both of v5's fixes are needed. Oversized steps with v5: 11.3 to 14.5 ms (eager 31.4 ms); the earlier 4 ms figures came from incorrect code.
+Part Z6 (variance check, GSM8K as Z1): v5 twice and cg256 once more, interleaved v5, cg256, v5.
+- (d6) v5 is correct if both repeats are within 2 points of stock and have no more degenerate generations than the cg256 runs (cg256: 1 so far). If v5 shows degenerate generations in both repeats while cg256 shows 0 or 1, a residual race remains.
