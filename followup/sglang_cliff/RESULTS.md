@@ -434,6 +434,18 @@ Part Y0 (closed loop, concurrency 96, sub-phase timing): v1 against v2 (v2 remov
 (z5) holds: 67% lower. The blocking copy serialized each chunk's preparation behind the previous replay. Remaining split overhead is mostly LoRA batch preparation, about 1 ms per chunk plus 1 ms for the whole batch, which the split then discards.
 Things I got wrong: I expected the per-chunk cost to be attention metadata planning; it was a blocking host-to-device copy.
 
+Part Y (split v2 in part X's protocol; 20 rps p95, 40 rps p95, 40 rps TPOT, 40 rps tok/s, largest decode batch; data `Y_*`, `stepY.txt`):
+
+| start | result |
+|---|---|
+| no busy loops, round 1 | 88 ms, 9.26 s, 20.2 ms, 4074, 127 |
+| no busy loops, round 2 | 84 ms, 9.37 s, 20.2 ms, 4040, 139 |
+| 14 busy loops, round 1 | 86 ms, 9.34 s, 20.5 ms, 4050, 145 |
+| 14 busy loops, round 2 | 2.52 s, 9.41 s, 21.0 ms, 4036, 146 |
+
+Predictions for v2: (z1) holds (oversized steps 3.9 to 4.1 ms, 2.1 times the 1.9 ms graph step). (z2) fails: 40 rps p95 is below every stock start in both conditions (9.3 to 9.4 s against 13.5 s and 16.7 to 16.9 s), but one busy-loop start had 20 rps p95 2.5 s. (z3) fails on the cg256 half: throughput is above stock's (4040 to 4074 against 2986 to 3014) but below 0.95 times cg256's (4664, 4265). (z4) vLLM's 40 rps p95 is lower (holds); split's throughput is 12 to 13% below vLLM's, not within 5% (fails).
+Reading: v2 removes most of the cliff's cost (40 rps p95 13.5 s to 9.3 s, TPOT 43 to 20 ms, throughput up about 35%) and is unaffected by busy loops at 40 rps; at 20 rps 3 of 4 starts stayed under 90 ms, including one with busy loops (stock: 1 of 2 busy-loop starts went to 10.6 s). It does not reach vLLM or cg256 at 40 rps: batches still reach 127 to 146 and settle at about 20 ms per token. The remaining per-step overhead is mostly LoRA batch preparation (about 1 ms per chunk plus 1 ms for the unused whole-batch preparation).
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.

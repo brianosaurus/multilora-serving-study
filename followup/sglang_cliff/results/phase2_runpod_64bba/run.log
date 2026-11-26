@@ -1079,3 +1079,45 @@ PART_X_DONE
 08:31:38 done Y0_splitv2-2
 DONE_Y0
 PART_Y0_DONE
+08:32:04 Y_splitv2-k0-1 pre-start cpu.stat: nr_periods 238988 nr_throttled 22311 throttled_time 215126309535668 nr_bursts 0 burst_time 0 
+08:32:14 start Y_splitv2-k0-1 host 64bba14d4768 load 1.49 5.80 13.32 external CPU: 0.75 2.31 1.41
+08:32:54 Y_splitv2-k0-1 ready=1 trace=1
+08:33:24 Y_splitv2-k0-1 pre-r20 cpu.stat: nr_periods 239762 nr_throttled 22323 throttled_time 215181017622484 nr_bursts 0 burst_time 0 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 36.96523149847053, "p95": 87.7062646475677, "p99": 239.48221624799766}, "tpot_ms": {"p50": 8.190181354341725, "p95": 9.46177468185923}, "tok_per_s": 2589.0, "max_send_lag_s": 0.004}
+08:33:58 Y_splitv2-k0-1 post-r20 cpu.stat: nr_periods 240103 nr_throttled 22325 throttled_time 215187929254724 nr_bursts 0 burst_time 0 
+08:33:58 Y_splitv2-k0-1 pre-r40 cpu.stat: nr_periods 240103 nr_throttled 22325 throttled_time 215187929254724 nr_bursts 0 burst_time 0 
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 50.05141299989191, "p95": 9260.208023347144, "p99": 11307.549736858851}, "tpot_ms": {"p50": 20.241391590532185, "p95": 28.223717519716683}, "tok_per_s": 4074.4, "max_send_lag_s": 0.002}
+08:34:22 Y_splitv2-k0-1 post-r40 cpu.stat: nr_periods 240339 nr_throttled 22327 throttled_time 215193384499398 nr_bursts 0 burst_time 0 
+08:34:35 done Y_splitv2-k0-1
+08:34:40 Y_splitv2-k14-1 pre-start cpu.stat: nr_periods 240501 nr_throttled 22327 throttled_time 215193384499398 nr_bursts 0 burst_time 0 
+08:34:50 start Y_splitv2-k14-1 host 64bba14d4768 load 3.19 4.55 11.67 external CPU: 0.16 0.25 4.85
+08:35:30 Y_splitv2-k14-1 ready=1 trace=1
+08:36:01 Y_splitv2-k14-1 pre-r20 cpu.stat: nr_periods 241308 nr_throttled 22343 throttled_time 215267272269871 nr_bursts 0 burst_time 0 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 31.59458699883544, "p95": 85.63781600241755, "p99": 237.278315021249}, "tpot_ms": {"p50": 8.25871561810202, "p95": 9.617093792922523}, "tok_per_s": 2588.3, "max_send_lag_s": 0.002}
+08:36:35 Y_splitv2-k14-1 post-r20 cpu.stat: nr_periods 241650 nr_throttled 22345 throttled_time 215275191932242 nr_bursts 0 burst_time 0 
+08:36:35 Y_splitv2-k14-1 pre-r40 cpu.stat: nr_periods 241650 nr_throttled 22345 throttled_time 215275191932242 nr_bursts 0 burst_time 0 
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 48.4711725039233, "p95": 9340.835008550854, "p99": 11405.899515129346}, "tpot_ms": {"p50": 20.458874846417885, "p95": 30.743840362248285}, "tok_per_s": 4050.4, "max_send_lag_s": 0.002}
+08:36:59 Y_splitv2-k14-1 post-r40 cpu.stat: nr_periods 241889 nr_throttled 22348 throttled_time 215282106033993 nr_bursts 0 burst_time 0 
+08:37:12 done Y_splitv2-k14-1
+08:37:17 Y_splitv2-k0-2 pre-start cpu.stat: nr_periods 242060 nr_throttled 22348 throttled_time 215282106033993 nr_bursts 0 burst_time 0 
+08:37:27 start Y_splitv2-k0-2 host 64bba14d4768 load 13.65 8.87 12.23 external CPU: 1.21 1.98 11.78
+08:38:07 Y_splitv2-k0-2 ready=1 trace=1
+08:38:37 Y_splitv2-k0-2 pre-r20 cpu.stat: nr_periods 242849 nr_throttled 22361 throttled_time 215331655598854 nr_bursts 0 burst_time 0 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 35.66305049753282, "p95": 84.01268475390648, "p99": 231.79224917563258}, "tpot_ms": {"p50": 8.155606799187435, "p95": 9.416042021971704}, "tok_per_s": 2589.9, "max_send_lag_s": 0.002}
+08:39:11 Y_splitv2-k0-2 post-r20 cpu.stat: nr_periods 243191 nr_throttled 22363 throttled_time 215336403363977 nr_bursts 0 burst_time 0 
+08:39:11 Y_splitv2-k0-2 pre-r40 cpu.stat: nr_periods 243191 nr_throttled 22363 throttled_time 215336403363977 nr_bursts 0 burst_time 0 
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 52.00363949916209, "p95": 9373.782305052004, "p99": 11435.794915938892}, "tpot_ms": {"p50": 20.16416898819501, "p95": 30.025058069317826}, "tok_per_s": 4040.2, "max_send_lag_s": 0.002}
+08:39:35 Y_splitv2-k0-2 post-r40 cpu.stat: nr_periods 243429 nr_throttled 22365 throttled_time 215342940971991 nr_bursts 0 burst_time 0 
+08:39:48 done Y_splitv2-k0-2
+08:39:53 Y_splitv2-k14-2 pre-start cpu.stat: nr_periods 243590 nr_throttled 22365 throttled_time 215342940971991 nr_bursts 0 burst_time 0 
+08:40:03 start Y_splitv2-k14-2 host 64bba14d4768 load 5.42 6.65 10.82 external CPU: 2.05 2.26 7.05
+08:40:44 Y_splitv2-k14-2 ready=1 trace=1
+08:41:15 Y_splitv2-k14-2 pre-r20 cpu.stat: nr_periods 244405 nr_throttled 22381 throttled_time 215409992218281 nr_bursts 0 burst_time 0 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 42.70258050019038, "p95": 2523.7701197962447, "p99": 5102.497173373049}, "tpot_ms": {"p50": 9.205318286495256, "p95": 28.203782151855318}, "tok_per_s": 2588.8, "max_send_lag_s": 0.004}
+08:41:50 Y_splitv2-k14-2 post-r20 cpu.stat: nr_periods 244759 nr_throttled 22383 throttled_time 215420364942635 nr_bursts 0 burst_time 0 
+08:41:50 Y_splitv2-k14-2 pre-r40 cpu.stat: nr_periods 244759 nr_throttled 22383 throttled_time 215420364942635 nr_bursts 0 burst_time 0 
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 48.25628099933965, "p95": 9406.379655695488, "p99": 11470.460533272486}, "tpot_ms": {"p50": 20.966270019653884, "p95": 30.85134731494848}, "tok_per_s": 4035.8, "max_send_lag_s": 0.002}
+08:42:14 Y_splitv2-k14-2 post-r40 cpu.stat: nr_periods 244999 nr_throttled 22386 throttled_time 215427390909859 nr_bursts 0 burst_time 0 
+08:42:27 done Y_splitv2-k14-2
+DONE_Y
+PART_Y_DONE

@@ -1,0 +1,4 @@
+Y_splitv2-k0-1     r20 p95      88 tpot   8.2 tok/s  2589  r40 p95    9260 tpot  20.2 tok/s  4074  maxbatch 127  step>48 3.9 ms  <=48 1.9 ms  ratio 2.1
+Y_splitv2-k0-2     r20 p95      84 tpot   8.2 tok/s  2590  r40 p95    9374 tpot  20.2 tok/s  4040  maxbatch 139  step>48 3.9 ms  <=48 1.9 ms  ratio 2.1
+Y_splitv2-k14-1    r20 p95      86 tpot   8.3 tok/s  2588  r40 p95    9341 tpot  20.5 tok/s  4050  maxbatch 145  step>48 4.0 ms  <=48 1.9 ms  ratio 2.1
+Y_splitv2-k14-2    r20 p95    2524 tpot   9.2 tok/s  2589  r40 p95    9406 tpot  21.0 tok/s  4036  maxbatch 146  step>48 4.1 ms  <=48 1.9 ms  ratio 2.1
