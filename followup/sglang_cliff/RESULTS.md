@@ -385,6 +385,23 @@ The cliff mechanism was reported before this study's diagnosis. Anything posted 
 What this study adds, as far as found: the LoRA case (eager decode at 31 ms per step against 19 ms without LoRA at the same batch size); CPU contention as a trigger at a load the server otherwise handles (20 rps); scheduler-loop measurements showing the loop is CPU-bound and is not preempted; and that the A10, 4090 and 5090 tier at tp below 4 is still 48 on main (`0e9cff98f5`).
 Things I got wrong: I diagnosed and drafted (`draft-issue.md`) without searching upstream issues for the mechanism first.
 
+## Step 7: cap running requests against a larger graph range (runpod 64bba14d4768, FLAGGED)
+
+Plan: PLAN.md step 7. Data: `results/phase2_runpod_64bba/V_*`, `step7.txt`. 20 rps and 40 rps p95 TTFT, 40 rps output tokens per second, largest decode batch:
+
+| arm | 14 busy loops, round 1 | 14 busy loops, round 2 | no busy loops |
+|---|---|---|---|
+| stock | 81 ms, 13.6 s, 2995, 244 | 84 ms, 13.5 s, 2976, 244 | **10.1 s**, 15.8 s, 2547, 292 |
+| cap48 (`--max-running-requests 48`) | 499 ms, 2.8 s, 4186, 48 | 77 ms, 2.1 s, 4415, 48 | 93 ms, 2.6 s, 4236, 48 |
+| cg256 | 2.1 s, 6.8 s, 4607, 231 | 957 ms, 7.1 s, 4192, 156 | 86 ms, 2.2 s, 4632, 82 |
+
+- (t) holds: under contention, cap48 kept 20 rps p95 at or under 499 ms, and its 40 rps p95 (2.1 to 2.8 s) is well below cg256's (6.8 to 7.1 s).
+- (u) fails on latency: without contention, cap48 throughput at 40 rps is 8.5% below cg256 (within 10%), but its 40 rps p95 is 2.6 s, above the 1 s bar (cg256: 2.2 s).
+- (v) holds: no cap48 decode step above 48.
+- The stock start without busy loops went slow at 20 rps (10.1 s, batches up to 292): the slow state does not need contention.
+- Under contention the larger range lets batches grow to 156 to 231 and step time rises (median TPOT 13.6 to 17.2 ms against 9.6 for cap48); keeping batches within the graph does better than enlarging the graph. Without contention the two are close, with cg256 slightly ahead, as #33483 also found at the tail.
+Reading: keeping every decode step inside a captured graph is what matters. A cap does it at a concurrency cost, which is why vLLM derives its capture range from its running limit (on a 4090: running limit 256, graphs to 512). Next: a fix that keeps decode in the graph without lowering concurrency (derive the range from the limit, or split large batches into graph-sized replays).
+
 ## Not established
 - Why admission with the same rule leaves vLLM's queue short; whether the SGLang waits come from the loop that picks which waiting request to admit (a skipped request keeps its place, with nothing to raise its priority) or from decode steps keeping all 16 adapters present. Phase 3 would test an intervention.
 - Whether the 20 rps tipping is a property of the server (a slow state it cannot leave) or of the load; needs repeats at 20 rps.

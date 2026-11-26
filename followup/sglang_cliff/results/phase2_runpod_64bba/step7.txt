@@ -1,0 +1,9 @@
+V_main-16-cap48-k0-1       r20 p95      93 tpot   8.6 tok/s  2589  r40 p95    2594 tpot  10.1 tok/s  4236  maxbatch 48
+V_main-16-cap48-k14-1      r20 p95     499 tpot   8.4 tok/s  2591  r40 p95    2789 tpot   9.6 tok/s  4186  maxbatch 48
+V_main-16-cap48-k14-2      r20 p95      77 tpot   8.2 tok/s  2590  r40 p95    2054 tpot   9.6 tok/s  4415  maxbatch 48
+V_main-16-cg256-k0-1       r20 p95      86 tpot   8.2 tok/s  2590  r40 p95    2240 tpot  12.5 tok/s  4632  maxbatch 82
+V_main-16-cg256-k14-1      r20 p95    2125 tpot   8.4 tok/s  2589  r40 p95    6849 tpot  13.6 tok/s  4607  maxbatch 231
+V_main-16-cg256-k14-2      r20 p95     957 tpot  10.4 tok/s  2589  r40 p95    7148 tpot  17.2 tok/s  4192  maxbatch 156
+V_main-16-stock-k0-1       r20 p95   10128 tpot  44.0 tok/s  1999  r40 p95   15797 tpot  61.0 tok/s  2547  maxbatch 292
+V_main-16-stock-k14-1      r20 p95      81 tpot   8.2 tok/s  2590  r40 p95   13577 tpot  44.1 tok/s  2995  maxbatch 244
+V_main-16-stock-k14-2      r20 p95      84 tpot   8.2 tok/s  2588  r40 p95   13537 tpot  45.8 tok/s  2976  maxbatch 244
