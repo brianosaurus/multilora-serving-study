@@ -199,6 +199,11 @@ Y) # step 9 amendment: split v2 in part X protocol
     for i in $(seq 1 $k); do python3 -c 'while True: pass' & echo $! >> /tmp/busy.pids; done; sleep 5; thr "$tag pre-start"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do thr "$tag pre-r$rate"; load $tag sglang http://localhost:30000 $rate 1; thr "$tag post-r$rate"; done; }
     stop_server; [ -f /tmp/busy.pids ] && { xargs kill < /tmp/busy.pids 2>/dev/null; rm -f /tmp/busy.pids; }; say "done $tag"; done; done; RIDP=; XENV=; PATCHPY=;;
+Z0) # PR prep smoke: rebased split on main, overlaid on the 0e9 env
+  tag=Z0_splitmain; PATCHPY=/root/src/sglang-splitmain/python; EXTRA=; XENV="SGLANG_CLIFF_PHASES=1"
+  start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; $PYL $R/followup/sglang_cliff/greedy_check.py run http://localhost:30000 $D/$tag/greedy.json 96 | tee -a $L
+    $PYL $R/scripts/loadgen.py --engine sglang --url http://localhost:30000 --tokenizer $M --concurrency 96 --requests 400 --warmup 40 --adapters 32 --popularity zipf --seed 1 --out $D/$tag/c96.json | cut -c1-300 | tee -a $L; }
+  say "$tag errors in log: $(grep -ciE 'Traceback|Error' $D/$tag/server.log)"; stop_server; PATCHPY=; XENV=; say "done $tag";;
 K) # Phase 3 option 8: raised graph limit plus overlap loading
   for n in 1 2 3; do tag=K_main-16-cg256-ovl-$n; PATCHPY=; XENV=; EXTRA="--cuda-graph-max-bs-decode 256 --enable-lora-overlap-loading"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
