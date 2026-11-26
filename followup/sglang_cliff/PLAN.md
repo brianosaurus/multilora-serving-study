@@ -307,3 +307,8 @@ Predictions (fixed now):
 - (z3) at k = 0, split 40 rps output tokens per second is at least stock's and at least 0.95 times cg256's, in every round.
 - (z4) at k = 0, vLLM's 40 rps p95 TTFT is lower than split's (adapter-load stalls, earlier results), and split's throughput is within 5% of vLLM's.
 Limits: one model (Qwen2.5-1.5B), one GPU, 16 adapter slots; shared host.
+
+Step 9 amendment (during part X, before any of the runs below): part X0 showed split decode steps above 48 at 12.1 ms median (2 chunks; about 6 ms per chunk) against 2.0 ms for one graph step, so (z1) is expected to fail for the version in part X. Version 2 of the patch (`split_v2.diff`, branch commit `7a32fc283e`) replaces a blocking `torch.tensor(n, device=cuda)` per chunk with `torch.full`, which may have serialized each chunk's preparation behind the previous replay. Part X continues unchanged with version 1.
+Part Y0 (after part X; no busy loops): split v1 and v2 alternating, 2 starts each, closed-loop concurrency 96 (400 requests, 40 warm-up), with phase and sub-phase timing, which now also times `DecodeCudaGraphRunner.execute` and `load_batch` and the split helpers (instrumentation only, active only with `SGLANG_CLIFF_SUBPHASES=1`).
+- (z5) v2's median wall time per decode step above 48 is at least 30% lower than v1's. Reported: where each chunk's time goes.
+Part Y (only if z5 holds): split v2 rerun in part X's protocol (k = 0 and 14, 2 rounds), compared against part X's other arms; (z1) to (z4) are evaluated for v2 as well as v1.

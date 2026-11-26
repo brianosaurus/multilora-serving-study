@@ -188,6 +188,17 @@ X) # step 9: stock, cap48, cg256, split, vllm; k in {0,14}; 2 rounds
       [ $ok = 1 ] && { warm vllm http://localhost:8000 $tag; for rate in 20 40; do thr "$tag pre-r$rate"; load $tag vllm http://localhost:8000 $rate 1; thr "$tag post-r$rate"; done; }
     else RIDP=$tag; start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do thr "$tag pre-r$rate"; load $tag sglang http://localhost:30000 $rate 1; thr "$tag post-r$rate"; done; }; fi
     stop_server; [ -f /tmp/busy.pids ] && { xargs kill < /tmp/busy.pids 2>/dev/null; rm -f /tmp/busy.pids; }; say "done $tag"; done; done; done; RIDP=; XENV=; EXTRA=; PATCHPY=;;
+Y0) # step 9 amendment: split v1 vs v2 step cost, c96 closed loop, sub-phase timing
+  for spec in v1-1 v2-1 v1-2 v2-2; do v=${spec%-*}; tag=Y0_split$spec; EXTRA=; XENV="SGLANG_CLIFF_PHASES=1 SGLANG_CLIFF_SUBPHASES=1"
+    PATCHPY=/root/src/sglang-split/python; [ $v = v2 ] && PATCHPY=/root/src/sglang-split2/python
+    start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; $PYL $R/scripts/loadgen.py --engine sglang --url http://localhost:30000 --tokenizer $M --concurrency 96 --requests 400 --warmup 40 --adapters 32 --popularity zipf --seed 1 --out $D/$tag/c96.json | cut -c1-300 | tee -a $L; }
+    stop_server; say "done $tag"; done; PATCHPY=; XENV=;;
+Y) # step 9 amendment: split v2 in part X protocol
+  thr(){ say "$1 cpu.stat: $(tr '\n' ' ' < /sys/fs/cgroup/cpu/cpu.stat)"; }
+  for rep in 1 2; do for k in 0 14; do tag=Y_splitv2-k$k-$rep; RIDP=$tag; PATCHPY=/root/src/sglang-split2/python; EXTRA=; XENV="SGLANG_CLIFF_PHASES=1"
+    for i in $(seq 1 $k); do python3 -c 'while True: pass' & echo $! >> /tmp/busy.pids; done; sleep 5; thr "$tag pre-start"
+    start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do thr "$tag pre-r$rate"; load $tag sglang http://localhost:30000 $rate 1; thr "$tag post-r$rate"; done; }
+    stop_server; [ -f /tmp/busy.pids ] && { xargs kill < /tmp/busy.pids 2>/dev/null; rm -f /tmp/busy.pids; }; say "done $tag"; done; done; RIDP=; XENV=; PATCHPY=;;
 K) # Phase 3 option 8: raised graph limit plus overlap loading
   for n in 1 2 3; do tag=K_main-16-cg256-ovl-$n; PATCHPY=; XENV=; EXTRA="--cuda-graph-max-bs-decode 256 --enable-lora-overlap-loading"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
