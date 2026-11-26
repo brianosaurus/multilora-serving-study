@@ -79,6 +79,63 @@ def _wrap_scheduler(mod):
                 _w(ev)
 
     S._add_request_to_queue, S.run_batch = add, run
+    if os.environ.get("SGLANG_CLIFF_PHASES") == "1":
+        _wrap_phases(S)
+
+
+# Phase timing (only with SGLANG_CLIFF_PHASES=1; trigger step 4). Per scheduler-loop phase, per 1 s bucket: calls, wall time,
+# thread CPU time (wall minus CPU = time the thread was off-CPU: GIL, preemption, I/O or GPU waits), and the scheduler thread's
+# voluntary and involuntary context switches. Event "ph": t (bucket start), p = {phase: [calls, wall, cpu]}, vcs, ivcs, qlen.
+_PH = {"t": None, "p": {}}
+
+
+def _ctx():
+    v = iv = None
+    try:
+        for l in open("/proc/thread-self/status"):
+            if l.startswith("voluntary_ctxt_switches"): v = int(l.split()[1])
+            elif l.startswith("nonvoluntary_ctxt_switches"): iv = int(l.split()[1])
+    except Exception:
+        pass
+    return v, iv
+
+
+def _ph_flush(sched, now):
+    try:
+        b = _PH
+        if b["t"] is None:
+            b["t"], b["ctx"] = int(now), _ctx()
+            return
+        if int(now) == b["t"]:
+            return
+        v, iv = _ctx(); v0, iv0 = b["ctx"]
+        _w({"e": "ph", "t": b["t"], "p": {k: [c, round(w, 6), round(u, 6)] for k, (c, w, u) in b["p"].items()},
+            "vcs": (v - v0) if v is not None and v0 is not None else None, "ivcs": (iv - iv0) if iv is not None and iv0 is not None else None,
+            "qlen": len(sched.waiting_queue), "nrun": len(sched.running_batch.reqs)})
+        b["t"], b["p"], b["ctx"] = int(now), {}, (v, iv)
+    except Exception:
+        pass
+
+
+def _wrap_phases(S):
+    def mk(name, o):
+        @functools.wraps(o)
+        def f(self, *a, **k):
+            w0, c0 = time.time(), time.thread_time()
+            if name == "ingest_requests":
+                _ph_flush(self, w0)
+            try:
+                return o(self, *a, **k)
+            finally:
+                try:
+                    r = _PH["p"].setdefault(name, [0, 0.0, 0.0])
+                    r[0] += 1; r[1] += time.time() - w0; r[2] += time.thread_time() - c0
+                except Exception:
+                    pass
+        return f
+    for name in ("ingest_requests", "get_next_batch_to_run", "run_batch", "process_batch_result"):
+        if hasattr(S, name):
+            setattr(S, name, mk(name, getattr(S, name)))
 
 
 def _wrap_lora(mod):

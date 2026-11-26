@@ -238,3 +238,16 @@ Predictions (fixed now):
 - (i) if throttling triggers the slow state: at least 2 of the 3 valid k = 14 starts are slow, and across all valid starts, slow starts have a higher throttled fraction during 20 rps than every normal start.
 - (j) in any slow valid start, at least 80% of its extra drift over the median normal k = 0 start is in hand-off and scheduler.
 If (i) fails, throttling of this kind is not shown to be the trigger; the next step is py-spy profiling of the scheduler under load (own plan).
+
+### Trigger step 4 (option 15): what in the scheduler loop fails to recover under CPU contention (runpod 64bba14d4768, instrumentation only)
+Why: step 3 part Q produced the slow state in 2 of 3 starts with 14 busy loops and none with 0 or 8; the delay is between the front end and the scheduler. py-spy cannot attach (the container lacks SYS_PTRACE), so timing is taken inside the scheduler process.
+Instrumentation (no engine behavior change; on only with `SGLANG_CLIFF_PHASES=1`): `cliff_trace.py` wraps the scheduler loop phases `ingest_requests`, `get_next_batch_to_run`, `run_batch` and `process_batch_result`, and writes per 1 s bucket: calls, wall time and thread CPU time per phase, the scheduler thread's voluntary and involuntary context switches, waiting-queue length and running-batch size.
+Runs (part R): k in {0, 14} busy loops, order 0, 14, repeated 3 times (6 starts), otherwise as part Q (stock main, 16 slots, traced, rids, cpu.stat logged). FLAGGED.
+Overhead check (fixed now): k = 0 starts with phase timing have 20 rps p95 TTFT within 20% of part Q's k = 0 median (83 ms). If not, phase results are reported as perturbed.
+Validity: client to front end median at most 5 ms at 20 rps (the first-send rule is dropped; see step 3 result).
+Predictions, over the 20 rps window, slow k = 14 starts against k = 0 starts (fixed now; each is one candidate mechanism, more than one may hold):
+- (k) preemption: the scheduler thread's involuntary context switches per second are at least 5 times the k = 0 median, and off-CPU time (wall minus CPU, summed over the four phases) is at least 30% of loop wall time, against under 10% at k = 0.
+- (l) work grows with the queue: CPU time per `get_next_batch_to_run` call has Spearman at least 0.5 with waiting-queue length across 1 s buckets, and its median per-call CPU time is at least 3 times the k = 0 median.
+- (m) adapter churn: adapter loads per second at 20 rps are at least 3 times the k = 0 median.
+- (n) the slow state is self-sustaining: after the first 1 s bucket with waiting queue above 50, the queue stays above 50 for the rest of the 20 rps window in slow starts.
+If no k = 14 start is slow, the phase data from loaded normal starts is reported and nothing is concluded about the mechanism.
