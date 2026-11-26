@@ -16,14 +16,16 @@ Read results with these limits in mind:
 |---|---|---|
 | Pre-registered grid (vLLM, SGLang, mistral.rs) | [docs/PLAN.md](docs/PLAN.md) | [results/raw/](results/raw/) (layout in [results/raw/README.md](results/raw/README.md)), [results/INTERIM_vLLM.md](results/INTERIM_vLLM.md) |
 | Slot count against KV capacity, SGLang 128-adapter rerun | [followup/pod_items/PLAN.md](followup/pod_items/PLAN.md) | [followup/pod_items/RESULTS.md](followup/pod_items/RESULTS.md), [followup/pod_items/results/B/TABLE.md](followup/pod_items/results/B/TABLE.md) |
-| SGLang latency cliff past the slot limit: the decode CUDA graph range, drainer, scheduling and eviction checks, and what is still unexplained | [followup/sglang_cliff/PLAN.md](followup/sglang_cliff/PLAN.md) | [followup/sglang_cliff/RESULTS.md](followup/sglang_cliff/RESULTS.md); raw runs in `followup/sglang_cliff/results/`; unposted upstream draft in [followup/sglang_cliff/draft-issue.md](followup/sglang_cliff/draft-issue.md) |
+| SGLang latency cliff past the slot limit: the decode CUDA graph range, drainer, scheduling and eviction checks, and what is still unexplained | [followup/sglang_cliff/PLAN.md](followup/sglang_cliff/PLAN.md) | [followup/sglang_cliff/RESULTS.md](followup/sglang_cliff/RESULTS.md); raw runs in `followup/sglang_cliff/results/`; upstream: issue [sgl-project/sglang#53431](https://github.com/sgl-project/sglang/issues/53431) and fix PR [#53433](https://github.com/sgl-project/sglang/pull/53433) (open, not merged; text as posted in [upstream/](followup/sglang_cliff/upstream/)) |
 | csgmv against triton backend (SGLang's documented 20 to 80%) | [followup/csgmv_ab/PLAN.md](followup/csgmv_ab/PLAN.md) | summarized on the page; raw data under [results/raw/](results/raw/) |
 | Adapters in flight against the working set | see [docs/CHANGELOG.md](docs/CHANGELOG.md) | [followup/working_set/RESULTS.md](followup/working_set/RESULTS.md) |
 | Routing and prefix-cache checks | [followup/routing/PLAN.md](followup/routing/PLAN.md), [followup/prefix_routing/PLAN.md](followup/prefix_routing/PLAN.md) | [followup/prefix_routing/RESULTS.md](followup/prefix_routing/RESULTS.md), [followup/routing/OBSERVATIONS.md](followup/routing/OBSERVATIONS.md) |
 | mistral.rs grouped LoRA kernel (rerun, incomplete) | [followup/kernel_rerun/PLAN.md](followup/kernel_rerun/PLAN.md) | [followup/kernel_rerun/results/](followup/kernel_rerun/results/) (B2 ended incomplete: disk full; recorded in [docs/BUGS.md](docs/BUGS.md)) |
 | Dedicated-machine session | [followup/dedicated_session/PLAN.md](followup/dedicated_session/PLAN.md) | pending |
 
-Open items, stated plainly: the cause of the roughly 50 ms stall after each SGLang adapter load, the trigger of SGLang's slow state, and the dedicated-machine rerun are not established.
+SGLang cliff, current state (FLAGGED): the cause is the decode CUDA graph range (48 on 24 GB) being far below the KV-derived running limit (4096), so larger batches decode eagerly at about 15 times the cost; CPU contention is one trigger. The proposed fix (running limit defaults to the graph range, 24 GB range raised to 256) gives a 40 rps p95 TTFT of 2.1 to 2.3 s against 13.4 to 13.5 s on main, GSM8K 66.3% against 67.5%, and the same KV pool; vLLM 0.34.0 is at 1.4 s (RESULTS.md, step 10). A prototype that split oversized batches into several graph replays was abandoned after accuracy runs exposed races (step 9).
+
+Open items, stated plainly: the cause of the roughly 50 ms stall after each SGLang adapter load (the likely remaining gap to vLLM), the fix on larger models, and the dedicated-machine rerun are not established.
 
 ## Question
 
