@@ -1,46 +1,55 @@
-# DRAFT (not posted) - ON HOLD: split v2 fails GSM8K (6.75%); see RESULTS.md
+# DRAFT (not posted)
 
-**Title:** [Perf] Replay CUDA graphs over chunks of decode batches above the graph range
+**Title:** [Perf] Keep decode inside CUDA graphs: default max_running_requests to the decode graph range, and raise the 24 GB tier's range to 256
 
-**Branch:** `brianosaurus:decode-graph-split-main` (based on `385262cabb`; not pushed)
+**Branch:** `brianosaurus:decode-graph-range` (based on `385262cabb`; not pushed)
 
 ## Motivation
 
-Fixes <issue link> (see also #33483). A decode batch larger than the largest captured decode graph runs eagerly. On launch-bound setups (small models, LoRA) an eager step costs about 15 times a replay (31 ms against 2 ms on a 4090 with LoRA), so the running batch grows instead of draining and stays above the graph range.
+Fixes <issue link> (see also #33483). When `--max-running-requests` is not set it is derived from KV capacity (4096 on a 4090 with a 1.5B model), while the decode CUDA graph range on 24 GB GPUs is 48. A decode batch above the range runs eagerly; with LoRA an eager step costs about 31 ms against 2 ms for a replay, so requests drain slower than they arrive, the batch stays above the range, and waiting requests are served only after the load stops.
+
+vLLM avoids this by bounding the two together (`max_num_seqs` 256, graphs captured to 512). This PR does the same.
 
 ## Modifications
 
-- `model_executor/runner/decode_graph_split.py` (new): `maybe_execute_split_decode` cuts a plain decode batch above the largest captured size into the fewest chunks that fit, sized within one of each other (`chunk_bounds`), using `TboForwardBatchPreparer.filter_batch`. Each chunk refills the LoRA batch info and replays a graph; outputs are copied out of the static buffers before the next replay and concatenated. Sampling still runs once on the whole batch.
-- Chunk size follows the captured range (48, 128, 160, 256, ...), so it composes with `--cuda-graph-max-bs-decode`.
-- Falls back to eager when any chunk cannot replay a graph, and for speculative decoding, DP-attention gathers, dLLM, mrope, PP, hisparse and the UOCR greedy graph, and when a replay produces outputs it cannot merge.
-- `model_runner.py`: one delegation after the existing graph check.
-- `SGLANG_DISABLE_DECODE_GRAPH_SPLIT` (default off) restores the eager path.
-- CPU unit tests: chunk bounds (fewest chunks, each within the range, sizes within one) and the kill-switch contract.
+- `mem_cache/kv_cache_configurator.py`: when `--max-running-requests` is not set, default it to the largest decode CUDA graph batch size (none when decode graphs are disabled or on a prefill-only disaggregation worker). Logged at INFO with the old value and a hint to raise `--cuda-graph-max-bs-decode`. An explicit `--max-running-requests` is unchanged.
+- `arg_groups/memory_hook.py`: the 24 GB tier (A10, 4090, 5090) default decode range for tp < 4 goes from 48 to 256, so the default running limit does not drop to 48.
 
 ## Accuracy
 
-Greedy, 96 concurrent requests, 64 tokens, adapters round-robin. Identical completions against a server with `--cuda-graph-max-bs-decode 256` (every step in a graph): this PR 65 to 67 of 96, stock 61 of 96, the 256 server against itself 79 of 96 (batch makeup changes numerics). No sgl-eval accuracy run yet: <to add before review>.
+sgl-eval 0.1.3 GSM8K, 1319 problems, greedy, 128 concurrent, Qwen2.5-1.5B-Instruct on a LoRA server: main 67.5%, this PR 66.3% (`--cuda-graph-max-bs-decode 256` on main: 66.3%, 66.5%). No degenerate generations.
+
+## Memory
+
+RTX 4090, `--mem-fraction-static 0.85`: decode graphs to 256 take 0.54 GB (0.15 GB to 48). The KV pool is 600,201 tokens with and without this PR.
 
 ## Benchmark
 
-RTX 4090, Qwen2.5-1.5B-Instruct, 32 rank-16 adapters, 16 slots, Zipf adapter choice, 256 in / 128 out, open loop, 500 requests after 50 warm-up; shared host, so starts are repeated. "Contention": 14 busy-loop processes in the same container.
+RTX 4090, Qwen2.5-1.5B-Instruct, 32 rank-16 adapters, `--max-loras-per-batch 16`, Zipf adapter choice, 256 in / 128 out, open-loop Poisson, 500 requests after 50 warm-up, 2 starts each. Shared cloud host, so treat these as screening numbers. "Busy loops": 14 CPU busy-loop processes in the same container.
 
-| | stock | this PR |
+40 rps (p95 TTFT; median TPOT; output tok/s):
+
+| | no contention | 14 busy loops |
 |---|---|---|
-| decode step, batch above 48 | 31 to 36 ms (eager) | 3.8 to 4.1 ms (2 to 3 replays) |
-| 40 rps p95 TTFT, no contention | 13.5 s, 13.5 s | 9.26 s, 9.37 s |
-| 40 rps p95 TTFT, contention | 16.9 s, 16.7 s | 9.34 s, 9.41 s |
-| 40 rps TPOT (median) | 43 to 71 ms | 20.2 to 21.0 ms |
-| 40 rps output tok/s | 2256 to 3014 | 4036 to 4074 |
-| 20 rps p95 TTFT, contention | 10.6 s, 0.82 s | 0.086 s, 2.5 s |
+| main | 13.5 s, 13.4 s; 43 to 44 ms; 2981, 3040 | 14.5 s, 18.9 s; 53 to 76 ms; 2725, 2155 |
+| this PR | 2.25 s, 2.08 s; 12.2 ms; 4665, 4673 | 3.35 s, 7.93 s; 14 to 16 ms; 4598, 4014 |
+| vLLM 0.34.0 (reference) | 1.43 s, 1.43 s; 10 ms; 4657, 4658 | 1.44 s, 1.46 s; 10 ms; 4671, 4446 |
 
-What it does not do: at 40 rps it does not reach `--cuda-graph-max-bs-decode 256` (2.2 to 6.2 s p95) or vLLM 0.34.0 (1.5 s). The remaining overhead is mostly LoRA batch preparation, about 1 ms per chunk plus 1 ms for a whole-batch preparation the split discards; a follow-up PR will address it.
+20 rps p95 TTFT: main 83 ms and 78 ms without contention; this PR 78 ms and 78 ms.
+
+At 40 rps on main, every request that waited more than 1 s for its first token (110 of 500 in each start) got it only after the last request was sent; with this PR, 19 of 100.
+
+## Not covered
+
+- Larger models on 24 GB, where a range of 256 may take memory the KV pool would otherwise use. If maintainers prefer, the tier can pick the range from free memory after weights, as in #46132.
+- The remaining gap to vLLM at 40 rps (traces point at LoRA adapter-load stalls); separate PR.
 
 ## Checklist
 
 - [ ] Format with pre-commit
-- [x] Unit tests (CPU)
-- [ ] sgl-eval accuracy run
-- [ ] Benchmark on a dedicated machine and a larger model
+- [ ] Unit test: default running limit follows the graph range; explicit value unchanged; graphs disabled leaves it unchanged
+- [x] sgl-eval accuracy run
+- [x] Benchmark (shared host)
+- [ ] Larger model (7 to 8B)
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
