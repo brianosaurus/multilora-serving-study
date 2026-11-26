@@ -4,7 +4,7 @@ R=/root/msf_study; D=$R/followup/sglang_cliff/results/phase2; mkdir -p $D; L=$D/
 say() { echo "$(date -u +%T) $*" | tee -a $L; }
 HOST_EXPECT=${HOST_EXPECT:-48bd787e389e}
 [ "$(hostname)" = "$HOST_EXPECT" ] || { echo "REFUSED: host $(hostname) is not $HOST_EXPECT"; exit 2; }
-M=/dev/shm/models/Qwen2.5-1.5B-Instruct; A=/dev/shm/adapters; PYL=/root/envs/sglang/bin/python; TR=$R/followup/sglang_cliff/trace
+M=/dev/shm/models/Qwen2.5-1.5B-Instruct; A=/dev/shm/adapters; PYL=${PYL:-/root/envs/sglang/bin/python}; TR=$R/followup/sglang_cliff/trace
 busy() { [ "$(nvidia-smi --query-compute-apps=pid --format=csv,noheader | wc -l)" != 0 ] || pgrep -f "[r]un_rerun.sh|[r]un_session.sh|[r]un_phase1.sh" >/dev/null; }
 declare -A ENVOF=( [v23]=/root/envs/sglang [main]=/root/envs/sglang_main )
 SP=""
@@ -22,7 +22,7 @@ start_sglang() { # tag eng slots trace(0|1)
 stop_server() { kill $SP 2>/dev/null; sleep 8; pkill -9 -f "[s]glang.launch_server|[s]glang::|[v]llm serve|[V]LLM::EngineCore" 2>/dev/null; sleep 5; }
 load() { # tag engine url rate seed
   local O=$D/$1; echo "{\"rate\":$4,\"t_start\":$(date +%s.%N)," >> $O/marks.tmp
-  $PYL $R/scripts/loadgen.py --engine $2 --url $3 --tokenizer $M --rate $4 --requests 500 --warmup 50 --adapters 32 --adapter-offset 0 --popularity zipf --seed $5 --out $O/zipf32_r$4.json | cut -c1-300 | tee -a $L
+  $PYL $R/scripts/loadgen.py --engine $2 --url $3 --tokenizer $M --rate $4 --requests 500 --warmup 50 --adapters 32 --adapter-offset 0 --popularity zipf --seed $5 ${RIDP:+--rid-prefix $RIDP-$4} --out $O/zipf32_r$4.json | cut -c1-300 | tee -a $L
   echo "\"t_end\":$(date +%s.%N)}" >> $O/marks.tmp; tr -d '\n' < $O/marks.tmp >> $O/marks.jsonl; echo >> $O/marks.jsonl; rm -f $O/marks.tmp
 }
 warm() { for s in 998 997; do $PYL $R/scripts/loadgen.py --engine $1 --url $2 --tokenizer $M --rate 40 --requests 300 --warmup 0 --adapters 0 --seed $s --out $D/$3/warm_$s.json >/dev/null 2>&1; done; }
@@ -87,6 +87,10 @@ J) # dedicated-style rerun on runpod2: stock vs graph limit 256, 16 and 32 slots
     tag=J_${c}-r$rnd; sl=${CFG[$c]%%:*}; EXTRA="${CFG[$c]#*:}"; PATCHPY=; XENV=
     start_sglang $tag main $sl 0 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; }
     stop_server; say "done $tag"; done; done;;
+M) # trigger step 2 (PLAN.md, option 13): stock main, 16 slots, traced with front-end events; absolute send times and rids
+  for n in $(seq 1 ${NSTARTS:-10}); do tag=M_main-16-$n; PATCHPY=; XENV=; EXTRA=; RIDP=$tag
+    start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }
+    stop_server; say "done $tag"; done; RIDP=;;
 K) # Phase 3 option 8: raised graph limit plus overlap loading
   for n in 1 2 3; do tag=K_main-16-cg256-ovl-$n; PATCHPY=; XENV=; EXTRA="--cuda-graph-max-bs-decode 256 --enable-lora-overlap-loading"
     start_sglang $tag main 16 1 && { warm sglang http://localhost:30000 $tag; for rate in 20 40; do load $tag sglang http://localhost:30000 $rate 1; done; say "$tag trace lines: $(cat $D/$tag/trace/*.jsonl | wc -l)"; }

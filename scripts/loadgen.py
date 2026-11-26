@@ -66,6 +66,7 @@ async def one_request(session, url, body, t_due, t0, rec):
     if delay > 0:
         await asyncio.sleep(delay)
     t_send = time.perf_counter()
+    rec["t_send_abs"] = time.time()  # absolute send time (epoch), for matching with server-side traces
     rec["send_lag_s"] = (t_send - t0) - t_due if t_due else 0.0
     rec["t_send"] = t_send - t0
     n_chunks = 0
@@ -150,10 +151,13 @@ async def run(args):
     conn = aiohttp.TCPConnector(limit=0)
     async with aiohttp.ClientSession(connector=conn) as session:
         t0 = time.perf_counter()
+        t0_abs = time.time()
         sem = asyncio.Semaphore(args.concurrency) if args.concurrency else None
 
         async def guarded(i):
             body = build_body(args.engine, picks[i], prompts[i], args.base_model_name, args.output_tokens)
+            if args.rid_prefix and args.engine == "sglang":
+                body["rid"] = recs[i]["rid"] = f"{args.rid_prefix}-{i}"
             if sem is None:
                 await one_request(session, args.url, body, float(due[i]), t0, recs[i])
             else:
@@ -171,6 +175,7 @@ async def run(args):
         window = (t_end - t0) - float(due[args.warmup - 1] if args.warmup else 0.0)
     out = {
         "config": {k: v for k, v in vars(args).items()},
+        "t0_abs": t0_abs,
         "summary": summarize(recs, args.warmup, window),
         "requests": recs,
     }
@@ -201,6 +206,7 @@ def main():
                     help="first N prompt tokens identical in all requests (prefix-cache test)")
     ap.add_argument("--output-tokens", type=int, default=128)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--rid-prefix", default="", help="sglang only: send rid=<prefix>-<i> so server traces match requests exactly")
     ap.add_argument("--out", required=True)
     asyncio.run(run(ap.parse_args()))
 

@@ -7,6 +7,9 @@ Events (t = time.time()):
   batch  : Scheduler.run_batch call (mode, n requests, distinct adapters, dur = CPU time in the call, gap = time since the
            previous call ended; rids for prefill batches)
   load   : LoRAManager.fetch_new_loras call that changed the pool (loads, evicts, dur = CPU time in the call)
+  recv   : TokenizerManager._init_req_state, i.e. the HTTP front end has the request and has normalized it (rid)
+  sent   : TokenizerManager._send_one_request entry, i.e. tokenized and about to be sent to the scheduler (rid)
+(recv and sent are written by the front-end process, arrive/batch/load by the scheduler process; both use time.time().)
 """
 import functools, importlib.abc, importlib.machinery, json, os, sys, time
 
@@ -104,7 +107,32 @@ def _wrap_lora(mod):
     M.fetch_new_loras = fetch
 
 
-_TARGETS = {"sglang.srt.managers.scheduler": _wrap_scheduler, "sglang.srt.lora.lora_manager": _wrap_lora}
+def _wrap_tokenizer_manager(mod):
+    T = mod.TokenizerManager
+    o_init, o_send = T._init_req_state, T._send_one_request
+
+    @functools.wraps(o_init)
+    def init(self, obj, *a, **k):
+        try:
+            if getattr(obj, "is_single", True):
+                _w({"e": "recv", "t": time.time(), "rid": obj.rid})
+        except Exception:
+            pass
+        return o_init(self, obj, *a, **k)
+
+    @functools.wraps(o_send)
+    async def send(self, tokenized_obj, *a, **k):
+        try:
+            _w({"e": "sent", "t": time.time(), "rid": tokenized_obj.rid})
+        except Exception:
+            pass
+        return await o_send(self, tokenized_obj, *a, **k)
+
+    T._init_req_state, T._send_one_request = init, send
+
+
+_TARGETS = {"sglang.srt.managers.scheduler": _wrap_scheduler, "sglang.srt.lora.lora_manager": _wrap_lora,
+            "sglang.srt.managers.tokenizer_manager": _wrap_tokenizer_manager}
 
 
 class _Finder(importlib.abc.MetaPathFinder):
