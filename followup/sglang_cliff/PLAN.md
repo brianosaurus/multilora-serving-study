@@ -282,3 +282,14 @@ Predictions (fixed now):
 - (u) without busy loops, cap48 output tokens per second at 40 rps is within 10% of cg256, and its 40 rps p95 is at most 1 s.
 - (v) cap48 has no decode step above 48 in any start.
 If (t) to (v) hold, A is a valid workaround on this hardware, and B (the general fix) is planned next. If (u) fails, capping costs throughput even here, and B is needed.
+
+### Step 8 (option 19): a patch that keeps the default running limit within the decode graph range (runpod 64bba14d4768; engine behavior change by design)
+Patch (`graphcap.diff`; local branch `decode-graph-running-cap` on SGLang `0e9cff98f5`, not pushed): in `KVCacheConfigurator.resolve_max_num_reqs`, when `--max-running-requests` is not set, the derived limit is capped at the largest decode CUDA graph batch size (skipped when decode graphs are disabled and on PD prefill servers). An explicit `--max-running-requests` is unchanged. This is direction 1 of sgl-project/sglang#33483 and matches how vLLM ties its capture range to `max_num_seqs`.
+Patched code is loaded by putting a patched worktree's `python/` first on PYTHONPATH (as for the depth-first patch). A pre-check (part W0) confirms the patched server logs the new default and runs.
+Part W: arms stock (no flags), patch (no flags), patch + `--cuda-graph-max-bs-decode 256` (running limit then defaults to 256); conditions k = 0 and k = 14 busy loops; 2 rounds; order within a round: stock, patch, patch-cg256 at k = 0, then the same at k = 14 (12 starts). Otherwise as part V. FLAGGED.
+Predictions (fixed now):
+- (w) every patch and patch-cg256 start has no decode step above its graph range (48 and 256).
+- (x) at k = 0 and k = 14, every patch start has 20 rps p95 TTFT at most 1 s, and its 40 rps p95 is below every stock start's in the same condition.
+- (y) at k = 0, patch 40 rps output tokens per second is at least stock's in every round.
+- Reported, no prediction: patch against patch-cg256 (the cost of the 48 default against a larger graph range).
+Limits: one model (Qwen2.5-1.5B), one GPU, rank-16 adapters at 16 slots; larger models, where eager decode costs less relative to graphs, may lose throughput from the cap, and are not measured here.
