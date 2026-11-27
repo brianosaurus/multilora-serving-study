@@ -50,3 +50,9 @@ GSM8K is reported with its standard error; a gap larger than 2 standard errors b
 - (h2) At 20 and 40 rps neither build reaches 256 running requests, so p95 TTFT is the same within noise.
 - (h3) At concurrency 1024 the patched build queues requests above 256 while stock runs them, some eagerly above 256. Which is faster is not predicted.
 - (h4) GSM8K within 2 standard errors.
+
+## Addition (2026-11-27, after the tp=1 results; not pre-registered)
+
+At the author's request: one vLLM 0.34.0 saturating run at tp = 1, same closed loop as step 1 (concurrency 1024, 3000 requests after 300 warm-up), queued after the tp = 2 and tp = 4 runs. It is a reference and is not part of the decision rule.
+
+Deviation recorded during the runs: the original tp = 1 saturating runs were invalid (the client hit the pod's 1024 open-file limit: 2280 of 3000 requests failed with ClientConnectorError in both builds, none on the server). They are kept as `invalid_fdlimit_*`; the script now raises the limit to 65536, and the reruns are the reported results.
