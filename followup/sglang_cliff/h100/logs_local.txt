@@ -1,0 +1,8 @@
+07:57:40 copy start
+07:58:05 copy done
+sglang-stock /opt/fast/src/sglang-stock/python/sglang/__init__.py /opt/fast/envs/sglang-stock
+sglang-patched /opt/fast/src/sglang-patched/python/sglang/__init__.py /opt/fast/envs/sglang-patched
+vllm 0.34.0 /opt/fast/envs/vllm
+#!/opt/fast/envs/vllm/bin/python
+remaining old paths in bin: 0
+07:58:08 LOCAL_DONE

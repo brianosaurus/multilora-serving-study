@@ -1,0 +1,14 @@
+05:06:51 clone sglang
+9009897b217ddd63e08d1a713c7997fc02e41d19
+05:10:01 sglang-stock at a9a27e9255
+05:13:54 sglang-patched at 9009897b21
+ python/sglang/srt/arg_groups/memory_hook.py        |  9 +++-
+ .../sglang/srt/mem_cache/kv_cache_configurator.py  | 30 +++++++++++
+ .../mem_cache/test_decode_graph_running_cap.py     | 58 ++++++++++++++++++++++
+ 3 files changed, 95 insertions(+), 2 deletions(-)
+05:13:55 env sglang-stock
+         in /workspace/src/sglang-stock/rust (and to build them); install a
+         Rust toolchain, or set SGLANG_BUILD_RUST_EXTS=none to build without
+         Rust extensions
+
+hint: Build failures usually indicate a problem with the package or the build environment

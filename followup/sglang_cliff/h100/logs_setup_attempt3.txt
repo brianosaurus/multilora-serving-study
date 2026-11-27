@@ -1,0 +1,20 @@
+05:19:23 rust toolchain
+info: downloading installer
+info: profile set to minimal
+info: default host tuple is x86_64-unknown-linux-gnu
+info: syncing channel updates for stable-x86_64-unknown-linux-gnu
+info: latest update on 2026-11-12 for version 1.100.0 (0ef1bc386 2026-11-09)
+info: downloading 3 components
+info: default toolchain set to stable-x86_64-unknown-linux-gnu
+cargo 1.100.0 (3acc79c0c 2026-11-05)
+05:19:45 clone sglang
+9009897b217ddd63e08d1a713c7997fc02e41d19
+05:19:52 sglang-stock at a9a27e9255
+05:19:52 sglang-patched at 9009897b21
+ python/sglang/srt/arg_groups/memory_hook.py        |  9 +++-
+ .../sglang/srt/mem_cache/kv_cache_configurator.py  | 30 +++++++++++
+ .../mem_cache/test_decode_graph_running_cap.py     | 58 ++++++++++++++++++++++
+ 3 files changed, 95 insertions(+), 2 deletions(-)
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'sglang'

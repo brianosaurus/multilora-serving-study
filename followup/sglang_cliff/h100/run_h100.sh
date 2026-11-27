@@ -8,6 +8,8 @@ PART=${1:?part}; TP=${2:?tp}
 # The pod's default open-file limit (1024) made the concurrency-1024 client fail to connect
 # (ClientConnectorError); raise it for this shell and the processes it starts.
 ulimit -n 65536
+# tp=4 dropped at the author's request on 2026-11-27 (1.5B model; little value at tp=4).
+[ "$TP" = 4 ] && { echo "$(date -u +%FT%T) SKIPPED $PART tp=4 (dropped by the author)" | tee -a /workspace/h100_run/run.log; exit 0; }
 export HF_HOME=/workspace/hf
 R=/workspace/h100_run; D=$R/results; mkdir -p $D; L=$R/run.log
 M=/workspace/hf/models/Qwen2.5-1.5B-Instruct; A=/workspace/hf/adapters; H=$R/harness

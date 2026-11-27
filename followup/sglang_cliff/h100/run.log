@@ -1,0 +1,140 @@
+2026-11-27T07:05:15 start tp1_stock_lat1 (stock, tp=1, GPUs 0) load 27.56 24.67 23.97
+2026-11-27T07:58:26 --- restart tp=1 from local-disk environments (/opt/fast/envs) ---
+2026-11-27T07:58:27 start tp1_stock_lat1 (stock, tp=1, GPUs 0) load 3.71 4.60 9.48
+2026-11-27T08:00:01 tp1_stock_lat1 ready |  | max_running_requests=4096 | KV #tokens: 2364506 | decode graph 256] max, mem usage=0.06 GB
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 33.13791548134759, "p95": 69.50753831770268, "p99": 95.5141257378272}, "tpot_ms": {"p50": 5.107798086530639, "p95": 6.109402102498909}, "tok_per_s": 2614.8, "max_send_lag_s": 0.007}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 36.07934602769092, "p95": 433.5432391497302, "p99": 572.1504804934375}, "tpot_ms": {"p50": 6.855271688816467, "p95": 7.4668932846013165}, "tok_per_s": 5053.5, "max_send_lag_s": 0.007}
+2026-11-27T08:01:31 done tp1_stock_lat1
+2026-11-27T08:01:31 start tp1_patched_lat1 (patched, tp=1, GPUs 0) load 3.77 4.63 8.64
+2026-11-27T08:02:29 tp1_patched_lat1 ready | max_running_requests defaults to 256 (was 4096) | max_running_requests=256 | KV #tokens: 2364506 | decode graph 256] max, mem usage=0.08 GB
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 34.19293253682554, "p95": 70.30190338846295, "p99": 110.46999186626635}, "tpot_ms": {"p50": 5.114636197009222, "p95": 6.145277201962532}, "tok_per_s": 2614.7, "max_send_lag_s": 0.009}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 34.36308796517551, "p95": 417.4977984919676, "p99": 528.2065318303647}, "tpot_ms": {"p50": 6.7609774409866645, "p95": 7.39625506107622}, "tok_per_s": 5047.6, "max_send_lag_s": 0.008}
+2026-11-27T08:03:58 done tp1_patched_lat1
+2026-11-27T08:03:59 start tp1_stock_lat2 (stock, tp=1, GPUs 0) load 3.23 4.20 7.90
+2026-11-27T08:04:39 tp1_stock_lat2 ready |  | max_running_requests=4096 | KV #tokens: 2365237 | decode graph 256] max, mem usage=0.08 GB
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 35.996880556922406, "p95": 77.7498321491293, "p99": 112.93965543154619}, "tpot_ms": {"p50": 5.160206205476088, "p95": 6.399102579675001}, "tok_per_s": 2613.9, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 41.18836048291996, "p95": 666.8915873975491, "p99": 824.5232866879085}, "tpot_ms": {"p50": 7.584586736331804, "p95": 8.70270636771424}, "tok_per_s": 4966.5, "max_send_lag_s": 0.015}
+2026-11-27T08:06:08 done tp1_stock_lat2
+2026-11-27T08:06:08 start tp1_patched_lat2 (patched, tp=1, GPUs 0) load 8.95 5.46 7.85
+2026-11-27T08:06:49 tp1_patched_lat2 ready | max_running_requests defaults to 256 (was 4096) | max_running_requests=256 | KV #tokens: 2364506 | decode graph 256] max, mem usage=0.08 GB
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 34.37678748741746, "p95": 71.41718811471944, "p99": 97.87118250736965}, "tpot_ms": {"p50": 5.078989708535813, "p95": 6.212703816686192}, "tok_per_s": 2613.8, "max_send_lag_s": 0.003}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 36.15457494743168, "p95": 430.6886236066929, "p99": 569.6352469292468}, "tpot_ms": {"p50": 6.798805332777377, "p95": 7.350475400022604}, "tok_per_s": 5069.8, "max_send_lag_s": 0.005}
+2026-11-27T08:08:17 done tp1_patched_lat2
+2026-11-27T08:08:18 start tp1_stock_lat3 (stock, tp=1, GPUs 0) load 4.34 4.92 7.33
+2026-11-27T08:08:58 tp1_stock_lat3 ready |  | max_running_requests=4096 | KV #tokens: 2364506 | decode graph 256] max, mem usage=0.06 GB
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 34.98891351046041, "p95": 71.52589069446545, "p99": 95.76834060600959}, "tpot_ms": {"p50": 5.1396151337273945, "p95": 6.328010458066531}, "tok_per_s": 2614.5, "max_send_lag_s": 0.003}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 36.23873449396342, "p95": 480.8883394172879, "p99": 670.1376584696116}, "tpot_ms": {"p50": 7.04112100803594, "p95": 7.668863707011214}, "tok_per_s": 5089.1, "max_send_lag_s": 0.003}
+2026-11-27T08:10:28 done tp1_stock_lat3
+2026-11-27T08:10:28 start tp1_patched_lat3 (patched, tp=1, GPUs 0) load 5.43 5.00 7.04
+2026-11-27T08:11:08 tp1_patched_lat3 ready | max_running_requests defaults to 256 (was 4096) | max_running_requests=256 | KV #tokens: 2364506 | decode graph 256] max, mem usage=0.08 GB
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 33.61466096248478, "p95": 71.22076299856414, "p99": 98.76610576524398}, "tpot_ms": {"p50": 5.141550127197273, "p95": 6.32731280913833}, "tok_per_s": 2614.6, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 35.51565750967711, "p95": 491.8732184916734, "p99": 614.0113538748116}, "tpot_ms": {"p50": 7.079064783706205, "p95": 7.850801288452747}, "tok_per_s": 5048.6, "max_send_lag_s": 0.002}
+2026-11-27T08:12:38 done tp1_patched_lat3
+2026-11-27T08:12:38 DONE_lat_tp1
+2026-11-27T08:12:38 start tp1_stock_sat (stock, tp=1, GPUs 0) load 6.64 6.15 7.23
+2026-11-27T08:13:18 tp1_stock_sat ready |  | max_running_requests=4096 | KV #tokens: 2364506 | decode graph 256] max, mem usage=0.06 GB
+{"rate": 0.0, "ok": 720, "errors": 2280, "ttft_ms": {"p50": 2199.5516910683364, "p95": 7447.555193246808, "p99": 7499.9730495444965}, "tpot_ms": {"p50": 36.95440443285821, "p95": 40.93446902377076}, "tok_per_s": 10789.0, "max_send_lag_s": 0}
+2026-11-27T08:14:12 done tp1_stock_sat
+2026-11-27T08:14:13 start tp1_patched_sat (patched, tp=1, GPUs 0) load 5.20 5.84 7.01
+2026-11-27T08:14:56 tp1_patched_sat ready | max_running_requests defaults to 256 (was 4096) | max_running_requests=256 | KV #tokens: 2364506 | decode graph 256] max, mem usage=0.08 GB
+{"rate": 0.0, "ok": 721, "errors": 2279, "ttft_ms": {"p50": 3249.758791993372, "p95": 6204.398036934435, "p99": 7281.1733265873045}, "tpot_ms": {"p50": 10.489096220648722, "p95": 11.616415007765896}, "tok_per_s": 12277.9, "max_send_lag_s": 0}
+2026-11-27T08:15:50 done tp1_patched_sat
+2026-11-27T08:15:50 DONE_sat_tp1
+2026-11-27T08:15:51 start tp1_vllm_lat1 (vllm, tp=1) load 4.92 5.67 6.84
+2026-11-27T08:18:18 tp1_vllm_lat1 ready | GPU KV cache size: 2,246,656 tokens 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 39.71306647872552, "p95": 76.9057857512962, "p99": 98.48281347192822}, "tpot_ms": {"p50": 6.1148079254253815, "p95": 7.169946428025361}, "tok_per_s": 2588.3, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 49.20074454275891, "p95": 613.4482788562302, "p99": 888.7833712156861}, "tpot_ms": {"p50": 7.596331148419935, "p95": 7.831219904138543}, "tok_per_s": 4923.0, "max_send_lag_s": 0.009}
+2026-11-27T08:19:50 done tp1_vllm_lat1
+2026-11-27T08:19:50 start tp1_vllm_lat2 (vllm, tp=1) load 4.33 5.00 6.28
+2026-11-27T08:20:45 tp1_vllm_lat2 ready | GPU KV cache size: 2,246,656 tokens 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 39.54168997006491, "p95": 76.8685681861825, "p99": 100.87312065297738}, "tpot_ms": {"p50": 6.109010417916117, "p95": 7.127818280480817}, "tok_per_s": 2588.1, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 48.19196555763483, "p95": 672.5301127764395, "p99": 860.3210664342621}, "tpot_ms": {"p50": 7.621092772105011, "p95": 12.584877535281054}, "tok_per_s": 4807.1, "max_send_lag_s": 0.004}
+2026-11-27T08:22:16 done tp1_vllm_lat2
+2026-11-27T08:22:16 start tp1_vllm_lat3 (vllm, tp=1) load 7.58 5.61 6.29
+2026-11-27T08:23:02 tp1_vllm_lat3 ready | GPU KV cache size: 2,246,656 tokens 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 41.06876446167007, "p95": 83.5783254529815, "p99": 101.08568203635512}, "tpot_ms": {"p50": 6.124724527201286, "p95": 7.311119827740701}, "tok_per_s": 2584.6, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 47.70978703163564, "p95": 614.0295765537298, "p99": 885.9454259858466}, "tpot_ms": {"p50": 7.613055172878663, "p95": 7.819772127104705}, "tok_per_s": 4924.7, "max_send_lag_s": 0.012}
+2026-11-27T08:24:33 done tp1_vllm_lat3
+2026-11-27T08:24:33 DONE_vllm_tp1
+2026-11-27T08:24:33 start tp1_stock_gsm8k (stock, tp=1, GPUs 0) load 9.72 7.23 6.81
+2026-11-27T08:25:13 tp1_stock_gsm8k ready |  | max_running_requests=4096 | KV #tokens: 2364506 | decode graph 256] max, mem usage=0.06 GB
+2026-11-27T08:27:38 done tp1_stock_gsm8k     "score": 0.6838514025777104,
+2026-11-27T08:27:38 start tp1_patched_gsm8k (patched, tp=1, GPUs 0) load 8.84 7.82 7.11
+2026-11-27T08:28:18 tp1_patched_gsm8k ready | max_running_requests defaults to 256 (was 4096) | max_running_requests=256 | KV #tokens: 2365237 | decode graph 256] max, mem usage=0.06 GB
+2026-11-27T08:29:38 done tp1_patched_gsm8k     "score": 0.6618650492797574,
+2026-11-27T08:29:38 DONE_gsm_tp1
+2026-11-27T08:44:26 --- rerun tp=1 sat with ulimit -n 65536 (previous sat runs invalid: client ClientConnectorError at fd limit 1024) ---
+2026-11-27T08:44:26 start tp1_stock_sat (stock, tp=1, GPUs 0) load 6.44 5.98 6.28
+2026-11-27T08:45:07 tp1_stock_sat ready |  | max_running_requests=4096 | KV #tokens: 2364506 | decode graph 256] max, mem usage=0.06 GB
+{"rate": 0.0, "ok": 3000, "errors": 0, "ttft_ms": {"p50": 1985.059735015966, "p95": 7816.969105676979, "p99": 8004.090612295549}, "tpot_ms": {"p50": 37.71469349226746, "p95": 41.932131481168085}, "tok_per_s": 13141.3, "max_send_lag_s": 0}
+2026-11-27T08:46:20 done tp1_stock_sat
+2026-11-27T08:46:20 start tp1_patched_sat (patched, tp=1, GPUs 0) load 8.41 6.85 6.57
+2026-11-27T08:47:01 tp1_patched_sat ready | max_running_requests defaults to 256 (was 4096) | max_running_requests=256 | KV #tokens: 2364506 | decode graph 256] max, mem usage=0.08 GB
+{"rate": 0.0, "ok": 3000, "errors": 0, "ttft_ms": {"p50": 5394.094493007287, "p95": 7514.223560440587, "p99": 8978.707079072483}, "tpot_ms": {"p50": 11.135890126122, "p95": 12.425023048252644}, "tok_per_s": 16408.8, "max_send_lag_s": 0}
+2026-11-27T08:48:09 done tp1_patched_sat
+2026-11-27T08:48:09 DONE_sat_tp1
+2026-11-27T08:48:53 start tp2_stock_lat1 (stock, tp=2, GPUs 0,1) load 5.33 6.64 6.56
+2026-11-27T08:50:00 tp2_stock_lat1 ready |  | max_running_requests=4096 | KV #tokens: 4803954 | decode graph 256] max, mem usage=0.18 GB
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 39.997336512897164, "p95": 72.61688922881146, "p99": 94.00563238887116}, "tpot_ms": {"p50": 4.938713243729838, "p95": 6.155252955875938}, "tok_per_s": 2623.8, "max_send_lag_s": 0.003}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 41.55710502527654, "p95": 476.478542335098, "p99": 617.497152078431}, "tpot_ms": {"p50": 6.89522712216456, "p95": 7.4988296139054}, "tok_per_s": 5105.2, "max_send_lag_s": 0.005}
+2026-11-27T08:51:32 done tp2_stock_lat1
+2026-11-27T08:51:32 start tp2_patched_lat1 (patched, tp=2, GPUs 0,1) load 5.22 6.16 6.40
+2026-11-27T08:52:15 tp2_patched_lat1 ready | max_running_requests defaults to 256 (was 4096) | max_running_requests=256 | KV #tokens: 4804539 | decode graph 256] max, mem usage=0.18 GB
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 38.359121477697045, "p95": 68.23877246933986, "p99": 92.14881026535294}, "tpot_ms": {"p50": 4.638399496146544, "p95": 5.82216131843729}, "tok_per_s": 2623.2, "max_send_lag_s": 0.005}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 40.617992519401014, "p95": 465.043256379431, "p99": 652.5478569068944}, "tpot_ms": {"p50": 6.903832731821597, "p95": 7.8836526279429355}, "tok_per_s": 5093.0, "max_send_lag_s": 0.005}
+2026-11-27T08:53:44 done tp2_patched_lat1
+2026-11-27T08:53:44 start tp2_stock_lat2 (stock, tp=2, GPUs 0,1) load 4.44 5.44 6.09
+2026-11-27T08:54:31 tp2_stock_lat2 ready |  | max_running_requests=4096 | KV #tokens: 4803954 | decode graph 256] max, mem usage=0.18 GB
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 38.6745459982194, "p95": 73.26442014891653, "p99": 96.51040362892665}, "tpot_ms": {"p50": 4.745576946762245, "p95": 6.012939393573521}, "tok_per_s": 2621.3, "max_send_lag_s": 0.004}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 43.196867511142045, "p95": 493.0430668639009, "p99": 644.9930353718808}, "tpot_ms": {"p50": 7.031659464128168, "p95": 7.708544072082749}, "tok_per_s": 5112.0, "max_send_lag_s": 0.004}
+2026-11-27T08:56:00 done tp2_stock_lat2
+2026-11-27T08:56:00 start tp2_patched_lat2 (patched, tp=2, GPUs 0,1) load 4.46 5.62 6.11
+2026-11-27T08:56:44 tp2_patched_lat2 ready | max_running_requests defaults to 256 (was 4096) | max_running_requests=256 | KV #tokens: 4803954 | decode graph 256] max, mem usage=0.18 GB
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 36.70132695697248, "p95": 70.10482196928932, "p99": 92.32704981695856}, "tpot_ms": {"p50": 4.586944952845485, "p95": 5.476830839582784}, "tok_per_s": 2623.3, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 38.23682601796463, "p95": 408.84575251257013, "p99": 540.2783111890312}, "tpot_ms": {"p50": 6.630910609988129, "p95": 7.2811839706539425}, "tok_per_s": 5097.4, "max_send_lag_s": 0.01}
+2026-11-27T08:58:13 done tp2_patched_lat2
+2026-11-27T08:58:13 start tp2_stock_lat3 (stock, tp=2, GPUs 0,1) load 5.04 5.53 6.01
+2026-11-27T08:58:56 tp2_stock_lat3 ready |  | max_running_requests=4096 | KV #tokens: 4803954 | decode graph 256] max, mem usage=0.18 GB
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 39.514702453743666, "p95": 72.82424420700404, "p99": 92.75526410085145}, "tpot_ms": {"p50": 4.633088012695399, "p95": 5.661207524322589}, "tok_per_s": 2623.0, "max_send_lag_s": 0.003}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 39.109397504944354, "p95": 433.2728111650792, "p99": 561.0044223640577}, "tpot_ms": {"p50": 6.771041496059175, "p95": 7.507786849113987}, "tok_per_s": 5097.8, "max_send_lag_s": 0.004}
+2026-11-27T09:00:25 done tp2_stock_lat3
+2026-11-27T09:00:26 start tp2_patched_lat3 (patched, tp=2, GPUs 0,1) load 5.69 5.95 6.13
+2026-11-27T09:01:09 tp2_patched_lat3 ready | max_running_requests defaults to 256 (was 4096) | max_running_requests=256 | KV #tokens: 4803954 | decode graph 256] max, mem usage=0.18 GB
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 38.480955990962684, "p95": 75.07120287627912, "p99": 94.65699318912806}, "tpot_ms": {"p50": 4.5683666615468255, "p95": 5.798201879447942}, "tok_per_s": 2621.8, "max_send_lag_s": 0.008}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 39.148677489720285, "p95": 472.41737014264794, "p99": 629.0844349039252}, "tpot_ms": {"p50": 6.901808199387723, "p95": 7.741366424982795}, "tok_per_s": 5092.2, "max_send_lag_s": 0.005}
+2026-11-27T09:02:38 done tp2_patched_lat3
+2026-11-27T09:02:38 DONE_lat_tp2
+2026-11-27T09:02:38 start tp2_stock_sat (stock, tp=2, GPUs 0,1) load 6.07 6.23 6.21
+2026-11-27T09:03:21 tp2_stock_sat ready |  | max_running_requests=4096 | KV #tokens: 4803954 | decode graph 256] max, mem usage=0.18 GB
+{"rate": 0.0, "ok": 3000, "errors": 0, "ttft_ms": {"p50": 1986.8638924672268, "p95": 12047.954690281767, "p99": 17451.824155820064}, "tpot_ms": {"p50": 39.26490719648312, "p95": 44.92108926056026}, "tok_per_s": 12460.0, "max_send_lag_s": 0}
+2026-11-27T09:04:37 done tp2_stock_sat
+2026-11-27T09:04:37 start tp2_patched_sat (patched, tp=2, GPUs 0,1) load 4.87 5.76 6.04
+2026-11-27T09:05:24 tp2_patched_sat ready | max_running_requests defaults to 256 (was 4096) | max_running_requests=256 | KV #tokens: 4804539 | decode graph 256] max, mem usage=0.18 GB
+{"rate": 0.0, "ok": 3000, "errors": 0, "ttft_ms": {"p50": 5575.5109275341965, "p95": 7497.10498044733, "p99": 8778.321969581302}, "tpot_ms": {"p50": 10.741885574571201, "p95": 12.508684870288304}, "tok_per_s": 16076.4, "max_send_lag_s": 0}
+2026-11-27T09:06:32 done tp2_patched_sat
+2026-11-27T09:06:32 DONE_sat_tp2
+2026-11-27T09:06:33 start tp2_vllm_lat1 (vllm, tp=2) load 9.29 6.93 6.41
+2026-11-27T09:08:51 tp2_vllm_lat1 ready | GPU KV cache size: 4,591,616 tokens 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 32.624293002299964, "p95": 56.79306177771643, "p99": 78.7148430140223}, "tpot_ms": {"p50": 4.558617259672747, "p95": 5.428718710374735}, "tok_per_s": 2596.5, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 40.6919660163112, "p95": 289.3449144670733, "p99": 399.3143400689587}, "tpot_ms": {"p50": 6.215473007700428, "p95": 6.595645127607157}, "tok_per_s": 5041.1, "max_send_lag_s": 0.005}
+2026-11-27T09:10:19 done tp2_vllm_lat1
+2026-11-27T09:10:20 start tp2_vllm_lat2 (vllm, tp=2) load 4.40 5.87 6.12
+2026-11-27T09:11:17 tp2_vllm_lat2 ready | GPU KV cache size: 4,591,616 tokens 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 33.07976055657491, "p95": 68.82511131116186, "p99": 83.52551949559711}, "tpot_ms": {"p50": 4.855584580633945, "p95": 6.018742086690314}, "tok_per_s": 2597.0, "max_send_lag_s": 0.002}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 42.029414034914225, "p95": 322.6212795183525, "p99": 455.35530021414155}, "tpot_ms": {"p50": 6.394838326698624, "p95": 6.749350665820997}, "tok_per_s": 5030.8, "max_send_lag_s": 0.004}
+2026-11-27T09:12:46 done tp2_vllm_lat2
+2026-11-27T09:12:46 start tp2_vllm_lat3 (vllm, tp=2) load 4.85 5.61 5.98
+2026-11-27T09:13:40 tp2_vllm_lat3 ready | GPU KV cache size: 4,591,616 tokens 
+{"rate": 20.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 34.73458852386102, "p95": 63.243673380929835, "p99": 87.67526038922367}, "tpot_ms": {"p50": 4.72620279183538, "p95": 5.7380083056467415}, "tok_per_s": 2592.0, "max_send_lag_s": 0.005}
+{"rate": 40.0, "ok": 500, "errors": 0, "ttft_ms": {"p50": 43.136327469255775, "p95": 384.5733581227249, "p99": 509.35234422562644}, "tpot_ms": {"p50": 6.586940863067064, "p95": 6.967451258591838}, "tok_per_s": 5022.4, "max_send_lag_s": 0.006}
+2026-11-27T09:15:09 done tp2_vllm_lat3
+2026-11-27T09:15:09 DONE_vllm_tp2
+2026-11-27T09:15:09 SKIPPED lat tp=4 (dropped by the author)
+2026-11-27T09:15:09 SKIPPED sat tp=4 (dropped by the author)
+2026-11-27T09:15:09 SKIPPED vllm tp=4 (dropped by the author)
+2026-11-27T09:15:09 SKIPPED gsm tp=4 (dropped by the author)
+2026-11-27T09:15:22 start tp1_vllm_sat (vllm, tp=1) load 4.81 5.45 5.87
+2026-11-27T09:16:05 tp1_vllm_sat ready | GPU KV cache size: 2,246,656 tokens 
+{"rate": 0.0, "ok": 3000, "errors": 0, "ttft_ms": {"p50": 1396.669934503734, "p95": 17603.685574111292, "p99": 24852.343893463258}, "tpot_ms": {"p50": 35.751975007633874, "p95": 44.17718044363529}, "tok_per_s": 13211.4, "max_send_lag_s": 0}
+2026-11-27T09:17:18 done tp1_vllm_sat
+2026-11-27T09:17:18 DONE_vllmsat_tp1

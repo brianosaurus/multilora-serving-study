@@ -1,0 +1,921 @@
+{
+  "base": "/dev/shm/models/Qwen2.5-1.5B-Instruct",
+  "base_weights_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+  "rank": 16,
+  "alpha": 32,
+  "b_std": 0.05,
+  "dtype": "float16",
+  "targets": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ],
+  "init": "A ~ N(0, 1/fan_in), B ~ N(0, b_std^2), seeded per adapter",
+  "versions": {
+    "torch": "2.14.0+cu130",
+    "peft": "0.22.0",
+    "transformers": "5.22.2"
+  },
+  "adapters": [
+    {
+      "name": "adapter_0000",
+      "seed": 0,
+      "path": "/dev/shm/adapters/adapter_0000",
+      "bytes": 36981464,
+      "sha256": "fce4dd005e5f34fcd4dcc79dacd169e67e40305e41298a98db6ce7fc0bc7ca94"
+    },
+    {
+      "name": "adapter_0001",
+      "seed": 1,
+      "path": "/dev/shm/adapters/adapter_0001",
+      "bytes": 36981464,
+      "sha256": "c00297d248f78f57634ba75b1a4d6e6cb22289f0dfc54d07ec33fb1cd325aa22"
+    },
+    {
+      "name": "adapter_0002",
+      "seed": 2,
+      "path": "/dev/shm/adapters/adapter_0002",
+      "bytes": 36981464,
+      "sha256": "e34619b183cd60ba5602e2b8a51fefaad56d3e17acb898d418cdcc4c5d222222"
+    },
+    {
+      "name": "adapter_0003",
+      "seed": 3,
+      "path": "/dev/shm/adapters/adapter_0003",
+      "bytes": 36981464,
+      "sha256": "262dab4144713f1b231832559f92a5d84f4454bdb647713ca03d0767283da74d"
+    },
+    {
+      "name": "adapter_0004",
+      "seed": 4,
+      "path": "/dev/shm/adapters/adapter_0004",
+      "bytes": 36981464,
+      "sha256": "e6674aa73ebb2d55c5ee73b6cedf6b9ac8a613c527a7b3ef05e5bc72c74a0f72"
+    },
+    {
+      "name": "adapter_0005",
+      "seed": 5,
+      "path": "/dev/shm/adapters/adapter_0005",
+      "bytes": 36981464,
+      "sha256": "da47b89eb33bbdedc90f570e597c512d787fdf0028c987543d2124b39845582b"
+    },
+    {
+      "name": "adapter_0006",
+      "seed": 6,
+      "path": "/dev/shm/adapters/adapter_0006",
+      "bytes": 36981464,
+      "sha256": "f380fa5e372e4742d149c0db33e69d7e5b7c10e18a2bcf5ae61ccc0a8e829884"
+    },
+    {
+      "name": "adapter_0007",
+      "seed": 7,
+      "path": "/dev/shm/adapters/adapter_0007",
+      "bytes": 36981464,
+      "sha256": "f127b4a3455081b9527e22bdb8f82f69eb905186126376a590dea34d86096d8d"
+    },
+    {
+      "name": "adapter_0008",
+      "seed": 8,
+      "path": "/dev/shm/adapters/adapter_0008",
+      "bytes": 36981464,
+      "sha256": "25c32a18900fd2533b45396d3944335ddefa56187d86c8bc554afafb7a4b954d"
+    },
+    {
+      "name": "adapter_0009",
+      "seed": 9,
+      "path": "/dev/shm/adapters/adapter_0009",
+      "bytes": 36981464,
+      "sha256": "663ad32cf377a8937ad2847311268c5fd6a1da9c8644aa24fe48e0be32116efd"
+    },
+    {
+      "name": "adapter_0010",
+      "seed": 10,
+      "path": "/dev/shm/adapters/adapter_0010",
+      "bytes": 36981464,
+      "sha256": "817caedbe32fa68b280f4f572cfaeb67756e64ac2772213644d2d12e727d5826"
+    },
+    {
+      "name": "adapter_0011",
+      "seed": 11,
+      "path": "/dev/shm/adapters/adapter_0011",
+      "bytes": 36981464,
+      "sha256": "80325b51358175231ec31336111fedbf0f9f5d683b240f96a160a2c94d8ed5b0"
+    },
+    {
+      "name": "adapter_0012",
+      "seed": 12,
+      "path": "/dev/shm/adapters/adapter_0012",
+      "bytes": 36981464,
+      "sha256": "fec4e94bdae1413e67e64150e6a615e091a99709cbac96f7d20195e3bcc49e27"
+    },
+    {
+      "name": "adapter_0013",
+      "seed": 13,
+      "path": "/dev/shm/adapters/adapter_0013",
+      "bytes": 36981464,
+      "sha256": "358bfa2d1c22b6831848b8d4eb7b47631bf16ecd5d628ef280716f4434896bb6"
+    },
+    {
+      "name": "adapter_0014",
+      "seed": 14,
+      "path": "/dev/shm/adapters/adapter_0014",
+      "bytes": 36981464,
+      "sha256": "e38825fb660d0961714182da7f4bada10029de0bf5b1d66457c36cc93e77deb7"
+    },
+    {
+      "name": "adapter_0015",
+      "seed": 15,
+      "path": "/dev/shm/adapters/adapter_0015",
+      "bytes": 36981464,
+      "sha256": "69c2c88d6aecb081e9b21d4c2732f73389732cafd893f99a175da68a6891a736"
+    },
+    {
+      "name": "adapter_0016",
+      "seed": 16,
+      "path": "/dev/shm/adapters/adapter_0016",
+      "bytes": 36981464,
+      "sha256": "278f8ebb1506b9fa62c7a627e1fd3cd68ec755a70e55f3b1f965aebdca2d7cc2"
+    },
+    {
+      "name": "adapter_0017",
+      "seed": 17,
+      "path": "/dev/shm/adapters/adapter_0017",
+      "bytes": 36981464,
+      "sha256": "6947197802f101dbfbaae46ef26954a0f95705d51c919e41451200e20992a0cf"
+    },
+    {
+      "name": "adapter_0018",
+      "seed": 18,
+      "path": "/dev/shm/adapters/adapter_0018",
+      "bytes": 36981464,
+      "sha256": "153d2c51fb5bb492b96817b3f44671d23fce01037985a20abf75b007a821312d"
+    },
+    {
+      "name": "adapter_0019",
+      "seed": 19,
+      "path": "/dev/shm/adapters/adapter_0019",
+      "bytes": 36981464,
+      "sha256": "e793f777cfe81ecc7bfef4a421726f0aa4f5c40f15bd97950ff6ec8377260334"
+    },
+    {
+      "name": "adapter_0020",
+      "seed": 20,
+      "path": "/dev/shm/adapters/adapter_0020",
+      "bytes": 36981464,
+      "sha256": "83135e47a7af0f515b4dd54737a1a3fb9733e14ea256ed34cf138abe7167ccf0"
+    },
+    {
+      "name": "adapter_0021",
+      "seed": 21,
+      "path": "/dev/shm/adapters/adapter_0021",
+      "bytes": 36981464,
+      "sha256": "92611cf2ca702712b4fe9dd78e4cf0b96699e1bd59d3e56978ca720b798a101c"
+    },
+    {
+      "name": "adapter_0022",
+      "seed": 22,
+      "path": "/dev/shm/adapters/adapter_0022",
+      "bytes": 36981464,
+      "sha256": "00ce1d1b3a902407e3fe94f0c0cbbeda081799eaa5a41c30c67715d0ea302c7a"
+    },
+    {
+      "name": "adapter_0023",
+      "seed": 23,
+      "path": "/dev/shm/adapters/adapter_0023",
+      "bytes": 36981464,
+      "sha256": "9d107c984e15a8a4037ff5438f5238d17ac68a4b1251364d3cb4f8c769515fa1"
+    },
+    {
+      "name": "adapter_0024",
+      "seed": 24,
+      "path": "/dev/shm/adapters/adapter_0024",
+      "bytes": 36981464,
+      "sha256": "3e468d4b731453d679e83575b1e0d1d07bc7b46986421fb9f5866a1103496fae"
+    },
+    {
+      "name": "adapter_0025",
+      "seed": 25,
+      "path": "/dev/shm/adapters/adapter_0025",
+      "bytes": 36981464,
+      "sha256": "fa49ccec8d1ab401d034e82547cbd4518453c36f787e4771492377da5ca7c759"
+    },
+    {
+      "name": "adapter_0026",
+      "seed": 26,
+      "path": "/dev/shm/adapters/adapter_0026",
+      "bytes": 36981464,
+      "sha256": "d666ba4c6c21ef0b456b46be80d185d2968ee1152f96021c31b5f28f3514dbab"
+    },
+    {
+      "name": "adapter_0027",
+      "seed": 27,
+      "path": "/dev/shm/adapters/adapter_0027",
+      "bytes": 36981464,
+      "sha256": "94b0495c42812c3987b22508f2e3c28408dc3e2a4c4081cdf6ba8dd06460f47f"
+    },
+    {
+      "name": "adapter_0028",
+      "seed": 28,
+      "path": "/dev/shm/adapters/adapter_0028",
+      "bytes": 36981464,
+      "sha256": "208259b5a03ee45a78a1332d85430d85dee1c57e200dbe82596ff8cb7048ad04"
+    },
+    {
+      "name": "adapter_0029",
+      "seed": 29,
+      "path": "/dev/shm/adapters/adapter_0029",
+      "bytes": 36981464,
+      "sha256": "65d554175274a01580b5dd128a422169c709faf02b72f6afaf5d9b7ddd79d1e0"
+    },
+    {
+      "name": "adapter_0030",
+      "seed": 30,
+      "path": "/dev/shm/adapters/adapter_0030",
+      "bytes": 36981464,
+      "sha256": "452ae1bfed59dee5a00254783cedafdc5988411a5c7d484cc047583cd4010ae3"
+    },
+    {
+      "name": "adapter_0031",
+      "seed": 31,
+      "path": "/dev/shm/adapters/adapter_0031",
+      "bytes": 36981464,
+      "sha256": "6a1e6b4235ae11b11b83fcf09afd8a562520855f38e63199be8e80b6cd06afea"
+    },
+    {
+      "name": "adapter_0032",
+      "seed": 32,
+      "path": "/dev/shm/adapters/adapter_0032",
+      "bytes": 36981464,
+      "sha256": "ea806de18c8673eb501d833c60d50145de610e304f3eda0d1789cd36ca11136e"
+    },
+    {
+      "name": "adapter_0033",
+      "seed": 33,
+      "path": "/dev/shm/adapters/adapter_0033",
+      "bytes": 36981464,
+      "sha256": "82d204f2d569cfcb205c4d4fc7c2251a1c14cc1d31697ab22ebed2191f61337a"
+    },
+    {
+      "name": "adapter_0034",
+      "seed": 34,
+      "path": "/dev/shm/adapters/adapter_0034",
+      "bytes": 36981464,
+      "sha256": "7d909d8e6b78c4536ad37926c581c9f5bcc790422be0b42db07b74cf74448771"
+    },
+    {
+      "name": "adapter_0035",
+      "seed": 35,
+      "path": "/dev/shm/adapters/adapter_0035",
+      "bytes": 36981464,
+      "sha256": "4606639b075e8292960dd0b0ba855aa28a5bbb255b9b02fc3e28810365e2e317"
+    },
+    {
+      "name": "adapter_0036",
+      "seed": 36,
+      "path": "/dev/shm/adapters/adapter_0036",
+      "bytes": 36981464,
+      "sha256": "82f8ab0e3ed3593afc151f2824024cfbe86880bcb07abe7d1ff561833b7457c9"
+    },
+    {
+      "name": "adapter_0037",
+      "seed": 37,
+      "path": "/dev/shm/adapters/adapter_0037",
+      "bytes": 36981464,
+      "sha256": "86f9e6556d50760b58a648a0c9797cb27d7e8be1a1b36ec467d2779816abfed7"
+    },
+    {
+      "name": "adapter_0038",
+      "seed": 38,
+      "path": "/dev/shm/adapters/adapter_0038",
+      "bytes": 36981464,
+      "sha256": "0a2f6989a87baf95a1e13ccceb00a5661afc66c168e5ba303806e5839401162d"
+    },
+    {
+      "name": "adapter_0039",
+      "seed": 39,
+      "path": "/dev/shm/adapters/adapter_0039",
+      "bytes": 36981464,
+      "sha256": "b3c04255e8a65f1c1a74eb7402bf3488c5c8ccc6914f9e4090b4796160777582"
+    },
+    {
+      "name": "adapter_0040",
+      "seed": 40,
+      "path": "/dev/shm/adapters/adapter_0040",
+      "bytes": 36981464,
+      "sha256": "3b06288ea12f2225d473c7f9d7f60ab063f119731be5f8cd29552d18e2e11086"
+    },
+    {
+      "name": "adapter_0041",
+      "seed": 41,
+      "path": "/dev/shm/adapters/adapter_0041",
+      "bytes": 36981464,
+      "sha256": "e29368513d494e77ed3af629ea1e019ccb92429ef5bad3558c9dbfbc9cd3d416"
+    },
+    {
+      "name": "adapter_0042",
+      "seed": 42,
+      "path": "/dev/shm/adapters/adapter_0042",
+      "bytes": 36981464,
+      "sha256": "24f3551e568b7f19fe6ee7d548f8334ca7e5f8af53b43a1931b1411d81dfde8e"
+    },
+    {
+      "name": "adapter_0043",
+      "seed": 43,
+      "path": "/dev/shm/adapters/adapter_0043",
+      "bytes": 36981464,
+      "sha256": "11e863526607cbf971efab7405e64f7a67d0fddf112a42c6f12ea9dabe28171e"
+    },
+    {
+      "name": "adapter_0044",
+      "seed": 44,
+      "path": "/dev/shm/adapters/adapter_0044",
+      "bytes": 36981464,
+      "sha256": "f20533fc8273ba64e9765c0c4365b9fce7594dfdeadad22d8f229516849267cb"
+    },
+    {
+      "name": "adapter_0045",
+      "seed": 45,
+      "path": "/dev/shm/adapters/adapter_0045",
+      "bytes": 36981464,
+      "sha256": "dc0a9d6e19c3583b4b4b5a960b3b3d3e56a7728f1bee9f66f3d0f76d755ad3e0"
+    },
+    {
+      "name": "adapter_0046",
+      "seed": 46,
+      "path": "/dev/shm/adapters/adapter_0046",
+      "bytes": 36981464,
+      "sha256": "cadc7f73bf677e5ae04fc2fb73a8b49394cc848a7ca799a9e92e5f3b672ee9e9"
+    },
+    {
+      "name": "adapter_0047",
+      "seed": 47,
+      "path": "/dev/shm/adapters/adapter_0047",
+      "bytes": 36981464,
+      "sha256": "e656b9b94eca28be24dc981b83c76562eb9df9ba14a8adf5eb9d6153e9016c29"
+    },
+    {
+      "name": "adapter_0048",
+      "seed": 48,
+      "path": "/dev/shm/adapters/adapter_0048",
+      "bytes": 36981464,
+      "sha256": "2a17ae4d900e587207ce437898cd38b41c47c56497b6c82796f1badf85de89d8"
+    },
+    {
+      "name": "adapter_0049",
+      "seed": 49,
+      "path": "/dev/shm/adapters/adapter_0049",
+      "bytes": 36981464,
+      "sha256": "850a33f02f7a0c030e9ed85e6f10cd54dbb9b970678f2c3738886e795e64c083"
+    },
+    {
+      "name": "adapter_0050",
+      "seed": 50,
+      "path": "/dev/shm/adapters/adapter_0050",
+      "bytes": 36981464,
+      "sha256": "7ebcb7088ee7d5d196136e92eec6bf135b869be789fb2fc6459cec5e3e4e3f89"
+    },
+    {
+      "name": "adapter_0051",
+      "seed": 51,
+      "path": "/dev/shm/adapters/adapter_0051",
+      "bytes": 36981464,
+      "sha256": "2d028e4f6dd6ddf3770ff4f2360d18aba4bb7dcc263ea431b8d868286c999d49"
+    },
+    {
+      "name": "adapter_0052",
+      "seed": 52,
+      "path": "/dev/shm/adapters/adapter_0052",
+      "bytes": 36981464,
+      "sha256": "39d0039339caaab3759629f1fe10979b4be89cf21c0638af3363175f08c4ff83"
+    },
+    {
+      "name": "adapter_0053",
+      "seed": 53,
+      "path": "/dev/shm/adapters/adapter_0053",
+      "bytes": 36981464,
+      "sha256": "dbeb895c2b84a40e794c2c9f0505e096617f17bb12e69f6e7ca8adb4274ae815"
+    },
+    {
+      "name": "adapter_0054",
+      "seed": 54,
+      "path": "/dev/shm/adapters/adapter_0054",
+      "bytes": 36981464,
+      "sha256": "a1af94b0c6409eeb71c63b6fc873dbdb286c58794d7acf428c6783a1136560e4"
+    },
+    {
+      "name": "adapter_0055",
+      "seed": 55,
+      "path": "/dev/shm/adapters/adapter_0055",
+      "bytes": 36981464,
+      "sha256": "37ca8fc3579018007546b3b6d638447a8fd6d77c2e568401df556edb5edb30a9"
+    },
+    {
+      "name": "adapter_0056",
+      "seed": 56,
+      "path": "/dev/shm/adapters/adapter_0056",
+      "bytes": 36981464,
+      "sha256": "b62df647596d30a68770e71bde71d1c1fdd52e655a99ce5b57176fdc9a289c3f"
+    },
+    {
+      "name": "adapter_0057",
+      "seed": 57,
+      "path": "/dev/shm/adapters/adapter_0057",
+      "bytes": 36981464,
+      "sha256": "20ed1041b00b18e92bcaa65688cd4173f15dec047939f103f87780a964486d69"
+    },
+    {
+      "name": "adapter_0058",
+      "seed": 58,
+      "path": "/dev/shm/adapters/adapter_0058",
+      "bytes": 36981464,
+      "sha256": "7d8aad99d7330274c5708fc46672f2875df51dbacaafaa6efda60ac60416b510"
+    },
+    {
+      "name": "adapter_0059",
+      "seed": 59,
+      "path": "/dev/shm/adapters/adapter_0059",
+      "bytes": 36981464,
+      "sha256": "a8dbbc2359a5a5b797df9afd679d820bd155adfadfd94cf17d2135e113744ecb"
+    },
+    {
+      "name": "adapter_0060",
+      "seed": 60,
+      "path": "/dev/shm/adapters/adapter_0060",
+      "bytes": 36981464,
+      "sha256": "9498c3e3b2a7dd78c3adacb403114ad15bf6e978633c763186eb14b9d35bee85"
+    },
+    {
+      "name": "adapter_0061",
+      "seed": 61,
+      "path": "/dev/shm/adapters/adapter_0061",
+      "bytes": 36981464,
+      "sha256": "210563d89520c86a0ac5f1a9a30284a24b42cd35da218abb7037181edb8ce990"
+    },
+    {
+      "name": "adapter_0062",
+      "seed": 62,
+      "path": "/dev/shm/adapters/adapter_0062",
+      "bytes": 36981464,
+      "sha256": "06e88a86559f03352ee1d4e1c7c729bc262131a9048250aa1a19b290c1a070ca"
+    },
+    {
+      "name": "adapter_0063",
+      "seed": 63,
+      "path": "/dev/shm/adapters/adapter_0063",
+      "bytes": 36981464,
+      "sha256": "ed44ad152fe0ee203f75fc10331336c88aeb03f9de6817ca3ef86ee16c683691"
+    },
+    {
+      "name": "adapter_0064",
+      "seed": 64,
+      "path": "/dev/shm/adapters/adapter_0064",
+      "bytes": 36981464,
+      "sha256": "f0c2e3dd6c58074e6bb9e0a68e8577fd15911006992f3ebd2d6b7f8983e029ee"
+    },
+    {
+      "name": "adapter_0065",
+      "seed": 65,
+      "path": "/dev/shm/adapters/adapter_0065",
+      "bytes": 36981464,
+      "sha256": "6273036a1097b47cceb32cc539099254f1d7484f248993469d092d672d424662"
+    },
+    {
+      "name": "adapter_0066",
+      "seed": 66,
+      "path": "/dev/shm/adapters/adapter_0066",
+      "bytes": 36981464,
+      "sha256": "cf3e2d9fb031ea27b0beeb9ffb0d2e2ede120ac095926c388940b82095f8df53"
+    },
+    {
+      "name": "adapter_0067",
+      "seed": 67,
+      "path": "/dev/shm/adapters/adapter_0067",
+      "bytes": 36981464,
+      "sha256": "a65dd74d2a678014dc67d7e5c42b23fbfbfc23ec3d1e939a3d00acc3c38adc08"
+    },
+    {
+      "name": "adapter_0068",
+      "seed": 68,
+      "path": "/dev/shm/adapters/adapter_0068",
+      "bytes": 36981464,
+      "sha256": "6cab7f96b7a96f01971c7a4172dd3a9120c57fa61767bd9e6f3b2990834eff62"
+    },
+    {
+      "name": "adapter_0069",
+      "seed": 69,
+      "path": "/dev/shm/adapters/adapter_0069",
+      "bytes": 36981464,
+      "sha256": "0c261e7da76e2bf105a29b0ad9bdf3477bae3404d0b30d8bc0e2c67dd94304a7"
+    },
+    {
+      "name": "adapter_0070",
+      "seed": 70,
+      "path": "/dev/shm/adapters/adapter_0070",
+      "bytes": 36981464,
+      "sha256": "dabd5ee7b23ce5e53f4581d17cafb8849560c40b4f91141a0f99725a11b59789"
+    },
+    {
+      "name": "adapter_0071",
+      "seed": 71,
+      "path": "/dev/shm/adapters/adapter_0071",
+      "bytes": 36981464,
+      "sha256": "08038b075ea3088e8d2fb27e83114c624a0c687e5a06db4dfd552fa0b18bfa94"
+    },
+    {
+      "name": "adapter_0072",
+      "seed": 72,
+      "path": "/dev/shm/adapters/adapter_0072",
+      "bytes": 36981464,
+      "sha256": "37934aeabc1a33a861429cb351ad92f06f1b7b7780f9108fe3f30dc7d4cd9881"
+    },
+    {
+      "name": "adapter_0073",
+      "seed": 73,
+      "path": "/dev/shm/adapters/adapter_0073",
+      "bytes": 36981464,
+      "sha256": "b0a50f67e0e478574df6fe137c5f659a7a9f2cf574cd5e197195d9ec99c725ff"
+    },
+    {
+      "name": "adapter_0074",
+      "seed": 74,
+      "path": "/dev/shm/adapters/adapter_0074",
+      "bytes": 36981464,
+      "sha256": "44efa8db76999f8a8397ce1a4a426ae9849bd3e267356b5cb7feb5a71bdb9e6d"
+    },
+    {
+      "name": "adapter_0075",
+      "seed": 75,
+      "path": "/dev/shm/adapters/adapter_0075",
+      "bytes": 36981464,
+      "sha256": "d45627205ba695e49cadb3d08c70fcc981b1ca099e4ba9de2187bddb805e6edf"
+    },
+    {
+      "name": "adapter_0076",
+      "seed": 76,
+      "path": "/dev/shm/adapters/adapter_0076",
+      "bytes": 36981464,
+      "sha256": "4ea24756b84148a07cdc662c1a6621e140b613a353a424a7cd0f1eb7decc044a"
+    },
+    {
+      "name": "adapter_0077",
+      "seed": 77,
+      "path": "/dev/shm/adapters/adapter_0077",
+      "bytes": 36981464,
+      "sha256": "27b63c3c74ad2c9ae97e2c85ae4c224beba9678e357b84a1b09694c7d2f101d7"
+    },
+    {
+      "name": "adapter_0078",
+      "seed": 78,
+      "path": "/dev/shm/adapters/adapter_0078",
+      "bytes": 36981464,
+      "sha256": "fcff8600ad1e2271a5d638236d7c518507c782febe04e1384292a63eb2ba8be3"
+    },
+    {
+      "name": "adapter_0079",
+      "seed": 79,
+      "path": "/dev/shm/adapters/adapter_0079",
+      "bytes": 36981464,
+      "sha256": "2719a105c6e74b185f4e8d0cc3b3e791b9241603b727360982c394d992d8f0c4"
+    },
+    {
+      "name": "adapter_0080",
+      "seed": 80,
+      "path": "/dev/shm/adapters/adapter_0080",
+      "bytes": 36981464,
+      "sha256": "65e01e53cb910dc8974354b1f76ae264984bb4f22d9a48a46c0776f9fb2f5913"
+    },
+    {
+      "name": "adapter_0081",
+      "seed": 81,
+      "path": "/dev/shm/adapters/adapter_0081",
+      "bytes": 36981464,
+      "sha256": "0703085cfc849a8be657726204959ca1827bd92a285ce2ba55fb6a01c914632c"
+    },
+    {
+      "name": "adapter_0082",
+      "seed": 82,
+      "path": "/dev/shm/adapters/adapter_0082",
+      "bytes": 36981464,
+      "sha256": "103276c7be267f67bf2da3ac4632993c6329c591fa1dbcad2c9413e6c824035e"
+    },
+    {
+      "name": "adapter_0083",
+      "seed": 83,
+      "path": "/dev/shm/adapters/adapter_0083",
+      "bytes": 36981464,
+      "sha256": "7d697d6ef67563f30dd30eaa027d0bee19452704f90fc937b825daa8b93979e0"
+    },
+    {
+      "name": "adapter_0084",
+      "seed": 84,
+      "path": "/dev/shm/adapters/adapter_0084",
+      "bytes": 36981464,
+      "sha256": "6ca36e0a7a01e7efa2094c50b86ae0c97503c9fa5718afac2f06881eea8225a0"
+    },
+    {
+      "name": "adapter_0085",
+      "seed": 85,
+      "path": "/dev/shm/adapters/adapter_0085",
+      "bytes": 36981464,
+      "sha256": "5d97387a7b482202c5b5ecbfffe023fce91834fc7899624cde2fe7566a446477"
+    },
+    {
+      "name": "adapter_0086",
+      "seed": 86,
+      "path": "/dev/shm/adapters/adapter_0086",
+      "bytes": 36981464,
+      "sha256": "f15d47a5161bf67e3fc5d605d5e582626093e1d2fa8d722692065c1f1cfbc010"
+    },
+    {
+      "name": "adapter_0087",
+      "seed": 87,
+      "path": "/dev/shm/adapters/adapter_0087",
+      "bytes": 36981464,
+      "sha256": "03a3f62f7c214a3c3e1f32a41654f9f827559579ec84dccd34d89e5cd21b7698"
+    },
+    {
+      "name": "adapter_0088",
+      "seed": 88,
+      "path": "/dev/shm/adapters/adapter_0088",
+      "bytes": 36981464,
+      "sha256": "b52a67d9dadfc32ca01d6d675970300693706033172bbf9b034b7cc4d664c2e2"
+    },
+    {
+      "name": "adapter_0089",
+      "seed": 89,
+      "path": "/dev/shm/adapters/adapter_0089",
+      "bytes": 36981464,
+      "sha256": "43afb61c0f57b9ab2d765fac2ceeab760836e1a912ec01c8cd7c0e9707959fba"
+    },
+    {
+      "name": "adapter_0090",
+      "seed": 90,
+      "path": "/dev/shm/adapters/adapter_0090",
+      "bytes": 36981464,
+      "sha256": "509824178c1316761a8465ecc3ce7a1e464c04dbb98e4ea4d2ada6c8b911fc61"
+    },
+    {
+      "name": "adapter_0091",
+      "seed": 91,
+      "path": "/dev/shm/adapters/adapter_0091",
+      "bytes": 36981464,
+      "sha256": "714f06ef245502f922face39f4ef6b07fc694ffc5b7287b9345e72e7beb3582b"
+    },
+    {
+      "name": "adapter_0092",
+      "seed": 92,
+      "path": "/dev/shm/adapters/adapter_0092",
+      "bytes": 36981464,
+      "sha256": "80cbd62904dfccf2aa826322cb4fff52df25d4f0ec307ca67402ff3c8c7617f7"
+    },
+    {
+      "name": "adapter_0093",
+      "seed": 93,
+      "path": "/dev/shm/adapters/adapter_0093",
+      "bytes": 36981464,
+      "sha256": "1ffc3dfe3c3ee00cf6fbd80c8c973c519a068c45b615e359ff98a0009c9b2b3b"
+    },
+    {
+      "name": "adapter_0094",
+      "seed": 94,
+      "path": "/dev/shm/adapters/adapter_0094",
+      "bytes": 36981464,
+      "sha256": "3546d7db779075356a2b6af60dc2001db31e232781b9b3b754941b8c33539c95"
+    },
+    {
+      "name": "adapter_0095",
+      "seed": 95,
+      "path": "/dev/shm/adapters/adapter_0095",
+      "bytes": 36981464,
+      "sha256": "63d09bce210afe012e4a0a3d73e7df4019fa15e8203e89fdba764c7e38b6b520"
+    },
+    {
+      "name": "adapter_0096",
+      "seed": 96,
+      "path": "/dev/shm/adapters/adapter_0096",
+      "bytes": 36981464,
+      "sha256": "1a228f1931f4afcb10584a5b0b77d7ae448b98bdfc57f0493e9c20e18b24af9e"
+    },
+    {
+      "name": "adapter_0097",
+      "seed": 97,
+      "path": "/dev/shm/adapters/adapter_0097",
+      "bytes": 36981464,
+      "sha256": "debb342276e0174d6f354a7530b20f2200433aa3ba5182b610b6fbcd5d31938a"
+    },
+    {
+      "name": "adapter_0098",
+      "seed": 98,
+      "path": "/dev/shm/adapters/adapter_0098",
+      "bytes": 36981464,
+      "sha256": "739a20e5897c2e3460e61660df2e5b4dbacbe45049db65f103fca4d263ae2585"
+    },
+    {
+      "name": "adapter_0099",
+      "seed": 99,
+      "path": "/dev/shm/adapters/adapter_0099",
+      "bytes": 36981464,
+      "sha256": "aa6a76ece9edd04893245443309dd7baff34726e4776015669de99961b16e341"
+    },
+    {
+      "name": "adapter_0100",
+      "seed": 100,
+      "path": "/dev/shm/adapters/adapter_0100",
+      "bytes": 36981464,
+      "sha256": "b90a2ae1ea0404bedb1f7b6a80821e60c981c2f5955b86632d69cefa4e813e3e"
+    },
+    {
+      "name": "adapter_0101",
+      "seed": 101,
+      "path": "/dev/shm/adapters/adapter_0101",
+      "bytes": 36981464,
+      "sha256": "35d077826431cca29c218fd51b7a0f169566f8401948f837fabb403a37a85ef0"
+    },
+    {
+      "name": "adapter_0102",
+      "seed": 102,
+      "path": "/dev/shm/adapters/adapter_0102",
+      "bytes": 36981464,
+      "sha256": "6d22952abfc71cd74813aafe8c975855acf426cdba763443368d21080e5b12c5"
+    },
+    {
+      "name": "adapter_0103",
+      "seed": 103,
+      "path": "/dev/shm/adapters/adapter_0103",
+      "bytes": 36981464,
+      "sha256": "a40fc6e816a5e7077b19a26c47cadec057c1018bf5c481b535929c9ae4e13ac0"
+    },
+    {
+      "name": "adapter_0104",
+      "seed": 104,
+      "path": "/dev/shm/adapters/adapter_0104",
+      "bytes": 36981464,
+      "sha256": "74eac608bd60f23b29d51461f74977cb2d248e74dd44ccf801b0d36c8fe18aec"
+    },
+    {
+      "name": "adapter_0105",
+      "seed": 105,
+      "path": "/dev/shm/adapters/adapter_0105",
+      "bytes": 36981464,
+      "sha256": "d36086be26f5c0c74e658de9f2d4ef4931e1fc9d14d352ae51eeb90c0c6ee604"
+    },
+    {
+      "name": "adapter_0106",
+      "seed": 106,
+      "path": "/dev/shm/adapters/adapter_0106",
+      "bytes": 36981464,
+      "sha256": "59f922f3b8864cd9031ccb0b29ca1e3313be75bf1e697ef0aad64a8ec572e1bc"
+    },
+    {
+      "name": "adapter_0107",
+      "seed": 107,
+      "path": "/dev/shm/adapters/adapter_0107",
+      "bytes": 36981464,
+      "sha256": "04a17482e57038d9d8f2ca68cde468b8f3ea5e48489b9f75ecd049355a628f87"
+    },
+    {
+      "name": "adapter_0108",
+      "seed": 108,
+      "path": "/dev/shm/adapters/adapter_0108",
+      "bytes": 36981464,
+      "sha256": "7131f5d71bbc91ccbd14d02c16ef5c187dd7d352a87dde65c4a57594017908e5"
+    },
+    {
+      "name": "adapter_0109",
+      "seed": 109,
+      "path": "/dev/shm/adapters/adapter_0109",
+      "bytes": 36981464,
+      "sha256": "d0d8a834d9acd0793c58c5e8036441bc46d6c6fb55286eae2f6e2417a62d8fe8"
+    },
+    {
+      "name": "adapter_0110",
+      "seed": 110,
+      "path": "/dev/shm/adapters/adapter_0110",
+      "bytes": 36981464,
+      "sha256": "4da5dc114ac3b42d9af6231da66fed769df77fb1458b12493c8f4f79f312a7d9"
+    },
+    {
+      "name": "adapter_0111",
+      "seed": 111,
+      "path": "/dev/shm/adapters/adapter_0111",
+      "bytes": 36981464,
+      "sha256": "22b93d6d979de0f1892153f8377fd709f43f592cf3b6eb7fb9440e92cb49d3d3"
+    },
+    {
+      "name": "adapter_0112",
+      "seed": 112,
+      "path": "/dev/shm/adapters/adapter_0112",
+      "bytes": 36981464,
+      "sha256": "303be028853cee05a60e32a3a6daea10723d20d520c2cef58cfee29e17412b92"
+    },
+    {
+      "name": "adapter_0113",
+      "seed": 113,
+      "path": "/dev/shm/adapters/adapter_0113",
+      "bytes": 36981464,
+      "sha256": "ca244e3766f7d0bce3f04f416a537bf0ab3471bb3418c04ed51a63a163cf5e3b"
+    },
+    {
+      "name": "adapter_0114",
+      "seed": 114,
+      "path": "/dev/shm/adapters/adapter_0114",
+      "bytes": 36981464,
+      "sha256": "1b919e80bd84b1fa9065d21332df07934dc389e9bbbad8f1cb11543f134e4a69"
+    },
+    {
+      "name": "adapter_0115",
+      "seed": 115,
+      "path": "/dev/shm/adapters/adapter_0115",
+      "bytes": 36981464,
+      "sha256": "a5728b531ba0e946fa4c69a20b5a9fc06fb5a358f11f3f32e32ae8538e06c1f1"
+    },
+    {
+      "name": "adapter_0116",
+      "seed": 116,
+      "path": "/dev/shm/adapters/adapter_0116",
+      "bytes": 36981464,
+      "sha256": "378c8bd62c9ebe0bf819135f778586c21fd4aba5cb238e7190d3c4073838f9b0"
+    },
+    {
+      "name": "adapter_0117",
+      "seed": 117,
+      "path": "/dev/shm/adapters/adapter_0117",
+      "bytes": 36981464,
+      "sha256": "9577d094a9ba1182b4285b40ee40ecd6915e93523c17067e2ae496458cb396be"
+    },
+    {
+      "name": "adapter_0118",
+      "seed": 118,
+      "path": "/dev/shm/adapters/adapter_0118",
+      "bytes": 36981464,
+      "sha256": "dd6d31edef301a42dd1bb3c62d20e5d3bbf55c37c839eec97e0aabff4986447e"
+    },
+    {
+      "name": "adapter_0119",
+      "seed": 119,
+      "path": "/dev/shm/adapters/adapter_0119",
+      "bytes": 36981464,
+      "sha256": "a981aab440f7f07616f4759ec5a4b633056463b1f2b999f085678eb0660f227e"
+    },
+    {
+      "name": "adapter_0120",
+      "seed": 120,
+      "path": "/dev/shm/adapters/adapter_0120",
+      "bytes": 36981464,
+      "sha256": "9ea7aeb52ffcfa84d6b0e94cac6b01f5d6e54abc569ffbb460ba4cd9fdc03a0c"
+    },
+    {
+      "name": "adapter_0121",
+      "seed": 121,
+      "path": "/dev/shm/adapters/adapter_0121",
+      "bytes": 36981464,
+      "sha256": "e42082527ae1299400ab2ec7972d0a3a757c2c04de37ed7fa176a173e59a15c8"
+    },
+    {
+      "name": "adapter_0122",
+      "seed": 122,
+      "path": "/dev/shm/adapters/adapter_0122",
+      "bytes": 36981464,
+      "sha256": "9fa58bf5daf1345672be7f0417867cf1d68ea5bcfe94885aeea1e177b489580f"
+    },
+    {
+      "name": "adapter_0123",
+      "seed": 123,
+      "path": "/dev/shm/adapters/adapter_0123",
+      "bytes": 36981464,
+      "sha256": "5fbbe0019a9be79b2254698d23d92857e3a93520a38964a3c72999fb32a54751"
+    },
+    {
+      "name": "adapter_0124",
+      "seed": 124,
+      "path": "/dev/shm/adapters/adapter_0124",
+      "bytes": 36981464,
+      "sha256": "c1d28aeaa0833f062a5c971d2c0594b1e60d35b4449fa29acb80fefee91bdec1"
+    },
+    {
+      "name": "adapter_0125",
+      "seed": 125,
+      "path": "/dev/shm/adapters/adapter_0125",
+      "bytes": 36981464,
+      "sha256": "eb3c404942766b97b04a1327a28cea8e6d2113a583e2162cf1dba20f444d1aa7"
+    },
+    {
+      "name": "adapter_0126",
+      "seed": 126,
+      "path": "/dev/shm/adapters/adapter_0126",
+      "bytes": 36981464,
+      "sha256": "ec461e6f2c95271cbd025047988647aa02245e8dce457b89f1119fcba730bf52"
+    },
+    {
+      "name": "adapter_0127",
+      "seed": 127,
+      "path": "/dev/shm/adapters/adapter_0127",
+      "bytes": 36981464,
+      "sha256": "98fae40c4a86aac22b084f4294fdcc468b9f0075b00e1a30854cad88193c50af"
+    }
+  ]
+}
