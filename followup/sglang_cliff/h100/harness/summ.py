@@ -1,6 +1,6 @@
 import json, glob, os, sys
 tp = sys.argv[1]
-os.chdir("/workspace/h100_run/results")
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results"))
 for tag in sorted(glob.glob(f"tp{tp}_*_lat*")) + sorted(glob.glob(f"tp{tp}_*_sat")):
     for f in sorted(glob.glob(tag + "/*.json")):
         b = os.path.basename(f)
