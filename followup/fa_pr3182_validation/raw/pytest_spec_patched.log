@@ -1,0 +1,17 @@
+compiled variants: {'cross_entropy_fwd_kernel': 2, 'cross_entropy_bwd_kernel': 2}
+.compiled variants: {'cross_entropy_fwd_kernel': 2, 'cross_entropy_bwd_kernel': 2}
+.compiled variants: {'cross_entropy_fwd_kernel': 3, 'cross_entropy_bwd_kernel': 3}
+.compiled variants: {'cross_entropy_fwd_kernel': 3, 'cross_entropy_bwd_kernel': 3}
+.compiled variants: {'cross_entropy_fwd_kernel': 3, 'cross_entropy_bwd_kernel': 3}
+.compiled variants: {'cross_entropy_fwd_kernel': 3, 'cross_entropy_bwd_kernel': 3}
+.compiled variants: {'cross_entropy_fwd_kernel': 3, 'cross_entropy_bwd_kernel': 3}
+.compiled variants: {'cross_entropy_fwd_kernel': 5, 'cross_entropy_bwd_kernel': 5}
+.compiled variants: {'cross_entropy_fwd_kernel': 5, 'cross_entropy_bwd_kernel': 5}
+.compiled variants: {'cross_entropy_fwd_kernel': 6, 'cross_entropy_bwd_kernel': 6}
+.compiled variants: {'cross_entropy_fwd_kernel': 6, 'cross_entropy_bwd_kernel': 6}
+.compiled variants: {'cross_entropy_fwd_kernel': 6, 'cross_entropy_bwd_kernel': 6}
+.compiled variants: {'cross_entropy_fwd_kernel': 6, 'cross_entropy_bwd_kernel': 6}
+.compiled variants: {'cross_entropy_fwd_kernel': 6, 'cross_entropy_bwd_kernel': 6}
+.FINAL compiled variants in this process: {'cross_entropy_fwd_kernel': 6, 'cross_entropy_bwd_kernel': 6}
+.
+15 passed in 3.65s

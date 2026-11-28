@@ -1,0 +1,12 @@
+Filesystem                         Size  Used Avail Use% Mounted on
+overlay                             50G  264M   50G   1% /
+tmpfs                               64M     0   64M   0% /dev
+shm                                 66G     0   66G   0% /dev/shm
+/dev/mapper/ubuntu--vg-ubuntu--lv  877G   43G  789G   6% /usr/bin/nvidia-smi
+tmpfs                              114G  5.3M  114G   1% /run/nvidia-persistenced/socket
+/dev/nvme1n1                       7.0T  3.0T  4.1T  43% /etc/hosts
+tmpfs                              4.0K  4.0K     0 100% /run/nvidia-ctk-hook/e5d21cd7-820c-47b7-9c7a-b0d25217ba6a
+tmpfs                              567G     0  567G   0% /proc/acpi
+tmpfs                              567G     0  567G   0% /proc/scsi
+tmpfs                              567G     0  567G   0% /sys/devices/virtual/powercap
+tmpfs                              567G     0  567G   0% /sys/firmware

@@ -1,0 +1,1587 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="126" skipped="0" tests="191" time="6.932" timestamp="2026-11-28T04:37:10.990199+00:00" hostname="1730effaa88e"><testcase classname="test_tensor_layouts" name="test_layout[A-contig-fp16]" time="1.538" /><testcase classname="test_tensor_layouts" name="test_layout[A-contig-bf16]" time="0.206" /><testcase classname="test_tensor_layouts" name="test_layout[A-contig-fp32]" time="0.184" /><testcase classname="test_tensor_layouts" name="test_layout[A-off1-fp16]" time="0.006" /><testcase classname="test_tensor_layouts" name="test_layout[A-off1-bf16]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[A-off1-fp32]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[A-off2-fp16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-off2-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-off2-fp32]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-off3-fp16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-off3-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-off3-fp32]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s2-fp16]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'A-s2-fp16'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01ed7740&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01ed7110&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s2-bf16]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.44) bwd_ok=False (max err 2.33)&#10;assert (False)">name = 'A-s2-bf16'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f13740&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f111c0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.44) bwd_ok=False (max err 2.33)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s2-fp32]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'A-s2-fp32'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float32, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f04b30&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f05d60&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s3-fp16]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'A-s3-fp16'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f06000&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f05fd0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s3-bf16]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.33)&#10;assert (False)">name = 'A-s3-bf16'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f066f0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f06120&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.33)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s3-fp32]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'A-s3-fp32'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float32, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f070e0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f07080&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s4-fp16]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'A-s4-fp16'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f07a70&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f07a40&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s4-bf16]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.44) bwd_ok=False (max err 2.33)&#10;assert (False)">name = 'A-s4-bf16'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0034c1d0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0034c920&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.44) bwd_ok=False (max err 2.33)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s4-fp32]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'A-s4-fp32'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float32, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0034c890&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0034d130&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s7-fp16]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'A-s7-fp16'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0034d3a0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0034d190&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s7-bf16]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.33)&#10;assert (False)">name = 'A-s7-bf16'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea3c2c0a70&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02310da0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.33)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s7-fp32]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'A-s7-fp32'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float32, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f07b30&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f07500&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s16-fp16]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'A-s16-fp16'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f06030&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f06bd0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s16-bf16]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.33)&#10;assert (False)">name = 'A-s16-bf16'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f06d20&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f04bf0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.33)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s16-fp32]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'A-s16-fp32'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float32, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f066c0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f04920&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.97) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s2o1-fp16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s2o1-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s2o1-fp32]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s3o2-fp16]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'A-s3o2-fp16'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f111c0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f13740&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s3o2-bf16]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.16) bwd_ok=False (max err 2.33)&#10;assert (False)">name = 'A-s3o2-bf16'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f11f70&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f13bf0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.16) bwd_ok=False (max err 2.33)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s3o2-fp32]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'A-s3o2-fp32'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float32, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f139b0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f104d0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-s4o3-fp16]" time="0.019" /><testcase classname="test_tensor_layouts" name="test_layout[A-s4o3-bf16]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[A-s4o3-fp32]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[A-s7o1-fp16]" time="0.005" /><testcase classname="test_tensor_layouts" name="test_layout[A-s7o1-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s7o1-fp32]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s16o5-fp16]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[A-s16o5-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s16o5-fp32]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-expand-fp16]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'A-expand-fp16'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01ed7020&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01ed6ff0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-expand-bf16]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'A-expand-bf16'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0034faa0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0034f2c0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[A-expand-fp32]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'A-expand-fp32'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float32, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0034f500&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0034df10&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n1-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n1-s2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n1-s3o2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n1-expand]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n2-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n2-s2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 1.65) bwd_ok=False (max err 0.578)&#10;assert (False)">name = 'B-n2-s2'
+kw = {'n': 2, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0034ddf0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0034fa40&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 1.65) bwd_ok=False (max err 0.578)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n2-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 0.422) bwd_ok=False (max err 0.578)&#10;assert (False)">name = 'B-n2-s3o2'
+kw = {'n': 2, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01ed7ec0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01ed6de0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 0.422) bwd_ok=False (max err 0.578)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n2-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 2.19) bwd_ok=False (max err 0.578)&#10;assert (False)">name = 'B-n2-expand'
+kw = {'n': 2, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f11fa0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f10290&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.19) bwd_ok=False (max err 0.578)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n3-contig]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[B-n3-s2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 1.65) bwd_ok=False (max err 0.705)&#10;assert (False)">name = 'B-n3-s2'
+kw = {'n': 3, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f125a0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f11d90&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 1.65) bwd_ok=False (max err 0.705)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n3-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 1.27) bwd_ok=False (max err 0.705)&#10;assert (False)">name = 'B-n3-s3o2'
+kw = {'n': 3, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f06ba0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f059d0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 1.27) bwd_ok=False (max err 0.705)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n3-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 2.19) bwd_ok=False (max err 0.705)&#10;assert (False)">name = 'B-n3-expand'
+kw = {'n': 3, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f055b0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f07e00&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.19) bwd_ok=False (max err 0.705)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n63-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n63-s2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n63-s2'
+kw = {'n': 63, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f040b0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f07a10&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n63-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n63-s3o2'
+kw = {'n': 63, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0034f9e0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0034fec0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n63-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n63-expand'
+kw = {'n': 63, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0034fdd0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0034d100&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n64-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n64-s2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n64-s2'
+kw = {'n': 64, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0034cbc0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0034c0e0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n64-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n64-s3o2'
+kw = {'n': 64, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0034dc70&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0034fa70&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n64-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n64-expand'
+kw = {'n': 64, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003a0bc0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003a0200&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n65-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n65-s2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n65-s2'
+kw = {'n': 65, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003a0230&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003a0fe0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n65-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n65-s3o2'
+kw = {'n': 65, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0034dc70&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0034dca0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n65-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n65-expand'
+kw = {'n': 65, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0034fd70&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0034fdd0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n127-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n127-s2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'B-n127-s2'
+kw = {'n': 127, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f07e30&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f063c0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n127-s3o2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'B-n127-s3o2'
+kw = {'n': 127, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f04f80&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0411cdd0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n127-expand]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n127-expand'
+kw = {'n': 127, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f12870&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f13f50&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n128-contig]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[B-n128-s2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'B-n128-s2'
+kw = {'n': 128, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ec763d5880&gt;, &lt;test_tensor_layouts.Count object at 0x76ec763d5760&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n128-s3o2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'B-n128-s3o2'
+kw = {'n': 128, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003a3ec0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003a36e0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n128-expand]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n128-expand'
+kw = {'n': 128, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003a2f60&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003a2c90&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n129-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n129-s2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'B-n129-s2'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003a30b0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003a0920&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n129-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'B-n129-s3o2'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003a0a40&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003a1a00&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.15) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n129-expand]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n129-expand'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003a1b20&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003a2990&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n255-contig]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[B-n255-s2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.88)&#10;assert (False)">name = 'B-n255-s2'
+kw = {'n': 255, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003a07a0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003a3dd0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.88)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n255-s3o2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.42) bwd_ok=False (max err 2.89)&#10;assert (False)">name = 'B-n255-s3o2'
+kw = {'n': 255, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003a3260&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003a34a0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.42) bwd_ok=False (max err 2.89)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n255-expand]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n255-expand'
+kw = {'n': 255, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003a0560&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003a05c0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n256-contig]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[B-n256-s2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.88)&#10;assert (False)">name = 'B-n256-s2'
+kw = {'n': 256, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003a3320&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003a3590&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.88)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n256-s3o2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.42) bwd_ok=False (max err 2.89)&#10;assert (False)">name = 'B-n256-s3o2'
+kw = {'n': 256, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ec763d5460&gt;, &lt;test_tensor_layouts.Count object at 0x76ec763d4e60&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.42) bwd_ok=False (max err 2.89)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n256-expand]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n256-expand'
+kw = {'n': 256, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f11400&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f13320&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n257-contig]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[B-n257-s2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.88)&#10;assert (False)">name = 'B-n257-s2'
+kw = {'n': 257, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f040e0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f05dc0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.88)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n257-s3o2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.42) bwd_ok=False (max err 2.89)&#10;assert (False)">name = 'B-n257-s3o2'
+kw = {'n': 257, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0034f410&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0034ce60&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.42) bwd_ok=False (max err 2.89)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n257-expand]" time="0.006"><failure message="AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n257-expand'
+kw = {'n': 257, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003c35c0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003c2930&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n1000-contig]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[B-n1000-s2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 4.8) bwd_ok=False (max err 3.49)&#10;assert (False)">name = 'B-n1000-s2'
+kw = {'n': 1000, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003c2b10&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003c1eb0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 4.8) bwd_ok=False (max err 3.49)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n1000-s3o2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 4.6) bwd_ok=False (max err 3.49)&#10;assert (False)">name = 'B-n1000-s3o2'
+kw = {'n': 1000, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003c2030&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003c0ef0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 4.6) bwd_ok=False (max err 3.49)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[B-n1000-expand]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'B-n1000-expand'
+kw = {'n': 1000, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003c1430&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003c0c20&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.9) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1-contig]" time="0.005"><failure message="triton.compiler.errors.CompilationError: at 22:40:&#10;    total_classes,&#10;    class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes&#10;    n_cols,  # shapes&#10;    logits_row_stride,  # strides&#10;    BLOCK_SIZE: tl.constexpr,&#10;    HAS_SMOOTHING: tl.constexpr,&#10;    # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE&#10;    SPLIT: tl.constexpr,&#10;[+6 more lines; full report in element text]">name = 'C-V1-contig'
+kw = {'n': 33, 'V': 1, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003c0e30&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003c1dc0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+&gt;       fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+../harness/test_tensor_layouts.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../harness/test_tensor_layouts.py:54: in run_case
+    loss, _ = ce.cross_entropy_loss(x, y, label_smoothing=smoothing, logit_scale=scale, lse_square_scale=lse_sq)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:320: in cross_entropy_loss
+    return CrossEntropyLoss.apply(
+/usr/local/lib/python3.12/dist-packages/torch/autograd/function.py:576: in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:197: in forward
+    cross_entropy_fwd_kernel[(n_rows,)](
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:390: in &lt;lambda&gt;
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/autotuner.py:453: in run
+    return self.fn.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:594: in run
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:339: in compile
+    module = src.make_ir(options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;triton.compiler.compiler.ASTSource object at 0x76ea003c27b0&gt;
+options = CUDAOptions(num_warps=4, num_ctas=1, num_stages=3, maxnreg=None, cluster_dims=(1, 1, 1), ptx_version=None, ptx_options...triton/backends/nvidia/lib/libdevice.10.bc'),), debug=False, backend_name='cuda', sanitize_overflow=True, arch='sm120')
+codegen_fns = {'convert_custom_types': &lt;function convert_custom_float8_sm80 at 0x76ec76505580&gt;, 'min_dot_size': &lt;function min_dot_size.&lt;locals&gt;.check_dot_compatibility at 0x76ea00340860&gt;}
+module_map = {'triton.language.extra.libdevice': &lt;module 'triton.language.extra.cuda.libdevice' from '/usr/local/lib/python3.12/dist-packages/triton/language/extra/cuda/libdevice.py'&gt;}
+context = &lt;triton._C.libtriton.ir.context object at 0x76ea003e64b0&gt;
+
+    def make_ir(self, options, codegen_fns, module_map, context):
+        from .code_generator import ast_to_ttir
+&gt;       return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+                           module_map=module_map)
+E       triton.compiler.errors.CompilationError: at 22:40:
+E           total_classes,
+E           class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes
+E           n_cols,  # shapes
+E           logits_row_stride,  # strides
+E           BLOCK_SIZE: tl.constexpr,
+E           HAS_SMOOTHING: tl.constexpr,
+E           # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE
+E           SPLIT: tl.constexpr,
+E           PRECOMPUTED_LSE: tl.constexpr,  # If LSE is already computed (also no smoothing and logit_scale == 1.0)
+E       ):
+E           row_idx = tl.program_id(0)
+E           logits_ptr = logits_ptr + row_idx * logits_row_stride.to(tl.int64)
+E                                               ^
+E       AttributeError("'int' object has no attribute 'to'")
+
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:83: CompilationError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1-s2]" time="0.005"><failure message="triton.compiler.errors.CompilationError: at 22:40:&#10;    total_classes,&#10;    class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes&#10;    n_cols,  # shapes&#10;    logits_row_stride,  # strides&#10;    BLOCK_SIZE: tl.constexpr,&#10;    HAS_SMOOTHING: tl.constexpr,&#10;    # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE&#10;    SPLIT: tl.constexpr,&#10;[+6 more lines; full report in element text]">name = 'C-V1-s2'
+kw = {'n': 33, 'V': 1, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0034ce00&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0034cf20&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+&gt;       fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+../harness/test_tensor_layouts.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../harness/test_tensor_layouts.py:54: in run_case
+    loss, _ = ce.cross_entropy_loss(x, y, label_smoothing=smoothing, logit_scale=scale, lse_square_scale=lse_sq)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:320: in cross_entropy_loss
+    return CrossEntropyLoss.apply(
+/usr/local/lib/python3.12/dist-packages/torch/autograd/function.py:576: in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:197: in forward
+    cross_entropy_fwd_kernel[(n_rows,)](
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:390: in &lt;lambda&gt;
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/autotuner.py:453: in run
+    return self.fn.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:594: in run
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:339: in compile
+    module = src.make_ir(options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;triton.compiler.compiler.ASTSource object at 0x76ea0034d7f0&gt;
+options = CUDAOptions(num_warps=4, num_ctas=1, num_stages=3, maxnreg=None, cluster_dims=(1, 1, 1), ptx_version=None, ptx_options...triton/backends/nvidia/lib/libdevice.10.bc'),), debug=False, backend_name='cuda', sanitize_overflow=True, arch='sm120')
+codegen_fns = {'convert_custom_types': &lt;function convert_custom_float8_sm80 at 0x76ec76505580&gt;, 'min_dot_size': &lt;function min_dot_size.&lt;locals&gt;.check_dot_compatibility at 0x76ea003418a0&gt;}
+module_map = {'triton.language.extra.libdevice': &lt;module 'triton.language.extra.cuda.libdevice' from '/usr/local/lib/python3.12/dist-packages/triton/language/extra/cuda/libdevice.py'&gt;}
+context = &lt;triton._C.libtriton.ir.context object at 0x76ea02962f30&gt;
+
+    def make_ir(self, options, codegen_fns, module_map, context):
+        from .code_generator import ast_to_ttir
+&gt;       return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+                           module_map=module_map)
+E       triton.compiler.errors.CompilationError: at 22:40:
+E           total_classes,
+E           class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes
+E           n_cols,  # shapes
+E           logits_row_stride,  # strides
+E           BLOCK_SIZE: tl.constexpr,
+E           HAS_SMOOTHING: tl.constexpr,
+E           # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE
+E           SPLIT: tl.constexpr,
+E           PRECOMPUTED_LSE: tl.constexpr,  # If LSE is already computed (also no smoothing and logit_scale == 1.0)
+E       ):
+E           row_idx = tl.program_id(0)
+E           logits_ptr = logits_ptr + row_idx * logits_row_stride.to(tl.int64)
+E                                               ^
+E       AttributeError("'int' object has no attribute 'to'")
+
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:83: CompilationError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1-s3o2]" time="0.004"><failure message="triton.compiler.errors.CompilationError: at 22:40:&#10;    total_classes,&#10;    class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes&#10;    n_cols,  # shapes&#10;    logits_row_stride,  # strides&#10;    BLOCK_SIZE: tl.constexpr,&#10;    HAS_SMOOTHING: tl.constexpr,&#10;    # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE&#10;    SPLIT: tl.constexpr,&#10;[+6 more lines; full report in element text]">name = 'C-V1-s3o2'
+kw = {'n': 33, 'V': 1, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f04770&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f047a0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+&gt;       fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+../harness/test_tensor_layouts.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../harness/test_tensor_layouts.py:54: in run_case
+    loss, _ = ce.cross_entropy_loss(x, y, label_smoothing=smoothing, logit_scale=scale, lse_square_scale=lse_sq)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:320: in cross_entropy_loss
+    return CrossEntropyLoss.apply(
+/usr/local/lib/python3.12/dist-packages/torch/autograd/function.py:576: in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:197: in forward
+    cross_entropy_fwd_kernel[(n_rows,)](
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:390: in &lt;lambda&gt;
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/autotuner.py:453: in run
+    return self.fn.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:594: in run
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:339: in compile
+    module = src.make_ir(options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;triton.compiler.compiler.ASTSource object at 0x76ea01f04c80&gt;
+options = CUDAOptions(num_warps=4, num_ctas=1, num_stages=3, maxnreg=None, cluster_dims=(1, 1, 1), ptx_version=None, ptx_options...triton/backends/nvidia/lib/libdevice.10.bc'),), debug=False, backend_name='cuda', sanitize_overflow=True, arch='sm120')
+codegen_fns = {'convert_custom_types': &lt;function convert_custom_float8_sm80 at 0x76ec76505580&gt;, 'min_dot_size': &lt;function min_dot_size.&lt;locals&gt;.check_dot_compatibility at 0x76ea00341e40&gt;}
+module_map = {'triton.language.extra.libdevice': &lt;module 'triton.language.extra.cuda.libdevice' from '/usr/local/lib/python3.12/dist-packages/triton/language/extra/cuda/libdevice.py'&gt;}
+context = &lt;triton._C.libtriton.ir.context object at 0x76ea029963b0&gt;
+
+    def make_ir(self, options, codegen_fns, module_map, context):
+        from .code_generator import ast_to_ttir
+&gt;       return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+                           module_map=module_map)
+E       triton.compiler.errors.CompilationError: at 22:40:
+E           total_classes,
+E           class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes
+E           n_cols,  # shapes
+E           logits_row_stride,  # strides
+E           BLOCK_SIZE: tl.constexpr,
+E           HAS_SMOOTHING: tl.constexpr,
+E           # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE
+E           SPLIT: tl.constexpr,
+E           PRECOMPUTED_LSE: tl.constexpr,  # If LSE is already computed (also no smoothing and logit_scale == 1.0)
+E       ):
+E           row_idx = tl.program_id(0)
+E           logits_ptr = logits_ptr + row_idx * logits_row_stride.to(tl.int64)
+E                                               ^
+E       AttributeError("'int' object has no attribute 'to'")
+
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:83: CompilationError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1-expand]" time="0.004"><failure message="triton.compiler.errors.CompilationError: at 22:40:&#10;    total_classes,&#10;    class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes&#10;    n_cols,  # shapes&#10;    logits_row_stride,  # strides&#10;    BLOCK_SIZE: tl.constexpr,&#10;    HAS_SMOOTHING: tl.constexpr,&#10;    # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE&#10;    SPLIT: tl.constexpr,&#10;[+6 more lines; full report in element text]">name = 'C-V1-expand'
+kw = {'n': 33, 'V': 1, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003a2a50&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003a2120&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+&gt;       fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+../harness/test_tensor_layouts.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../harness/test_tensor_layouts.py:54: in run_case
+    loss, _ = ce.cross_entropy_loss(x, y, label_smoothing=smoothing, logit_scale=scale, lse_square_scale=lse_sq)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:320: in cross_entropy_loss
+    return CrossEntropyLoss.apply(
+/usr/local/lib/python3.12/dist-packages/torch/autograd/function.py:576: in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:197: in forward
+    cross_entropy_fwd_kernel[(n_rows,)](
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:390: in &lt;lambda&gt;
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/autotuner.py:453: in run
+    return self.fn.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:594: in run
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:339: in compile
+    module = src.make_ir(options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;triton.compiler.compiler.ASTSource object at 0x76ea003a27b0&gt;
+options = CUDAOptions(num_warps=4, num_ctas=1, num_stages=3, maxnreg=None, cluster_dims=(1, 1, 1), ptx_version=None, ptx_options...triton/backends/nvidia/lib/libdevice.10.bc'),), debug=False, backend_name='cuda', sanitize_overflow=True, arch='sm120')
+codegen_fns = {'convert_custom_types': &lt;function convert_custom_float8_sm80 at 0x76ec76505580&gt;, 'min_dot_size': &lt;function min_dot_size.&lt;locals&gt;.check_dot_compatibility at 0x76ea003432e0&gt;}
+module_map = {'triton.language.extra.libdevice': &lt;module 'triton.language.extra.cuda.libdevice' from '/usr/local/lib/python3.12/dist-packages/triton/language/extra/cuda/libdevice.py'&gt;}
+context = &lt;triton._C.libtriton.ir.context object at 0x76ea02ba2a30&gt;
+
+    def make_ir(self, options, codegen_fns, module_map, context):
+        from .code_generator import ast_to_ttir
+&gt;       return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+                           module_map=module_map)
+E       triton.compiler.errors.CompilationError: at 22:40:
+E           total_classes,
+E           class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes
+E           n_cols,  # shapes
+E           logits_row_stride,  # strides
+E           BLOCK_SIZE: tl.constexpr,
+E           HAS_SMOOTHING: tl.constexpr,
+E           # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE
+E           SPLIT: tl.constexpr,
+E           PRECOMPUTED_LSE: tl.constexpr,  # If LSE is already computed (also no smoothing and logit_scale == 1.0)
+E       ):
+E           row_idx = tl.program_id(0)
+E           logits_ptr = logits_ptr + row_idx * logits_row_stride.to(tl.int64)
+E                                               ^
+E       AttributeError("'int' object has no attribute 'to'")
+
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:83: CompilationError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V2-contig]" time="0.185" /><testcase classname="test_tensor_layouts" name="test_layout[C-V2-s2]" time="0.004"><failure message="AssertionError: fwd_ok=False (max err 3.94) bwd_ok=False (max err 1.82)&#10;assert (False)">name = 'C-V2-s2'
+kw = {'n': 33, 'V': 2, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003a21b0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003a0890&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.94) bwd_ok=False (max err 1.82)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V2-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 2.79) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V2-s3o2'
+kw = {'n': 33, 'V': 2, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea00409100&gt;, &lt;test_tensor_layouts.Count object at 0x76ea004090a0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.79) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V2-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 2.79) bwd_ok=False (max err 1.82)&#10;assert (False)">name = 'C-V2-expand'
+kw = {'n': 33, 'V': 2, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea00406540&gt;, &lt;test_tensor_layouts.Count object at 0x76ea00404620&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.79) bwd_ok=False (max err 1.82)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V31-contig]" time="0.179" /><testcase classname="test_tensor_layouts" name="test_layout[C-V31-s2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 2.85) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V31-s2'
+kw = {'n': 33, 'V': 31, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea00404bf0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea00406ea0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.85) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V31-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 4.06) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V31-s3o2'
+kw = {'n': 33, 'V': 31, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003dbf50&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003da840&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 4.06) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V31-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.63) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V31-expand'
+kw = {'n': 33, 'V': 31, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003d9340&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003da420&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.63) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V32-contig]" time="0.169" /><testcase classname="test_tensor_layouts" name="test_layout[C-V32-s2]" time="0.005"><failure message="AssertionError: fwd_ok=False (max err 2.93) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V32-s2'
+kw = {'n': 33, 'V': 32, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003d87a0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003dadb0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.93) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V32-s3o2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.23) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V32-s3o2'
+kw = {'n': 33, 'V': 32, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0040a810&gt;, &lt;test_tensor_layouts.Count object at 0x76ea004090a0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.23) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V32-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 2.6) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V32-expand'
+kw = {'n': 33, 'V': 32, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea00405310&gt;, &lt;test_tensor_layouts.Count object at 0x76ea004047a0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.6) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V33-contig]" time="0.180" /><testcase classname="test_tensor_layouts" name="test_layout[C-V33-s2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 2.83) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V33-s2'
+kw = {'n': 33, 'V': 33, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f21070&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f21670&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.83) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V33-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.42) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V33-s3o2'
+kw = {'n': 33, 'V': 33, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02cf27b0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02cf28a0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.42) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V33-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 2.41) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V33-expand'
+kw = {'n': 33, 'V': 33, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02cf1820&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02cf00e0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.41) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1023-contig]" time="0.208" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1023-s2]" time="0.004"><failure message="AssertionError: fwd_ok=False (max err 2.86) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V1023-s2'
+kw = {'n': 33, 'V': 1023, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02cf2cc0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02cf2840&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.86) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1023-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 2.82) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V1023-s3o2'
+kw = {'n': 33, 'V': 1023, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea00404c50&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0040ab40&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.82) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1023-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.36) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V1023-expand'
+kw = {'n': 33, 'V': 1023, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f04650&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f22420&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.36) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1024-contig]" time="0.212" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1024-s2]" time="0.007"><failure message="AssertionError: fwd_ok=False (max err 2.72) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V1024-s2'
+kw = {'n': 33, 'V': 1024, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003db3b0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003dafc0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.72) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1024-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 2.92) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V1024-s3o2'
+kw = {'n': 33, 'V': 1024, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003d7e90&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003d5100&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.92) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1024-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 1.8) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V1024-expand'
+kw = {'n': 33, 'V': 1024, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003d4b90&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003d4500&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 1.8) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1025-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1025-s2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V1025-s2'
+kw = {'n': 33, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003d7980&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003d45f0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.45) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1025-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 2.23) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V1025-s3o2'
+kw = {'n': 33, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003b9d90&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003bac00&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.23) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1025-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.37) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V1025-expand'
+kw = {'n': 33, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003ba330&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003b9a60&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.37) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V4095-contig]" time="0.216" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4095-s2]" time="0.004"><failure message="AssertionError: fwd_ok=False (max err 4.42) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V4095-s2'
+kw = {'n': 33, 'V': 4095, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea0040b6e0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea0040aab0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 4.42) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V4095-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.68) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V4095-s3o2'
+kw = {'n': 33, 'V': 4095, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ec763d7620&gt;, &lt;test_tensor_layouts.Count object at 0x76ec763d5f40&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.68) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V4095-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 1.83) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V4095-expand'
+kw = {'n': 33, 'V': 4095, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea00407140&gt;, &lt;test_tensor_layouts.Count object at 0x76ea00405ac0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 1.83) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V4096-contig]" time="0.202" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4096-s2]" time="0.007"><failure message="AssertionError: fwd_ok=False (max err 3.16) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V4096-s2'
+kw = {'n': 33, 'V': 4096, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea01f21700&gt;, &lt;test_tensor_layouts.Count object at 0x76ea01f22150&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.16) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V4096-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 4.51) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V4096-s3o2'
+kw = {'n': 33, 'V': 4096, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003bb8f0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003b8290&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 4.51) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V4096-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.57) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V4096-expand'
+kw = {'n': 33, 'V': 4096, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003d7230&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003d5fa0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.57) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V4097-contig]" time="0.121" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4097-s2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.17) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V4097-s2'
+kw = {'n': 33, 'V': 4097, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003f8a70&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003f9820&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.17) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V4097-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 2.95) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V4097-s3o2'
+kw = {'n': 33, 'V': 4097, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003fa4b0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02c4f920&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.95) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V4097-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 4.44) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V4097-expand'
+kw = {'n': 33, 'V': 4097, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02c4f8f0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02c4ccb0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 4.44) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V16383-contig]" time="0.126" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16383-s2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 2.31) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V16383-s2'
+kw = {'n': 33, 'V': 16383, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02c4c560&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003f9550&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.31) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V16383-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.09) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V16383-s3o2'
+kw = {'n': 33, 'V': 16383, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003f9670&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003fa570&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.09) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V16383-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 2.16) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V16383-expand'
+kw = {'n': 33, 'V': 16383, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003fa810&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003f9010&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.16) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V16384-contig]" time="0.118" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16384-s2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.61) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V16384-s2'
+kw = {'n': 33, 'V': 16384, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02c4ebd0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02c4fbc0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.61) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V16384-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.06) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V16384-s3o2'
+kw = {'n': 33, 'V': 16384, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003c3bf0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003c1700&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.06) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V16384-expand]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 2.17) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V16384-expand'
+kw = {'n': 33, 'V': 16384, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02c4e600&gt;, &lt;test_tensor_layouts.Count object at 0x76ea004071a0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.17) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V16385-contig]" time="0.004" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16385-s2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.64) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V16385-s2'
+kw = {'n': 33, 'V': 16385, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea00407410&gt;, &lt;test_tensor_layouts.Count object at 0x76ea00406900&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.64) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V16385-s3o2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 2.9) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V16385-s3o2'
+kw = {'n': 33, 'V': 16385, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003bac60&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02c521b0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.9) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V16385-expand]" time="0.014"><failure message="AssertionError: fwd_ok=False (max err 2.67) bwd_ok=False (max err 2.03)&#10;assert (False)">name = 'C-V16385-expand'
+kw = {'n': 33, 'V': 16385, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02c52b10&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02c51fa0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.67) bwd_ok=False (max err 2.03)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V50257-contig]" time="0.015" /><testcase classname="test_tensor_layouts" name="test_layout[C-V50257-s2]" time="0.013"><failure message="AssertionError: fwd_ok=False (max err 2.24) bwd_ok=False (max err 1.78)&#10;assert (False)">name = 'C-V50257-s2'
+kw = {'n': 17, 'V': 50257, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02c53b90&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02c53020&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.24) bwd_ok=False (max err 1.78)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V50257-s3o2]" time="0.022"><failure message="AssertionError: fwd_ok=False (max err 2.75) bwd_ok=False (max err 1.78)&#10;assert (False)">name = 'C-V50257-s3o2'
+kw = {'n': 17, 'V': 50257, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea00407140&gt;, &lt;test_tensor_layouts.Count object at 0x76ea00407ef0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.75) bwd_ok=False (max err 1.78)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V50257-expand]" time="0.021"><failure message="AssertionError: fwd_ok=False (max err 3.49) bwd_ok=False (max err 1.78)&#10;assert (False)">name = 'C-V50257-expand'
+kw = {'n': 17, 'V': 50257, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003ba180&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003baa20&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.49) bwd_ok=False (max err 1.78)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V128256-contig]" time="0.044" /><testcase classname="test_tensor_layouts" name="test_layout[C-V128256-s2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 2.04) bwd_ok=False (max err 1.78)&#10;assert (False)">name = 'C-V128256-s2'
+kw = {'n': 17, 'V': 128256, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003bb170&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003d7d40&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.04) bwd_ok=False (max err 1.78)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V128256-s3o2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.49) bwd_ok=False (max err 1.78)&#10;assert (False)">name = 'C-V128256-s3o2'
+kw = {'n': 17, 'V': 128256, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003d6780&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003d5e50&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.49) bwd_ok=False (max err 1.78)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V128256-expand]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 2.34) bwd_ok=False (max err 1.78)&#10;assert (False)">name = 'C-V128256-expand'
+kw = {'n': 17, 'V': 128256, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003fb1a0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003fa360&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.34) bwd_ok=False (max err 1.78)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-contig-smoothing0.1-ign0]" time="0.246" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-smoothing0.1-ign1]" time="0.007" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-scale0.7-ign0]" time="0.203" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-scale0.7-ign1]" time="0.006" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-lse_sq0.01-ign0]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-lse_sq0.01-ign1]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-smoothing0.1-scale0.7-lse_sq0.01-ign0]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-smoothing0.1-scale0.7-lse_sq0.01-ign1]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-s2-smoothing0.1-ign0]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.49) bwd_ok=False (max err 2.59)&#10;assert (False)">name = 'D-s2-smoothing0.1-ign0'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02cd54c0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02cd7890&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.49) bwd_ok=False (max err 2.59)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s2-smoothing0.1-ign1]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 10.8) bwd_ok=False (max err 2.59)&#10;assert (False)">name = 'D-s2-smoothing0.1-ign1'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02cd4d10&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02cd7560&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 10.8) bwd_ok=False (max err 2.59)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s2-scale0.7-ign0]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 2.71) bwd_ok=False (max err 2.02)&#10;assert (False)">name = 'D-s2-scale0.7-ign0'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02cd4cb0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02cd5df0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.71) bwd_ok=False (max err 2.02)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s2-scale0.7-ign1]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 10.1) bwd_ok=False (max err 2.02)&#10;assert (False)">name = 'D-s2-scale0.7-ign1'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02cd54f0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02cd6660&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 10.1) bwd_ok=False (max err 2.02)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s2-lse_sq0.01-ign0]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.88) bwd_ok=False (max err 2.89)&#10;assert (False)">name = 'D-s2-lse_sq0.01-ign0'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02cd5d30&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02cd6360&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.88) bwd_ok=False (max err 2.89)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s2-lse_sq0.01-ign1]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 11.8) bwd_ok=False (max err 2.89)&#10;assert (False)">name = 'D-s2-lse_sq0.01-ign1'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02d09250&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02d0bfb0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 11.8) bwd_ok=False (max err 2.89)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s2-smoothing0.1-scale0.7-lse_sq0.01-ign0]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 2.44) bwd_ok=False (max err 1.82)&#10;assert (False)">name = 'D-s2-smoothing0.1-scale0.7-lse_sq0.01-ign0'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02d0b560&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02d0b5c0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 2.44) bwd_ok=False (max err 1.82)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s2-smoothing0.1-scale0.7-lse_sq0.01-ign1]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 10.7) bwd_ok=False (max err 1.82)&#10;assert (False)">name = 'D-s2-smoothing0.1-scale0.7-lse_sq0.01-ign1'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02d0a960&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02d0aa20&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 10.7) bwd_ok=False (max err 1.82)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-smoothing0.1-ign0]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 4.75) bwd_ok=False (max err 2.59)&#10;assert (False)">name = 'D-s3o2-smoothing0.1-ign0'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02d08470&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02d08500&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 4.75) bwd_ok=False (max err 2.59)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-smoothing0.1-ign1]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 10.9) bwd_ok=False (max err 2.59)&#10;assert (False)">name = 'D-s3o2-smoothing0.1-ign1'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02c595b0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02c599a0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 10.9) bwd_ok=False (max err 2.59)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-scale0.7-ign0]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 3.7) bwd_ok=False (max err 2.02)&#10;assert (False)">name = 'D-s3o2-scale0.7-ign0'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02c5b950&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02c5b560&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.7) bwd_ok=False (max err 2.02)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-scale0.7-ign1]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 10.2) bwd_ok=False (max err 2.02)&#10;assert (False)">name = 'D-s3o2-scale0.7-ign1'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02c5a120&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02c598b0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 10.2) bwd_ok=False (max err 2.02)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-lse_sq0.01-ign0]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 5.28) bwd_ok=False (max err 2.89)&#10;assert (False)">name = 'D-s3o2-lse_sq0.01-ign0'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02c5b140&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02c5b860&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 5.28) bwd_ok=False (max err 2.89)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-lse_sq0.01-ign1]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 11.9) bwd_ok=False (max err 2.89)&#10;assert (False)">name = 'D-s3o2-lse_sq0.01-ign1'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02d09e80&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02d09cd0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 11.9) bwd_ok=False (max err 2.89)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-smoothing0.1-scale0.7-lse_sq0.01-ign0]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 3.33) bwd_ok=False (max err 1.82)&#10;assert (False)">name = 'D-s3o2-smoothing0.1-scale0.7-lse_sq0.01-ign0'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02d0aae0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02d0b050&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 3.33) bwd_ok=False (max err 1.82)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-smoothing0.1-scale0.7-lse_sq0.01-ign1]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 10.8) bwd_ok=False (max err 1.82)&#10;assert (False)">name = 'D-s3o2-smoothing0.1-scale0.7-lse_sq0.01-ign1'
+kw = {'n': 257, 'V': 4097, 'xdt': torch.bfloat16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02d0b4a0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02d0b500&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 10.8) bwd_ok=False (max err 1.82)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[E-int32-contig]" time="0.185" /><testcase classname="test_tensor_layouts" name="test_layout[E-ign-contig]" time="0.005" /><testcase classname="test_tensor_layouts" name="test_layout[E-int32-s2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 9.31) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'E-int32-s2'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int32, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02c4ffb0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02c4e570&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 9.31) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[E-ign-s2]" time="0.002"><failure message="AssertionError: fwd_ok=False (max err 8.87) bwd_ok=False (max err 2.57)&#10;assert (False)">name = 'E-ign-s2'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea003d66f0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea003d4830&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 8.87) bwd_ok=False (max err 2.57)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[E-int32-s3o2]" time="0.183"><failure message="AssertionError: fwd_ok=False (max err 8.54) bwd_ok=False (max err 2.32)&#10;assert (False)">name = 'E-int32-s3o2'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int32, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02cd7500&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02cd7bc0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 8.54) bwd_ok=False (max err 2.32)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[E-ign-s3o2]" time="0.003"><failure message="AssertionError: fwd_ok=False (max err 9.33) bwd_ok=False (max err 2.56)&#10;assert (False)">name = 'E-ign-s3o2'
+kw = {'n': 129, 'V': 1025, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x76ea02cd9af0&gt;, &lt;test_tensor_layouts.Count object at 0x76ea02cd9bb0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+        fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+&gt;       assert fwd_ok and bwd_ok, f"fwd_ok={fwd_ok} (max err {fe:.3g}) bwd_ok={bwd_ok} (max err {be:.3g})"
+E       AssertionError: fwd_ok=False (max err 9.33) bwd_ok=False (max err 2.56)
+E       assert (False)
+
+../harness/test_tensor_layouts.py:93: AssertionError</failure></testcase></testsuite></testsuites>

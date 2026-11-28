@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="191" time="11.990" timestamp="2026-11-28T04:37:18.779631+00:00" hostname="1730effaa88e"><testcase classname="test_tensor_layouts" name="test_layout[A-contig-fp16]" time="1.539" /><testcase classname="test_tensor_layouts" name="test_layout[A-contig-bf16]" time="0.201" /><testcase classname="test_tensor_layouts" name="test_layout[A-contig-fp32]" time="0.192" /><testcase classname="test_tensor_layouts" name="test_layout[A-off1-fp16]" time="0.004" /><testcase classname="test_tensor_layouts" name="test_layout[A-off1-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-off1-fp32]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[A-off2-fp16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-off2-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-off2-fp32]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-off3-fp16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-off3-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-off3-fp32]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s2-fp16]" time="0.351" /><testcase classname="test_tensor_layouts" name="test_layout[A-s2-bf16]" time="0.181" /><testcase classname="test_tensor_layouts" name="test_layout[A-s2-fp32]" time="0.195" /><testcase classname="test_tensor_layouts" name="test_layout[A-s3-fp16]" time="0.004" /><testcase classname="test_tensor_layouts" name="test_layout[A-s3-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s3-fp32]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[A-s4-fp16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s4-bf16]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[A-s4-fp32]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[A-s7-fp16]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[A-s7-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s7-fp32]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s16-fp16]" time="0.202" /><testcase classname="test_tensor_layouts" name="test_layout[A-s16-bf16]" time="0.193" /><testcase classname="test_tensor_layouts" name="test_layout[A-s16-fp32]" time="0.181" /><testcase classname="test_tensor_layouts" name="test_layout[A-s2o1-fp16]" time="0.006" /><testcase classname="test_tensor_layouts" name="test_layout[A-s2o1-bf16]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[A-s2o1-fp32]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[A-s3o2-fp16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s3o2-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s3o2-fp32]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s4o3-fp16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s4o3-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s4o3-fp32]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s7o1-fp16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s7o1-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s7o1-fp32]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s16o5-fp16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s16o5-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-s16o5-fp32]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-expand-fp16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-expand-bf16]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[A-expand-fp32]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n1-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n1-s2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n1-s3o2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n1-expand]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n2-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n2-s2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n2-s3o2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n2-expand]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n3-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n3-s2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n3-s3o2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n3-expand]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n63-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n63-s2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[B-n63-s3o2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n63-expand]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n64-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n64-s2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n64-s3o2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n64-expand]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n65-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n65-s2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n65-s3o2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n65-expand]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n127-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n127-s2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n127-s3o2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n127-expand]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n128-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n128-s2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n128-s3o2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n128-expand]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n129-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n129-s2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n129-s3o2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n129-expand]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n255-contig]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[B-n255-s2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[B-n255-s3o2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[B-n255-expand]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[B-n256-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n256-s2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n256-s3o2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n256-expand]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n257-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n257-s2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n257-s3o2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n257-expand]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n1000-contig]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[B-n1000-s2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[B-n1000-s3o2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[B-n1000-expand]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1-contig]" time="0.005"><failure message="triton.compiler.errors.CompilationError: at 23:40:&#10;    class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes&#10;    n_cols,  # shapes&#10;    logits_row_stride,  # strides&#10;    labels_row_stride,&#10;    BLOCK_SIZE: tl.constexpr,&#10;    HAS_SMOOTHING: tl.constexpr,&#10;    # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE&#10;    SPLIT: tl.constexpr,&#10;[+6 more lines; full report in element text]">name = 'C-V1-contig'
+kw = {'n': 33, 'V': 1, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x73ba32e95af0&gt;, &lt;test_tensor_layouts.Count object at 0x73ba32e95b80&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+&gt;       fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+../harness/test_tensor_layouts.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../harness/test_tensor_layouts.py:54: in run_case
+    loss, _ = ce.cross_entropy_loss(x, y, label_smoothing=smoothing, logit_scale=scale, lse_square_scale=lse_sq)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:324: in cross_entropy_loss
+    return CrossEntropyLoss.apply(
+/usr/local/lib/python3.12/dist-packages/torch/autograd/function.py:576: in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:199: in forward
+    cross_entropy_fwd_kernel[(n_rows,)](
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:390: in &lt;lambda&gt;
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/autotuner.py:453: in run
+    return self.fn.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:594: in run
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:339: in compile
+    module = src.make_ir(options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;triton.compiler.compiler.ASTSource object at 0x73ba32e94aa0&gt;
+options = CUDAOptions(num_warps=4, num_ctas=1, num_stages=3, maxnreg=None, cluster_dims=(1, 1, 1), ptx_version=None, ptx_options...triton/backends/nvidia/lib/libdevice.10.bc'),), debug=False, backend_name='cuda', sanitize_overflow=True, arch='sm120')
+codegen_fns = {'convert_custom_types': &lt;function convert_custom_float8_sm80 at 0x73bca58fd4e0&gt;, 'min_dot_size': &lt;function min_dot_size.&lt;locals&gt;.check_dot_compatibility at 0x73ba32eb8b80&gt;}
+module_map = {'triton.language.extra.libdevice': &lt;module 'triton.language.extra.cuda.libdevice' from '/usr/local/lib/python3.12/dist-packages/triton/language/extra/cuda/libdevice.py'&gt;}
+context = &lt;triton._C.libtriton.ir.context object at 0x73ba32ebc3b0&gt;
+
+    def make_ir(self, options, codegen_fns, module_map, context):
+        from .code_generator import ast_to_ttir
+&gt;       return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+                           module_map=module_map)
+E       triton.compiler.errors.CompilationError: at 23:40:
+E           class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes
+E           n_cols,  # shapes
+E           logits_row_stride,  # strides
+E           labels_row_stride,
+E           BLOCK_SIZE: tl.constexpr,
+E           HAS_SMOOTHING: tl.constexpr,
+E           # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE
+E           SPLIT: tl.constexpr,
+E           PRECOMPUTED_LSE: tl.constexpr,  # If LSE is already computed (also no smoothing and logit_scale == 1.0)
+E       ):
+E           row_idx = tl.program_id(0)
+E           logits_ptr = logits_ptr + row_idx * logits_row_stride.to(tl.int64)
+E                                               ^
+E       AttributeError("'int' object has no attribute 'to'")
+
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:83: CompilationError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1-s2]" time="0.005"><failure message="triton.compiler.errors.CompilationError: at 23:40:&#10;    class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes&#10;    n_cols,  # shapes&#10;    logits_row_stride,  # strides&#10;    labels_row_stride,&#10;    BLOCK_SIZE: tl.constexpr,&#10;    HAS_SMOOTHING: tl.constexpr,&#10;    # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE&#10;    SPLIT: tl.constexpr,&#10;[+6 more lines; full report in element text]">name = 'C-V1-s2'
+kw = {'n': 33, 'V': 1, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x73ba32e95790&gt;, &lt;test_tensor_layouts.Count object at 0x73ba32e96090&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+&gt;       fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+../harness/test_tensor_layouts.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../harness/test_tensor_layouts.py:54: in run_case
+    loss, _ = ce.cross_entropy_loss(x, y, label_smoothing=smoothing, logit_scale=scale, lse_square_scale=lse_sq)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:324: in cross_entropy_loss
+    return CrossEntropyLoss.apply(
+/usr/local/lib/python3.12/dist-packages/torch/autograd/function.py:576: in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:199: in forward
+    cross_entropy_fwd_kernel[(n_rows,)](
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:390: in &lt;lambda&gt;
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/autotuner.py:453: in run
+    return self.fn.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:594: in run
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:339: in compile
+    module = src.make_ir(options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;triton.compiler.compiler.ASTSource object at 0x73ba32e97530&gt;
+options = CUDAOptions(num_warps=4, num_ctas=1, num_stages=3, maxnreg=None, cluster_dims=(1, 1, 1), ptx_version=None, ptx_options...triton/backends/nvidia/lib/libdevice.10.bc'),), debug=False, backend_name='cuda', sanitize_overflow=True, arch='sm120')
+codegen_fns = {'convert_custom_types': &lt;function convert_custom_float8_sm80 at 0x73bca58fd4e0&gt;, 'min_dot_size': &lt;function min_dot_size.&lt;locals&gt;.check_dot_compatibility at 0x73ba32eb8400&gt;}
+module_map = {'triton.language.extra.libdevice': &lt;module 'triton.language.extra.cuda.libdevice' from '/usr/local/lib/python3.12/dist-packages/triton/language/extra/cuda/libdevice.py'&gt;}
+context = &lt;triton._C.libtriton.ir.context object at 0x73ba32a8b7f0&gt;
+
+    def make_ir(self, options, codegen_fns, module_map, context):
+        from .code_generator import ast_to_ttir
+&gt;       return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+                           module_map=module_map)
+E       triton.compiler.errors.CompilationError: at 23:40:
+E           class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes
+E           n_cols,  # shapes
+E           logits_row_stride,  # strides
+E           labels_row_stride,
+E           BLOCK_SIZE: tl.constexpr,
+E           HAS_SMOOTHING: tl.constexpr,
+E           # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE
+E           SPLIT: tl.constexpr,
+E           PRECOMPUTED_LSE: tl.constexpr,  # If LSE is already computed (also no smoothing and logit_scale == 1.0)
+E       ):
+E           row_idx = tl.program_id(0)
+E           logits_ptr = logits_ptr + row_idx * logits_row_stride.to(tl.int64)
+E                                               ^
+E       AttributeError("'int' object has no attribute 'to'")
+
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:83: CompilationError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1-s3o2]" time="0.004"><failure message="triton.compiler.errors.CompilationError: at 23:40:&#10;    class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes&#10;    n_cols,  # shapes&#10;    logits_row_stride,  # strides&#10;    labels_row_stride,&#10;    BLOCK_SIZE: tl.constexpr,&#10;    HAS_SMOOTHING: tl.constexpr,&#10;    # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE&#10;    SPLIT: tl.constexpr,&#10;[+6 more lines; full report in element text]">name = 'C-V1-s3o2'
+kw = {'n': 33, 'V': 1, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x73ba30b14f50&gt;, &lt;test_tensor_layouts.Count object at 0x73ba30b141a0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+&gt;       fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+../harness/test_tensor_layouts.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../harness/test_tensor_layouts.py:54: in run_case
+    loss, _ = ce.cross_entropy_loss(x, y, label_smoothing=smoothing, logit_scale=scale, lse_square_scale=lse_sq)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:324: in cross_entropy_loss
+    return CrossEntropyLoss.apply(
+/usr/local/lib/python3.12/dist-packages/torch/autograd/function.py:576: in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:199: in forward
+    cross_entropy_fwd_kernel[(n_rows,)](
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:390: in &lt;lambda&gt;
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/autotuner.py:453: in run
+    return self.fn.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:594: in run
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:339: in compile
+    module = src.make_ir(options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;triton.compiler.compiler.ASTSource object at 0x73ba30ad7b00&gt;
+options = CUDAOptions(num_warps=4, num_ctas=1, num_stages=3, maxnreg=None, cluster_dims=(1, 1, 1), ptx_version=None, ptx_options...triton/backends/nvidia/lib/libdevice.10.bc'),), debug=False, backend_name='cuda', sanitize_overflow=True, arch='sm120')
+codegen_fns = {'convert_custom_types': &lt;function convert_custom_float8_sm80 at 0x73bca58fd4e0&gt;, 'min_dot_size': &lt;function min_dot_size.&lt;locals&gt;.check_dot_compatibility at 0x73ba32eb8ea0&gt;}
+module_map = {'triton.language.extra.libdevice': &lt;module 'triton.language.extra.cuda.libdevice' from '/usr/local/lib/python3.12/dist-packages/triton/language/extra/cuda/libdevice.py'&gt;}
+context = &lt;triton._C.libtriton.ir.context object at 0x73ba32c1edf0&gt;
+
+    def make_ir(self, options, codegen_fns, module_map, context):
+        from .code_generator import ast_to_ttir
+&gt;       return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+                           module_map=module_map)
+E       triton.compiler.errors.CompilationError: at 23:40:
+E           class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes
+E           n_cols,  # shapes
+E           logits_row_stride,  # strides
+E           labels_row_stride,
+E           BLOCK_SIZE: tl.constexpr,
+E           HAS_SMOOTHING: tl.constexpr,
+E           # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE
+E           SPLIT: tl.constexpr,
+E           PRECOMPUTED_LSE: tl.constexpr,  # If LSE is already computed (also no smoothing and logit_scale == 1.0)
+E       ):
+E           row_idx = tl.program_id(0)
+E           logits_ptr = logits_ptr + row_idx * logits_row_stride.to(tl.int64)
+E                                               ^
+E       AttributeError("'int' object has no attribute 'to'")
+
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:83: CompilationError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V1-expand]" time="0.005"><failure message="triton.compiler.errors.CompilationError: at 23:40:&#10;    class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes&#10;    n_cols,  # shapes&#10;    logits_row_stride,  # strides&#10;    labels_row_stride,&#10;    BLOCK_SIZE: tl.constexpr,&#10;    HAS_SMOOTHING: tl.constexpr,&#10;    # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE&#10;    SPLIT: tl.constexpr,&#10;[+6 more lines; full report in element text]">name = 'C-V1-expand'
+kw = {'n': 33, 'V': 1, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (&lt;test_tensor_layouts.Count object at 0x73ba30ad6ab0&gt;, &lt;test_tensor_layouts.Count object at 0x73ba30ad61e0&gt;)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+&gt;       fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+../harness/test_tensor_layouts.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../harness/test_tensor_layouts.py:54: in run_case
+    loss, _ = ce.cross_entropy_loss(x, y, label_smoothing=smoothing, logit_scale=scale, lse_square_scale=lse_sq)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:324: in cross_entropy_loss
+    return CrossEntropyLoss.apply(
+/usr/local/lib/python3.12/dist-packages/torch/autograd/function.py:576: in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:199: in forward
+    cross_entropy_fwd_kernel[(n_rows,)](
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:390: in &lt;lambda&gt;
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/autotuner.py:453: in run
+    return self.fn.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:594: in run
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:339: in compile
+    module = src.make_ir(options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;triton.compiler.compiler.ASTSource object at 0x73ba30ad65a0&gt;
+options = CUDAOptions(num_warps=4, num_ctas=1, num_stages=3, maxnreg=None, cluster_dims=(1, 1, 1), ptx_version=None, ptx_options...triton/backends/nvidia/lib/libdevice.10.bc'),), debug=False, backend_name='cuda', sanitize_overflow=True, arch='sm120')
+codegen_fns = {'convert_custom_types': &lt;function convert_custom_float8_sm80 at 0x73bca58fd4e0&gt;, 'min_dot_size': &lt;function min_dot_size.&lt;locals&gt;.check_dot_compatibility at 0x73ba32e758a0&gt;}
+module_map = {'triton.language.extra.libdevice': &lt;module 'triton.language.extra.cuda.libdevice' from '/usr/local/lib/python3.12/dist-packages/triton/language/extra/cuda/libdevice.py'&gt;}
+context = &lt;triton._C.libtriton.ir.context object at 0x73ba32b887b0&gt;
+
+    def make_ir(self, options, codegen_fns, module_map, context):
+        from .code_generator import ast_to_ttir
+&gt;       return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+                           module_map=module_map)
+E       triton.compiler.errors.CompilationError: at 23:40:
+E           class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes
+E           n_cols,  # shapes
+E           logits_row_stride,  # strides
+E           labels_row_stride,
+E           BLOCK_SIZE: tl.constexpr,
+E           HAS_SMOOTHING: tl.constexpr,
+E           # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE
+E           SPLIT: tl.constexpr,
+E           PRECOMPUTED_LSE: tl.constexpr,  # If LSE is already computed (also no smoothing and logit_scale == 1.0)
+E       ):
+E           row_idx = tl.program_id(0)
+E           logits_ptr = logits_ptr + row_idx * logits_row_stride.to(tl.int64)
+E                                               ^
+E       AttributeError("'int' object has no attribute 'to'")
+
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:83: CompilationError</failure></testcase><testcase classname="test_tensor_layouts" name="test_layout[C-V2-contig]" time="0.184" /><testcase classname="test_tensor_layouts" name="test_layout[C-V2-s2]" time="0.195" /><testcase classname="test_tensor_layouts" name="test_layout[C-V2-s3o2]" time="0.004" /><testcase classname="test_tensor_layouts" name="test_layout[C-V2-expand]" time="0.174" /><testcase classname="test_tensor_layouts" name="test_layout[C-V31-contig]" time="0.180" /><testcase classname="test_tensor_layouts" name="test_layout[C-V31-s2]" time="0.186" /><testcase classname="test_tensor_layouts" name="test_layout[C-V31-s3o2]" time="0.004" /><testcase classname="test_tensor_layouts" name="test_layout[C-V31-expand]" time="0.175" /><testcase classname="test_tensor_layouts" name="test_layout[C-V32-contig]" time="0.187" /><testcase classname="test_tensor_layouts" name="test_layout[C-V32-s2]" time="0.176" /><testcase classname="test_tensor_layouts" name="test_layout[C-V32-s3o2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V32-expand]" time="0.176" /><testcase classname="test_tensor_layouts" name="test_layout[C-V33-contig]" time="0.180" /><testcase classname="test_tensor_layouts" name="test_layout[C-V33-s2]" time="0.168" /><testcase classname="test_tensor_layouts" name="test_layout[C-V33-s3o2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V33-expand]" time="0.169" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1023-contig]" time="0.210" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1023-s2]" time="0.204" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1023-s3o2]" time="0.004" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1023-expand]" time="0.196" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1024-contig]" time="0.188" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1024-s2]" time="0.199" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1024-s3o2]" time="0.004" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1024-expand]" time="0.212" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1025-contig]" time="0.005" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1025-s2]" time="0.004" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1025-s3o2]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[C-V1025-expand]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4095-contig]" time="0.205" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4095-s2]" time="0.209" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4095-s3o2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4095-expand]" time="0.213" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4096-contig]" time="0.196" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4096-s2]" time="0.210" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4096-s3o2]" time="0.004" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4096-expand]" time="0.208" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4097-contig]" time="0.119" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4097-s2]" time="0.116" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4097-s3o2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V4097-expand]" time="0.109" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16383-contig]" time="0.124" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16383-s2]" time="0.118" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16383-s3o2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16383-expand]" time="0.127" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16384-contig]" time="0.141" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16384-s2]" time="0.130" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16384-s3o2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16384-expand]" time="0.130" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16385-contig]" time="0.004" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16385-s2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16385-s3o2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V16385-expand]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V50257-contig]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V50257-s2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V50257-s3o2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V50257-expand]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V128256-contig]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V128256-s2]" time="0.004" /><testcase classname="test_tensor_layouts" name="test_layout[C-V128256-s3o2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[C-V128256-expand]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-smoothing0.1-ign0]" time="0.239" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-smoothing0.1-ign1]" time="0.006" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-scale0.7-ign0]" time="0.203" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-scale0.7-ign1]" time="0.005" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-lse_sq0.01-ign0]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-lse_sq0.01-ign1]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-smoothing0.1-scale0.7-lse_sq0.01-ign0]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-contig-smoothing0.1-scale0.7-lse_sq0.01-ign1]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-s2-smoothing0.1-ign0]" time="0.224" /><testcase classname="test_tensor_layouts" name="test_layout[D-s2-smoothing0.1-ign1]" time="0.006" /><testcase classname="test_tensor_layouts" name="test_layout[D-s2-scale0.7-ign0]" time="0.200" /><testcase classname="test_tensor_layouts" name="test_layout[D-s2-scale0.7-ign1]" time="0.005" /><testcase classname="test_tensor_layouts" name="test_layout[D-s2-lse_sq0.01-ign0]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-s2-lse_sq0.01-ign1]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-s2-smoothing0.1-scale0.7-lse_sq0.01-ign0]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-s2-smoothing0.1-scale0.7-lse_sq0.01-ign1]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-smoothing0.1-ign0]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-smoothing0.1-ign1]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-scale0.7-ign0]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-scale0.7-ign1]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-lse_sq0.01-ign0]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-lse_sq0.01-ign1]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-smoothing0.1-scale0.7-lse_sq0.01-ign0]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[D-s3o2-smoothing0.1-scale0.7-lse_sq0.01-ign1]" time="0.002" /><testcase classname="test_tensor_layouts" name="test_layout[E-int32-contig]" time="0.189" /><testcase classname="test_tensor_layouts" name="test_layout[E-ign-contig]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[E-int32-s2]" time="0.185" /><testcase classname="test_tensor_layouts" name="test_layout[E-ign-s2]" time="0.003" /><testcase classname="test_tensor_layouts" name="test_layout[E-int32-s3o2]" time="0.190" /><testcase classname="test_tensor_layouts" name="test_layout[E-ign-s3o2]" time="0.004" /></testsuite></testsuites>

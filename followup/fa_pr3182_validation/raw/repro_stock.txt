@@ -1,0 +1,9 @@
+module: /root/fa/stock/flash_attn/ops/triton/cross_entropy.py
+labels: [0, 1, 2] stride: (2,) storage_offset: 0
+observed loss: [0.169846, 2.169846, 3.169846]
+expected loss: [0.169846, 0.169846, 0.169846]
+max abs loss error (strided): 3.0
+max abs grad error (strided): 1.0
+max abs loss error (contiguous control): 1.4901161193847656e-08
+max abs grad error (contiguous control): 7.450580596923828e-09
+RESULT FAIL

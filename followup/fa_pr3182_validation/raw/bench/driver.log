@@ -1,0 +1,105 @@
+04:42:02 start contig block 0 alt
+04:42:40 done contig block 0 alt rc=0 
+04:42:40 start contig block 0 stock
+04:43:18 done contig block 0 stock rc=0 
+04:43:18 start contig block 0 patched
+04:43:56 done contig block 0 patched rc=0 
+04:43:56 start contig block 0 stock2
+04:44:34 done contig block 0 stock2 rc=0 
+04:44:34 start contig block 1 alt
+04:45:12 done contig block 1 alt rc=0 
+04:45:12 start contig block 1 stock2
+04:45:50 done contig block 1 stock2 rc=0 
+04:45:50 start contig block 1 stock
+04:46:28 done contig block 1 stock rc=0 
+04:46:28 start contig block 1 patched
+04:47:07 done contig block 1 patched rc=0 
+04:47:07 start contig block 2 stock
+04:47:45 done contig block 2 stock rc=0 
+04:47:45 start contig block 2 patched
+04:48:23 done contig block 2 patched rc=0 
+04:48:23 start contig block 2 stock2
+04:49:01 done contig block 2 stock2 rc=0 
+04:49:01 start contig block 2 alt
+04:49:39 done contig block 2 alt rc=0 
+04:49:39 start contig block 3 patched
+04:50:17 done contig block 3 patched rc=0 
+04:50:17 start contig block 3 alt
+04:50:56 done contig block 3 alt rc=0 
+04:50:56 start contig block 3 stock
+04:51:34 done contig block 3 stock rc=0 
+04:51:34 start contig block 3 stock2
+04:52:12 done contig block 3 stock2 rc=0 
+04:52:12 start contig block 4 alt
+04:52:50 done contig block 4 alt rc=0 
+04:52:50 start contig block 4 patched
+04:53:28 done contig block 4 patched rc=0 
+04:53:28 start contig block 4 stock2
+04:54:06 done contig block 4 stock2 rc=0 
+04:54:06 start contig block 4 stock
+04:54:44 done contig block 4 stock rc=0 
+04:54:44 start contig block 5 alt
+04:55:23 done contig block 5 alt rc=0 
+04:55:23 start contig block 5 stock2
+04:56:01 done contig block 5 stock2 rc=0 
+04:56:01 start contig block 5 patched
+04:56:39 done contig block 5 patched rc=0 
+04:56:39 start contig block 5 stock
+04:57:17 done contig block 5 stock rc=0 
+04:57:17 start contig block 6 stock2
+04:57:55 done contig block 6 stock2 rc=0 
+04:57:55 start contig block 6 stock
+04:58:34 done contig block 6 stock rc=0 
+04:58:34 start contig block 6 alt
+04:59:12 done contig block 6 alt rc=0 
+04:59:12 start contig block 6 patched
+04:59:50 done contig block 6 patched rc=0 
+04:59:50 start contig block 7 patched
+05:00:28 done contig block 7 patched rc=0 
+05:00:28 start contig block 7 alt
+05:01:06 done contig block 7 alt rc=0 
+05:01:06 start contig block 7 stock2
+05:01:44 done contig block 7 stock2 rc=0 
+05:01:44 start contig block 7 stock
+05:02:22 done contig block 7 stock rc=0 
+05:02:22 start contig block 8 stock2
+05:03:00 done contig block 8 stock2 rc=0 
+05:03:00 start contig block 8 patched
+05:03:38 done contig block 8 patched rc=0 
+05:03:38 start contig block 8 alt
+05:04:16 done contig block 8 alt rc=0 
+05:04:17 start contig block 8 stock
+05:04:55 done contig block 8 stock rc=0 
+05:04:55 start contig block 9 stock2
+05:05:33 done contig block 9 stock2 rc=0 
+05:05:33 start contig block 9 stock
+05:06:11 done contig block 9 stock rc=0 
+05:06:11 start contig block 9 patched
+05:06:49 done contig block 9 patched rc=0 
+05:06:49 start contig block 9 alt
+05:07:28 done contig block 9 alt rc=0 
+05:07:28 start strided block 0 alt
+05:08:05 done strided block 0 alt rc=0 
+05:08:05 start strided block 0 patched
+05:08:43 done strided block 0 patched rc=0 
+05:08:43 start strided block 1 alt
+05:09:21 done strided block 1 alt rc=0 
+05:09:21 start strided block 1 patched
+05:09:59 done strided block 1 patched rc=0 
+05:09:59 start strided block 2 alt
+05:10:37 done strided block 2 alt rc=0 
+05:10:37 start strided block 2 patched
+05:11:15 done strided block 2 patched rc=0 
+05:11:15 start strided block 3 patched
+05:11:53 done strided block 3 patched rc=0 
+05:11:53 start strided block 3 alt
+05:12:31 done strided block 3 alt rc=0 
+05:12:31 start strided block 4 alt
+05:13:09 done strided block 4 alt rc=0 
+05:13:09 start strided block 4 patched
+05:13:47 done strided block 4 patched rc=0 
+05:13:47 start strided block 5 patched
+05:14:25 done strided block 5 patched rc=0 
+05:14:25 start strided block 5 alt
+05:15:03 done strided block 5 alt rc=0 
+05:15:03 BENCH_DONE

@@ -1,0 +1,266 @@
+........................................................................ [ 37%]
+.........................FFFF........................................... [ 75%]
+...............................................                          [100%]
+=================================== FAILURES ===================================
+___________________________ test_layout[C-V1-contig] ___________________________
+
+name = 'C-V1-contig'
+kw = {'n': 33, 'V': 1, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (<test_tensor_layouts.Count object at 0x73ba32e95af0>, <test_tensor_layouts.Count object at 0x73ba32e95b80>)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+>       fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+../harness/test_tensor_layouts.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../harness/test_tensor_layouts.py:54: in run_case
+    loss, _ = ce.cross_entropy_loss(x, y, label_smoothing=smoothing, logit_scale=scale, lse_square_scale=lse_sq)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:324: in cross_entropy_loss
+    return CrossEntropyLoss.apply(
+/usr/local/lib/python3.12/dist-packages/torch/autograd/function.py:576: in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:199: in forward
+    cross_entropy_fwd_kernel[(n_rows,)](
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:390: in <lambda>
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/autotuner.py:453: in run
+    return self.fn.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:594: in run
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:339: in compile
+    module = src.make_ir(options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <triton.compiler.compiler.ASTSource object at 0x73ba32e94aa0>
+options = CUDAOptions(num_warps=4, num_ctas=1, num_stages=3, maxnreg=None, cluster_dims=(1, 1, 1), ptx_version=None, ptx_options...triton/backends/nvidia/lib/libdevice.10.bc'),), debug=False, backend_name='cuda', sanitize_overflow=True, arch='sm120')
+codegen_fns = {'convert_custom_types': <function convert_custom_float8_sm80 at 0x73bca58fd4e0>, 'min_dot_size': <function min_dot_size.<locals>.check_dot_compatibility at 0x73ba32eb8b80>}
+module_map = {'triton.language.extra.libdevice': <module 'triton.language.extra.cuda.libdevice' from '/usr/local/lib/python3.12/dist-packages/triton/language/extra/cuda/libdevice.py'>}
+context = <triton._C.libtriton.ir.context object at 0x73ba32ebc3b0>
+
+    def make_ir(self, options, codegen_fns, module_map, context):
+        from .code_generator import ast_to_ttir
+>       return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+                           module_map=module_map)
+E       triton.compiler.errors.CompilationError: at 23:40:
+E           class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes
+E           n_cols,  # shapes
+E           logits_row_stride,  # strides
+E           labels_row_stride,
+E           BLOCK_SIZE: tl.constexpr,
+E           HAS_SMOOTHING: tl.constexpr,
+E           # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE
+E           SPLIT: tl.constexpr,
+E           PRECOMPUTED_LSE: tl.constexpr,  # If LSE is already computed (also no smoothing and logit_scale == 1.0)
+E       ):
+E           row_idx = tl.program_id(0)
+E           logits_ptr = logits_ptr + row_idx * logits_row_stride.to(tl.int64)
+E                                               ^
+E       AttributeError("'int' object has no attribute 'to'")
+
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:83: CompilationError
+_____________________________ test_layout[C-V1-s2] _____________________________
+
+name = 'C-V1-s2'
+kw = {'n': 33, 'V': 1, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (<test_tensor_layouts.Count object at 0x73ba32e95790>, <test_tensor_layouts.Count object at 0x73ba32e96090>)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+>       fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+../harness/test_tensor_layouts.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../harness/test_tensor_layouts.py:54: in run_case
+    loss, _ = ce.cross_entropy_loss(x, y, label_smoothing=smoothing, logit_scale=scale, lse_square_scale=lse_sq)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:324: in cross_entropy_loss
+    return CrossEntropyLoss.apply(
+/usr/local/lib/python3.12/dist-packages/torch/autograd/function.py:576: in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:199: in forward
+    cross_entropy_fwd_kernel[(n_rows,)](
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:390: in <lambda>
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/autotuner.py:453: in run
+    return self.fn.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:594: in run
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:339: in compile
+    module = src.make_ir(options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <triton.compiler.compiler.ASTSource object at 0x73ba32e97530>
+options = CUDAOptions(num_warps=4, num_ctas=1, num_stages=3, maxnreg=None, cluster_dims=(1, 1, 1), ptx_version=None, ptx_options...triton/backends/nvidia/lib/libdevice.10.bc'),), debug=False, backend_name='cuda', sanitize_overflow=True, arch='sm120')
+codegen_fns = {'convert_custom_types': <function convert_custom_float8_sm80 at 0x73bca58fd4e0>, 'min_dot_size': <function min_dot_size.<locals>.check_dot_compatibility at 0x73ba32eb8400>}
+module_map = {'triton.language.extra.libdevice': <module 'triton.language.extra.cuda.libdevice' from '/usr/local/lib/python3.12/dist-packages/triton/language/extra/cuda/libdevice.py'>}
+context = <triton._C.libtriton.ir.context object at 0x73ba32a8b7f0>
+
+    def make_ir(self, options, codegen_fns, module_map, context):
+        from .code_generator import ast_to_ttir
+>       return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+                           module_map=module_map)
+E       triton.compiler.errors.CompilationError: at 23:40:
+E           class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes
+E           n_cols,  # shapes
+E           logits_row_stride,  # strides
+E           labels_row_stride,
+E           BLOCK_SIZE: tl.constexpr,
+E           HAS_SMOOTHING: tl.constexpr,
+E           # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE
+E           SPLIT: tl.constexpr,
+E           PRECOMPUTED_LSE: tl.constexpr,  # If LSE is already computed (also no smoothing and logit_scale == 1.0)
+E       ):
+E           row_idx = tl.program_id(0)
+E           logits_ptr = logits_ptr + row_idx * logits_row_stride.to(tl.int64)
+E                                               ^
+E       AttributeError("'int' object has no attribute 'to'")
+
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:83: CompilationError
+____________________________ test_layout[C-V1-s3o2] ____________________________
+
+name = 'C-V1-s3o2'
+kw = {'n': 33, 'V': 1, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (<test_tensor_layouts.Count object at 0x73ba30b14f50>, <test_tensor_layouts.Count object at 0x73ba30b141a0>)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+>       fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+../harness/test_tensor_layouts.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../harness/test_tensor_layouts.py:54: in run_case
+    loss, _ = ce.cross_entropy_loss(x, y, label_smoothing=smoothing, logit_scale=scale, lse_square_scale=lse_sq)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:324: in cross_entropy_loss
+    return CrossEntropyLoss.apply(
+/usr/local/lib/python3.12/dist-packages/torch/autograd/function.py:576: in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:199: in forward
+    cross_entropy_fwd_kernel[(n_rows,)](
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:390: in <lambda>
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/autotuner.py:453: in run
+    return self.fn.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:594: in run
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:339: in compile
+    module = src.make_ir(options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <triton.compiler.compiler.ASTSource object at 0x73ba30ad7b00>
+options = CUDAOptions(num_warps=4, num_ctas=1, num_stages=3, maxnreg=None, cluster_dims=(1, 1, 1), ptx_version=None, ptx_options...triton/backends/nvidia/lib/libdevice.10.bc'),), debug=False, backend_name='cuda', sanitize_overflow=True, arch='sm120')
+codegen_fns = {'convert_custom_types': <function convert_custom_float8_sm80 at 0x73bca58fd4e0>, 'min_dot_size': <function min_dot_size.<locals>.check_dot_compatibility at 0x73ba32eb8ea0>}
+module_map = {'triton.language.extra.libdevice': <module 'triton.language.extra.cuda.libdevice' from '/usr/local/lib/python3.12/dist-packages/triton/language/extra/cuda/libdevice.py'>}
+context = <triton._C.libtriton.ir.context object at 0x73ba32c1edf0>
+
+    def make_ir(self, options, codegen_fns, module_map, context):
+        from .code_generator import ast_to_ttir
+>       return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+                           module_map=module_map)
+E       triton.compiler.errors.CompilationError: at 23:40:
+E           class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes
+E           n_cols,  # shapes
+E           logits_row_stride,  # strides
+E           labels_row_stride,
+E           BLOCK_SIZE: tl.constexpr,
+E           HAS_SMOOTHING: tl.constexpr,
+E           # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE
+E           SPLIT: tl.constexpr,
+E           PRECOMPUTED_LSE: tl.constexpr,  # If LSE is already computed (also no smoothing and logit_scale == 1.0)
+E       ):
+E           row_idx = tl.program_id(0)
+E           logits_ptr = logits_ptr + row_idx * logits_row_stride.to(tl.int64)
+E                                               ^
+E       AttributeError("'int' object has no attribute 'to'")
+
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:83: CompilationError
+___________________________ test_layout[C-V1-expand] ___________________________
+
+name = 'C-V1-expand'
+kw = {'n': 33, 'V': 1, 'xdt': torch.float16, 'ldt': torch.int64, ...}
+count_kernels = (<test_tensor_layouts.Count object at 0x73ba30ad6ab0>, <test_tensor_layouts.Count object at 0x73ba30ad61e0>)
+
+    @pytest.mark.parametrize("name,kw", CASES, ids=[c[0] for c in CASES])
+    def test_layout(name, kw, count_kernels):
+>       fwd_ok, bwd_ok, fe, be = run_case(count=count_kernels, **kw)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+../harness/test_tensor_layouts.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../harness/test_tensor_layouts.py:54: in run_case
+    loss, _ = ce.cross_entropy_loss(x, y, label_smoothing=smoothing, logit_scale=scale, lse_square_scale=lse_sq)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:324: in cross_entropy_loss
+    return CrossEntropyLoss.apply(
+/usr/local/lib/python3.12/dist-packages/torch/autograd/function.py:576: in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+flash_attn/ops/triton/cross_entropy.py:199: in forward
+    cross_entropy_fwd_kernel[(n_rows,)](
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:390: in <lambda>
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/autotuner.py:453: in run
+    return self.fn.run(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py:594: in run
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:339: in compile
+    module = src.make_ir(options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <triton.compiler.compiler.ASTSource object at 0x73ba30ad65a0>
+options = CUDAOptions(num_warps=4, num_ctas=1, num_stages=3, maxnreg=None, cluster_dims=(1, 1, 1), ptx_version=None, ptx_options...triton/backends/nvidia/lib/libdevice.10.bc'),), debug=False, backend_name='cuda', sanitize_overflow=True, arch='sm120')
+codegen_fns = {'convert_custom_types': <function convert_custom_float8_sm80 at 0x73bca58fd4e0>, 'min_dot_size': <function min_dot_size.<locals>.check_dot_compatibility at 0x73ba32e758a0>}
+module_map = {'triton.language.extra.libdevice': <module 'triton.language.extra.cuda.libdevice' from '/usr/local/lib/python3.12/dist-packages/triton/language/extra/cuda/libdevice.py'>}
+context = <triton._C.libtriton.ir.context object at 0x73ba32b887b0>
+
+    def make_ir(self, options, codegen_fns, module_map, context):
+        from .code_generator import ast_to_ttir
+>       return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+                           module_map=module_map)
+E       triton.compiler.errors.CompilationError: at 23:40:
+E           class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes
+E           n_cols,  # shapes
+E           logits_row_stride,  # strides
+E           labels_row_stride,
+E           BLOCK_SIZE: tl.constexpr,
+E           HAS_SMOOTHING: tl.constexpr,
+E           # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE
+E           SPLIT: tl.constexpr,
+E           PRECOMPUTED_LSE: tl.constexpr,  # If LSE is already computed (also no smoothing and logit_scale == 1.0)
+E       ):
+E           row_idx = tl.program_id(0)
+E           logits_ptr = logits_ptr + row_idx * logits_row_stride.to(tl.int64)
+E                                               ^
+E       AttributeError("'int' object has no attribute 'to'")
+
+/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py:83: CompilationError
+=========================== short test summary info ============================
+FAILED ../harness/test_tensor_layouts.py::test_layout[C-V1-contig] - triton.c...
+FAILED ../harness/test_tensor_layouts.py::test_layout[C-V1-s2] - triton.compi...
+FAILED ../harness/test_tensor_layouts.py::test_layout[C-V1-s3o2] - triton.com...
+FAILED ../harness/test_tensor_layouts.py::test_layout[C-V1-expand] - triton.c...
+4 failed, 187 passed in 11.99s

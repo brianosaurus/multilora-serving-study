@@ -1,0 +1,99 @@
+CONTIGUOUS LABELS: median over blocks of per-block (variant median / stock median); [min..max] across blocks; stock2 is an unchanged-code control
+cfg  metric  stock_ms | stock2/stock | patched/stock | alt/stock
+bfloat16  V32000  n16     fwd        0.0345 |  0.981 [0.364..1.016] |  0.977 [0.414..1.124] |  0.992 [0.367..1.030]
+bfloat16  V32000  n16     bwd        0.0776 |  0.990 [0.823..1.381] |  0.987 [0.584..1.327] |  0.997 [0.842..1.420]
+bfloat16  V32000  n16     fwdbwd     0.1519 |  1.002 [0.957..1.169] |  1.010 [0.599..1.186] |  1.018 [0.974..1.224]
+bfloat16  V32000  n512    fwd        0.0365 |  1.002 [0.937..1.024] |  1.016 [0.940..1.069] |  1.002 [0.936..1.028]
+bfloat16  V32000  n512    bwd        0.0770 |  1.003 [0.962..1.178] |  1.003 [0.702..1.122] |  1.012 [0.965..1.231]
+bfloat16  V32000  n512    fwdbwd     0.1495 |  1.010 [0.964..1.399] |  1.011 [0.639..1.216] |  1.031 [0.954..1.458]
+bfloat16  V32000  n8192   fwd        0.3457 |  1.000 [1.000..1.002] |  1.000 [1.000..1.001] |  1.000 [1.000..1.002]
+bfloat16  V32000  n8192   bwd        1.7768 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.001]
+bfloat16  V32000  n8192   fwdbwd     2.1202 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+bfloat16  V32000  n32768  fwd        1.3677 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+bfloat16  V32000  n32768  bwd        7.1271 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+bfloat16  V32000  n32768  fwdbwd     8.4926 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+bfloat16  V128256 n16     fwd        0.0370 |  0.999 [0.940..1.047] |  1.005 [0.919..1.145] |  0.986 [0.939..1.071]
+bfloat16  V128256 n16     bwd        0.0772 |  0.993 [0.640..1.022] |  0.995 [0.633..1.118] |  1.013 [0.662..1.203]
+bfloat16  V128256 n16     fwdbwd     0.1490 |  1.002 [0.589..1.536] |  0.991 [0.586..1.035] |  1.008 [0.579..1.621]
+bfloat16  V128256 n512    fwd        0.0364 |  1.001 [0.946..1.109] |  1.012 [0.969..1.073] |  1.004 [0.943..1.121]
+bfloat16  V128256 n512    bwd        0.4255 |  1.000 [1.000..1.000] |  1.000 [1.000..1.001] |  1.000 [1.000..1.001]
+bfloat16  V128256 n512    fwdbwd     0.5035 |  1.000 [0.999..1.001] |  1.000 [0.999..1.001] |  1.000 [0.999..1.000]
+bfloat16  V128256 n8192   fwd        1.3707 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+bfloat16  V128256 n8192   bwd        7.1492 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+bfloat16  V128256 n8192   fwdbwd     8.5082 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+bfloat16  V128256 n32768  fwd        5.4626 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+bfloat16  V128256 n32768  bwd       28.5588 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+bfloat16  V128256 n32768  fwdbwd    34.0192 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+float16   V32000  n16     fwd        0.0347 |  1.001 [0.839..2.138] |  1.016 [0.887..1.232] |  0.995 [0.833..2.767]
+float16   V32000  n16     bwd        0.0788 |  0.990 [0.807..1.067] |  1.015 [0.814..1.102] |  0.982 [0.622..1.275]
+float16   V32000  n16     fwdbwd     0.1550 |  1.000 [0.810..1.701] |  1.001 [0.810..1.681] |  0.991 [0.615..1.260]
+float16   V32000  n512    fwd        0.0367 |  0.995 [0.463..1.000] |  1.011 [0.474..1.151] |  1.000 [0.463..1.035]
+float16   V32000  n512    bwd        0.0789 |  1.004 [0.838..1.472] |  1.000 [0.814..1.445] |  0.999 [0.675..1.240]
+float16   V32000  n512    fwdbwd     0.1528 |  0.996 [0.788..1.610] |  1.024 [0.795..1.611] |  0.986 [0.619..1.249]
+float16   V32000  n8192   fwd        0.3457 |  1.000 [1.000..1.002] |  1.000 [1.000..1.001] |  1.000 [1.000..1.003]
+float16   V32000  n8192   bwd        1.7771 |  1.000 [1.000..1.000] |  1.000 [1.000..1.001] |  1.000 [1.000..1.001]
+float16   V32000  n8192   fwdbwd     2.1199 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+float16   V32000  n32768  fwd        1.3677 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+float16   V32000  n32768  bwd        7.1265 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+float16   V32000  n32768  fwdbwd     8.4923 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+float16   V128256 n16     fwd        0.0381 |  1.001 [0.925..1.079] |  0.982 [0.948..1.026] |  1.006 [0.927..1.053]
+float16   V128256 n16     bwd        0.0783 |  0.990 [0.943..1.826] |  1.002 [0.914..1.580] |  1.019 [0.624..1.655]
+float16   V128256 n16     fwdbwd     0.1518 |  0.993 [0.959..1.983] |  1.018 [0.983..1.717] |  1.012 [0.589..1.729]
+float16   V128256 n512    fwd        0.0371 |  1.016 [0.983..1.113] |  1.018 [0.982..1.249] |  1.000 [0.962..1.027]
+float16   V128256 n512    bwd        0.4255 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+float16   V128256 n512    fwdbwd     0.5036 |  1.000 [1.000..1.000] |  1.000 [0.999..1.001] |  1.000 [1.000..1.001]
+float16   V128256 n8192   fwd        1.3708 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+float16   V128256 n8192   bwd        7.1491 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+float16   V128256 n8192   fwdbwd     8.5072 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+float16   V128256 n32768  fwd        5.4626 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+float16   V128256 n32768  bwd       28.5578 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+float16   V128256 n32768  fwdbwd    34.0183 |  1.000 [1.000..1.000] |  1.000 [1.000..1.000] |  1.000 [1.000..1.000]
+
+SUMMARY over the 16 configs (median of per-config ratios; min..max of per-config median ratios)
+  alt     /stock bwd     median 1.000  range 0.982..1.019
+  alt     /stock fwd     median 1.000  range 0.986..1.006
+  alt     /stock fwdbwd  median 1.000  range 0.986..1.031
+  patched /stock bwd     median 1.000  range 0.987..1.015
+  patched /stock fwd     median 1.000  range 0.977..1.018
+  patched /stock fwdbwd  median 1.000  range 0.991..1.024
+  stock2  /stock bwd     median 1.000  range 0.990..1.004
+  stock2  /stock fwd     median 1.000  range 0.981..1.016
+  stock2  /stock fwdbwd  median 1.000  range 0.993..1.010
+
+STRIDED LABELS (stock is incorrect here and is not benchmarked): alt(.contiguous()) / patched, per-block median ratio; extra peak memory MB
+s16  float16  V32000  n512    fwd     patched   0.0374 ms  alt/patched  1.100 [0.889..1.129]  extra peak MB patched     32.0 alt     32.0
+s16  float16  V32000  n512    bwd     patched   0.0784 ms  alt/patched  0.964 [0.688..1.161]  extra peak MB patched     32.0 alt     32.0
+s16  float16  V32000  n512    fwdbwd  patched   0.1543 ms  alt/patched  1.050 [0.660..1.266]  extra peak MB patched     32.0 alt     32.0
+s16  float16  V32000  n8192   fwd     patched   0.3467 ms  alt/patched  1.007 [1.006..1.009]  extra peak MB patched    500.1 alt    500.2
+s16  float16  V32000  n8192   bwd     patched   1.7783 ms  alt/patched  0.999 [0.999..1.000]  extra peak MB patched    500.1 alt    500.2
+s16  float16  V32000  n8192   fwdbwd  patched   2.1216 ms  alt/patched  1.000 [1.000..1.000]  extra peak MB patched    500.1 alt    500.2
+s16  float16  V32000  n32768  fwd     patched   1.3685 ms  alt/patched  1.002 [1.001..1.002]  extra peak MB patched   2000.5 alt   2000.8
+s16  float16  V32000  n32768  bwd     patched   7.1317 ms  alt/patched  0.999 [0.999..0.999]  extra peak MB patched   2000.5 alt   2000.8
+s16  float16  V32000  n32768  fwdbwd  patched   8.4971 ms  alt/patched  1.000 [0.999..1.000]  extra peak MB patched   2000.5 alt   2000.8
+s16  float16  V128256 n512    fwd     patched   0.0384 ms  alt/patched  1.123 [1.067..1.164]  extra peak MB patched    126.0 alt    126.0
+s16  float16  V128256 n512    bwd     patched   0.4255 ms  alt/patched  1.000 [1.000..1.001]  extra peak MB patched    126.0 alt    126.0
+s16  float16  V128256 n512    fwdbwd  patched   0.5037 ms  alt/patched  1.005 [1.004..1.006]  extra peak MB patched    126.0 alt    126.0
+s16  float16  V128256 n8192   fwd     patched   1.3711 ms  alt/patched  1.001 [1.001..1.001]  extra peak MB patched   2004.1 alt   2004.2
+s16  float16  V128256 n8192   bwd     patched   7.1549 ms  alt/patched  0.999 [0.999..1.000]  extra peak MB patched   2004.1 alt   2004.2
+s16  float16  V128256 n8192   fwdbwd  patched   8.5144 ms  alt/patched  0.999 [0.999..1.000]  extra peak MB patched   2004.1 alt   2004.2
+s16  float16  V128256 n32768  fwd     patched   5.4627 ms  alt/patched  1.000 [1.000..1.000]  extra peak MB patched   8016.5 alt   8016.8
+s16  float16  V128256 n32768  bwd     patched  28.5810 ms  alt/patched  0.999 [0.999..0.999]  extra peak MB patched   8016.5 alt   8016.8
+s16  float16  V128256 n32768  fwdbwd  patched  34.0416 ms  alt/patched  0.999 [0.999..0.999]  extra peak MB patched   8016.5 alt   8016.8
+s2   float16  V32000  n512    fwd     patched   0.0376 ms  alt/patched  1.093 [1.079..1.124]  extra peak MB patched     31.3 alt     31.3
+s2   float16  V32000  n512    bwd     patched   0.0821 ms  alt/patched  0.997 [0.862..1.056]  extra peak MB patched     31.3 alt     31.3
+s2   float16  V32000  n512    fwdbwd  patched   0.1588 ms  alt/patched  1.064 [0.860..1.167]  extra peak MB patched     31.3 alt     31.3
+s2   float16  V32000  n8192   fwd     patched   0.3458 ms  alt/patched  1.010 [1.008..1.010]  extra peak MB patched    500.1 alt    500.2
+s2   float16  V32000  n8192   bwd     patched   1.7773 ms  alt/patched  1.000 [1.000..1.000]  extra peak MB patched    500.1 alt    500.2
+s2   float16  V32000  n8192   fwdbwd  patched   2.1202 ms  alt/patched  1.001 [1.001..1.001]  extra peak MB patched    500.1 alt    500.2
+s2   float16  V32000  n32768  fwd     patched   1.3678 ms  alt/patched  1.002 [1.002..1.002]  extra peak MB patched   2000.5 alt   2000.8
+s2   float16  V32000  n32768  bwd     patched   7.1287 ms  alt/patched  1.000 [1.000..1.000]  extra peak MB patched   2000.5 alt   2000.8
+s2   float16  V32000  n32768  fwdbwd  patched   8.4937 ms  alt/patched  1.000 [1.000..1.000]  extra peak MB patched   2000.5 alt   2000.8
+s2   float16  V128256 n512    fwd     patched   0.0384 ms  alt/patched  1.093 [1.068..1.137]  extra peak MB patched    126.0 alt    126.0
+s2   float16  V128256 n512    bwd     patched   0.4256 ms  alt/patched  1.000 [1.000..1.000]  extra peak MB patched    126.0 alt    126.0
+s2   float16  V128256 n512    fwdbwd  patched   0.5036 ms  alt/patched  1.004 [1.004..1.006]  extra peak MB patched    126.0 alt    126.0
+s2   float16  V128256 n8192   fwd     patched   1.3707 ms  alt/patched  1.002 [1.002..1.002]  extra peak MB patched   2004.1 alt   2004.2
+s2   float16  V128256 n8192   bwd     patched   7.1504 ms  alt/patched  1.000 [1.000..1.000]  extra peak MB patched   2004.1 alt   2004.2
+s2   float16  V128256 n8192   fwdbwd  patched   8.5097 ms  alt/patched  1.000 [1.000..1.000]  extra peak MB patched   2004.1 alt   2004.2
+s2   float16  V128256 n32768  fwd     patched   5.4619 ms  alt/patched  1.001 [1.000..1.001]  extra peak MB patched   8016.5 alt   8016.8
+s2   float16  V128256 n32768  bwd     patched  28.5641 ms  alt/patched  1.000 [1.000..1.000]  extra peak MB patched   8016.5 alt   8016.8
+s2   float16  V128256 n32768  fwdbwd  patched  34.0246 ms  alt/patched  1.000 [1.000..1.000]  extra peak MB patched   8016.5 alt   8016.8

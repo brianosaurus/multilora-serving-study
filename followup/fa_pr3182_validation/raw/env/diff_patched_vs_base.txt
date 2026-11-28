@@ -1,0 +1,92 @@
+diff --git a/flash_attn/ops/triton/cross_entropy.py b/flash_attn/ops/triton/cross_entropy.py
+index 1b5a415b..fdde1ea6 100644
+--- a/flash_attn/ops/triton/cross_entropy.py
++++ b/flash_attn/ops/triton/cross_entropy.py
+@@ -36,6 +36,7 @@ def cross_entropy_fwd_kernel(
+     class_start_idx,  # Useful for tensor parallel when each rank only has a subset of classes
+     n_cols,  # shapes
+     logits_row_stride,  # strides
++    labels_row_stride,
+     BLOCK_SIZE: tl.constexpr,
+     HAS_SMOOTHING: tl.constexpr,
+     # if SPLIT (e.g. tensor parallel), don't include the LSE in the loss since it's not the final LSE
+@@ -63,7 +64,7 @@ def cross_entropy_fwd_kernel(
+         tl.store(lse_ptr + row_idx, lse)
+     else:
+         lse = tl.load(lse_ptr + row_idx)
+-    label_idx = tl.load(labels_ptr + row_idx)
++    label_idx = tl.load(labels_ptr + row_idx.to(tl.int64) * labels_row_stride)
+     if label_idx == ignore_index:
+         loss = 0.0
+         z_loss = 0.0
+@@ -117,6 +118,7 @@ def cross_entropy_bwd_kernel(
+     logits_row_stride,  # strides
+     dlogits_row_stride,
+     dloss_row_stride,
++    labels_row_stride,
+     BLOCK_SIZE: tl.constexpr,
+     HAS_SMOOTHING: tl.constexpr,
+ ):
+@@ -125,7 +127,7 @@ def cross_entropy_bwd_kernel(
+     logits_ptr = logits_ptr + row_idx * logits_row_stride.to(tl.int64)
+     dlogits_ptr = dlogits_ptr + row_idx * dlogits_row_stride.to(tl.int64)
+     col_offsets = col_block_idx * BLOCK_SIZE + tl.arange(0, BLOCK_SIZE)
+-    label_idx = tl.load(labels_ptr + row_idx)
++    label_idx = tl.load(labels_ptr + row_idx.to(tl.int64) * labels_row_stride)
+     if label_idx != ignore_index:
+         dloss = tl.load(dloss_ptr + row_idx * dloss_row_stride)
+     else:
+@@ -208,6 +210,7 @@ class CrossEntropyLoss(torch.autograd.Function):
+                 class_start_idx,
+                 n_cols,  # shapes
+                 logits.stride(0),  # strides
++                labels.stride(0),
+                 BLOCK_SIZE=BLOCK_SIZE,  # constants
+                 SPLIT=world_size > 1,
+                 PRECOMPUTED_LSE=use_precomputed_lse,
+@@ -283,6 +286,7 @@ class CrossEntropyLoss(torch.autograd.Function):
+                 logits.stride(0),  # strides
+                 dlogits.stride(0),
+                 grad_losses.stride(0),
++                labels.stride(0),
+                 BLOCK_SIZE=BLOCK_SIZE,  # constants
+                 num_warps=num_warps,
+             )
+diff --git a/tests/losses/test_cross_entropy.py b/tests/losses/test_cross_entropy.py
+index 7ccf5f42..056ecdb5 100644
+--- a/tests/losses/test_cross_entropy.py
++++ b/tests/losses/test_cross_entropy.py
+@@ -81,3 +81,33 @@ def test_cross_entropy_loss(
+     out_pt.backward(g)
+     out.backward(g)
+     assert torch.allclose(x.grad, x_pt.grad, rtol=rtol, atol=atol)
++
++
++@pytest.mark.parametrize(
++    "dtype", [torch.float16, torch.float32] + ([torch.bfloat16] if is_sm8x else [])
++)
++def test_cross_entropy_loss_strided_labels(dtype):
++    # Regression test: the forward/backward kernels used to load labels_ptr + row_idx,
++    # which assumes labels is contiguous and silently reads the wrong label otherwise.
++    device = "cuda"
++    rtol, atol = (1e-5, 1e-6) if dtype == torch.float32 else (1e-3, 1e-4)
++    torch.random.manual_seed(0)
++    batch_size, seqlen, vocab_size = 4, 128, 256
++    n_rows = batch_size * seqlen
++    x = torch.randn(n_rows, vocab_size, device=device, dtype=dtype, requires_grad=True)
++    x_pt = x.detach().clone().requires_grad_()
++    # A stepped slice gives stride(0) == 2 while the underlying storage stays aligned.
++    y_storage = torch.randint(0, vocab_size, (2 * n_rows,), dtype=torch.long, device=device)
++    y = y_storage[::2]
++    assert y.stride(0) != 1
++
++    model = CrossEntropyLoss()
++    model_pt = torch.nn.CrossEntropyLoss()
++    out = model(x, y)
++    out_pt = model_pt(x_pt.float(), y)
++    assert torch.allclose(out, out_pt, rtol=rtol, atol=atol)
++
++    g = torch.randn_like(out)
++    out_pt.backward(g)
++    out.backward(g)
++    assert torch.allclose(x.grad, x_pt.grad, rtol=rtol, atol=atol)

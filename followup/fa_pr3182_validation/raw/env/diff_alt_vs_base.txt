@@ -1,0 +1,12 @@
+diff --git a/flash_attn/ops/triton/cross_entropy.py b/flash_attn/ops/triton/cross_entropy.py
+index 1b5a415b..374e83ff 100644
+--- a/flash_attn/ops/triton/cross_entropy.py
++++ b/flash_attn/ops/triton/cross_entropy.py
+@@ -161,6 +161,7 @@ class CrossEntropyLoss(torch.autograd.Function):
+         inplace_backward=False,
+         process_group=None,
+     ):
++        labels = labels.contiguous()
+         # For some reason Triton generates wrong code when labels has dtype long and its address
+         # is not aligned to 16 bytes. The ld.global.b64 seems to load the wrong label index.
+         if labels.dtype == torch.long and labels.data_ptr() % 16 != 0:
